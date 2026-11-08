@@ -15,7 +15,7 @@ A five-step wizard that turns an existing website (or a blank start) into previe
 | 5 | Templates | Browse templates that fit, preview any page at all sizes, pick one, request development |
 
 **Design rules that shape the code:**
-- **Versions (`editions.js`, `S.edition`):** EXPRESS, RezSite and BAKER preview the **live page** in an iframe and can show its code (*View code*). **PRO** previews are PNG/JPEG screenshots, so the generated HTML is never left in the DOM. Choose the version in step 1 or the header, or with `?v=express|indigihub|baker|pro` in the address.
+- **Versions (`editions.js`, `S.edition`):** EXPRESS, RezSite and BAKER preview the **live page** in an iframe and can show its code (*View code*). **PRO** previews are PNG/JPEG screenshots, so the generated HTML is never left in the DOM. Choose the version in step 1 or the header, or with `?v=express|rezsite|baker|pro` in the address. RezSite was called IndigiHub until 2026-11-08; `?v=indigihub` and saved projects with `edition: 'indigihub'` still open RezSite.
 - **Publishing** (planned, see `ROADMAP.md`): `lib/site.js` already turns a project into real page files (EXPRESS, RezSite) or a clickable screenshot page (BAKER portfolios on bakedbya.pro). Until accounts exist, the studio's exit is "Request development".
 - **Everything runs in the browser.** State is saved to `localStorage` until Supabase is added.
 
@@ -180,7 +180,7 @@ Every section also takes `bg` (`auto`, `default`, `soft`, `ink`, `acc`) and `ali
 
 - **Saving:** `save()` writes the whole `S` 250 ms after the last change. If the browser's storage is full (usually from large uploads), a warning banner appears.
 - **Saving and loading** are in `store.js`. The key and format are unchanged from the pre-React studio, so saved work carries over.
-- **Loading:** `load()` reads the key. A **v2** project (one page, `S.sections`) is converted to v3: its sections become `pages[0]` ("Home"), and site images found in `brand.opts` seed `lib`. Missing top-level keys and `ui` keys are filled from `blank()`.
+- **Loading:** `load()` reads the key. A **v2** project (one page, `S.sections`) is converted to v3: its sections become `pages[0]` ("Home"), and site images found in `brand.opts` seed `lib`. Missing top-level keys and `ui` keys are filled from `blank()`. An old `edition: 'indigihub'` becomes `'rezsite'`.
 - **Start over** clears the key and reloads.
 - **Images in state:** uploads are stored as data URLs (shrunk to 1600 px for hero images, 700 px otherwise, WebP). Site images are stored as URLs only.
 
