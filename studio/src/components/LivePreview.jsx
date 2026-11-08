@@ -1,4 +1,4 @@
-/* LivePreview: the real generated page in a frame, for EXPRESS, IndigiHub and BAKER (PRO uses screenshots).
+/* LivePreview: the real generated page in a frame, for EXPRESS, RezSite and BAKER (PRO uses screenshots).
    Each screen size is a same-origin iframe drawn at its real width and scaled to fit. The page is written
    into the frame once and then updated in place, so typing doesn't flash. With onPart, clicking a
    section, item, text or picture inside the frame opens the same editor as the screenshot overlays.

@@ -1,5 +1,5 @@
 /* Preview: PRO shows full-page screenshots of the generated site, plus optional see-through click
-   targets placed from Shot's box map (ARCHITECTURE.md §5.1). EXPRESS, IndigiHub and BAKER show the
+   targets placed from Shot's box map (ARCHITECTURE.md §5.1). EXPRESS, RezSite and BAKER show the
    real page live in a frame (LivePreview.jsx), with the same click-to-edit and a View code panel. */
 import { useEffect, useState } from 'react';
 import { livePreview } from '../editions.js';

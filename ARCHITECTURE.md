@@ -15,8 +15,8 @@ A five-step wizard that turns an existing website (or a blank start) into previe
 | 5 | Templates | Browse templates that fit, preview any page at all sizes, pick one, request development |
 
 **Design rules that shape the code:**
-- **Versions (`editions.js`, `S.edition`):** EXPRESS, IndigiHub and BAKER preview the **live page** in an iframe and can show its code (*View code*). **PRO** previews are PNG/JPEG screenshots, so the generated HTML is never left in the DOM. Choose the version in step 1 or the header, or with `?v=express|indigihub|baker|pro` in the address.
-- **Publishing** (planned, see `ROADMAP.md`): `lib/site.js` already turns a project into real page files (EXPRESS, IndigiHub) or a clickable screenshot page (BAKER portfolios on bakedbya.pro). Until accounts exist, the studio's exit is "Request development".
+- **Versions (`editions.js`, `S.edition`):** EXPRESS, RezSite and BAKER preview the **live page** in an iframe and can show its code (*View code*). **PRO** previews are PNG/JPEG screenshots, so the generated HTML is never left in the DOM. Choose the version in step 1 or the header, or with `?v=express|indigihub|baker|pro` in the address.
+- **Publishing** (planned, see `ROADMAP.md`): `lib/site.js` already turns a project into real page files (EXPRESS, RezSite) or a clickable screenshot page (BAKER portfolios on bakedbya.pro). Until accounts exist, the studio's exit is "Request development".
 - **Everything runs in the browser.** State is saved to `localStorage` until Supabase is added.
 
 ## 2. File structure
@@ -34,7 +34,7 @@ bakeaweb.com/   (the repository)
     ├── scripts/place.mjs     copies studio/dist into the repo main folder + .nojekyll
     └── src/
         ├── main.jsx          starts React; window.BAKE test hook
-        ├── editions.js       the four versions (EXPRESS, IndigiHub, BAKER, PRO): names, hosts, live preview or screenshots
+        ├── editions.js       the four versions (EXPRESS, RezSite, BAKER, PRO): names, hosts, live preview or screenshots
         ├── index.css         Tailwind theme + utilities (no reset) + studio.css as a layer; studio colours as Tailwind colours
         ├── studio.css        the studio's component styles (cards, buttons, grids, picker, overlays, light/dark)
         ├── store.js          S (project state), load/migrate, save, commit(), useStudio()
@@ -79,7 +79,7 @@ One plain object, created by `blank()` in `store.js` and saved whole as JSON und
 ```js
 S = {
   v: 3,                       // format version (v2 is migrated on load, see §3.3)
-  edition: 'express',         // 'express' | 'indigihub' | 'baker' | 'pro' (editions.js)
+  edition: 'express',         // 'express' | 'rezsite' | 'baker' | 'pro' (editions.js)
   step: 1,                    // current step, 1–5 (also mirrored in the URL hash #step-N)
 
   source: {                   // step 1
@@ -320,7 +320,7 @@ map = { width, height,             // CSS px of the render width (not the pixel 
 - `links`: every visible `<a href>` (not `#`) as `{ x, y, width, height, href, label }`, used by `Site.shotSite` to make screenshots clickable.
 - Test hook: `BAKE.maps()` returns the maps of the step 3 preview's current screenshots (PRO only).
 
-### 5.2 Live preview and page files (EXPRESS, IndigiHub, BAKER)
+### 5.2 Live preview and page files (EXPRESS, RezSite, BAKER)
 
 - **`LivePreview`** draws each screen size in a same-origin iframe at its real width (1280, 820, 390 px), scaled to fit. The frame gets `site.css` and the page's Google Fonts once; later changes replace the page inside it, so typing doesn't flash. In step 3, clicking inside the frame finds the nearest `data-fk`, `data-ii` or `data-sec` and calls the same `onPart` as the screenshot overlays. Links don't navigate; menus open and close.
 - **`Site.html(S, tpl, {pageId})`** makes one complete HTML file: doctype, title, description, Google Fonts link, `site.css` inline and the page inside `<div class="cq">`. *View code* shows it.

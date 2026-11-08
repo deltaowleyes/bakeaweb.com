@@ -24,7 +24,7 @@ function PublishCard() {
       </>}
       <p>Your site’s address: <b>https://{addr}</b></p>
       {S.edition == 'baker' && <p className="mu small">Portfolio pieces on bakedbya.pro are published as screenshots, with every link and menu clickable.</p>}
-      {S.edition == 'indigihub' && <p className="mu small">IndigiHub pages go live after a short review by our team.</p>}
+      {S.edition == 'rezsite' && <p className="mu small">RezSite pages go live after a short review by our team.</p>}
       <p className="mu small">One-click publishing turns on when accounts arrive. Until then, use Request development below and we’ll publish it for you.</p>
     </div>
   );

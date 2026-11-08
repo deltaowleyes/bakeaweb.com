@@ -2,7 +2,7 @@
 
 BAKE is growing from a design studio into a home on the web for everyone, in the spirit of GeoCities but built for today. Anyone can design a site and publish it free. Indigenous people and communities get their own free hub. Experts, called **Bakers**, show their work and get hired. PRO clients get their own domain, AI images and Baker help. This file is the business plan the code is built toward. `ARCHITECTURE.md` describes what exists today, and `ROADMAP.md` lists every task.
 
-Updated 2026-11-07.
+Updated 2026-11-08.
 
 ## 1. The four domains
 
@@ -12,7 +12,7 @@ All four are registered at **Porkbun**.
 |---|---|---|
 | **bakeaweb.com** | The home of BAKE: the studio, the home page, accounts, the Baker marketplace, the admin control room | `bakeaweb.com` |
 | **bakedby.me** | Free **EXPRESS** sites | `bakedby.me/pagename` |
-| **indigihub.cloud** | Free sites for Indigenous people, businesses and communities (**IndigiHub**) | `indigihub.cloud/pagename` |
+| **rezsite.com** | Free sites for First Nations, Métis and Inuit people, businesses and communities (**RezSite**) | `rezsite.com/pagename` |
 | **bakedbya.pro** | **BAKER** portfolios: examples of each Baker's work, built in the studio | `bakedbya.pro/bakername` |
 
 PRO sites live on the client's own domain (a new one bought through Porkbun, or one they already own).
@@ -24,28 +24,29 @@ Addresses use a path (`/pagename`), not a subdomain (`pagename.bakedby.me`). A p
 | Version | Who it's for | Where it's published | Price | What's included |
 |---|---|---|---|---|
 | **EXPRESS** | Anyone | `bakedby.me/pagename` | Free | The full studio, all templates, one-click publish, a small *Baked with BAKE* badge |
-| **IndigiHub** | Indigenous people, businesses, Nations and organizations (a free form of EXPRESS) | `indigihub.cloud/pagename` | Free | Everything in EXPRESS, Indigenous language and syllabics support, a listing in the IndigiHub directory |
+| **RezSite** | Indigenous people, businesses, Nations and organizations (a free form of EXPRESS) | `rezsite.com/pagename` | Free | Everything in EXPRESS, Indigenous language and syllabics support, a listing in the RezSite directory |
 | **BAKER** | Bakers (the experts) | `bakedbya.pro/bakername` | Free | Portfolio pieces built in the studio, a public profile, reviews, bidding on tasks |
 | **PRO** | Clients who want more | Their own domain | One-time fee (§5) | Everything in EXPRESS plus own domain, AI image generation, the Baker marketplace, no badge, more visitor stats |
 
 Everyone starts free and can upgrade to PRO at any time.
 
 **How each version previews and publishes**
-- **EXPRESS and IndigiHub:** the studio shows the live page and its code. Published as real web pages.
+- **EXPRESS and RezSite:** the studio shows the live page and its code. Published as real web pages.
 - **BAKER:** the studio shows the live page and its code. Portfolio pieces on bakedbya.pro are published as **screenshots only**, with every menu and link clickable, so template code isn't handed out.
 - **PRO:** the studio shows screenshots (the template code stays protected). Published as a real site on the client's own domain.
 
-**Free hosting setup (2026-11-07):** one GitHub repository per free domain (`deltaowleyes/bakedby.me`, `deltaowleyes/bakedbya.pro`, `deltaowleyes/indigihub.cloud`), each with its custom domain, and one folder per pagename (`bakedby.me/pagename/`). This needs no extra accounts and is the fastest start; the *BAKE Host* task decides when to move to Cloudflare or GitHub organizations.
+**Free hosting setup (2026-11-07):** one GitHub repository per free domain (`deltaowleyes/bakedby.me`, `deltaowleyes/bakedbya.pro`, `deltaowleyes/rezsite.com`), each with its custom domain, and one folder per pagename (`bakedby.me/pagename/`). This needs no extra accounts and is the fastest start; the *BAKE Host* task decides when to move to Cloudflare or GitHub organizations.
 
 ## 3. Accounts
 - A client signs up with a **pagename** (like a username), a **title** and a **description**.
 - One pagename is unique across all four domains. It names the client's address, their email address and their code repository.
-- Roles: **client**, **Baker**, **administrator**. The **escrow specialist** and the **IndigiHub reviewer** are administrator roles.
+- Roles: **client**, **Baker**, **administrator**. The **escrow specialist** and the **RezSite reviewer** are administrator roles.
 - Reserved words (admin, www, api, brand names) and pagenames that impersonate others are blocked.
 
-### IndigiHub eligibility
+### RezSite eligibility
+- RezSite is for First Nations, Métis and Inuit people, businesses, Nations and organizations.
 - The owner states their Nation or community (**self-declared**), and an administrator **reviews** the page before it goes live.
-- Every IndigiHub page has a *Report a concern* link, and decisions can be appealed.
+- Every RezSite page has a *Report a concern* link, and decisions can be appealed.
 - No status cards or personal documents are asked for.
 - An Indigenous advisory circle should shape the review rules, the directory and how cultural content is handled.
 
@@ -57,7 +58,7 @@ Everyone starts free and can upgrade to PRO at any time.
 | What | Price | How |
 |---|---|---|
 | EXPRESS on `bakedby.me/pagename` | Free | Automatic |
-| IndigiHub on `indigihub.cloud/pagename` | Free | Automatic after review |
+| RezSite on `rezsite.com/pagename` | Free | Automatic after review |
 | BAKER portfolio on `bakedbya.pro/bakername` | Free | Automatic |
 | **PRO** upgrade | $25–$500 one-time, depending on the template's tier | Stripe Checkout; republishing is free |
 | PRO + a new domain | +$50 plus the domain's price | Registered through Porkbun in the client's name, then pointed at the site |
@@ -91,10 +92,10 @@ These keep the vision intact while staying within the rules of the services it d
 
 ### Hosting
 - **GitHub Pages rules:** GitHub says Pages is not meant to be a free web host for running an online business or e-commerce site. It allows one organization site (and so one custom domain) per GitHub organization, 1 GB per site, and a soft limit of 100 GB of traffic a month. A few hundred community and small-business sites are likely fine. A hosting platform for thousands of sites, including paid PRO sites, is exactly what that rule is about, and one bad site could get a whole organization suspended.
-- **Recommendation (BAKE Host):** start on GitHub Pages with one organization per domain (bakedbyme, indigihub, bakedbyapro, plus a PRO organization), and plan the move to **Cloudflare** before a public launch. Cloudflare can serve every site from storage with no traffic charges for static files, and **Cloudflare for SaaS** connects PRO clients' own domains: 100 are free, then about $0.10 a month each. The domains stay registered at Porkbun; only their DNS would move. Decide this in the *BAKE Host* roadmap task.
+- **Recommendation (BAKE Host):** start on GitHub Pages with one organization per domain (bakedbyme, rezsite, bakedbyapro, plus a PRO organization), and plan the move to **Cloudflare** before a public launch. Cloudflare can serve every site from storage with no traffic charges for static files, and **Cloudflare for SaaS** connects PRO clients' own domains: 100 are free, then about $0.10 a month each. The domains stay registered at Porkbun; only their DNS would move. Decide this in the *BAKE Host* roadmap task.
 
 ### Names
-- **An "IndigiHub" already exists in Canada:** a platform for Indigenous entrepreneurs, founded in Manitoba, which won a Manitoba Tech Award in 2026. Using the same name for a similar audience risks confusion and a trademark dispute. Check with a trademark lawyer before launch. Partnering with them could also be a real opportunity.
+- **IndigiHub renamed to RezSite (2026-11-08):** an Indigenous-led platform called IndigiHub already operates in Canada (indigihub.com, founded in Manitoba by Zachary Flett), so the free Indigenous version is now **RezSite** on **rezsite.com**. indigihub.cloud is no longer used. We plan to contact IndigiHub about working together. Research: `plans/names-and-trademarks-check.md` and `plans/indigihub-rename.md`.
 - Check **BAKE**, **Bake a Web**, **Baked by me** and **Baked by a pro** in the Canadian trademark database too. "Baked" is also slang for cannabis in North America; worth knowing when choosing slogans.
 
 ### Money
