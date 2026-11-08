@@ -11,3 +11,15 @@
 2. `cd studio && npm install && npm run build` (writes `index.html`, `assets/`, `.nojekyll` into the repo main folder).
 3. Test in headless Chrome (all five steps, no console errors) before pushing.
 4. Commit source + build together and push straight to `main`. If publishing fails, give the owner BAKE buttons to retry.
+
+## Parallel BAKE (BAKE PRO 2.0)
+Many BAKE tasks can run at the same time (in background agents or in separate Claude sessions). `ROADMAP.json` gives each task an `id`, a `ready` state (`now`, `plan`, `after`, `you`), the files it `touches`, and the tasks it waits for (`after`). `waves()` in `studio/scripts/roadmap.mjs` groups ready tasks whose files don't overlap.
+
+Rules for a task running in parallel:
+1. Start from the latest `main` of `deltaowleyes/bakeaweb.com` on a new branch `bake/<id>`. Only change the files in its `touches` (new files inside a listed folder are fine). If it truly needs another file, stop and say so instead of editing it.
+2. `ready: plan` tasks only write `plans/<id>.md` (plain-language plan, costs, risks, questions for the owner). No code.
+3. Never run `npm run build`, never commit `index.html`, `assets/`, `docs/` builds, and never push to `main`. Don't edit `ARCHITECTURE.md`, `VISION.md`, `ROADMAP.*`, `README.md` or this file; write what changed and what the docs should say in `bake-notes/<id>.md`.
+4. Testing: `npm run dev -- --port <any free port>` or a headless Chrome check on a random free port, so parallel tasks don't collide. Run the existing tests if there are any.
+5. Commit with a clear message and push the branch `bake/<id>`. Report the branch name.
+
+**Merge and publish** (one session, after a wave): fetch all `bake/*` branches; merge `bake/publish-only-the-finished-website` first if it's in the wave (so plans never reach the public site); merge the rest one by one, fixing any small overlaps; fold `bake-notes/*.md` into the docs and mark finished tasks done in `ROADMAP.json` (keep every other task); then follow **Publishing** above (backup branch, build, test, push to `main`), and delete the merged `bake/*` branches.
