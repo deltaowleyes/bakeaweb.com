@@ -27,9 +27,12 @@ bakeaweb.com/   (the repository)
 │   └── index.html, assets/, .nojekyll, CNAME (bakeaweb.com), ROADMAP.json (for the BAKE PRO panel)
 ├── ROADMAP.json, ROADMAP.md, VISION.md, plans/   plans and the roadmap (in the repo, not on the website)
 ├── README.md, ARCHITECTURE.md, CLAUDE.md
+├── bake-notes/               (only while tasks are waiting to merge) notes from parallel BAKE tasks, folded into these docs at Merge and publish
+├── .github/workflows/test.yml  runs the testing robot on GitHub on every push (results: the repo's Actions tab)
 └── studio/                   SOURCE (Vite project)
     ├── index.html            page shell with <div id="root">
-    ├── package.json          scripts: dev, build (clean → vite build → place)
+    ├── package.json          scripts: dev, build (clean → vite build → place), test, test:ui, test:install
+    ├── tests/                the automatic testing robot (Playwright, `npm test`); see tests/README.md
     ├── vite.config.js        React + Tailwind plugins; base './'
     ├── scripts/clean.mjs     removes the old docs/ build
     ├── scripts/place.mjs     copies studio/dist into docs/ + .nojekyll, CNAME, ROADMAP.json
@@ -38,9 +41,9 @@ bakeaweb.com/   (the repository)
         ├── editions.js       the four versions (EXPRESS, RezSite, BAKER, PRO): names, hosts, live preview or screenshots
         ├── index.css         Tailwind theme + utilities (no reset) + studio.css as a layer; studio colours as Tailwind colours
         ├── studio.css        the studio's component styles (cards, buttons, grids, picker, overlays, light/dark)
-        ├── store.js          S (project state), load/migrate, save, commit(), useStudio()
+        ├── store.js          S (project state), load/migrate, save, commit(), undo/redo, save points, useStudio()
         ├── edit.js           editing logic shared by the steps: pages, starter, applyImport, importPage, FIELDS/ITEMF…
-        ├── App.jsx           header + step buttons, active step, Back/Next, storage-full warning
+        ├── App.jsx           header + step buttons, Undo/Redo/History, History dialog, active step, Back/Next, storage-full warning
         ├── steps/Step1–5.jsx one component per step
         ├── components/
         │   ├── Preview.jsx   PRO: screenshots + click-to-edit overlays; SizeButtons. Others: LivePreview
@@ -69,7 +72,7 @@ bakeaweb.com/   (the repository)
 
 **Build and publish:** `cd studio && npm install && npm run build`, then commit `docs/` and the source together and push to `main`. Vite gives built files hashed names, so there's no `?v=` cache number to bump any more.
 
-**Packages:** react, react-dom, sortablejs, cropperjs 1.x (loaded only when the image editor opens); dev: vite, @vitejs/plugin-react, tailwindcss, @tailwindcss/vite.
+**Packages:** react, react-dom, sortablejs, cropperjs 1.x (loaded only when the image editor opens); dev: vite, @vitejs/plugin-react, tailwindcss, @tailwindcss/vite, @playwright/test.
 
 **Module dependencies:** `importer` → `art`; `render` → `art`; `shot` → `site.css` (raw text), `fonts`; `edit` → `store`, `art`, `importer`; steps → `store`, `edit`, `render`, components.
 
@@ -182,7 +185,8 @@ Every section also takes `bg` (`auto`, `default`, `soft`, `ink`, `acc`) and `ali
 - **Saving:** `save()` writes the whole `S` 250 ms after the last change. If the browser's storage is full (usually from large uploads), a warning banner appears.
 - **Saving and loading** are in `store.js`. The key and format are unchanged from the pre-React studio, so saved work carries over.
 - **Loading:** `load()` reads the key. A **v2** project (one page, `S.sections`) is converted to v3: its sections become `pages[0]` ("Home"), and site images found in `brand.opts` seed `lib`. Missing top-level keys and `ui` keys are filled from `blank()`. An old `edition: 'indigihub'` becomes `'rezsite'`.
-- **Start over** clears the key and reloads.
+- **Start over** clears the key and reloads (a save point is made first, so it can be undone).
+- **Undo and save points:** `commit()` serializes the project without view state (`snap()`: no `ui`, `step`, `source.log`) and, if it changed, pushes the previous snapshot on the undo list (same focused input within 1.5 s = one step; up to 80 steps, about 60 MB, for this visit only). `undoStep()` / `redoStep()` put a snapshot back in place with `apply()`, keeping the view state and fixing `ui.page`, `ui.tpage`, `ui.sel` if they no longer exist. Keys: Ctrl+Z, Ctrl+Shift+Z, Ctrl+Y (⌘ on a Mac), plus header buttons. Save points (`addPoint`, `restorePoint`, `deletePoint`, `savePoints`) live under the `localStorage` key `bake-studio-history` (newest first, max 8); they are made every 3 min while editing, when a commit replaces every page id (import, starter), before Start over, before a restore, and by *Save point now*. `save()` drops the oldest save point when storage is full.
 - **Images in state:** uploads are stored as data URLs (shrunk to 1600 px for hero images, 700 px otherwise, WebP). Site images are stored as URLs only.
 
 ### 3.4 Inspector overrides (`fx`, `lx`)
@@ -350,13 +354,14 @@ map = { width, height,             // CSS px of the render width (not the pixel 
 
 ## 7. How the React app works
 
-- **One store, mutable state.** `S` is a plain object (as before). Change it with `commit(S => { … })`: the change is applied, every component using `useStudio()` redraws, and `save()` writes to `localStorage` 250 ms later. Components read `S` directly; avoid `React.memo` on them, since `S` is changed in place.
+- **One store, mutable state.** `S` is a plain object (as before). Change it with `commit(S => { … })`: the change is applied, every component using `useStudio()` redraws, and `save()` writes to `localStorage` 250 ms later. Components read `S` directly; avoid `React.memo` on them, since `S` is changed in place. Change state only through `commit()` so Undo sees it; changes made outside `commit()` are folded into the next undo step.
 - **Inputs are controlled:** they show values from `S` and call `commit` on every keystroke. React keeps focus, so no special handling is needed.
 - **Previews:** `<Preview vp opt onPart>` builds the page HTML with `Render.page` on every redraw and, 120 ms after the HTML stops changing, asks `Shot.take` for screenshots. Late results from an older HTML are ignored. With `onPart` it also draws the click-to-edit overlays from the box map.
 - **Template thumbnails** (`useThumbs` in Step5) are made one after another and restart after any change; `Shot`'s cache makes unchanged ones instant.
 - **Font picker previews** download only the letters of each font's name, under a separate family name (`bake-preview …`), so a preview copy can never replace the full font on the page.
 - **Styling:** existing look in `studio.css`, layered under Tailwind utilities, so a utility class always wins. Use Tailwind classes for new layout and the studio colours (`text-muted`, `border-line`, `bg-acc`, `text-onacc`, `bg-panel`, `text-warn`). Tailwind's reset (preflight) is deliberately off so generated pages measure the same in the page as in the screenshot.
-- **Test hook:** `window.BAKE = { state(), maps(), site }`: `maps()` returns the box maps of the step 3 preview's screenshots; `site` is `Site` (§5.2).
+- **Test hook:** `window.BAKE = { state(), maps(), site }`: `maps()` returns the box maps of the step 3 preview's screenshots; `site` is `Site` (§5.2). The testing robot (`studio/tests/`) uses this hook.
+- **Testing robot:** `cd studio && npm test` runs Playwright tests of all five steps and the page engine on its own Vite server (random free port); any console error fails a test, and outside sites are blocked. `BAKE_TEST_BUILT=1 npm test` tests the finished build. First time on a computer: `npm run test:install`. GitHub runs the same tests on every push.
 
 ## 8. Known limits and what Supabase will add
 

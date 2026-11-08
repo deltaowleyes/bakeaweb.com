@@ -1,8 +1,8 @@
 # BAKE PRO roadmap
 
-Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do list. The list itself lives in `ROADMAP.json` (edit that file and the BAKE PRO buttons update too); this page is made from it by `node studio/scripts/roadmap.mjs`. Business plan: `VISION.md`. Updated 2026-11-08. 68 tasks.
+Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do list. The list itself lives in `ROADMAP.json` (edit that file and the BAKE PRO buttons update too); this page is made from it by `node studio/scripts/roadmap.mjs`. Business plan: `VISION.md`. Updated 2026-11-08. 66 tasks.
 
-**Already done:** Drag-and-drop sections (Step 3); Inspector sidebar (Step 3); Google Fonts; Image editor with crop and border/frame controls; Versions: EXPRESS, RezSite and BAKER preview the live page with View code; PRO previews screenshots; Page files and clickable screenshot pages (lib/site.js); Studio moved to bakeaweb.com; IndigiHub version renamed to RezSite (rezsite.com); Only the finished studio is published (GitHub Pages serves docs/).
+**Already done:** Drag-and-drop sections (Step 3); Inspector sidebar (Step 3); Google Fonts; Image editor with crop and border/frame controls; Versions: EXPRESS, RezSite and BAKER preview the live page with View code; PRO previews screenshots; Page files and clickable screenshot pages (lib/site.js); Studio moved to bakeaweb.com; IndigiHub version renamed to RezSite (rezsite.com); Only the finished studio is published (GitHub Pages serves docs/); Automatic testing robot (Playwright tests, npm test, GitHub Actions); Undo, redo and history (Ctrl+Z, save points).
 
 **Top picks** are marked ★. **Plan first** means Claude shows a plan and costs and waits for an OK before building.
 **Ready:** ▶ now = can start now; ✎ plan = the planning part can start now; ⏳ after = waits for other tasks; ✋ you = waits for you.
@@ -11,9 +11,9 @@ Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do
 
 Tasks in the same wave change different files, so they can all run at the same time. Each works on its own branch (`bake/<id>`) and never builds or publishes; one **Merge and publish** step does that at the end (CLAUDE.md, *Parallel BAKE*).
 
-**Wave 1** (36 tasks): Automatic testing robot · Undo, redo and history · Site health check · Turn designs into real websites · Pagename accounts · BAKE Host: where every site lives · Free EXPRESS publish to bakedby.me/pagename · PRO upgrade and publish fee · RezSite free pages · Names and trademarks check · Trust and safety for free hosting · Escrow payments · bakeaweb.com home page · Edit text right on the preview · Drag and drop for pages, cards and menu links · Command palette · Colours from your logo · Mix and match templates · Compare templates side by side · Pagename email addresses · A repository for every pagename · Price shown as you design · Terms and policies · New domain through Porkbun · Connect an existing domain · Domain renewals for PRO · Import any website · Real AI images · AI image credits for PRO · AI writing help on every field · Shareable preview link · Pin comments on the preview · Requests reach your inbox · Automate the manual steps · Protect the templates · Ready for a million sites
+**Wave 1** (34 tasks): Site health check · Turn designs into real websites · Pagename accounts · BAKE Host: where every site lives · Free EXPRESS publish to bakedby.me/pagename · PRO upgrade and publish fee · RezSite free pages · Trust and safety for free hosting · Escrow payments · bakeaweb.com home page · Edit text right on the preview · Drag and drop for pages, cards and menu links · Command palette · Colours from your logo · Mix and match templates · Compare templates side by side · Studio works great on phones · Pagename email addresses · A repository for every pagename · Price shown as you design · Terms and policies · New domain through Porkbun · Connect an existing domain · Domain renewals for PRO · Import any website · Real AI images · AI image credits for PRO · AI writing help on every field · Shareable preview link · Pin comments on the preview · Requests reach your inbox · Automate the manual steps · Protect the templates · Ready for a million sites
 
-**Wave 2** (4 tasks): Describe your business, get a site · Dark mode and seasonal looks · Presentation mode · Studio works great on phones
+**Wave 2** (3 tasks): Describe your business, get a site · Dark mode and seasonal looks · Presentation mode
 
 **Wave 3** (2 tasks): More section types · Faster previews
 
@@ -27,8 +27,6 @@ Tasks in the same wave change different files, so they can all run at the same t
 
 | | Task | Area | Size | Ready | You'll need |
 |---|---|---|---|---|---|
-| ★ | **Automatic testing robot**<br>A robot clicks through everything on every change. Essential once real money is involved. | Quality | Medium | ▶ now | — |
-| ★ | **Undo, redo and history**<br>The safety net every pro editor has. Nobody fears experimenting. | Editing | Quick | ▶ now | — |
 |  | **Also make the repositories private**<br>Hide the code and plans on GitHub too. Needs GitHub Pro (about $4 US a month); the website stays public and keeps working. | Operations | Quick | ✋ you | GitHub Pro (about $4/month, check your billing settings) |
 | ★ | **Free hosting live on bakedby.me, bakedbya.pro and rezsite.com**<br>Each free domain gets its home page and a working example site, so the hosting is real before accounts arrive. | Publishing | Quick | ✋ you | DNS at Porkbun for all 4 domains, and the 3 GitHub repositories (step-by-step guide) |
 |  | **bakeaweb.com home page**<br>The front door: what BAKE is, the four versions, prices, examples and a big Start baking button. | Sharing | Medium | ▶ now | — |
@@ -63,7 +61,7 @@ Tasks in the same wave change different files, so they can all run at the same t
 | ★ | **Free EXPRESS publish to bakedby.me/pagename** (plan first)<br>Anyone can put their site online free at bakedby.me/pagename in one click, with a small Baked with BAKE badge that brings in new visitors. | Publishing | Big | ✎ plan | Accounts first (so a server function can publish safely) |
 | ★ | **PRO upgrade and publish fee** (plan first)<br>The first way to earn: a one-time PRO fee of $25 to $500 depending on the template. | Publishing | Medium | ✎ plan | A Stripe account |
 | ★ | **RezSite free pages** (plan first)<br>Free sites for First Nations, Métis and Inuit people, businesses and communities on rezsite.com, with a respectful, trusted review. | Accounts | Medium | ✎ plan | Indigenous advisors to shape the rules |
-| ★ | **Names and trademarks check** (plan first)<br>An IndigiHub already exists in Canada (so ours is now RezSite); check every BAKE name before it's on thousands of sites. | Operations | Quick | ✎ plan | A trademark lawyer for the final answer |
+| ★ | **Names and trademarks check** (plan first)<br>An IndigiHub already exists in Canada (so ours is now RezSite); check every BAKE name before it's on thousands of sites. | Operations | Quick | ✋ you | Read the plan (plans/names-and-trademarks-check.md), then a trademark lawyer for the final answer |
 | ★ | **Trust and safety for free hosting** (plan first)<br>Free hosting attracts scammers. Keep them out, or GitHub or Cloudflare could take every BAKE site down with them. | Trust | Medium | ✎ plan | — |
 |  | **Price shown as you design** (plan first)<br>Clients always see what they'll pay: EXPRESS and RezSite are free; PRO shows the template's one-time fee plus any domain option. | Publishing | Quick | ✎ plan | Your price list |
 |  | **Terms and policies** (plan first)<br>Terms of service, Baker agreement, escrow and refund policy, privacy policy, content and takedown policy, RezSite rules. | Operations | Medium | ✎ plan | A lawyer to review the drafts |

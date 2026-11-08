@@ -1,6 +1,5 @@
 # BAKE Studio testing robot on GitHub Actions.
-# The Merge and publish step copies this file to .github/workflows/test.yml (Parallel BAKE tasks may not
-# create files outside their listed folders). It runs every test on every push and pull request.
+# Runs every test (studio/tests/) on every push and pull request. Results: the repo's Actions tab.
 name: Testing robot
 on:
   push:

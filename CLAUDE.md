@@ -9,7 +9,7 @@
 ## Publishing (the owner never publishes; Claude does)
 1. Push the current `main` to a backup branch first (for example `backup-YYYY-MM-DD-what`).
 2. `cd studio && npm install && npm run build` (rebuilds `docs/`: `index.html`, `assets/`, `.nojekyll`, `CNAME`, `ROADMAP.json`). Never put other files in `docs/`: everything there is public.
-3. Test in headless Chrome (all five steps, no console errors) before pushing.
+3. Test: `cd studio && npm test`, and after the build `BAKE_TEST_BUILT=1 npm test` (the automatic testing robot, see `studio/tests/README.md`). Don't push if anything fails. GitHub also runs the tests on every push (`.github/workflows/test.yml`, results on the repo's Actions tab).
 4. Commit source + build together and push straight to `main`. If publishing fails, give the owner BAKE buttons to retry.
 
 ## Parallel BAKE (BAKE PRO 2.0)
@@ -19,7 +19,8 @@ Rules for a task running in parallel:
 1. Start from the latest `main` of `deltaowleyes/bakeaweb.com` on a new branch `bake/<id>`. Only change the files in its `touches` (new files inside a listed folder are fine). If it truly needs another file, stop and say so instead of editing it.
 2. `ready: plan` tasks only write `plans/<id>.md` (plain-language plan, costs, risks, questions for the owner). No code.
 3. Never run `npm run build`, never commit `index.html`, `assets/`, `docs/` builds, and never push to `main`. Don't edit `ARCHITECTURE.md`, `VISION.md`, `ROADMAP.*`, `README.md` or this file; write what changed and what the docs should say in `bake-notes/<id>.md`.
-4. Testing: `npm run dev -- --port <any free port>` or a headless Chrome check on a random free port, so parallel tasks don't collide. Run the existing tests if there are any.
-5. Commit with a clear message and push the branch `bake/<id>`. Report the branch name.
+4. Testing: run `cd studio && npm test` before pushing your branch (it starts its own server on a random free port, so parallel tasks don't collide), and add tests for what you built in `studio/tests/`. For manual checks use `npm run dev -- --port <any free port>`.
+5. Change project state only through `commit()` in `store.js`, so Undo/Redo sees it.
+6. Commit with a clear message and push the branch `bake/<id>`. Report the branch name.
 
 **Merge and publish** (one session, after a wave): fetch all `bake/*` branches; merge `bake/publish-only-the-finished-website` first if it's in the wave (so plans never reach the public site); merge the rest one by one, fixing any small overlaps; fold `bake-notes/*.md` into the docs and mark finished tasks done in `ROADMAP.json` (keep every other task); then follow **Publishing** above (backup branch, build, test, push to `main`), and delete the merged `bake/*` branches.
