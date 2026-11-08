@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "vite",
     "build": "node scripts/clean.mjs && vite build && node scripts/place.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "playwright test -c tests",
+    "test:ui": "playwright test -c tests --ui",
+    "test:install": "playwright install --with-deps chromium"
   },
   "dependencies": {
     "cropperjs": "^1.7.0",
@@ -14,6 +17,7 @@
     "sortablejs": "^1.15.7"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.0",
     "@tailwindcss/vite": "^4.3.5",
     "@vitejs/plugin-react": "^6.2.1",
     "tailwindcss": "^4.3.5",
