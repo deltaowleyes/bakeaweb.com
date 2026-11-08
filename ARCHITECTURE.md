@@ -1,6 +1,6 @@
 # BAKE Studio: architecture
 
-This describes BAKE Studio as it is now (November 2026, project format **v3**). It is a static web app with no server, built with **React + Vite + Tailwind CSS** and published by GitHub Pages from `deltaowleyes/bakeaweb.com` (branch `main`, folder `/`; moved from `deltaowleyes/bake-studio` on 2026-11-07). The source lives in `studio/`; `npm run build` writes the built site into the repo's main folder, which is what Pages serves. Live: **https://bakeaweb.com/**, set by the `CNAME` file in the repo main folder (the old https://deltaowleyes.ca/bake-studio/ address forwards there).
+This describes BAKE Studio as it is now (November 2026, project format **v3**). It is a static web app with no server, built with **React + Vite + Tailwind CSS** and published by GitHub Pages from `deltaowleyes/bakeaweb.com` (branch `main`, folder `/docs`; moved from `deltaowleyes/bake-studio` on 2026-11-07). The source lives in `studio/`; `npm run build` writes the built site into `docs/`, the **only** folder Pages serves, so plans, docs and source code are not on the website (since 2026-11-08). Live: **https://bakeaweb.com/**, set by `docs/CNAME` (the old https://deltaowleyes.ca/bake-studio/ address and the old `deltaowleyes/bake-studio` repo forward there).
 
 ## 1. What it does
 
@@ -23,15 +23,16 @@ A five-step wizard that turns an existing website (or a blank start) into previe
 
 ```
 bakeaweb.com/   (the repository)
-├── index.html, assets/       BUILT studio (made by `npm run build`; don't edit by hand)
-├── .nojekyll                 tells GitHub Pages to serve files as they are
+├── docs/                     BUILT studio, the only folder Pages publishes (made by `npm run build`; don't edit by hand)
+│   └── index.html, assets/, .nojekyll, CNAME (bakeaweb.com), ROADMAP.json (for the BAKE PRO panel)
+├── ROADMAP.json, ROADMAP.md, VISION.md, plans/   plans and the roadmap (in the repo, not on the website)
 ├── README.md, ARCHITECTURE.md, CLAUDE.md
 └── studio/                   SOURCE (Vite project)
     ├── index.html            page shell with <div id="root">
     ├── package.json          scripts: dev, build (clean → vite build → place)
     ├── vite.config.js        React + Tailwind plugins; base './'
-    ├── scripts/clean.mjs     removes the old build from the repo main folder
-    ├── scripts/place.mjs     copies studio/dist into the repo main folder + .nojekyll
+    ├── scripts/clean.mjs     removes the old docs/ build
+    ├── scripts/place.mjs     copies studio/dist into docs/ + .nojekyll, CNAME, ROADMAP.json
     └── src/
         ├── main.jsx          starts React; window.BAKE test hook
         ├── editions.js       the four versions (EXPRESS, RezSite, BAKER, PRO): names, hosts, live preview or screenshots
@@ -66,7 +67,7 @@ bakeaweb.com/   (the repository)
 
 **Why templates stay plain HTML/CSS:** previews are screenshots made by drawing the page's HTML plus `site.css` inside an SVG. That only works with plain markup and one stylesheet, so `render.js` and `site.css` don't use React or Tailwind. React and Tailwind are for the studio around them.
 
-**Build and publish:** `cd studio && npm install && npm run build`, then commit `index.html`, `assets/` and the source together and push to `main`. Vite gives built files hashed names, so there's no `?v=` cache number to bump any more.
+**Build and publish:** `cd studio && npm install && npm run build`, then commit `docs/` and the source together and push to `main`. Vite gives built files hashed names, so there's no `?v=` cache number to bump any more.
 
 **Packages:** react, react-dom, sortablejs, cropperjs 1.x (loaded only when the image editor opens); dev: vite, @vitejs/plugin-react, tailwindcss, @tailwindcss/vite.
 
