@@ -1,6 +1,6 @@
 # BAKE PRO roadmap
 
-Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do list. The list itself lives in `ROADMAP.json` (edit that file and the BAKE PRO buttons update too); this page is made from it by `node studio/scripts/roadmap.mjs`. Business plan: `VISION.md`. Updated 2026-11-08. 66 tasks.
+Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do list. The list itself lives in `ROADMAP.json` (edit that file and the BAKE PRO buttons update too); this page is made from it by `node studio/scripts/roadmap.mjs`. Business plan: `VISION.md`. Updated 2026-11-08. 67 tasks.
 
 **Already done:** Drag-and-drop sections (Step 3); Inspector sidebar (Step 3); Google Fonts; Image editor with crop and border/frame controls; Versions: EXPRESS, RezSite and BAKER preview the live page with View code; PRO previews screenshots; Page files and clickable screenshot pages (lib/site.js); Studio moved to bakeaweb.com; IndigiHub version renamed to RezSite (rezsite.com); Only the finished studio is published (GitHub Pages serves docs/); Automatic testing robot (Playwright tests, npm test, GitHub Actions); Undo, redo and history (Ctrl+Z, save points).
 
@@ -11,7 +11,7 @@ Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do
 
 Tasks in the same wave change different files, so they can all run at the same time. Each works on its own branch (`bake/<id>`) and never builds or publishes; one **Merge and publish** step does that at the end (CLAUDE.md, *Parallel BAKE*).
 
-**Wave 1** (34 tasks): Site health check · Turn designs into real websites · Pagename accounts · BAKE Host: where every site lives · Free EXPRESS publish to bakedby.me/pagename · PRO upgrade and publish fee · RezSite free pages · Trust and safety for free hosting · Escrow payments · bakeaweb.com home page · Edit text right on the preview · Drag and drop for pages, cards and menu links · Command palette · Colours from your logo · Mix and match templates · Compare templates side by side · Studio works great on phones · Pagename email addresses · A repository for every pagename · Price shown as you design · Terms and policies · New domain through Porkbun · Connect an existing domain · Domain renewals for PRO · Import any website · Real AI images · AI image credits for PRO · AI writing help on every field · Shareable preview link · Pin comments on the preview · Requests reach your inbox · Automate the manual steps · Protect the templates · Ready for a million sites
+**Wave 1** (35 tasks): Talk about the vision (always open) · Site health check · Turn designs into real websites · Pagename accounts · BAKE Host: where every site lives · Free EXPRESS publish to bakedby.me/pagename · PRO upgrade and publish fee · RezSite free pages · Trust and safety for free hosting · Escrow payments · bakeaweb.com home page · Edit text right on the preview · Drag and drop for pages, cards and menu links · Command palette · Colours from your logo · Mix and match templates · Compare templates side by side · Studio works great on phones · Pagename email addresses · A repository for every pagename · Price shown as you design · Terms and policies · New domain through Porkbun · Connect an existing domain · Domain renewals for PRO · Import any website · Real AI images · AI image credits for PRO · AI writing help on every field · Shareable preview link · Pin comments on the preview · Requests reach your inbox · Automate the manual steps · Protect the templates · Ready for a million sites
 
 **Wave 2** (3 tasks): Describe your business, get a site · Dark mode and seasonal looks · Presentation mode
 
@@ -27,6 +27,7 @@ Tasks in the same wave change different files, so they can all run at the same t
 
 | | Task | Area | Size | Ready | You'll need |
 |---|---|---|---|---|---|
+| ★ | **Talk about the vision (always open)**<br>A standing place to talk through how BAKE should work: each version's flow, accounts, markets, prices. Never marked done. | Operations | Quick | ▶ now | Just you and your ideas |
 |  | **Also make the repositories private**<br>Hide the code and plans on GitHub too. Needs GitHub Pro (about $4 US a month); the website stays public and keeps working. | Operations | Quick | ✋ you | GitHub Pro (about $4/month, check your billing settings) |
 | ★ | **Free hosting live on bakedby.me, bakedbya.pro and rezsite.com**<br>Each free domain gets its home page and a working example site, so the hosting is real before accounts arrive. | Publishing | Quick | ✋ you | DNS at Porkbun for all 4 domains, and the 3 GitHub repositories (step-by-step guide) |
 |  | **bakeaweb.com home page**<br>The front door: what BAKE is, the four versions, prices, examples and a big Start baking button. | Sharing | Medium | ▶ now | — |
