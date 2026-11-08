@@ -16,4 +16,4 @@ React + Vite + Tailwind CSS for the studio. The generated websites stay plain HT
 
 ## Files
 - `studio/`: the source code (see `ARCHITECTURE.md`)
-- `index.html` and `assets/`: the built studio that GitHub Pages serves (made by `npm run build` in `studio/`)
+- `docs/`: the built studio, the only folder GitHub Pages serves (made by `npm run build` in `studio/`; don't edit by hand)
