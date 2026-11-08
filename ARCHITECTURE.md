@@ -1,6 +1,6 @@
 # BAKE Studio: architecture
 
-This describes BAKE Studio as it is now (November 2026, project format **v3**). It is a static web app with no server, built with **React + Vite + Tailwind CSS** and published by GitHub Pages from `deltaowleyes/bake-studio` (branch `main`, folder `/`). The source lives in `studio/`; `npm run build` writes the built site into the repo's main folder, which is what Pages serves. Live: **https://bakeaweb.com/**, set by the `CNAME` file in the repo main folder (the old https://deltaowleyes.ca/bake-studio/ and https://deltaowleyes.github.io/bake-studio/ forward there).
+This describes BAKE Studio as it is now (November 2026, project format **v3**). It is a static web app with no server, built with **React + Vite + Tailwind CSS** and published by GitHub Pages from `deltaowleyes/bakeaweb.com` (branch `main`, folder `/`; moved from `deltaowleyes/bake-studio` on 2026-11-07). The source lives in `studio/`; `npm run build` writes the built site into the repo's main folder, which is what Pages serves. Live: **https://bakeaweb.com/**, set by the `CNAME` file in the repo main folder (the old https://deltaowleyes.ca/bake-studio/ address forwards there).
 
 ## 1. What it does
 
@@ -22,7 +22,7 @@ A five-step wizard that turns an existing website (or a blank start) into previe
 ## 2. File structure
 
 ```
-bake-studio/
+bakeaweb.com/   (the repository)
 ├── index.html, assets/       BUILT studio (made by `npm run build`; don't edit by hand)
 ├── .nojekyll                 tells GitHub Pages to serve files as they are
 ├── README.md, ARCHITECTURE.md, CLAUDE.md
