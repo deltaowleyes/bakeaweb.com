@@ -1,6 +1,6 @@
 # Plan: Pagename accounts
 
-Roadmap task `pagename-accounts` (Phase 1, ★, plan first). Written 2026-11-08 from VISION.md §3 (vision talk 2). **No code has been written.** Nothing gets built until you say OK and answer the questions in §9.
+Roadmap task `pagename-accounts` (Phase 1, ★, plan first). Written 2026-11-08 from VISION.md §3 (vision talk 2). **Approved 2026-11-08** with the recommendations in §9, plus two changes from the owner: **3 free sites per login** (was 5), and a site with **any purchase doesn't count** toward that limit. (Also decided: **5 free AI images** once a card is validated, was 10; that belongs to the AI image tasks.)
 
 Prices were checked on 2026-11-08 and are in US dollars (about 1.4 × for Canadian dollars). They can change.
 
@@ -8,14 +8,14 @@ Prices were checked on 2026-11-08 and are in US dollars (about 1.4 × for Canadi
 
 ## 1. What this task gives BAKE, in one paragraph
 
-People keep designing in the Studio with no account, exactly like today. When they press **Publish** or **Download code**, a short sign-up appears: email and password, or *Continue with Google*, then a **pagename**, a **title** and a **description**. From then on their design is saved online in that account, so it follows them to any computer and can't be lost when a browser clears its storage. One person (a **login**) can hold up to **5 accounts**, one site each, and switch between them from a small menu in the header. A **Your account** page lets them rename, delete or switch. Everything else that needs accounts (free publishing, the cart, Baker profiles, the admin room) is built on top of this.
+People keep designing in the Studio with no account, exactly like today. When they press **Publish** or **Download code**, a short sign-up appears: email and password, or *Continue with Google*, then a **pagename**, a **title** and a **description**. From then on their design is saved online in that account, so it follows them to any computer and can't be lost when a browser clears its storage. One person (a **login**) can hold up to **3 free accounts**, one site each (sites with a purchase don't count toward the 3), and switch between them from a small menu in the header. A **Your account** page lets them rename, delete or switch. Everything else that needs accounts (free publishing, the cart, Baker profiles, the admin room) is built on top of this.
 
 ## 2. The words used in this plan
 
 | Word | Means | Example |
 |---|---|---|
 | **Login** | The person. One email (or one Google account). | chris@example.com |
-| **Account** | One pagename on one domain = one site. A login holds up to 5. | `sunrise` on bakedby.me |
+| **Account** | One pagename on one domain = one site. A login holds up to 3 free ones; accounts with a purchase are extra. | `sunrise` on bakedby.me |
 | **Pagename** | The name in the address. | bakedby.me/**sunrise** |
 | **Project** | The design saved in an account (what the Studio keeps in the browser today). | — |
 | **Role** | What a login is allowed to do: client, Baker, administrator (escrow specialist and RezSite reviewer are administrator roles). | — |
@@ -33,11 +33,11 @@ People keep designing in the Studio with no account, exactly like today. When th
 6. **RezSite only:** a short line where they state their Nation or community (self-declared, live right away, kept private; only the RezSite reviewer can see it). The full RezSite rules come from the *RezSite free pages* task.
 7. **Done.** The design they were working on moves into the new account and is saved online. Publish or download continues (those steps belong to other tasks).
 
-**Later visits:** *Sign in* in the header. Their accounts are listed; picking one opens its site. *New site* creates another account (up to 5). Someone who isn't signed in sees the Studio exactly as today.
+**Later visits:** *Sign in* in the header. Their accounts are listed; picking one opens its site. *New site* creates another account (up to 3 free; once a site has a purchase it no longer counts, which frees a spot). Someone who isn't signed in sees the Studio exactly as today.
 
 **Your account page:** email, sign-in method, password reset, the list of accounts (pagename, domain, title, last edited), *Rename*, *Delete*, *Download all my data*, *Sign out*.
 
-**Rename:** pick a new pagename (same checks). Tick *Keep the old address and forward it* and the old pagename stays reserved and points to the new one, using one of the 5 accounts. A pagename can't be handed to another person.
+**Rename:** pick a new pagename (same checks). Tick *Keep the old address and forward it* and the old pagename stays reserved and points to the new one, using one of the 3 free accounts. A pagename can't be handed to another person.
 
 **Delete:** asks to type the pagename to confirm. The design is kept for 30 days (so a mistake can be undone), then removed.
 
@@ -48,10 +48,10 @@ Built in this order, each step tested before the next:
 | Step | What | Who does it |
 |---|---|---|
 | A. Setup | Create the Supabase project, Google sign-in, and the sign-up email sender (§6) | **You**, with click-by-click steps from me |
-| B. Database and its rules | Tables for logins, accounts, projects, roles and reserved names; the rules that make sure nobody can read or change someone else's work (Supabase calls these *row-level security*); the 5-account limit and the pagename rules checked **by the database itself**, so they can't be skipped by tampering with the page | Claude |
+| B. Database and its rules | Tables for logins, accounts, projects, roles and reserved names; the rules that make sure nobody can read or change someone else's work (Supabase calls these *row-level security*); the 3-free-account limit (accounts with a purchase not counted) and the pagename rules checked **by the database itself**, so they can't be skipped by tampering with the page | Claude |
 | C. Sign-up and sign-in | The sign-up window at Publish and Download code, *Sign in* in the header, the account switcher, the *Your account* page, password reset | Claude |
 | D. Saving online | Each account's project is saved online a few seconds after changes; the browser copy stays as a backup so the Studio still works offline; the work already in the browser moves into the first account; Undo/Redo and save points keep working | Claude |
-| E. Testing robot | New tests for sign-up, pagename checks, the 5-account limit, rename, delete, and "someone can't see another person's work" | Claude |
+| E. Testing robot | New tests for sign-up, pagename checks, the 3-free-account limit (and that a paid account doesn't count), rename, delete, and "someone can't see another person's work" | Claude |
 
 Roughly 3 to 5 working sessions with Claude after setup.
 
@@ -61,8 +61,8 @@ Roughly 3 to 5 working sessions with Claude after setup.
 
 ```
 logins     one row per person (made by Supabase when they sign up)
-accounts   login · domain · pagename · title · description · status (active, forwarding, deleted) · forwards to
-           → a pagename can appear once per domain; a login can have at most 5 accounts
+accounts   login · domain · pagename · title · description · status (active, forwarding, deleted) · forwards to · paid (yes once anything is bought for it)
+           → a pagename can appear once per domain; a login can have at most 3 accounts that are not paid
 projects   account · the saved design · last saved
 roles      login · role (baker-approved, admin, escrow, rezsite-reviewer); only administrators can change this
 reserved   words nobody can take as a pagename
@@ -93,7 +93,7 @@ Sources: [Supabase pricing](https://supabase.com/pricing), [Supabase on its buil
 1. **Free Supabase projects go to sleep** after a week with no visitors, and a free project has no automatic backups. Fine while building; before real people sign up, move to Pro ($25/month), which never sleeps and keeps daily backups.
 2. **Supabase's own email sender is for testing only** (a couple of emails an hour). Real sign-ups need our own sender: Resend, sending from something like `hello@bakeaweb.com`. That needs a few DNS records at Porkbun on bakeaweb.com. The *Pagename email addresses* task also changes email DNS, so the two are done carefully (they can live side by side).
 3. **Big designs.** Uploaded images are stored inside the design today, so one design can be several megabytes. 500 MB fills after a few hundred image-heavy sites. Fix, built into step D: uploaded images go to Supabase file storage (1 GB free, 100 GB on Pro) and the design keeps only a link.
-4. **Fake and bot sign-ups, and pagename hoarding** (one person making many logins to grab good names). Bot check on the form, confirmed email before publishing, reserved words, and the *Trust and safety* task for the rest.
+4. **Fake and bot sign-ups, and pagename hoarding** (one person making many logins to grab good names; the 3-free limit helps). Bot check on the form, confirmed email before publishing, reserved words, and the *Trust and safety* task for the rest.
 5. **Lookalike pagenames** (`paypal`, `cra-refund`). A starter blocked list now; the *Trust and safety* task adds proper checks.
 6. **Losing the administrator login** would lock you out of everything. Your admin login gets two-step sign-in, and a second administrator should exist.
 7. **Privacy law (PIPEDA).** Collecting emails means a privacy policy and a way to delete your data. The *Terms and policies* task drafts it; this task adds *Download all my data* and *Delete*. Recommended: store the data in Supabase's **Canada** region.
@@ -118,7 +118,7 @@ My recommendation is in **bold** after each. Answering "go with your recommendat
 
 1. **Code download without publishing:** which domain does the pagename belong to? **Ask for a pagename on bakedby.me (or rezsite.com) at code download too, so every site has one home address.**
 2. **Sites on the client's own domain:** do they still need a pagename? **Yes: every site has a bakedby.me or rezsite.com pagename as its ID and backup address, even if it lives on its own domain.**
-3. **bakedbya.pro pagenames** are Baker names. Does a Baker's portfolio count as one of their 5 accounts? **No: a Baker gets one bakedbya.pro name with their Baker profile, separate from the 5.**
+3. **bakedbya.pro pagenames** are Baker names. Does a Baker's portfolio count as one of their free accounts? **No: a Baker gets one bakedbya.pro name with their Baker profile, separate from the 3.**
 4. **After a pagename is deleted or renamed** (without forwarding), when can someone else take it? **After 90 days, so nobody can grab a known address and pretend to be the old owner.**
 5. **Hyphens:** allow a hyphen at the end, or two in a row (`sun--rise`, `sunrise-`)? **No to both.**
 6. **Title and description length:** **title up to 60 characters, description up to 160** (what search engines show).
@@ -129,4 +129,6 @@ My recommendation is in **bold** after each. Answering "go with your recommendat
 
 ---
 
-When you're happy with the answers, say OK and I'll start with the setup steps (§8).
+**Status:** approved; setup (§8) started 2026-11-08.
+
+**Still to confirm:** does *any* purchase free up a spot, even the $5 badge removal? This plan assumes yes (the cart marks the account paid once it's checked out). A paid site that is later deleted doesn't give its spot back to a free site.
