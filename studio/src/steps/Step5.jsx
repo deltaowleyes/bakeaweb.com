@@ -4,27 +4,36 @@ import { Render } from '../lib/render.js';
 import { Shot } from '../lib/shot.js';
 import { S, commit, useStudio, useRev, startOver } from '../store.js';
 import { nid, SEC } from '../edit.js';
-import { edition } from '../editions.js';
+import { edition, DESTS, DEST_KEYS } from '../editions.js';
 import Preview, { SizeButtons } from '../components/Preview.jsx';
 
 /* Thumbnails are made one after another (Home page, 1280 px wide, cropped to 960 px, half scale, JPEG). */
 function PublishCard() {
   useStudio();
-  const ed = edition(S), pn = S.req.pagename || '';
-  const ok = /^[a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9])$/.test(pn);
-  const addr = S.edition == 'pro' ? 'your own domain (for example yourname.com)' : ed.host + '/' + (pn || 'yourname');
+  const st = edition(S), pn = S.req.pagename || '';
+  const dests = DEST_KEYS.concat(st.markets ? ['portfolio'] : []);
+  const dk = dests.includes(S.req.dest) ? S.req.dest : 'bakedby';
+  const d = dk == 'portfolio' ? { host: 'bakedbya.pro' } : DESTS[dk];
+  const ok = /^[a-z][a-z0-9-]{2,11}$/.test(pn);
+  const addr = dk == 'own' ? 'your own domain (for example yourname.com)' : d.host + '/' + (pn || 'yourname');
   return (
-    <div className="card" id="pubc"><h3>Publish ({ed.name})</h3>
-      <p className="mu">{ed.blurb}</p>
-      {S.edition != 'pro' && <>
+    <div className="card" id="pubc"><h3>Publish ({st.full})</h3>
+      <p className="mu">Choose where your site will live. You can design first and decide here.</p>
+      <div className="dests" role="radiogroup" aria-label="Where your site will live">
+        {dests.map(k => (
+          <label key={k}><input type="radio" name="dest" value={k} checked={dk == k} onChange={() => commit(S => { S.req.dest = k; })} />
+            <span><b>{k == 'portfolio' ? 'bakedbya.pro (portfolio)' : DESTS[k].name}</b><br /><span className="mu small">{k == 'portfolio' ? 'For Bakers: portfolio pieces, published as screenshots with every link and menu clickable.' : DESTS[k].blurb}</span></span>
+          </label>
+        ))}
+      </div>
+      {dk != 'own' && <>
         <label htmlFor="pname">Your page name</label>
-        <input id="pname" value={pn} placeholder="sunrise-bakery" aria-describedby="pnhelp"
-          onChange={e => commit(S => { S.req.pagename = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''); })} />
-        <p id="pnhelp" className={pn && !ok ? 'errmsg' : 'mu small'}>{pn && !ok ? 'Use 3 to 40 lowercase letters, numbers or dashes, starting and ending with a letter or number.' : 'Lowercase letters, numbers and dashes.'}</p>
+        <input id="pname" value={pn} placeholder="sunrise" maxLength={12} aria-describedby="pnhelp"
+          onChange={e => commit(S => { S.req.pagename = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 12); })} />
+        <p id="pnhelp" className={pn && !ok ? 'errmsg' : 'mu small'}>{pn && !ok ? 'Use 3 to 12 lowercase letters, numbers or hyphens, starting with a letter.' : '3 to 12 lowercase letters, numbers or hyphens, starting with a letter.'}</p>
       </>}
       <p>Your site’s address: <b>https://{addr}</b></p>
-      {S.edition == 'baker' && <p className="mu small">Portfolio pieces on bakedbya.pro are published as screenshots, with every link and menu clickable.</p>}
-      {S.edition == 'rezsite' && <p className="mu small">RezSite pages go live after a short review by our team.</p>}
+      {dk == 'rezsite' && <p className="mu small">You’ll state your Nation or community, and your page goes live right away. BAKE takes no share on premium items for RezSite sites, so they cost less.</p>}
       <p className="mu small">One-click publishing turns on when accounts arrive. Until then, use Request development below and we’ll publish it for you.</p>
     </div>
   );
@@ -68,7 +77,7 @@ export default function Step5() {
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) { setMsg({ bad: true, text: 'Enter a valid email address so we can reach you.' }); return document.getElementById('remail').focus(); }
     commit(S => {
       S.req = { name: nm, email: em, pagename: S.req.pagename || '' };
-      S.notes.unshift({ id: nid('n'), at: Date.now(), name: nm, email: em, text: nt, tpl: S.tpl.pick, edition: S.edition, pagename: S.req.pagename || '', status: 'Requested', summary: { sections: SEC().map(x => x.title || x.type), menu: S.menu.items.map(m => m.label) } });
+      S.notes.unshift({ id: nid('n'), at: Date.now(), name: nm, email: em, text: nt, tpl: S.tpl.pick, edition: S.edition, dest: S.req.dest || 'bakedby', pagename: S.req.pagename || '', status: 'Requested', summary: { sections: SEC().map(x => x.title || x.type), menu: S.menu.items.map(m => m.label) } });
     });
     setNote(''); setMsg({ bad: false, text: 'Request saved. We’ll be in touch at ' + em + '.' });
   }

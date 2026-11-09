@@ -1,8 +1,8 @@
 # BAKE Studio: notes for Claude
 
 - Read `ARCHITECTURE.md` first. Source is in `studio/` (React + Vite + Tailwind); the BUILT site is in `docs/`, the only folder GitHub Pages serves at https://bakeaweb.com/ (Settings → Pages: branch `main`, folder `/docs`), so plans and source code are not on the website. The repo is `deltaowleyes/bakeaweb.com` (moved from `deltaowleyes/bake-studio` on 2026-11-07; the old repo only forwards visitors here).
-- Templates and generated pages (`studio/src/lib/render.js`, `site.css`) stay plain HTML/CSS: PRO previews are screenshots, EXPRESS/RezSite/BAKER preview the live page (`LivePreview.jsx`), and `lib/site.js` makes the published files. Use React/Tailwind for the studio UI only.
-- BAKE's plan is in `VISION.md`: bakeaweb.com (the studio's new home), bakedby.me (free EXPRESS sites), rezsite.com (free RezSite sites), bakedbya.pro (BAKER portfolios), PRO on clients' own domains. All four domains are at Porkbun. `docs/CNAME` contains `bakeaweb.com` (that is what puts the studio there); `place.mjs` writes it on every build, so never remove that line.
+- Templates and generated pages (`studio/src/lib/render.js`, `site.css`) stay plain HTML/CSS: previews are the live page (`LivePreview.jsx`), or screenshots when an unpaid premium item is in use, and `lib/site.js` makes the published files. Use React/Tailwind for the studio UI only.
+- BAKE's plan is in `VISION.md`: bakeaweb.com (the studio's new home), bakedby.me (free address for anyone), rezsite.com (free address for First Nations, Métis and Inuit), bakedbya.pro (Baker portfolios), or clients' own domains. There are two Studios, BAKE Studio PRO and BAKE Studio BAKER (`editions.js`); where a site lives is chosen at Publish. All four domains are at Porkbun. `docs/CNAME` contains `bakeaweb.com` (that is what puts the studio there); `place.mjs` writes it on every build, so never remove that line.
 - The roadmap (BAKE PRO) is `ROADMAP.json`; after editing it, run `node studio/scripts/roadmap.mjs` to rewrite `ROADMAP.md`.
 - The owner is not a developer. Explain in plain language with links, and offer BAKE / COPY BAKE buttons for next steps.
 

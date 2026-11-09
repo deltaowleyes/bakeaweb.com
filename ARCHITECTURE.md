@@ -1,6 +1,6 @@
 # BAKE Studio: architecture
 
-This describes BAKE Studio as it is now (November 2026, project format **v3**). It is a static web app with no server, built with **React + Vite + Tailwind CSS** and published by GitHub Pages from `deltaowleyes/bakeaweb.com` (branch `main`, folder `/docs`; moved from `deltaowleyes/bake-studio` on 2026-11-07). The source lives in `studio/`; `npm run build` writes the built site into `docs/`, the **only** folder Pages serves, so plans, docs and source code are not on the website (since 2026-11-08). Live: **https://bakeaweb.com/**, set by `docs/CNAME` (the old https://deltaowleyes.ca/bake-studio/ address and the old `deltaowleyes/bake-studio` repo forward there).
+This describes BAKE Studio as it is now (November 2026; two Studios since 2026-11-08, project format **v3**). It is a static web app with no server, built with **React + Vite + Tailwind CSS** and published by GitHub Pages from `deltaowleyes/bakeaweb.com` (branch `main`, folder `/docs`; moved from `deltaowleyes/bake-studio` on 2026-11-07). The source lives in `studio/`; `npm run build` writes the built site into `docs/`, the **only** folder Pages serves, so plans, docs and source code are not on the website (since 2026-11-08). Live: **https://bakeaweb.com/**, set by `docs/CNAME` (the old https://deltaowleyes.ca/bake-studio/ address and the old `deltaowleyes/bake-studio` repo forward there).
 
 ## 1. What it does
 
@@ -15,8 +15,10 @@ A five-step wizard that turns an existing website (or a blank start) into previe
 | 5 | Templates | Browse templates that fit, preview any page at all sizes, pick one, request development |
 
 **Design rules that shape the code:**
-- **Versions (`editions.js`, `S.edition`):** EXPRESS, RezSite and BAKER preview the **live page** in an iframe and can show its code (*View code*). **PRO** previews are PNG/JPEG screenshots, so the generated HTML is never left in the DOM. Choose the version in step 1 or the header, or with `?v=express|rezsite|baker|pro` in the address. RezSite was called IndigiHub until 2026-11-08; `?v=indigihub` and saved projects with `edition: 'indigihub'` still open RezSite.
-- **Publishing** (planned, see `ROADMAP.md`): `lib/site.js` already turns a project into real page files (EXPRESS, RezSite) or a clickable screenshot page (BAKER portfolios on bakedbya.pro). Until accounts exist, the studio's exit is "Request development".
+- **Two Studios (`editions.js`, `S.edition`, since 2026-11-08):** **BAKE Studio PRO** (`'pro'`, clients, the default) and **BAKE Studio BAKER** (`'baker'`, Bakers: everything in PRO plus a *Markets* area, a placeholder for now). Choose in step 1 or the header, or with `?v=pro|baker`. Old links and saved projects with `express`, `rezsite` or `indigihub` open in PRO (`normStudio()`).
+- **Previews:** the **live page** in an iframe with *View code*, in both Studios. When the project uses a **premium item that isn't paid for**, previews switch to PNG/JPEG **screenshots**, so that code is never left in the DOM. The cart plugs in with `setPremiumCheck(fn)` in `editions.js` (`fn(S)` → true = unpaid premium in use); until then nothing is premium.
+- **Where a site lives** (bakedby.me, rezsite.com, own domain; plus bakedbya.pro portfolio in BAKER) is chosen at **Publish** in step 5 (`S.req.dest`: `'bakedby' | 'rezsite' | 'own' | 'portfolio'`), not by the Studio.
+- **Publishing** (planned, see `ROADMAP.md`): `lib/site.js` already turns a project into real page files (bakedby.me, rezsite.com, own domain) or a clickable screenshot page (BAKER portfolios on bakedbya.pro). Until accounts exist, the studio's exit is "Request development".
 - **Everything runs in the browser.** State is saved to `localStorage` until Supabase is added.
 
 ## 2. File structure
@@ -38,7 +40,7 @@ bakeaweb.com/   (the repository)
     ├── scripts/place.mjs     copies studio/dist into docs/ + .nojekyll, CNAME, ROADMAP.json
     └── src/
         ├── main.jsx          starts React; window.BAKE test hook
-        ├── editions.js       the four versions (EXPRESS, RezSite, BAKER, PRO): names, hosts, live preview or screenshots
+        ├── editions.js       the two Studios (PRO, BAKER), markets list, publish destinations, live preview vs screenshots (premium check)
         ├── index.css         Tailwind theme + utilities (no reset) + studio.css as a layer; studio colours as Tailwind colours
         ├── studio.css        the studio's component styles (cards, buttons, grids, picker, overlays, light/dark)
         ├── store.js          S (project state), load/migrate, save, commit(), undo/redo, save points, useStudio()
@@ -46,9 +48,9 @@ bakeaweb.com/   (the repository)
         ├── App.jsx           header + step buttons, Undo/Redo/History, History dialog, active step, Back/Next, storage-full warning
         ├── steps/Step1–5.jsx one component per step
         ├── components/
-        │   ├── Preview.jsx   PRO: screenshots + click-to-edit overlays; SizeButtons. Others: LivePreview
+        │   ├── Preview.jsx   unpaid premium in use: screenshots + click-to-edit overlays; SizeButtons. Otherwise: LivePreview
         │   ├── LivePreview.jsx live page in scaled iframes, click-to-edit inside the frame, View code
-        │   ├── EditionPicker.jsx version cards (step 1) and header menu
+        │   ├── EditionPicker.jsx Studio cards (step 1), BAKER Markets card, header menu
         │   ├── Inspector.jsx right-hand sidebar in step 3 (Text / Section / Page / Site tabs)
         │   ├── FontPicker.jsx   searchable Google Fonts picker (full catalogue)
         │   ├── ColourPicker.jsx brand colours + every art.js palette + free picker + hex
@@ -83,7 +85,7 @@ One plain object, created by `blank()` in `store.js` and saved whole as JSON und
 ```js
 S = {
   v: 3,                       // format version (v2 is migrated on load, see §3.3)
-  edition: 'express',         // 'express' | 'rezsite' | 'baker' | 'pro' (editions.js)
+  edition: 'pro',             // 'pro' | 'baker': the two Studios (editions.js)
   step: 1,                    // current step, 1–5 (also mirrored in the URL hash #step-N)
 
   source: {                   // step 1
@@ -123,7 +125,7 @@ S = {
 
   tpl: { pick, view, fav: { [tplId]: true }, all, favOnly },  // step 5
   notes: [Request],           // development requests (newest first)
-  req: { name, email, pagename },  // remembered contact details and page name for requests and publishing
+  req: { name, email, pagename, dest },  // contact details, page name, and where the site lives ('bakedby' | 'rezsite' | 'own' | 'portfolio')
   ai: { endpoint: '' },       // AI image service URL; empty means sample artwork only
 
   ui: {                       // view state, saved too so a reload returns to the same place
@@ -157,7 +159,7 @@ ImageRef   = undefined (template default) | null (no image)
              …each may also carry crop?, cropSrc?, frame? (§3.5)
 MenuItem   = { id, label, href } | { id, label, href, children: [MenuItem] }   // a group has children
 MenuConfig = { type: 'bar' | 'mega' | 'split' | 'hamburger' | 'bottom', logo: 'left' | 'center', sticky, cta, search }
-Request    = { id, at (ms), name, email, text, tpl, status: 'Requested', summary: { sections: [titles], menu: [labels] } }
+Request    = { id, at (ms), name, email, text, tpl, edition, dest, pagename, status: 'Requested', summary: { sections: [titles], menu: [labels] } }
 ```
 
 ### 3.2 Section types (`Render.SECTION_TYPES`)
@@ -184,7 +186,7 @@ Every section also takes `bg` (`auto`, `default`, `soft`, `ink`, `acc`) and `ali
 
 - **Saving:** `save()` writes the whole `S` 250 ms after the last change. If the browser's storage is full (usually from large uploads), a warning banner appears.
 - **Saving and loading** are in `store.js`. The key and format are unchanged from the pre-React studio, so saved work carries over.
-- **Loading:** `load()` reads the key. A **v2** project (one page, `S.sections`) is converted to v3: its sections become `pages[0]` ("Home"), and site images found in `brand.opts` seed `lib`. Missing top-level keys and `ui` keys are filled from `blank()`. An old `edition: 'indigihub'` becomes `'rezsite'`.
+- **Loading:** `load()` reads the key. A **v2** project (one page, `S.sections`) is converted to v3: its sections become `pages[0]` ("Home"), and site images found in `brand.opts` seed `lib`. Missing top-level keys and `ui` keys are filled from `blank()`. Any `edition` other than `'baker'` (old `express`, `rezsite`, `indigihub`) becomes `'pro'`.
 - **Start over** clears the key and reloads (a save point is made first, so it can be undone).
 - **Undo and save points:** `commit()` serializes the project without view state (`snap()`: no `ui`, `step`, `source.log`) and, if it changed, pushes the previous snapshot on the undo list (same focused input within 1.5 s = one step; up to 80 steps, about 60 MB, for this visit only). `undoStep()` / `redoStep()` put a snapshot back in place with `apply()`, keeping the view state and fixing `ui.page`, `ui.tpage`, `ui.sel` if they no longer exist. Keys: Ctrl+Z, Ctrl+Shift+Z, Ctrl+Y (⌘ on a Mac), plus header buttons. Save points (`addPoint`, `restorePoint`, `deletePoint`, `savePoints`) live under the `localStorage` key `bake-studio-history` (newest first, max 8); they are made every 3 min while editing, when a commit replaces every page id (import, starter), before Start over, before a restore, and by *Save point now*. `save()` drops the oldest save point when storage is full.
 - **Images in state:** uploads are stored as data URLs (shrunk to 1600 px for hero images, 700 px otherwise, WebP). Site images are stored as URLs only.
@@ -323,9 +325,9 @@ map = { width, height,             // CSS px of the render width (not the pixel 
 - `id`: `sectionId[:itemIndex][:field]`, with `:2`, `:3`… for repeats (for example several paragraphs of one text field).
 - The tags come from `render.js`: `data-sec`, `data-type`, `data-si` on each section (and the footer), `data-ii` on each item, `data-fk="{field}"` on each editable text or image. Field names match `FIELDS` / `ITEMF` in `edit.js`.
 - `links`: every visible `<a href>` (not `#`) as `{ x, y, width, height, href, label }`, used by `Site.shotSite` to make screenshots clickable.
-- Test hook: `BAKE.maps()` returns the maps of the step 3 preview's current screenshots (PRO only).
+- Test hook: `BAKE.maps()` returns the maps of the step 3 preview's current screenshots (screenshot previews only).
 
-### 5.2 Live preview and page files (EXPRESS, RezSite, BAKER)
+### 5.2 Live preview and page files
 
 - **`LivePreview`** draws each screen size in a same-origin iframe at its real width (1280, 820, 390 px), scaled to fit. The frame gets `site.css` and the page's Google Fonts once; later changes replace the page inside it, so typing doesn't flash. In step 3, clicking inside the frame finds the nearest `data-fk`, `data-ii` or `data-sec` and calls the same `onPart` as the screenshot overlays. Links don't navigate; menus open and close.
 - **`Site.html(S, tpl, {pageId})`** makes one complete HTML file: doctype, title, description, Google Fonts link, `site.css` inline and the page inside `<div class="cq">`. *View code* shows it.
@@ -360,7 +362,7 @@ map = { width, height,             // CSS px of the render width (not the pixel 
 - **Template thumbnails** (`useThumbs` in Step5) are made one after another and restart after any change; `Shot`'s cache makes unchanged ones instant.
 - **Font picker previews** download only the letters of each font's name, under a separate family name (`bake-preview …`), so a preview copy can never replace the full font on the page.
 - **Styling:** existing look in `studio.css`, layered under Tailwind utilities, so a utility class always wins. Use Tailwind classes for new layout and the studio colours (`text-muted`, `border-line`, `bg-acc`, `text-onacc`, `bg-panel`, `text-warn`). Tailwind's reset (preflight) is deliberately off so generated pages measure the same in the page as in the screenshot.
-- **Test hook:** `window.BAKE = { state(), maps(), site }`: `maps()` returns the box maps of the step 3 preview's screenshots; `site` is `Site` (§5.2). The testing robot (`studio/tests/`) uses this hook.
+- **Test hook:** `window.BAKE = { state(), maps(), site, premium }`: `maps()` returns the box maps of the step 3 preview's screenshots; `site` is `Site` (§5.2); `premium(fn)` is `setPremiumCheck` (tests use it to force screenshot previews). The testing robot (`studio/tests/`) uses this hook.
 - **Testing robot:** `cd studio && npm test` runs Playwright tests of all five steps and the page engine on its own Vite server (random free port); any console error fails a test, and outside sites are blocked. `BAKE_TEST_BUILT=1 npm test` tests the finished build. First time on a computer: `npm run test:install`. GitHub runs the same tests on every push.
 
 ## 8. Known limits and what Supabase will add

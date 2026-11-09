@@ -3,19 +3,20 @@
    component then redraws and the project is saved 250 ms later. */
 import { useSyncExternalStore } from 'react';
 import { Art } from './lib/art.js';
+import { normStudio } from './editions.js';
 
 export const KEY = 'bake-studio-v2';
 
 export function blank() {
   return {
-    v: 3, step: 1, edition: 'express',   // 'express' | 'rezsite' | 'baker' | 'pro' (editions.js)
+    v: 3, step: 1, edition: 'pro',   // 'pro' | 'baker': the two Studios (editions.js)
     source: { has: true, url: 'https://deltaowleyes.ca/', log: [], found: null },
     biz: { name: 'Your business', desc: '' },
     brand: { pal: Object.assign({}, Art.PALETTES[0]), palFound: null, font: 0, seed: { logo: 0, hero: 0, ill: 0 }, opts: { logo: [], hero: [], ill: [] }, pick: {}, star: {} },
     pages: [], lib: [], footer: { motto: '', text: '' },
     menu: { items: [], cta: { label: 'Contact us', href: '#contact' }, vp: { desktop: { type: 'bar', logo: 'left', sticky: true, cta: false, search: false }, tablet: { type: 'hamburger', logo: 'left', sticky: true, cta: false, search: false }, phone: { type: 'hamburger', logo: 'left', sticky: true, cta: false, search: false } } },
     tpl: { pick: null, view: null, fav: {}, all: false, favOnly: false },
-    notes: [], req: { name: '', email: '' }, ai: { endpoint: '' },
+    notes: [], req: { name: '', email: '', dest: 'bakedby' }, ai: { endpoint: '' },
     ui: { vp: 'desktop', tvp: 'all', mvp: 'desktop', btab: 'logo', bsrc: 'svg', sel: null, open: false, prompt: {}, page: null, tpage: null, pasteFor: null, libq: '', insp: { open: false, tab: 'section', key: null, item: null } }
   };
 }
@@ -27,7 +28,7 @@ export function load() {
       o.v = 3; o.pages = [{ id: 'p-home', name: 'Home', url: (o.source && o.source.url) || '', status: 'imported', sections: o.sections || [] }]; delete o.sections; o.lib = [];
       ['logo', 'hero'].forEach(t => o.brand.opts[t].forEach(x => { if (x.from == 'site') o.lib.push({ id: x.id, src: x.src, label: x.label || '', logo: t == 'logo' }); }));
     }
-    if (o && o.edition == 'indigihub') o.edition = 'rezsite';   // renamed 2026-11-08
+    if (o) o.edition = normStudio(o.edition);   // two Studios since 2026-11-08: express, rezsite, indigihub → pro
     if (o && o.v == 3) { const b = blank(); for (const k in b) if (!(k in o)) o[k] = b[k]; for (const k in b.ui) if (!(k in o.ui)) o.ui[k] = b.ui[k]; return o; }
   } catch (e) { /* unreadable save: start fresh */ }
   return null;
@@ -36,7 +37,7 @@ export function load() {
 /* ---------- store ---------- */
 export let S = load() || blank();
 const hm = /#step-(\d)/.exec(location.hash); if (hm) S.step = Math.min(5, Math.max(1, +hm[1]));
-const em = /[?&]v=(express|rezsite|indigihub|baker|pro)\b/.exec(location.search); if (em) S.edition = em[1] == 'indigihub' ? 'rezsite' : em[1];
+const em = /[?&]v=(express|rezsite|indigihub|baker|pro)\b/.exec(location.search); if (em) S.edition = normStudio(em[1]);   // old ?v= links open PRO
 
 let rev = 0, saveT, storageFull = false;
 const subs = new Set();

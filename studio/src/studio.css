@@ -158,4 +158,7 @@ dialog#picker::backdrop{background:rgba(0,0,0,.45)}
 .eds button{height:auto;min-height:0;display:block;text-align:left;padding:10px 12px;white-space:normal}
 .eds button[aria-pressed="true"]{outline:2px solid var(--acc);outline-offset:-1px}
 .eds b{display:block;font-size:15px}.eds span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.eds button[aria-pressed="true"] span{color:inherit;opacity:.9}
+.eds .mk{border:1px solid var(--line);border-radius:10px;padding:10px 12px}.eds .mk b{display:block;font-size:15px}.eds .soon{font-weight:600;color:var(--acc)}
+#pubc .dests{display:grid;gap:6px;margin:6px 0 10px}#pubc .dests label{display:flex;gap:8px;align-items:flex-start;font-weight:400}#pubc .dests input{width:auto;height:auto;margin-top:3px}
 .edtag{font-size:12px;font-weight:600;letter-spacing:.04em;padding:2px 8px;border-radius:999px;background:var(--acc);color:var(--onacc);vertical-align:middle;margin-left:4px}

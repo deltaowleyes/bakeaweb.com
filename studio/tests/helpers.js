@@ -20,7 +20,7 @@ export const test = base.extend({
 export { expect };
 
 /** Open the studio with nothing saved, at a given version and step. */
-export async function openStudio(page, { v = 'express', step = 1 } = {}) {
+export async function openStudio(page, { v = 'pro', step = 1 } = {}) {
   await page.goto(`./?v=${v}#step-${step}`);
   await page.evaluate(() => localStorage.clear());
   await page.goto(`./?v=${v}#step-${step}`);
@@ -58,3 +58,7 @@ export async function expectScreenshot(page, scope = page) {
   await expect(img).toHaveAttribute('src', /^(blob:|data:)/);
   await expect.poll(() => img.evaluate(i => i.complete && i.naturalWidth)).toBeGreaterThan(100);
 }
+
+/** Pretend the project uses an unpaid premium item, so previews switch to screenshots (editions.js setPremiumCheck).
+    Takes effect on the next change (for example makeStarter or goStep). */
+export const unpaidPremium = (page, on = true) => page.evaluate(on => window.BAKE.premium(on ? () => true : null), on);

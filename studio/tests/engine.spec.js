@@ -1,7 +1,7 @@
 /* The page engine without clicking: saved-project upgrades, every template renders, page files. */
 import { test, expect, openStudio, makeStarter, state } from './helpers.js';
 
-test('old saved projects still open (v2 and IndigiHub → RezSite)', async ({ page }) => {
+test('old saved projects still open (v2, and IndigiHub → PRO)', async ({ page }) => {
   await openStudio(page);
   await page.evaluate(() => localStorage.setItem('bake-studio-v2', JSON.stringify({
     v: 2, step: 1, edition: 'indigihub', source: { has: true, url: 'https://old.example/', log: [], found: null },
@@ -13,14 +13,18 @@ test('old saved projects still open (v2 and IndigiHub → RezSite)', async ({ pa
   await page.goto('./');
   const S = await state(page);
   expect(S.v).toBe(3);
-  expect(S.edition).toBe('rezsite');
+  expect(S.edition).toBe('pro');
   expect(S.pages[0].sections[0].text).toBe('From v2');
 });
 
-test('?v=indigihub still opens RezSite', async ({ page }) => {
-  await openStudio(page, { v: 'indigihub' });
-  expect((await state(page)).edition).toBe('rezsite');
-});
+for (const [old, want] of [['express', 'pro'], ['rezsite', 'pro'], ['pro', 'pro'], ['baker', 'baker']]) {
+  test(`a saved ${old} project opens in ${want.toUpperCase()}`, async ({ page }) => {
+    await openStudio(page);
+    await page.evaluate(o => { const S = JSON.parse(JSON.stringify(window.BAKE.state())); S.edition = o; localStorage.setItem('bake-studio-v2', JSON.stringify(S)); }, old);
+    await page.goto('./');
+    expect((await state(page)).edition).toBe(want);
+  });
+}
 
 test('every template makes complete page files', async ({ page }) => {
   test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');

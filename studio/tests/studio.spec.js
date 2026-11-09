@@ -1,17 +1,21 @@
 /* The robot's main walk: all five steps, every version, with no console errors. */
 import { readFileSync } from 'node:fs';
-import { test, expect, openStudio, makeStarter, goStep, state, expectLivePreview, expectScreenshot } from './helpers.js';
+import { test, expect, openStudio, makeStarter, goStep, state, expectLivePreview, expectScreenshot, unpaidPremium } from './helpers.js';
 
 const SAMPLE = readFileSync(new URL('./fixtures/sample-site.html', import.meta.url), 'utf8');
 
-test('the studio opens with five steps and the version picker', async ({ page }) => {
+test('the studio opens with five steps and the Studio picker', async ({ page }) => {
   await openStudio(page);
   const steps = page.getByRole('navigation', { name: 'Steps' }).getByRole('button');
   await expect(steps).toHaveText(['1. Your site', '2. Brand', '3. Sections', '4. Menu', '5. Templates'].map(t => new RegExp(t.replace('.', '\\.'))));
-  await expect(page.getByRole('group', { name: 'BAKE version' }).getByRole('button')).toHaveCount(4);
+  const cards = page.getByRole('group', { name: 'BAKE Studio' }).getByRole('button');
+  await expect(cards).toHaveCount(2);
+  await expect(cards.nth(0)).toContainText('BAKE Studio PRO');
+  await expect(cards.nth(1)).toContainText('BAKE Studio BAKER');
+  expect((await state(page)).edition).toBe('pro');   // PRO is the default
 });
 
-for (const v of ['express', 'rezsite', 'baker', 'pro']) {
+for (const v of ['pro', 'baker']) {
   test(`every step opens without errors (${v})`, async ({ page }) => {
     await openStudio(page, { v });
     await makeStarter(page);
@@ -19,6 +23,60 @@ for (const v of ['express', 'rezsite', 'baker', 'pro']) {
     expect((await state(page)).edition).toBe(v);
   });
 }
+
+for (const [v, want] of [['express', 'pro'], ['rezsite', 'pro'], ['indigihub', 'pro'], ['pro', 'pro'], ['baker', 'baker']]) {
+  test(`old ?v=${v} link opens ${want.toUpperCase()}`, async ({ page }) => {
+    await openStudio(page, { v });
+    expect((await state(page)).edition).toBe(want);
+  });
+}
+
+test('switching Studios: BAKER shows the Markets area, PRO doesn’t', async ({ page }) => {
+  await openStudio(page);
+  await expect(page.locator('#markets')).toHaveCount(0);
+  await page.getByRole('group', { name: 'BAKE Studio' }).getByRole('button', { name: /BAKER/ }).click();
+  await expect(page.locator('#markets')).toBeVisible();
+  await expect(page.getByRole('list', { name: 'Markets' }).getByRole('listitem')).toHaveText([/Services/, /Templates/, /Sections/, /Extensions/]);
+  await expect(page.locator('.edtag')).toHaveText('BAKER');
+  expect(page.url()).toContain('v=baker');
+  await page.getByRole('combobox', { name: 'BAKE Studio' }).selectOption('pro');   // the header menu
+  await expect(page.locator('#markets')).toHaveCount(0);
+  expect((await state(page)).edition).toBe('pro');
+});
+
+test('previews are live in both Studios until an unpaid premium item is used', async ({ page }) => {
+  for (const v of ['pro', 'baker']) {
+    await openStudio(page, { v });
+    await makeStarter(page);
+    await goStep(page, 3);
+    await expectLivePreview(page);
+  }
+  await unpaidPremium(page);
+  await goStep(page, 2);
+  await expectScreenshot(page);
+  await expect(page.locator('iframe')).toHaveCount(0);
+});
+
+test('step 5: where the site lives is chosen at Publish', async ({ page }) => {
+  await openStudio(page);
+  await makeStarter(page);
+  await goStep(page, 5);
+  const dests = page.getByRole('radiogroup', { name: 'Where your site will live' }).getByRole('radio');
+  await expect(dests).toHaveCount(3);   // bakedby.me, rezsite.com, own domain
+  await expect(page.locator('#pubc')).toContainText('https://bakedby.me/yourname');
+  await page.locator('#pname').fill('Sunrise!!');
+  await expect(page.locator('#pname')).toHaveValue('sunrise');
+  await page.getByRole('radio', { name: /rezsite\.com/ }).check();
+  await expect(page.locator('#pubc')).toContainText('https://rezsite.com/sunrise');
+  await page.locator('#pname').fill('9lives');
+  await expect(page.locator('#pnhelp')).toHaveClass(/errmsg/);
+  await page.getByRole('radio', { name: /Your own domain/ }).check();
+  await expect(page.locator('#pname')).toHaveCount(0);
+  expect((await state(page)).req.dest).toBe('own');
+  // BAKER adds the bakedbya.pro portfolio
+  await page.getByRole('combobox', { name: 'BAKE Studio' }).selectOption('baker');
+  await expect(dests).toHaveCount(4);
+});
 
 test('step 1: paste-code import finds the name, menu and sections', async ({ page }) => {
   await openStudio(page);
@@ -76,13 +134,14 @@ test('step 3: add, move and delete sections; live preview updates', async ({ pag
   await expectLivePreview(page);
 });
 
-test('step 3 (PRO): screenshot preview with click-to-edit boxes', async ({ page }) => {
-  await openStudio(page, { v: 'pro' });
+test('step 3 (unpaid premium): screenshot preview with click-to-edit boxes', async ({ page }) => {
+  await openStudio(page);
+  await unpaidPremium(page);
   await makeStarter(page);
   await goStep(page, 3);
   await expectScreenshot(page);
   await expect.poll(() => page.evaluate(() => (window.BAKE.maps()[0] || { boxes: [] }).boxes.length)).toBeGreaterThan(3);
-  // PRO never leaves the generated page code in the studio
+  // screenshot previews never leave the generated page code in the studio
   await expect(page.locator('iframe')).toHaveCount(0);
   // clicking a headline in the screenshot opens the Inspector on that text
   await page.locator('button.ov-text').first().click();
@@ -126,8 +185,9 @@ test('step 5: thumbnails, pick a template and request development', async ({ pag
   expect(S.tpl.pick).toBeTruthy();
 });
 
-test('step 5 (PRO): template preview is a screenshot', async ({ page }) => {
-  await openStudio(page, { v: 'pro' });
+test('step 5 (unpaid premium): template preview is a screenshot', async ({ page }) => {
+  await openStudio(page);
+  await unpaidPremium(page);
   await makeStarter(page);
   await goStep(page, 5);
   await expectScreenshot(page, page.locator('#tpc'));
