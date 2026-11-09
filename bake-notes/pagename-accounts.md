@@ -11,7 +11,7 @@ Decisions from the owner on 2026-11-08, to fold into the docs at **Merge and pub
 
 ## ROADMAP.json
 - *Pagename accounts* (`pagename-accounts`): blurb and prompt say 5 accounts → 3 free accounts (paid accounts don't count). Plan approved; set `ready` to `now` once setup is done, and `touches`: `studio/src/store.js`, `studio/src/App.jsx`, `studio/src/lib/cloud.js`, `studio/src/components/`, `studio/src/steps/Step5.jsx`, `studio/package.json`, `supabase/`, `studio/tests/`. Build after *Two Studios* and *The cart* (both change `App.jsx`).
-- *AI image limits: card first, 10 free* (see its `id` in ROADMAP.json): title and text 10 → 5.
+- *AI image limits: card first, 10 free* (`ai-image-credits-for-pro`): title and text 10 → 5.
 - *Real AI images*: any "10 free" wording → 5.
 
 ## plans/vision-talk.md
