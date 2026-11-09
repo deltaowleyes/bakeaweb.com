@@ -13,3 +13,8 @@
 - Row-level security: a login only sees and changes its own accounts and projects. `paid`, `status` and pagename changes only go through `rename_account`, `delete_account`, `restore_account` or the server.
 - Anyone (even signed out) can call `pagename_check(domain, pagename)` → `ok` | `format` | `reserved` | `taken`.
 - Roles (`user_roles`: baker, admin, escrow, rezsite_reviewer) are given by an administrator in the dashboard only.
+
+## Sign-in setup (2026-11-08)
+- Site URL `https://bakeaweb.com`; redirect URLs `https://bakeaweb.com/**` and `http://localhost:5173/**`.
+- Email + password on, with email confirmation. Google sign-in on (Google Cloud client "BAKE Studio", callback `https://gpwxuunutljcauoknhrh.supabase.co/auth/v1/callback`).
+- **Google is in Testing mode**: only test users added at https://console.cloud.google.com/auth/audience can use Google sign-in. To open it to everyone: add the privacy policy (and terms) link on the Branding page once the *Terms and policies* pages are live, then click **Publish app**.
