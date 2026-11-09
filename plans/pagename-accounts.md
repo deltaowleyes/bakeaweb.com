@@ -129,6 +129,6 @@ My recommendation is in **bold** after each. Answering "go with your recommendat
 
 ---
 
-**Status:** approved; setup (§8) started 2026-11-08.
+**Status:** approved; setup (§8) started 2026-11-08. Done so far: Supabase project `bakeaweb` in Canada (Central) and the database with all its rules, tested (step B, see `supabase/`). Next: sign-in addresses and Google sign-in (owner), then the sign-up email sender.
 
 **Still to confirm:** does *any* purchase free up a spot, even the $5 badge removal? This plan assumes yes (the cart marks the account paid once it's checked out). A paid site that is later deleted doesn't give its spot back to a free site.
