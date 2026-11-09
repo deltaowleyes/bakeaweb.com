@@ -30,7 +30,7 @@ Tasks in the same wave change different files, so they can all run at the same t
 | ★ | **Talk about the vision (always open)**<br>A standing place to talk through how BAKE should work: the two Studios, the cart, accounts, markets, prices. Never marked done. | Operations | Quick | ▶ now | Just you and your ideas |
 |  | **Also make the repositories private**<br>Hide the code and plans on GitHub too. Needs GitHub Pro (about $4 US a month); the website stays public and keeps working. | Operations | Quick | ✋ you | GitHub Pro (about $4/month, check your billing settings) |
 | ★ | **Free hosting live on bakedby.me, bakedbya.pro and rezsite.com**<br>Each free domain gets its home page and a working example site, so the hosting is real before accounts arrive. | Publishing | Quick | ✋ you | DNS at Porkbun for all 4 domains, and the 3 GitHub repositories (step-by-step guide) |
-|  | **bakeaweb.com home page**<br>The front door: what BAKE is, the four versions, prices, examples and a big Start baking button. | Sharing | Medium | ▶ now | — |
+|  | **bakeaweb.com home page**<br>The front door: what BAKE is, the two Studios, the free addresses, prices, examples and a big Start baking button. | Sharing | Medium | ▶ now | — |
 |  | **Edit text right on the preview**<br>Double-click a headline in the preview and type. Feels like magic. | Editing | Medium | ▶ now | — |
 |  | **Drag and drop for pages, cards and menu links**<br>Sections can already be dragged; this brings it to everything else. | Editing | Quick | ▶ now | — |
 |  | **Command palette**<br>Ctrl+K to jump anywhere or do anything. A power-user favourite. | Editing | Quick | ▶ now | — |
@@ -49,7 +49,7 @@ Tasks in the same wave change different files, so they can all run at the same t
 |  | **English and French**<br>A bilingual studio and bilingual sites for Canadian clients. | Quality | Medium | ▶ now | — |
 |  | **Indigenous languages and syllabics**<br>Sites in Cree, Ojibwe, Inuktitut and more, with syllabics fonts that just work. | Quality | Medium | ▶ now | Indigenous language speakers to check the results |
 
-## Phase 1: Accounts, free hosting and the first PRO publish
+## Phase 1: Accounts, free hosting, the cart and the first publish
 
 | | Task | Area | Size | Ready | You'll need |
 |---|---|---|---|---|---|
