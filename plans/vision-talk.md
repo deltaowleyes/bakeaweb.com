@@ -2,6 +2,48 @@
 
 The always-open roadmap task *Talk about the vision* (`vision-talk`). Newest talk first. VISION.md is not updated until a talk is finished.
 
+## Talk 2 (2026-11-08): two Studios and a cart
+
+Everything below is now in VISION.md (§2–§6, §8) and the roadmap.
+
+### Talk 1 answers confirmed
+All 13 still apply (pagenames, per-domain uniqueness, sign-up, try first, 5 accounts per login, renaming, handing work to a Baker, email and repository, page/site wording, $5 badge removal, AI images, the four BAKER markets, RezSite self-declaration). One change: **BAKER includes every PRO feature.**
+
+### Decisions
+| # | Question | Answer |
+|---|---|---|
+| 1 | What is bakedby.me now? | The **free address for anyone**: a site with an empty cart publishes free there, with the badge. |
+| 2 | What is rezsite.com now? | A **free address with lower prices**: BAKE takes no cut (normally 30% on items, 10% on Baker services) on anything premium. |
+| 3 | Who gets the RezSite saving? | The **buyer pays less**; the Baker earns the same. |
+| 4 | What does buying an item cover? | **One site**; another site means buying again. |
+| 5 | Who sets item prices? | An admin gives each submitted item a **price class**; the class sets the range the Baker picks from; buyers **filter by price class**. |
+| 6 | Item sale split | **70% Baker / 30% BAKE.** |
+| 7 | Previewing unpaid premium items | **Screenshots** for pages using an unpaid premium item; everything else live. |
+| 8 | Code download | **$25 once per site**, then **unlimited downloads**, so the Studio can be used as an editor. |
+| 9 | Publish fee | **Only the cart** (own domain still +$50 new / +$100 existing). |
+| 10 | When is a card asked for? | **Only at checkout**, except AI images. |
+| 11 | AI images | **Card on file first**, then **10 free per login**, then each image is a cart item. |
+| 12 | Who can hire Bakers? | **Anyone with an account** (card at escrow). |
+| 13 | Badge removal | **$5 cart item.** |
+| 14 | Who can use the BAKER Studio? | **Anyone**; an admin **approves** a Baker before they bid or sell. |
+| 15 | Other Bakers' premium items in a Baker's own work | **Not allowed.** |
+| 16 | Premium items a Baker uses on a client's site | Go in the **client's** cart. |
+| 17 | How the cart follows the design | **The cart is what's in use** (removing or swapping updates it). |
+| 18 | Where the address is chosen | **At Publish.** |
+| 19 | What to build first | **Accounts first.** |
+
+### Roadmap changes
+- *Choose your version* → **Two Studios: PRO and BAKER** (ready now, ★).
+- *Price shown as you design* → **The cart and its total at the top right** (ready now, ★).
+- *Free EXPRESS publish* → **Free publish to bakedby.me and rezsite.com**; *PRO upgrade and publish fee* → **Cart checkout**; *AI image credits for PRO* → **AI image limits: card first, 10 free**.
+- Updated: Pagename accounts, RezSite free pages, Real AI images, Baker profiles, Fees, payouts and receipts.
+- New: **Code download** ($25, unlimited) and **Markets for templates, sections and extensions** (price classes).
+
+### Still open for a later talk
+- The price-class ranges (how many classes, and their minimum and maximum).
+- The price of an AI image after the free 10.
+- ARCHITECTURE.md still describes the four-version studio; it gets updated when *Two Studios* is built.
+
 ## Talk 1 (2026-11-08): versions and accounts, stopped and restarted
 
 ### New direction (supersedes the four-version plan; start the next talk here)

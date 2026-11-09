@@ -1,6 +1,6 @@
 # BAKE PRO roadmap
 
-Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do list. The list itself lives in `ROADMAP.json` (edit that file and the BAKE PRO buttons update too); this page is made from it by `node studio/scripts/roadmap.mjs`. Business plan: `VISION.md`. Updated 2026-11-08. 67 tasks.
+Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do list. The list itself lives in `ROADMAP.json` (edit that file and the BAKE PRO buttons update too); this page is made from it by `node studio/scripts/roadmap.mjs`. Business plan: `VISION.md`. Updated 2026-11-08. 69 tasks.
 
 **Already done:** Drag-and-drop sections (Step 3); Inspector sidebar (Step 3); Google Fonts; Image editor with crop and border/frame controls; Versions: EXPRESS, RezSite and BAKER preview the live page with View code; PRO previews screenshots; Page files and clickable screenshot pages (lib/site.js); Studio moved to bakeaweb.com; IndigiHub version renamed to RezSite (rezsite.com); Only the finished studio is published (GitHub Pages serves docs/); Automatic testing robot (Playwright tests, npm test, GitHub Actions); Undo, redo and history (Ctrl+Z, save points).
 
@@ -11,7 +11,7 @@ Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do
 
 Tasks in the same wave change different files, so they can all run at the same time. Each works on its own branch (`bake/<id>`) and never builds or publishes; one **Merge and publish** step does that at the end (CLAUDE.md, *Parallel BAKE*).
 
-**Wave 1** (35 tasks): Talk about the vision (always open) · Site health check · Turn designs into real websites · Pagename accounts · BAKE Host: where every site lives · Free EXPRESS publish to bakedby.me/pagename · PRO upgrade and publish fee · RezSite free pages · Trust and safety for free hosting · Escrow payments · bakeaweb.com home page · Edit text right on the preview · Drag and drop for pages, cards and menu links · Command palette · Colours from your logo · Mix and match templates · Compare templates side by side · Studio works great on phones · Pagename email addresses · A repository for every pagename · Price shown as you design · Terms and policies · New domain through Porkbun · Connect an existing domain · Domain renewals for PRO · Import any website · Real AI images · AI image credits for PRO · AI writing help on every field · Shareable preview link · Pin comments on the preview · Requests reach your inbox · Automate the manual steps · Protect the templates · Ready for a million sites
+**Wave 1** (36 tasks): Talk about the vision (always open) · Site health check · Two Studios: PRO and BAKER · Turn designs into real websites · The cart and its total at the top right · Pagename accounts · BAKE Host: where every site lives · Free publish to bakedby.me and rezsite.com · Cart checkout · RezSite free pages · Trust and safety for free hosting · Escrow payments · bakeaweb.com home page · Edit text right on the preview · Drag and drop for pages, cards and menu links · Command palette · Colours from your logo · Mix and match templates · Compare templates side by side · Studio works great on phones · Pagename email addresses · A repository for every pagename · Terms and policies · New domain through Porkbun · Connect an existing domain · Domain renewals for PRO · Import any website · Real AI images · AI image limits: card first, 10 free · AI writing help on every field · Shareable preview link · Pin comments on the preview · Requests reach your inbox · Automate the manual steps · Protect the templates · Ready for a million sites
 
 **Wave 2** (3 tasks): Describe your business, get a site · Dark mode and seasonal looks · Presentation mode
 
@@ -27,7 +27,7 @@ Tasks in the same wave change different files, so they can all run at the same t
 
 | | Task | Area | Size | Ready | You'll need |
 |---|---|---|---|---|---|
-| ★ | **Talk about the vision (always open)**<br>A standing place to talk through how BAKE should work: each version's flow, accounts, markets, prices. Never marked done. | Operations | Quick | ▶ now | Just you and your ideas |
+| ★ | **Talk about the vision (always open)**<br>A standing place to talk through how BAKE should work: the two Studios, the cart, accounts, markets, prices. Never marked done. | Operations | Quick | ▶ now | Just you and your ideas |
 |  | **Also make the repositories private**<br>Hide the code and plans on GitHub too. Needs GitHub Pro (about $4 US a month); the website stays public and keeps working. | Operations | Quick | ✋ you | GitHub Pro (about $4/month, check your billing settings) |
 | ★ | **Free hosting live on bakedby.me, bakedbya.pro and rezsite.com**<br>Each free domain gets its home page and a working example site, so the hosting is real before accounts arrive. | Publishing | Quick | ✋ you | DNS at Porkbun for all 4 domains, and the 3 GitHub repositories (step-by-step guide) |
 |  | **bakeaweb.com home page**<br>The front door: what BAKE is, the four versions, prices, examples and a big Start baking button. | Sharing | Medium | ▶ now | — |
@@ -53,19 +53,20 @@ Tasks in the same wave change different files, so they can all run at the same t
 
 | | Task | Area | Size | Ready | You'll need |
 |---|---|---|---|---|---|
-| ★ | **Pagename accounts** (plan first)<br>Sign up with a pagename, title and description. One pagename works across bakedby.me, rezsite.com and bakedbya.pro, and names the client's email and repository. | Accounts | Big | ✎ plan | A free Supabase account |
-|  | **Choose your version: EXPRESS, RezSite, BAKER or PRO**<br>The version picker is in the studio now. Next: tie the version to the account, show which features are PRO, and add Upgrade to PRO. | Accounts | Medium | ⏳ after pagename-accounts | Accounts first |
+| ★ | **Pagename accounts** (plan first)<br>Sign up at Publish or code download with a pagename, title and description. One login holds up to 5 accounts (one site each); pagenames are unique per domain. | Accounts | Big | ✎ plan | A free Supabase account |
+| ★ | **Two Studios: PRO and BAKER**<br>Replace the four-version picker (EXPRESS, RezSite, BAKER, PRO) with two Studios: BAKE Studio PRO for clients and BAKE Studio BAKER for Bakers (everything in PRO plus the markets). | Studio | Medium | ▶ now | — |
 |  | **Pagename email addresses** (plan first)<br>pagename@bakedby.me (or another BAKE domain) for every client, without sharing a Gmail password. | Accounts | Medium | ✎ plan | Email forwarding set up on one of our Porkbun domains |
 |  | **A repository for every pagename** (plan first)<br>Each page gets its own GitHub repository in a BAKE organization, created automatically. | Accounts | Medium | ✎ plan | A GitHub organization per hosting domain and a GitHub App |
 | ★ | **Turn designs into real websites**<br>The engine behind every publish. Real page files already work (lib/site.js); next come image files, a favicon, a sitemap and testing on every template. | Publishing | Big | ▶ now | — |
 | ★ | **BAKE Host: where every site lives** (plan first)<br>Decide now how thousands of free sites are hosted safely, before GitHub's rules or limits become a problem. | Publishing | Medium | ✎ plan | Possibly a free Cloudflare account |
-| ★ | **Free EXPRESS publish to bakedby.me/pagename** (plan first)<br>Anyone can put their site online free at bakedby.me/pagename in one click, with a small Baked with BAKE badge that brings in new visitors. | Publishing | Big | ✎ plan | Accounts first (so a server function can publish safely) |
-| ★ | **PRO upgrade and publish fee** (plan first)<br>The first way to earn: a one-time PRO fee of $25 to $500 depending on the template. | Publishing | Medium | ✎ plan | A Stripe account |
-| ★ | **RezSite free pages** (plan first)<br>Free sites for First Nations, Métis and Inuit people, businesses and communities on rezsite.com, with a respectful, trusted review. | Accounts | Medium | ✎ plan | Indigenous advisors to shape the rules |
+| ★ | **Free publish to bakedby.me and rezsite.com** (plan first)<br>A site with an empty cart goes online free at bakedby.me/pagename or rezsite.com/pagename in one click, with a small Baked with BAKE badge that brings in new visitors. | Publishing | Big | ✎ plan | Accounts first (so a server function can publish safely) |
+| ★ | **Cart checkout** (plan first)<br>The way BAKE earns: pay the cart in one Stripe checkout at Publish or code download. Bakers get 70% of item sales, BAKE 30% (no BAKE share on RezSite sites). | Publishing | Medium | ✎ plan | A Stripe account |
+| ★ | **RezSite free pages** (plan first)<br>Free sites for First Nations, Métis and Inuit people, businesses and communities on rezsite.com, with lower prices and a respectful review only when a concern is reported. | Accounts | Medium | ✎ plan | Indigenous advisors to shape the rules |
 | ★ | **Names and trademarks check** (plan first)<br>An IndigiHub already exists in Canada (so ours is now RezSite); check every BAKE name before it's on thousands of sites. | Operations | Quick | ✋ you | Read the plan (plans/names-and-trademarks-check.md), then a trademark lawyer for the final answer |
 | ★ | **Trust and safety for free hosting** (plan first)<br>Free hosting attracts scammers. Keep them out, or GitHub or Cloudflare could take every BAKE site down with them. | Trust | Medium | ✎ plan | — |
-|  | **Price shown as you design** (plan first)<br>Clients always see what they'll pay: EXPRESS and RezSite are free; PRO shows the template's one-time fee plus any domain option. | Publishing | Quick | ✎ plan | Your price list |
+| ★ | **The cart and its total at the top right**<br>Anyone can try premium templates, sections and extensions free; whatever is in use goes in a cart, and the total always shows at the top right. | Studio | Medium | ▶ now | — |
 |  | **Terms and policies** (plan first)<br>Terms of service, Baker agreement, escrow and refund policy, privacy policy, content and takedown policy, RezSite rules. | Operations | Medium | ✎ plan | A lawyer to review the drafts |
+|  | **Code download**<br>$25 once per site, then the site's code can be downloaded any number of times, so the Studio works as an editor for sites hosted anywhere. | Publishing | Quick | ⏳ after pro-upgrade-and-publish-fee, turn-designs-into-real-websites | Cart checkout first |
 
 ## Phase 2: PRO domains, server functions and sharing
 
@@ -77,8 +78,8 @@ Tasks in the same wave change different files, so they can all run at the same t
 |  | **Domain renewals for PRO** (plan first)<br>Domains cost money every year. A one-time PRO fee can't cover that forever, so no client ever loses their domain by surprise. | Payments | Quick | ✎ plan | Porkbun prepaid credit; Stripe |
 |  | **Updates and rollback after launch**<br>Clients keep editing and republish anytime, and can undo a bad publish. | Publishing | Quick | ⏳ after free-express-publish-to-bakedby-me-pagename | — |
 |  | **Import any website** (plan first)<br>Fixes most sites blocking imports, and blocked images in screenshots. | Studio | Medium | ✎ plan | Supabase |
-|  | **Real AI images** (plan first)<br>A PRO feature: turns the sample artwork tab into real generated logos, heroes and illustrations. | AI | Medium | ✎ plan | An OpenAI account with billing, plus Supabase |
-|  | **AI image credits for PRO** (plan first)<br>Keeps one-time PRO pricing sustainable: AI images cost us money every time they're made. | AI | Quick | ✎ plan | An OpenAI account with billing |
+|  | **Real AI images** (plan first)<br>Turns the sample artwork tab into real generated logos, heroes and illustrations, for everyone with a card on file. | AI | Medium | ✎ plan | An OpenAI account with billing, plus Supabase |
+|  | **AI image limits: card first, 10 free** (plan first)<br>AI images cost BAKE money every time one is made: a card on file first, 10 free per login, then each image goes in the cart. | AI | Quick | ✎ plan | An OpenAI account with billing |
 |  | **AI writing help on every field** (plan first)<br>Improve, shorten, make friendlier, fix spelling or translate any text. | AI | Medium | ✎ plan | An AI server function (Supabase plus an API key) |
 |  | **Shareable preview link** (plan first)<br>Send anyone a link to see the new site on every screen size. | Sharing | Medium | ✎ plan | Supabase |
 |  | **Pin comments on the preview** (plan first)<br>Click any spot and leave a note, like Figma comments. Great for client and Baker feedback. | Sharing | Medium | ✎ plan | Supabase |
@@ -90,17 +91,18 @@ Tasks in the same wave change different files, so they can all run at the same t
 
 | | Task | Area | Size | Ready | You'll need |
 |---|---|---|---|---|---|
-|  | **Baker profiles**<br>Bakers show skills, rates, reviews and portfolio pieces hosted on bakedbya.pro, so clients choose with confidence. | Accounts | Medium | ⏳ after pagename-accounts | — |
+|  | **Baker profiles**<br>Anyone can practise in the BAKER Studio; an admin approves a Baker before they bid or sell. Profiles show skills, rates, reviews and portfolio pieces on bakedbya.pro. | Accounts | Medium | ⏳ after pagename-accounts | — |
 | ★ | **Ask for help from anywhere**<br>Click any part of the preview, describe what you want, and it becomes a task Bakers can bid on. | Marketplace | Medium | ⏳ after pagename-accounts | Accounts first |
 |  | **AI task writer**<br>Turns a vague request into a clear brief and suggests a fair price range. | Marketplace | Quick | ⏳ after ai-writing-help-on-every-field | An AI server function |
 |  | **Baker bidding**<br>Bakers quote a price (even $0), a delivery time and an approval window. | Marketplace | Medium | ⏳ after baker-profiles | — |
 |  | **Task workspace**<br>Chat, files and a safe copy of the client's project for the Baker to work on. | Marketplace | Big | ⏳ after baker-bidding | — |
 | ★ | **Escrow payments** (plan first)<br>The client pays when accepting a quote, and the money is held until they approve. | Payments | Big | ✎ plan | A Stripe account, plus a quick check with an accountant or lawyer |
-|  | **Fees, payouts and receipts**<br>Our 10% fee, Baker payouts and clear receipts for everyone. | Payments | Medium | ⏳ after escrow-payments | Escrow first |
+|  | **Fees, payouts and receipts**<br>BAKE's 10% on services and 30% on item sales (none on RezSite sites), Baker payouts and clear receipts for everyone. | Payments | Medium | ⏳ after escrow-payments | Escrow first |
 |  | **Dispute centre**<br>An escrow specialist sees everything in one place and decides fairly. | Payments | Medium | ⏳ after escrow-payments | — |
 | ★ | **Required public reviews**<br>Every finished task gets a public review, so the marketplace earns trust. | Trust | Quick | ⏳ after baker-bidding | — |
 |  | **Baker reputation and badges**<br>Completion rate, on-time rate and badges like Rising Baker for $0 starters. | Trust | Quick | ⏳ after required-public-reviews | — |
 |  | **Safety and fraud protection**<br>Keeps payments on the platform and bad actors out. | Trust | Medium | ⏳ after escrow-payments | — |
+| ★ | **Markets for templates, sections and extensions**<br>Approved Bakers submit templates, sections and extensions; an admin gives each a price class, the Baker picks a price in its range, and buyers filter by price class. | Marketplace | Big | ⏳ after baker-profiles | Accounts and Baker profiles first |
 
 ## Phase 4: Operations, community and scale
 
