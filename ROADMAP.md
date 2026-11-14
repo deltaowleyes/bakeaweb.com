@@ -1,6 +1,6 @@
 # BAKE PRO roadmap
 
-Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do list. The list itself lives in `ROADMAP.json` (edit that file and the BAKE PRO buttons update too); this page is made from it by `node studio/scripts/roadmap.mjs`. Business plan: `VISION.md`. Updated 2026-11-10. 68 tasks.
+Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do list. The list itself lives in `ROADMAP.json` (edit that file and the BAKE PRO buttons update too); this page is made from it by `node studio/scripts/roadmap.mjs`. Business plan: `VISION.md`. Updated 2026-11-14. 73 tasks.
 
 **Already done:** Drag-and-drop sections (Step 3); Inspector sidebar (Step 3); Google Fonts; Image editor with crop and border/frame controls; Versions: EXPRESS, RezSite and BAKER preview the live page with View code; PRO previews screenshots; Page files and clickable screenshot pages (lib/site.js); Studio moved to bakeaweb.com; IndigiHub version renamed to RezSite (rezsite.com); Only the finished studio is published (GitHub Pages serves docs/); Automatic testing robot (Playwright tests, npm test, GitHub Actions); Undo, redo and history (Ctrl+Z, save points); Two Studios: BAKE Studio PRO and BAKE Studio BAKER (destination chosen at Publish).
 
@@ -11,7 +11,7 @@ Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do
 
 Tasks in the same wave change different files, so they can all run at the same time. Each works on its own branch (`bake/<id>`) and never builds or publishes; one **Merge and publish** step does that at the end (CLAUDE.md, *Parallel BAKE*).
 
-**Wave 1** (33 tasks): Talk about the vision (always open) · Site health check · Turn designs into real websites · The cart and its total at the top right · Pagename accounts · Free publish to bakedby.me and rezsite.com · Cart checkout · RezSite free pages · Trust and safety for free hosting · Escrow payments · bakeaweb.com home page · Edit text right on the preview · Drag and drop for pages, cards and menu links · Command palette · Colours from your logo · Mix and match templates · Compare templates side by side · Studio works great on phones · Pagename email addresses · Terms and policies · New domain through Porkbun · Connect an existing domain · Domain renewals for PRO · Import any website · Real AI images · AI image limits: card first, 10 free · AI writing help on every field · Shareable preview link · Pin comments on the preview · Requests reach your inbox · Automate the manual steps · Protect the templates · Ready for a million sites
+**Wave 1** (38 tasks): Talk about the vision (always open) · Site health check · Turn designs into real websites · The cart and its total at the top right · Import a site as it is · HTML editor with locked code blocks · Magic AI buttons · Pagename accounts · Free publish to bakedby.me and rezsite.com · Cart checkout · RezSite free pages · Trust and safety for free hosting · Escrow payments · Check imported sites before publish · bakeaweb.com home page · Edit text right on the preview · Drag and drop for pages, cards and menu links · Command palette · Colours from your logo · Mix and match templates · Compare templates side by side · Studio works great on phones · Pagename email addresses · Terms and policies · New domain through Porkbun · Connect an existing domain · Domain renewals for PRO · Import any website · Real AI images · AI image limits: card first, 10 free · AI writing help on every field · Shareable preview link · Pin comments on the preview · Requests reach your inbox · Magic AI allowance and packs · Automate the manual steps · Protect the templates · Ready for a million sites
 
 **Wave 2** (3 tasks): Describe your business, get a site · Dark mode and seasonal looks · Presentation mode
 
@@ -48,6 +48,9 @@ Tasks in the same wave change different files, so they can all run at the same t
 |  | **Guided tour and demo projects**<br>New visitors see the studio's power in one click. | Quality | Quick | ▶ now | — |
 |  | **English and French**<br>A bilingual studio and bilingual sites for Canadian clients. | Quality | Medium | ▶ now | — |
 |  | **Indigenous languages and syllabics**<br>Sites in Cree, Ojibwe, Inuktitut and more, with syllabics fonts that just work. | Quality | Medium | ▶ now | Indigenous language speakers to check the results |
+| ★ | **Import a site as it is** (plan first)<br>Bring in an existing site unchanged (its own HTML, CSS, images and scripts) and host it free. Its own code is always viewable, editable and free to download until a premium item is added. | Studio | Medium | ✎ plan | — |
+| ★ | **HTML editor with locked code blocks** (plan first)<br>BAKE Studio as an HTML editor: code beside the live preview. Unpaid premium templates, sections and add-ons show as locked blocks until checkout; free items stay visible. | Studio | Big | ✎ plan | — |
+| ★ | **Magic AI buttons** (plan first)<br>Buttons marked with a sparkle improve a page in one click: Make it pop, Rewrite, Fix for phones, Modernize, Speed it up, Easy for everyone, Get found on Google, Translate, Add a section. | AI | Big | ✎ plan | An AI server function (Supabase plus an API key) for the AI ones; some work without one |
 
 ## Phase 1: Accounts, free hosting, the cart and the first publish
 
@@ -65,6 +68,7 @@ Tasks in the same wave change different files, so they can all run at the same t
 | ★ | **The cart and its total at the top right**<br>Anyone can try premium templates, sections and extensions free; whatever is in use goes in a cart, and the total always shows at the top right. | Studio | Medium | ▶ now | — |
 |  | **Terms and policies** (plan first)<br>Terms of service, Baker agreement, escrow and refund policy, privacy policy, content and takedown policy, RezSite rules. | Operations | Medium | ✎ plan | A lawyer to review the drafts |
 |  | **Code download**<br>$25 once per site, then the site's code can be downloaded any number of times, so the Studio works as an editor for sites hosted anywhere. | Publishing | Quick | ⏳ after pro-upgrade-and-publish-fee, turn-designs-into-real-websites | Cart checkout first |
+| ★ | **Check imported sites before publish** (plan first)<br>Imported sites can bring their own scripts. Check them before they go live on bakedby.me or rezsite.com, so one bad site can't hurt visitors or get every BAKE site taken down. | Trust | Medium | ✎ plan | — |
 
 ## Phase 2: PRO domains, server functions and sharing
 
@@ -84,6 +88,7 @@ Tasks in the same wave change different files, so they can all run at the same t
 |  | **Requests reach your inbox** (plan first)<br>Development requests arrive by email instead of staying in one browser. | Sharing | Medium | ✎ plan | Supabase, plus a free email-sending account (like Resend) |
 |  | **Requests that write the brief**<br>Every request or task arrives as a complete brief, so work starts with no back-and-forth. | Sharing | Medium | ▶ now | — |
 |  | **Visitor stats for every site**<br>Owners see how many people visit, without creepy tracking or cookie banners. | Sharing | Medium | ⏳ after free-express-publish-to-bakedby-me-pagename | Possibly a free Cloudflare account |
+|  | **Magic AI allowance and packs** (plan first)<br>Each magic click costs BAKE a little money: a free monthly allowance per login once a card is on file, then paid packs in the cart. | AI | Quick | ✎ plan | An AI account with billing; Stripe |
 
 ## Phase 3: The Baker marketplace, escrow and reviews
 

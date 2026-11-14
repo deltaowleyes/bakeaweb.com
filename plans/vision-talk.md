@@ -2,6 +2,27 @@
 
 The always-open roadmap task *Talk about the vision* (`vision-talk`). Newest talk first. VISION.md is not updated until a talk is finished.
 
+## Talk 3 (2026-11-14): import a site as it is, the HTML editor, locked code and magic AI buttons
+
+### What the owner asked for
+- Import a site, with the option to **import it as it is**, so BAKE Studio works as an **HTML editor** and people can use the free hosting more freely.
+- Anything that is a **template, section or add-on** doesn't show its code until paid.
+- **Magic "AI" buttons** that improve a page.
+
+### Decisions
+- Code download of an imported site is **free until a premium item is added**; then the $25 applies.
+- **Free** ($0) templates, sections and add-ons keep showing their code; only premium code is locked until checkout.
+- Magic AI buttons: a **free monthly allowance per login** once a card is on file, then **paid packs** in the cart.
+- Imported sites on the free addresses are **checked before publish**: scripts scanned, password and card forms blocked, risky sites wait for an admin.
+- Already settled by BAKE Host (2026-11-09): every member site has its own subdomain, so one imported site's scripts can't reach another site's visitors.
+
+### Roadmap changes
+- Added: Import a site as it is, HTML editor with locked code blocks, Check imported sites before publish, Magic AI buttons, Magic AI allowance and packs (all plan first).
+
+### Still open
+- Sizes and prices of magic AI packs (after measuring real costs).
+- Size limits per imported site (pages and megabytes).
+
 ## Talk 2 (2026-11-08): two Studios and a cart
 
 Everything below is now in VISION.md (§2–§6, §8) and the roadmap.
