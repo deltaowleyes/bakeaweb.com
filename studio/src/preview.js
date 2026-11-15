@@ -38,18 +38,19 @@ function gone() {
 
 function draw() {
   const notes = (P.before_notes || '').split('\n').map(l => l.replace(/^[-•]\s*/, '').trim()).filter(Boolean);
+  const none = !P.website;   /* no website yet: a first website, not a redesign */
   const after = P.rating_after || designs.reduce((m, d) => Math.max(m, +d.grade || 0), 0);
   app.innerHTML = `
-    <p class="score">Design score <span class="b">${esc(P.rating_before ?? '?')}/99 today</span> → <span class="a">${esc(after)}/99 redesigned</span></p>
+    <p class="score">${none ? `Design score <span class="a">${esc(after)}/99</span>` : `Design score <span class="b">${esc(P.rating_before ?? '?')}/99 today</span> → <span class="a">${esc(after)}/99 redesigned</span>`}</p>
     <h1>A fresh website for ${esc(P.business_name)}</h1>
-    <p class="lead">We made ${designs.length == 1 ? 'a free redesign' : designs.length + ' free redesigns'} of your website so you can see what's possible, with no commitment.
+    <p class="lead">${none ? `We made ${designs.length == 1 ? 'a free website design' : designs.length + ' free website designs'} for you, with your own photos, so you can see what's possible, with no commitment.` : `We made ${designs.length == 1 ? 'a free redesign' : designs.length + ' free redesigns'} of your website so you can see what's possible, with no commitment.`}
       Pick a design below and try it on a computer or a phone. Photos labelled “Sample photo” are placeholders that we swap for your own.</p>
     <div class="bar"><div class="tabs" role="tablist">${designs.map((d, i) => `<button data-i="${i}" aria-pressed="${i == cur}">${i == 0 && designs.length > 1 ? '★ ' : ''}${esc(d.name)}</button>`).join('')}</div>
       <div class="dev">${Object.keys(DEV).map(k => `<button data-d="${k}" aria-pressed="${k == dev}">${k[0].toUpperCase() + k.slice(1)}</button>`).join('')}</div></div>
     <div class="stage" id="stage"><div class="frame" id="frame"><iframe id="f" title="Website preview" sandbox="allow-same-origin"></iframe></div></div>
     <p class="hint">Scroll inside the preview to see the whole page.${designs.length > 1 ? ' ★ = the design we think suits you best.' : ''}</p>
     <div class="grid">
-      <div class="card before"><h2>Your website today</h2>
+      <div class="card before"><h2>${none ? 'Today' : 'Your website today'}</h2>
         ${P.before_shot ? `<a href="${esc(P.website)}" target="_blank" rel="noopener"><img id="bshot" data-url="${esc(P.website)}" src="${esc(P.before_shot)}" alt="Your current website" loading="lazy"></a>` : ''}
         ${notes.length ? '<h3 style="margin:16px 0 0;font-size:16px">Quick things we noticed</h3><ul>' + notes.map(n => '<li>' + esc(n) + '</li>').join('') + '</ul>' : ''}
       </div>
