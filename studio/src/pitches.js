@@ -8,6 +8,7 @@ import { createClient } from '@supabase/supabase-js';
 import { Site } from './lib/site.js';
 import { Render } from './lib/render.js';
 import { blank, KEY, addPoint } from './store.js';
+import { tameLinks } from './lib/tame.js';
 
 const sb = createClient('https://gpwxuunutljcauoknhrh.supabase.co', 'sb_publishable_B7a1VEv6RX13n2JhA50tbQ_oR_oKfw9');
 const $ = s => document.querySelector(s);
@@ -156,6 +157,7 @@ function open(r, d) { cur = d; $('#dlgT').textContent = r.business_name + ' · '
 function size(w) { $('#dlgF').style.width = Math.min(w, innerWidth * .96 - 4) + 'px'; }
 document.querySelectorAll('#dlg [data-w]').forEach(b => b.onclick = () => size(+b.dataset.w));
 $('#dlgX').onclick = () => $('#dlg').close();
+tameLinks($('#dlgF'));
 
 /* Load a redesign into the studio on this browser (a save point keeps the work that was there). */
 function toStudio(r, d) {

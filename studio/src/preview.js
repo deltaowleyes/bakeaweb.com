@@ -5,6 +5,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { Site } from './lib/site.js';
 import { blank } from './store.js';
+import { tameLinks } from './lib/tame.js';
 
 const sb = createClient('https://gpwxuunutljcauoknhrh.supabase.co', 'sb_publishable_B7a1VEv6RX13n2JhA50tbQ_oR_oKfw9');
 const $ = s => document.querySelector(s);
@@ -76,7 +77,12 @@ function draw() {
     $('#rm').className = 'msg ok'; $('#rm').textContent = 'Thank you! We got your message and will be in touch soon.'; e.target.querySelectorAll('input,textarea,button').forEach(x => x.disabled = true);
   };
   if ($('#bshot')) watchShot($('#bshot'));
+  tameLinks($('#f'), label => toast(label == 'form' ? 'Forms will work on your finished site.' : (label ? '“' + label + '”' : 'This link') + ' will open its own page on your finished site. This preview shows the home page.'));
   show(); new ResizeObserver(fit).observe($('#stage'));
+}
+function toast(text) {
+  let t = $('#toast'); if (!t) { t = document.createElement('div'); t.id = 'toast'; t.setAttribute('role', 'status'); t.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);max-width:min(92vw,520px);background:#1d2a2c;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:0 8px 24px #0004;font-size:15px;z-index:20;transition:opacity .3s'; document.body.append(t); }
+  t.textContent = text; t.style.opacity = 1; clearTimeout(toast.h); toast.h = setTimeout(() => t.style.opacity = 0, 3500);
 }
 function mark(sel, on) { app.querySelectorAll(sel).forEach(x => x.setAttribute('aria-pressed', x == on)); }
 

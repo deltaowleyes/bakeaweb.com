@@ -167,3 +167,20 @@ test('the prospect preview page shows a friendly message for a bad link and is h
   await expect(page.locator('.empty')).toContainText("isn't working");
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
 });
+
+test('links inside a preview iframe never load a page inside the preview', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
+  await page.goto('preview.html');
+  const r = await page.evaluate(async () => {
+    const { tameLinks } = await import('/src/lib/tame.js');
+    const f = document.createElement('iframe'); f.setAttribute('sandbox', 'allow-same-origin'); document.body.append(f);
+    let said = null; tameLinks(f, l => said = l);
+    f.srcdoc = '<a id="m" href="#">Cabins</a><div style="height:3000px"></div><a id="j" href="#end">Jump</a><p id="end">end</p>';
+    await new Promise(r => f.addEventListener('load', r, { once: true }));
+    f.contentDocument.getElementById('m').click();
+    await new Promise(r => setTimeout(r, 300));
+    return { said, still: !!f.contentDocument.getElementById('m') };
+  });
+  expect(r.said).toBe('Cabins');
+  expect(r.still).toBe(true);
+});
