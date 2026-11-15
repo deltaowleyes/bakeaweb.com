@@ -2898,6 +2898,8 @@
   .pv.tf-trapline .gl{grid-template-columns:1fr 1fr}
   .pv.tf-tannery h1{font-size:44px}.pv.tf-tannery h2{font-size:34px}.pv.tf-tannery .s-cta h2{font-size:36px}.pv.tf-tannery .fe h3{font-size:32px}
   .pv.tf-tannery .hl-split .hx{grid-template-columns:1fr;gap:28px}
+  .pv.tf-tannery .ey{white-space:normal;border-radius:22px;padding:9px 16px;font-size:10.5px;letter-spacing:.12em;transform:rotate(-2deg);max-width:100%}
+  .pv.tf-tannery .hl-split .ht{min-width:0}
   .pv.tf-tannery .hl-split .hm{padding:18px}
   .pv.tf-tannery .stt{grid-template-columns:1fr 1fr;gap:14px}.pv.tf-tannery .stt b{font-size:32px}
   .pv.tf-tannery .ls{grid-template-columns:1fr}
@@ -2912,3 +2914,10 @@
 }
 .pv.tf-trapline .ey{white-space:nowrap}
 @container (max-width:599.98px){.pv.tf-trapline .ey{white-space:normal}}
+/* phones: a long business name or a wide logo image shrinks to fit beside the Menu button instead of pushing the page sideways */
+@container (max-width:599.98px){
+  .pv:is(.tf-trapline,.tf-tannery,.tf-birchbark) .hd .lg{flex:0 1 auto;min-width:0}
+  .pv:is(.tf-trapline,.tf-tannery,.tf-birchbark) .hd .lg img{height:auto;max-height:34px;max-width:100%;object-fit:contain}
+  .pv:is(.tf-trapline,.tf-tannery,.tf-birchbark) .wm{min-width:0}
+  .pv:is(.tf-trapline,.tf-tannery,.tf-birchbark) .wm-n{white-space:normal;line-height:1.05}
+}
