@@ -4,6 +4,10 @@
 # It saves the photos and studio/src/lib/photos.json (with credits) to main; the next publish puts them on bakeaweb.com.
 name: Photo robot
 on:
+  # Claude can also start it by pushing a change to studio/photo-request.txt (one line: kinds, then mode)
+  push:
+    branches: [main]
+    paths: ['studio/photo-request.txt']
   workflow_dispatch:
     inputs:
       kinds:
@@ -29,12 +33,14 @@ jobs:
         working-directory: studio
         env:
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
-        run: node scripts/fetch-photos.mjs "${{ inputs.kinds }}" "${{ inputs.mode }}"
+        run: |
+          if [ -n "${{ inputs.kinds }}" ]; then node scripts/fetch-photos.mjs "${{ inputs.kinds }}" "${{ inputs.mode }}"
+          else read KINDS MODE < photo-request.txt; node scripts/fetch-photos.mjs "$KINDS" "$MODE"; fi
       - name: Save them to the repository
         run: |
           git config user.name "BAKE photo robot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add studio/public/photos studio/src/lib/photos.json
           git diff --cached --quiet && echo "No new photos." && exit 0
-          git commit -m "Photo robot: sample photos from Pixabay (${{ inputs.kinds }}, ${{ inputs.mode }})"
+          git commit -m "Photo robot: sample photos from Pixabay"
           git push
