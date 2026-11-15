@@ -1,0 +1,572 @@
+{
+ "source": "Pixabay",
+ "sourceUrl": "https://pixabay.com/",
+ "kinds": {
+  "cafe": {
+   "name": "Café and restaurant",
+   "photos": [
+    {
+     "id": "3537801",
+     "file": "photos/cafe/3537801.jpg",
+     "role": "hero",
+     "topic": "cafe interior",
+     "w": 3776,
+     "h": 2500,
+     "tags": "cafe, building, greece, karpathos island, facade, architecture, chairs, tables, front, windows, nature, door, restaurant, empty, closed, street, outdoors, summer, mediterranean, hd wallpaper",
+     "by": "analogicus",
+     "page": "https://pixabay.com/photos/cafe-building-greece-3537801/"
+    },
+    {
+     "id": "2242213",
+     "file": "photos/cafe/2242213.jpg",
+     "role": "hero",
+     "topic": "cafe interior",
+     "w": 5997,
+     "h": 4000,
+     "tags": "coffee, wallpaper 4k, 4k wallpaper 1920x1080, workspace, wallpaper hd, free background, cafe, drink, hd wallpaper, notebook, beverage, free wallpaper, beautiful wallpaper, laptop wallpaper, mac wallpaper, flat lay, windows wallpaper, 4k wallpaper, copy space, full hd wallpaper, desktop backgrounds, background, cool backgrounds, wallpaper",
+     "by": "Engin_Akyurt",
+     "page": "https://pixabay.com/photos/coffee-workspace-cafe-drink-2242213/"
+    },
+    {
+     "id": "1834784",
+     "file": "photos/cafe/1834784.jpg",
+     "role": "hero",
+     "topic": "restaurant table food",
+     "w": 4096,
+     "h": 2730,
+     "tags": "brick wall, chairs, furniture, interior design, lights, restaurant, table, rustic, interior decoration, restaurant, restaurant, restaurant, restaurant, restaurant, table",
+     "by": "Pexels",
+     "page": "https://pixabay.com/photos/brick-wall-chairs-furniture-1834784/"
+    },
+    {
+     "id": "449952",
+     "file": "photos/cafe/449952.jpg",
+     "role": "hero",
+     "topic": "restaurant table food",
+     "w": 2400,
+     "h": 1600,
+     "tags": "restaurant, table setting, table, glassware, stemware, wine glasses, glasses, plates, napkin, set-up, dinner, dining, service, lunch, restaurant, restaurant, restaurant, restaurant, restaurant",
+     "by": "neshom",
+     "page": "https://pixabay.com/photos/restaurant-table-setting-table-449952/"
+    },
+    {
+     "id": "1284438",
+     "file": "photos/cafe/1284438.jpg",
+     "role": "item",
+     "topic": "fresh bread bakery",
+     "w": 5472,
+     "h": 3072,
+     "tags": "bread, croissant, morning, puff paste, puff pastry, flaky pastry, bakery, breakfast, dessert, sweet, snack, homemade, delicious, cuisine, tasty, pie, bake, pastry, bun, nutrition, delicacy, assortment, puff, brown bread, brown dessert, brown nutrition, brown breakfast, brown morning, bread, bread, bread, bread, bread, croissant, croissant, croissant, croissant, bakery, bakery, breakfast, pastry",
+     "by": "Pexels",
+     "page": "https://pixabay.com/photos/bread-croissant-morning-puff-paste-1284438/"
+    },
+    {
+     "id": "1281053",
+     "file": "photos/cafe/1281053.jpg",
+     "role": "item",
+     "topic": "fresh bread bakery",
+     "w": 1920,
+     "h": 1286,
+     "tags": "bread, baked, food, freshly baked, artisan bread, dough, homemade, homemade bread, carbohydrates, eat, food photography, bread, bread, bread, bread, bread",
+     "by": "Couleur",
+     "page": "https://pixabay.com/photos/bread-baked-food-freshly-baked-1281053/"
+    },
+    {
+     "id": "2756467",
+     "file": "photos/cafe/2756467.jpg",
+     "role": "item",
+     "topic": "soup bowl",
+     "w": 3925,
+     "h": 2620,
+     "tags": "salad, fruit, berry, healthy, vitamins, fresh, food, vegetarian, meal, bio, raw food, vegan, diet, buffet, salad bowl, bowls, vegetables",
+     "by": "silviarita",
+     "page": "https://pixabay.com/photos/salad-fruit-berry-healthy-vitamins-2756467/"
+    },
+    {
+     "id": "366875",
+     "file": "photos/cafe/366875.jpg",
+     "role": "item",
+     "topic": "soup bowl",
+     "w": 5000,
+     "h": 3000,
+     "tags": "food, dishes, meals, cuisine, soup, pasta, egg, bread, croissant, tasty, delicious, plate, copy space, flat lay, food, food, food, food, food",
+     "by": "51581",
+     "page": "https://pixabay.com/photos/food-dishes-meals-cuisine-soup-366875/"
+    },
+    {
+     "id": "2306471",
+     "file": "photos/cafe/2306471.jpg",
+     "role": "item",
+     "topic": "latte coffee cup",
+     "w": 7952,
+     "h": 5304,
+     "tags": "coffee, pen, notebook, open notebook, empty notebook, caffeine, cup, cafe, coffee cup, latte, latte art, cappuccino, morning coffee, coffee break, beverage, coffee, coffee, coffee, coffee, coffee",
+     "by": "Engin_Akyurt",
+     "page": "https://pixabay.com/photos/coffee-pen-notebook-open-notebook-2306471/"
+    },
+    {
+     "id": "624440",
+     "file": "photos/cafe/624440.jpg",
+     "role": "item",
+     "topic": "latte coffee cup",
+     "w": 4926,
+     "h": 3284,
+     "tags": "valentine's day, heart, cup, coffee, coffee cup, caffeine, hot coffee, nature, hot drink, hot beverage, heart shape, valentine, love, heart mug, snow, winter, steaming cup, romantic",
+     "by": "JillWellington",
+     "page": "https://pixabay.com/photos/valentines-day-heart-cup-coffee-624440/"
+    },
+    {
+     "id": "2277",
+     "file": "photos/cafe/2277.jpg",
+     "role": "item",
+     "topic": "tacos food",
+     "w": 4752,
+     "h": 3168,
+     "tags": "berries, free background, 4k wallpaper 1920x1080, fruits, beautiful wallpaper, food, wallpaper 4k, full hd wallpaper, blackberries, 4k wallpaper, hd wallpaper, desktop backgrounds, blueberries, raspberries, windows wallpaper, mac wallpaper, wallpaper hd, free wallpaper, fresh, organic, ripe, cool backgrounds, laptop wallpaper, vitamins, nutrition, healthy, background",
+     "by": "PublicDomainPictures",
+     "page": "https://pixabay.com/photos/berries-fruits-food-blackberries-2277/"
+    },
+    {
+     "id": "2367029",
+     "file": "photos/cafe/2367029.jpg",
+     "role": "item",
+     "topic": "tacos food",
+     "w": 3264,
+     "h": 2448,
+     "tags": "watermelon, berry, fruit, nature, heart, blueberries, blackberries, raspberries, fresh, ripe, organic, vitamins, detoxify, diet, healthy, dessert, summer, food, cookie cutter, vegetarian, fructose",
+     "by": "silviarita",
+     "page": "https://pixabay.com/photos/watermelon-berry-fruit-heart-2367029/"
+    },
+    {
+     "id": "593341",
+     "file": "photos/cafe/593341.jpg",
+     "role": "item",
+     "topic": "lemonade drink",
+     "w": 5472,
+     "h": 3648,
+     "tags": "startup, start-up, people, silicon valley, teamwork, business, team, office, group, meeting, corporate, conference, company, men, partnership, table, technology, casual, successful, seminar, colleagues, working, planning, network, strategy, cooperation, professional, notes, notepad, writing, laptop, computer, drinks, business, business, business, business, business, team, team, office, office, meeting, meeting, meeting, company, technology, writing, writing, computer",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/startup-start-up-people-593341/"
+    },
+    {
+     "id": "6688901",
+     "file": "photos/cafe/6688901.jpg",
+     "role": "item",
+     "topic": "lemonade drink",
+     "w": 6000,
+     "h": 4000,
+     "tags": "wine, glasses, toast, holiday, celebration, year, gold, greeting, decoration, eve, golden, xmas, winter, merry, glitter, new year, shiny, happy new year, merry christmas, wine, new year, new year, new year, new year, new year",
+     "by": "OleksandrPidvalnyi",
+     "page": "https://pixabay.com/photos/wine-glasses-toast-holiday-6688901/"
+    },
+    {
+     "id": "2557396",
+     "file": "photos/cafe/2557396.jpg",
+     "role": "item",
+     "topic": "friends eating dinner",
+     "w": 3648,
+     "h": 2432,
+     "tags": "people, girls, women, students, friends, talking, meeting, study, group, activity, homework, group work, brainstorming, group study, people, people, people, students, students, students, friends, friends, friends, talking, meeting, meeting, meeting, meeting, meeting, study, study, group",
+     "by": "StockSnap",
+     "page": "https://pixabay.com/photos/people-girls-women-students-2557396/"
+    },
+    {
+     "id": "3104635",
+     "file": "photos/cafe/3104635.jpg",
+     "role": "item",
+     "topic": "friends eating dinner",
+     "w": 6016,
+     "h": 4016,
+     "tags": "friendship day, black women, portrait, women, natural hair, happy, female, together, family, lifestyle, girls, fun, smiling, group, happiness, smile, joy, cheerful, friends, best friends, love, women, women, women, women, family, family, family, family, family, smile, friends, friends, friends, friends",
+     "by": "trevoykellyphotography",
+     "page": "https://pixabay.com/photos/friendship-day-black-women-portrait-3104635/"
+    },
+    {
+     "id": "2132874",
+     "file": "photos/cafe/2132874.jpg",
+     "role": "item",
+     "topic": "baker hands dough",
+     "w": 5676,
+     "h": 3784,
+     "tags": "cooking, pies, vareniki, pelmeni, cook, prepare, food, kitchen, nutrition, cooking food, organic food, taste, homemade food, cooking, cooking, cooking, cooking, cooking, cook, food, food, food, kitchen, kitchen",
+     "by": "Daria-Yakovleva",
+     "page": "https://pixabay.com/photos/cooking-pies-vareniki-pelmeni-cook-2132874/"
+    },
+    {
+     "id": "1181189",
+     "file": "photos/cafe/1181189.jpg",
+     "role": "item",
+     "topic": "baker hands dough",
+     "w": 3312,
+     "h": 2200,
+     "tags": "pasta, fettuccine, fresh pasta, ingredients, flour, eggs, flat lay, food, italian, gastronomy, cooking, raw, pasta, flour, food, food, food, food, food, cooking, cooking, cooking",
+     "by": "Oldmermaid",
+     "page": "https://pixabay.com/photos/pasta-fettuccine-fresh-pasta-1181189/"
+    }
+   ]
+  },
+  "trades": {
+   "name": "Trades and services",
+   "photos": [
+    {
+     "id": "849825",
+     "file": "photos/trades/849825.jpg",
+     "role": "hero",
+     "topic": "electrician working",
+     "w": 3000,
+     "h": 2000,
+     "tags": "student, typing, keyboard, text, startup, people, students, office, strategy, work, technology, company, corporate, communication, young, plan, marketing, computer, design, professional, planning, internet, project, laptop, presentation, web, display, monitor, screen, digital, electronic, pc, modern, student, office, work, work, work, marketing, computer, computer, computer, computer, computer, laptop, laptop, laptop",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/student-typing-keyboard-text-849825/"
+    },
+    {
+     "id": "620822",
+     "file": "photos/trades/620822.jpg",
+     "role": "hero",
+     "topic": "electrician working",
+     "w": 4288,
+     "h": 2848,
+     "tags": "office, business, accountant, accounting, notebook, mobile phone, smart phone, keyboard, woman, laptop, technology, office, office, business, business, business, business, business, accounting, mobile phone, laptop, laptop, laptop, technology, technology, technology",
+     "by": "Firmbee",
+     "page": "https://pixabay.com/photos/office-business-accountant-620822/"
+    },
+    {
+     "id": "849804",
+     "file": "photos/trades/849804.jpg",
+     "role": "hero",
+     "topic": "construction worker house",
+     "w": 3000,
+     "h": 2143,
+     "tags": "startup, business, people, students, office, strategy, work, technology, company, corporate, communication, young, plan, marketing, computer, design, professional, planning, internet, project, laptop, presentation, web, display, monitor, business, business, business, office, office, office, office, office, work, work, work, technology, technology, marketing, marketing, marketing, computer, computer, computer, computer, laptop",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/startup-business-people-students-849804/"
+    },
+    {
+     "id": "593296",
+     "file": "photos/trades/593296.jpg",
+     "role": "hero",
+     "topic": "construction worker house",
+     "w": 5472,
+     "h": 3648,
+     "tags": "laptops, meeting, businessmen, coworkers, colleagues, business meeting, conference room, meeting room, startup, start-up, notebooks, creative, company, silicon valley, modern, office, conference, table, discussion, business, team, computers, desk, technology, vaio, people, working, meeting, meeting, meeting, meeting, meeting, business meeting, office, office, discussion, discussion, business, business, business, team, team",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/laptops-meeting-businessmen-593296/"
+    },
+    {
+     "id": "591631",
+     "file": "photos/trades/591631.jpg",
+     "role": "item",
+     "topic": "electrical panel",
+     "w": 4096,
+     "h": 2731,
+     "tags": "wood, beautiful wallpaper, board, laptop wallpaper, 4k wallpaper 1920x1080, wallpaper hd, wallpaper 4k, windows wallpaper, mac wallpaper, free background, structure, boards, free wallpaper, grain, old, 4k wallpaper, background, desktop backgrounds, panels, bohlen, weathered, wall, hd wallpaper, full hd wallpaper, rack, cool backgrounds, wooden wall, texture",
+     "by": "blickpixel",
+     "page": "https://pixabay.com/photos/wood-board-structure-boards-grain-591631/"
+    },
+    {
+     "id": "1256804",
+     "file": "photos/trades/1256804.jpg",
+     "role": "item",
+     "topic": "electrical panel",
+     "w": 5000,
+     "h": 2808,
+     "tags": "floor, wood, hardwood floors, wooden planks, wooden board, brown wood, brown board, texture, material, wooden background, wood, wood, wood, wood, wood",
+     "by": "messomx",
+     "page": "https://pixabay.com/photos/floor-wood-hardwood-floors-1256804/"
+    },
+    {
+     "id": "2045380",
+     "file": "photos/trades/2045380.jpg",
+     "role": "item",
+     "topic": "solar panels roof",
+     "w": 5356,
+     "h": 3571,
+     "tags": "wood, boards, texture, wooden, brown, wood texture, rustic, brown texture, brown wood, brown board, wood, wood, wood, wood, wood, texture, wood texture",
+     "by": "Daria-Yakovleva",
+     "page": "https://pixabay.com/photos/wood-boards-texture-wooden-brown-2045380/"
+    },
+    {
+     "id": "1365995",
+     "file": "photos/trades/1365995.jpg",
+     "role": "item",
+     "topic": "solar panels roof",
+     "w": 3000,
+     "h": 1600,
+     "tags": "earth, moon, space, planet, world, blue planet, outer space, galaxy, universe, cosmos, celestial body, orbit, atmosphere, glowing, 3d, earth, earth, earth, earth, earth, moon, space, space, space, world, world",
+     "by": "qimono",
+     "page": "https://pixabay.com/photos/earth-moon-space-planet-world-1365995/"
+    },
+    {
+     "id": "3104355",
+     "file": "photos/trades/3104355.jpg",
+     "role": "item",
+     "topic": "electric car charging",
+     "w": 3840,
+     "h": 2160,
+     "tags": "lightbulb, idea, creativity, base, light, energy revolution, energy, electricity, plug, line, power consumption, motivation, shining, lighten up, dark, light in the dark, intelligent, thought, idea, light, energy, electricity, motivation, motivation, motivation, motivation, motivation, dark",
+     "by": "ColiN00B",
+     "page": "https://pixabay.com/photos/lightbulb-idea-creativity-base-3104355/"
+    },
+    {
+     "id": "4322521",
+     "file": "photos/trades/4322521.jpg",
+     "role": "item",
+     "topic": "electric car charging",
+     "w": 4000,
+     "h": 3215,
+     "tags": "fiat 500, automobile, trees, nature, antique car, vehicle, classic, italy, nostalgia, car, small car, car wallpapers, motor vehicle, avenue, road, path",
+     "by": "pixel2013",
+     "page": "https://pixabay.com/photos/fiat-500-automobile-trees-4322521/"
+    },
+    {
+     "id": "3129361",
+     "file": "photos/trades/3129361.jpg",
+     "role": "item",
+     "topic": "tools workbench",
+     "w": 5802,
+     "h": 3873,
+     "tags": "brushes, painter, work shop, bowl, lights, work, creative, creativity, painting, artist, paintbrush, studio, art, brush, drawing, artistic, hobby, color, tool, paint, palette, blue work, blue light, blue art, blue shop, blue painting, blue paint, blue tools, blue color, blue creative, blue drawing, blue lights, painting, painting, artist, art, art, art, art, art, drawing, paint",
+     "by": "ClickerHappy",
+     "page": "https://pixabay.com/photos/brushes-painter-work-shop-bowl-3129361/"
+    },
+    {
+     "id": "3094035",
+     "file": "photos/trades/3094035.jpg",
+     "role": "item",
+     "topic": "tools workbench",
+     "w": 5851,
+     "h": 3567,
+     "tags": "handyman, construction site, workers, force, characters, fun, diy, construction work, work, to build, construction worker, building, housebuilding, craft, tool, architecture, maurer, renovation, hard work, helmet, building trade, works, handyman, handyman, workers, workers, workers, workers, diy, work, work, work, work, work, construction worker, building, hard work",
+     "by": "Alexas_Fotos",
+     "page": "https://pixabay.com/photos/handyman-construction-site-workers-3094035/"
+    },
+    {
+     "id": "1836070",
+     "file": "photos/trades/1836070.jpg",
+     "role": "item",
+     "topic": "modern house exterior",
+     "w": 5408,
+     "h": 3605,
+     "tags": "house, architecture, front yard, garage, home, house lights, illuminated, exterior, house exterior, home exterior, facade, real estate, windows, house, house, house, house, house, home, home, real estate",
+     "by": "Pexels",
+     "page": "https://pixabay.com/photos/house-architecture-front-yard-1836070/"
+    },
+    {
+     "id": "1477041",
+     "file": "photos/trades/1477041.jpg",
+     "role": "item",
+     "topic": "modern house exterior",
+     "w": 1920,
+     "h": 1080,
+     "tags": "house, pool, interior design, architecture, 3d, design, style, minimalist, interior, modular, housing, prefabricated, modular home, house, house, house, house, house",
+     "by": "Giovanni_cg",
+     "page": "https://pixabay.com/photos/house-pool-interior-design-1477041/"
+    },
+    {
+     "id": "3535435",
+     "file": "photos/trades/3535435.jpg",
+     "role": "item",
+     "topic": "light bulb led",
+     "w": 4900,
+     "h": 3267,
+     "tags": "light bulb, light, idea, bokeh, energy, glass, power, light bulb, light bulb, light bulb, light, light, light, idea, idea, idea, energy, energy, energy, energy, energy, power, power",
+     "by": "jplenio",
+     "page": "https://pixabay.com/photos/light-bulb-light-idea-bokeh-energy-3535435/"
+    },
+    {
+     "id": "5258341",
+     "file": "photos/trades/5258341.jpg",
+     "role": "item",
+     "topic": "light bulb led",
+     "w": 6048,
+     "h": 4024,
+     "tags": "bulb, light, idea, electricity, energy, bulbs, glow, innovation, thought, lighting, design, luminous, books, question, electric, nature, solution, power, glass, sky, filament",
+     "by": "AJS1",
+     "page": "https://pixabay.com/photos/bulb-light-idea-electricity-energy-5258341/"
+    }
+   ]
+  },
+  "crafts": {
+   "name": "Arts and crafts shop",
+   "photos": [
+    {
+     "id": "1841132",
+     "file": "photos/crafts/1841132.jpg",
+     "role": "hero",
+     "topic": "craft market stall",
+     "w": 2592,
+     "h": 1728,
+     "tags": "apples, farmer's market, buy, buying, consumer, customer, sell, business, deal, fruits, give, hands, sale, produce, fresh produce, fruit stand, buy, buy, buying, consumer, consumer, consumer, customer, customer, customer, customer, customer, sell, sell, business, business, business, business, deal, give, give, sale",
+     "by": "Pexels",
+     "page": "https://pixabay.com/photos/apples-farmers-market-buy-buying-1841132/"
+    },
+    {
+     "id": "3466906",
+     "file": "photos/crafts/3466906.jpg",
+     "role": "hero",
+     "topic": "craft market stall",
+     "w": 4366,
+     "h": 2911,
+     "tags": "market, stand, spices, food, farmers market, market stall, trading, exotic, pepper, curcuma, oriental, market, market, market, market, market",
+     "by": "Tama66",
+     "page": "https://pixabay.com/photos/market-stand-spices-food-3466906/"
+    },
+    {
+     "id": "2557396",
+     "file": "photos/crafts/2557396.jpg",
+     "role": "hero",
+     "topic": "artisan workshop",
+     "w": 3648,
+     "h": 2432,
+     "tags": "people, girls, women, students, friends, talking, meeting, study, group, activity, homework, group work, brainstorming, group study, people, people, people, students, students, students, friends, friends, friends, talking, meeting, meeting, meeting, meeting, meeting, study, study, group",
+     "by": "StockSnap",
+     "page": "https://pixabay.com/photos/people-girls-women-students-2557396/"
+    },
+    {
+     "id": "8478515",
+     "file": "photos/crafts/8478515.jpg",
+     "role": "hero",
+     "topic": "artisan workshop",
+     "w": 6240,
+     "h": 4160,
+     "tags": "kombucha, fermented drink, fermentation, kombucha mushroom, scoby, tea mushroom, ferment, kombucha, kombucha, kombucha, kombucha, kombucha, fermentation, fermentation, fermentation, ferment",
+     "by": "Nennieinszweidrei",
+     "page": "https://pixabay.com/photos/kombucha-fermented-drink-8478515/"
+    },
+    {
+     "id": "2137080",
+     "file": "photos/crafts/2137080.jpg",
+     "role": "item",
+     "topic": "colorful beads",
+     "w": 6000,
+     "h": 4000,
+     "tags": "colorful, pencils, submerged, underwater, air bubbles, colored pencils, coloring pencils, art materials, coloring materials, wet, color, creativity, creative, art, color, art, art, art, art, art",
+     "by": "Myriams-Fotos",
+     "page": "https://pixabay.com/photos/colorful-pencils-submerged-2137080/"
+    },
+    {
+     "id": "3388622",
+     "file": "photos/crafts/3388622.jpg",
+     "role": "item",
+     "topic": "colorful beads",
+     "w": 5184,
+     "h": 3332,
+     "tags": "gerbera, hd wallpaper, wallpaper hd, free wallpaper, pink flower, happy mothers day, full hd wallpaper, beautiful wallpaper, 4k wallpaper, desktop backgrounds, love, wallpaper 4k, free background, bracelet, 4k wallpaper 1920x1080, laptop wallpaper, mac wallpaper, romantic, valentine's day, windows wallpaper, emotion, wallpaper, cool backgrounds, background",
+     "by": "pixel2013",
+     "page": "https://pixabay.com/photos/gerbera-pink-flower-love-bracelet-3388622/"
+    },
+    {
+     "id": "700141",
+     "file": "photos/crafts/700141.jpg",
+     "role": "item",
+     "topic": "handmade jewelry",
+     "w": 5013,
+     "h": 3347,
+     "tags": "hearts, valentines day, free background, 4k wallpaper, hd wallpaper, windows wallpaper, beautiful wallpaper, background, cool backgrounds, laptop wallpaper, mac wallpaper, love, romance, valentine, full hd wallpaper, harmony, desktop backgrounds, romantic, wallpaper 4k, 4k wallpaper 1920x1080, wallpaper hd, brown love, free wallpaper, brown heart",
+     "by": "Ben_Kerckx",
+     "page": "https://pixabay.com/photos/hearts-valentines-day-background-700141/"
+    },
+    {
+     "id": "3085515",
+     "file": "photos/crafts/3085515.jpg",
+     "role": "item",
+     "topic": "handmade jewelry",
+     "w": 5705,
+     "h": 3656,
+     "tags": "heart, valentines day, background, red, rope, loyalty, love, cool backgrounds, friendship, full hd wallpaper, wood, free background, laptop wallpaper, 4k wallpaper 1920x1080, wooden, mac wallpaper, wallpaper hd, node, hd wallpaper, connection, knotted, windows wallpaper, free wallpaper, beautiful wallpaper, desktop backgrounds, together, 4k wallpaper, wallpaper 4k, line, symbol",
+     "by": "congerdesign",
+     "page": "https://pixabay.com/photos/heart-valentines-day-background-red-3085515/"
+    },
+    {
+     "id": "2918844",
+     "file": "photos/crafts/2918844.jpg",
+     "role": "item",
+     "topic": "quilt fabric",
+     "w": 4272,
+     "h": 2848,
+     "tags": "textile, 4k wallpaper, jute, wallpaper hd, hd wallpaper, brown, fabric, cool backgrounds, full hd wallpaper, laptop wallpaper, texture, pattern, beautiful wallpaper, free background, mac wallpaper, background, wallpaper 4k, thread, windows wallpaper, desktop backgrounds, material, 4k wallpaper 1920x1080, brown background, brown texture, free wallpaper, brown pattern",
+     "by": "virin000",
+     "page": "https://pixabay.com/photos/textile-jute-brown-fabric-texture-2918844/"
+    },
+    {
+     "id": "1099399",
+     "file": "photos/crafts/1099399.jpg",
+     "role": "item",
+     "topic": "quilt fabric",
+     "w": 5616,
+     "h": 3744,
+     "tags": "texture, fabric, burlap, background, 4k wallpaper, hd wallpaper, windows wallpaper, cool backgrounds, fabric texture, 4k wallpaper 1920x1080, material, laptop wallpaper, beautiful wallpaper, free wallpaper, full hd wallpaper, cloth, backdrop, fiber, brown, wallpaper hd, surface, mac wallpaper, desktop backgrounds, textile, free background, jute, brown background, wallpaper 4k, brown texture",
+     "by": "lovepixs",
+     "page": "https://pixabay.com/photos/texture-fabric-burlap-background-1099399/"
+    },
+    {
+     "id": "3035665",
+     "file": "photos/crafts/3035665.jpg",
+     "role": "item",
+     "topic": "pottery hands",
+     "w": 8076,
+     "h": 4000,
+     "tags": "hand, woman, female, man, touch, fingers, reach, support, god, creation, michelangelo, hand, hand, hand, hand, hand",
+     "by": "zhivko",
+     "page": "https://pixabay.com/photos/hand-woman-female-man-touch-3035665/"
+    },
+    {
+     "id": "1139098",
+     "file": "photos/crafts/1139098.jpg",
+     "role": "item",
+     "topic": "pottery hands",
+     "w": 5556,
+     "h": 3125,
+     "tags": "clay, pottery, hands, potter, potter's wheel, dirty, artist, craft, work, art, handicraft, workshop, closeup, clay, pottery, pottery, potter, artist, work, work, work, work, work, art",
+     "by": "LubosHouska",
+     "page": "https://pixabay.com/photos/clay-pottery-hands-potter-1139098/"
+    },
+    {
+     "id": "1807533",
+     "file": "photos/crafts/1807533.jpg",
+     "role": "item",
+     "topic": "weaving basket",
+     "w": 5000,
+     "h": 3039,
+     "tags": "woman, kid, rain, leaf umbrella, happiness, happy, young, child, girl, adult, play, playing, enjoyment, umbrella, flood, water, pond, tradition, culture, outdoors, nature, asian, rain, rain, rain, rain, rain, happy, girl, nature",
+     "by": "sasint",
+     "page": "https://pixabay.com/photos/woman-kid-rain-leaf-umbrella-1807533/"
+    },
+    {
+     "id": "1566792",
+     "file": "photos/crafts/1566792.jpg",
+     "role": "item",
+     "topic": "weaving basket",
+     "w": 4496,
+     "h": 3000,
+     "tags": "valentines day background, roses, beautiful wallpaper, flowers, basket, wallpaper hd, full hd wallpaper, flower wallpaper, pink roses, pink flowers, beautiful flowers, bloom, blossom, floral background, free background, beauty, laptop wallpaper, wire basket, desktop backgrounds, mac wallpaper, 4k wallpaper 1920x1080, garden roses, windows wallpaper, flower background, hd wallpaper, 4k wallpaper, wallpaper 4k, nature, cool backgrounds, romantic, rose wallpaper, free wallpaper, background",
+     "by": "castleguard",
+     "page": "https://pixabay.com/photos/valentines-day-background-roses-1566792/"
+    },
+    {
+     "id": "837156",
+     "file": "photos/crafts/837156.jpg",
+     "role": "item",
+     "topic": "knitting yarn",
+     "w": 5760,
+     "h": 3840,
+     "tags": "woman, portrait, model, hairstyle, curly hair, brunette, brunette woman, young woman, girl, shawl, pose, posing, modeling, woman, woman, woman, girl, girl, girl, girl, girl",
+     "by": "RondellMelling",
+     "page": "https://pixabay.com/photos/woman-portrait-model-hairstyle-837156/"
+    },
+    {
+     "id": "1149671",
+     "file": "photos/crafts/1149671.jpg",
+     "role": "item",
+     "topic": "knitting yarn",
+     "w": 3999,
+     "h": 2662,
+     "tags": "children, road, supportive, support, dirt road, path, roadway, friends, friendship, child, siblings, brother, sister, walking, together, childhood, kids, love, monochrome, black and white, friendship day, friends, friendship, friendship, friendship, friendship, love, love, love, love, love",
+     "by": "AnnieSpratt",
+     "page": "https://pixabay.com/photos/children-road-supportive-support-1149671/"
+    }
+   ]
+  }
+ },
+ "updated": "2026-11-15"
+}
