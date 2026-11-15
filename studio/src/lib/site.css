@@ -936,8 +936,11 @@
 .pv.tf-hearth .mu-g{gap:48px 56px}
 .pv.tf-hearth .mu-h{font:italic 600 34px/1.1 var(--hf);letter-spacing:0;text-transform:none;text-align:center;border:0;margin-bottom:18px;color:var(--ink)}
 .pv.tf-hearth .mu-h:after{content:"";display:block;width:48px;height:2px;background:var(--acc);margin:12px auto 0}
-.pv.tf-hearth .mu-im{flex-basis:84px;width:84px;height:84px;border-radius:50%;box-shadow:0 10px 22px -10px rgba(0,0,0,.5)}
-.pv.tf-hearth .mu-l strong,.pv.tf-hearth .mu-p{font:600 25px var(--hf)}
+.pv.tf-hearth .s-menu .w{max-width:1200px}
+.pv.tf-hearth .mu-g{gap:48px 44px}
+.pv.tf-hearth .mu-im{flex-basis:64px;width:64px;height:64px;border-radius:50%;box-shadow:0 10px 22px -10px rgba(0,0,0,.5)}
+.pv.tf-hearth .mu-l strong,.pv.tf-hearth .mu-p{font:600 21px/1.15 var(--hf)}
+.pv.tf-hearth .mu-x p{font-size:14px}
 .pv.tf-hearth .mu-p{color:var(--acc)}
 .pv.tf-hearth .mu-f{text-align:center;margin-top:44px}
 .pv.tf-volt .bk-a h2{font-size:58px}
