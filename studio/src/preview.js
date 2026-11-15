@@ -6,6 +6,8 @@ import { createClient } from '@supabase/supabase-js';
 import { Site } from './lib/site.js';
 import { blank } from './store.js';
 import { tameLinks } from './lib/tame.js';
+import { Render } from './lib/render.js';
+import { compareHtml } from './lib/compare.js';
 
 const sb = createClient('https://gpwxuunutljcauoknhrh.supabase.co', 'sb_publishable_B7a1VEv6RX13n2JhA50tbQ_oR_oKfw9');
 const $ = s => document.querySelector(s);
@@ -49,6 +51,8 @@ function draw() {
       <div class="dev">${Object.keys(DEV).map(k => `<button data-d="${k}" aria-pressed="${k == dev}">${k[0].toUpperCase() + k.slice(1)}</button>`).join('')}</div></div>
     <div class="stage" id="stage"><div class="frame" id="frame"><iframe id="f" title="Website preview" sandbox="allow-same-origin"></iframe></div></div>
     <p class="hint">Scroll inside the preview to see the whole page.${designs.length > 1 ? ' ★ = the design we think suits you best.' : ''}</p>
+    <div class="card price"><h2>What this design costs, compared</h2><div id="cmp"></div>
+      <p class="hint">Publishing to a free BAKE address is included. Your own domain is +$50 for a new one or +$100 to connect one you have.</p></div>
     <div class="grid">
       <div class="card before"><h2>${none ? 'Today' : 'Your website today'}</h2>
         ${P.before_shot ? `<a href="${esc(P.website)}" target="_blank" rel="noopener"><img id="bshot" data-url="${esc(P.website)}" src="${esc(P.before_shot)}" alt="Your current website" loading="lazy"></a>` : ''}
@@ -90,6 +94,7 @@ function mark(sel, on) { app.querySelectorAll(sel).forEach(x => x.setAttribute('
 function show() {
   const d = designs[cur]; if (!d) return;
   $('#f').srcdoc = Site.html(project(d.project || P.base_project), d.tpl);
+  const g = +d.grade || 0; $('#cmp').innerHTML = compareHtml(g, Render.priceFor(g), Render.money, { forProspect: true }) || '<p>Ask us about this design.</p>';
   fit();
 }
 function fit() {

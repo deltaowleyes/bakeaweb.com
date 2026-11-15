@@ -185,3 +185,15 @@ test('links inside a preview iframe never load a page inside the preview', async
   expect(r.said).toBe('Cabins');
   expect(r.still).toBe(true);
 });
+
+test('every offered template has a sourced price comparison', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
+  await openStudio(page);
+  const res = await page.evaluate(async () => {
+    const { Render } = await import('/src/lib/render.js');
+    const { compare } = await import('/src/lib/compare.js');
+    return Render.TEMPLATES.filter(t => t.price != null).map(t => { const c = compare(t.grade, t.price); return { id: t.id, ok: !!c && c.sources.length > 0 && c.sources.every(s => /^https:\/\//.test(s.url)) && /^(Free|US\$)/.test(c.tpl.label) && /^C\$/.test(c.agency.label) }; });
+  });
+  expect(res.length).toBeGreaterThan(50);
+  for (const r of res) expect(r, r.id).toMatchObject({ ok: true });
+});

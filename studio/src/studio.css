@@ -165,3 +165,7 @@ dialog#picker::backdrop{background:rgba(0,0,0,.45)}
 .eds .mk{border:1px solid var(--line);border-radius:10px;padding:10px 12px}.eds .mk b{display:block;font-size:15px}.eds .soon{font-weight:600;color:var(--acc)}
 #pubc .dests{display:grid;gap:6px;margin:6px 0 10px}#pubc .dests label{display:flex;gap:8px;align-items:flex-start;font-weight:400}#pubc .dests input{width:auto;height:auto;margin-top:3px}
 .edtag{font-size:12px;font-weight:600;letter-spacing:.04em;padding:2px 8px;border-radius:999px;background:var(--acc);color:var(--onacc);vertical-align:middle;margin-left:4px}
+
+/* price comparison on template cards and the preview header (lib/compare.js) */
+.cmp{font-size:12.5px;line-height:1.45;margin:0 0 6px;padding:6px 8px;border-radius:8px;background:color-mix(in srgb,var(--acc) 6%,transparent)}
+.cmp details{margin-top:4px}.cmp summary{cursor:pointer;color:var(--acc)}.cmp ul{margin:4px 0;padding-left:18px}

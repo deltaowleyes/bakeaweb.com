@@ -27,7 +27,7 @@ button[aria-pressed=true],.primary{background:var(--acc);color:#fff}
 .hint{font-size:13px;color:var(--mute);margin:8px 2px 0}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
-.card h2{margin:0 0 10px;font-size:20px}
+.card.price{margin-top:22px}.card h2{margin:0 0 10px;font-size:20px}
 .before img{width:100%;border:1px solid var(--line);border-radius:10px;aspect-ratio:4/3;object-fit:cover;object-position:top;background:#eee;display:block}
 ul{padding-left:20px;margin:10px 0 0}li{margin:4px 0}
 form{display:grid;gap:10px}
@@ -35,6 +35,8 @@ input,textarea{font:inherit;padding:10px 12px;border:1px solid var(--line);borde
 .choices{display:flex;gap:8px;flex-wrap:wrap}
 .msg{min-height:1.4em;margin:0;font-weight:600}
 .ok{color:var(--good)}.err{color:var(--warn)}
+.cmp{font-size:14px;line-height:1.5;margin-top:8px}.cmp-row{display:flex;gap:10px;padding:4px 0;border-top:1px solid var(--line)}.cmp-row:first-child{border-top:0}
+.cmp-k{min-width:150px;color:var(--mute);font-weight:600}.cmp small{color:var(--mute)}.cmp details{margin-top:6px;font-size:13px}.cmp summary{cursor:pointer;color:var(--acc);font-weight:600}.cmp ul{margin:6px 0}
 .empty{text-align:center;color:var(--mute);padding:80px 0}
 footer{text-align:center;color:var(--mute);font-size:13px;padding:30px 0}
 footer a{color:var(--acc)}

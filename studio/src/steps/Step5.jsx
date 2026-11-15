@@ -1,11 +1,25 @@
 /* Step 5: Templates. Browse templates that fit, preview any page at any size, pick one, request development. */
 import { useEffect, useState } from 'react';
 import { Render } from '../lib/render.js';
+import { compare, CHECKED } from '../lib/compare.js';
 import { Shot } from '../lib/shot.js';
 import { S, commit, useStudio, useRev, startOver } from '../store.js';
 import { nid, SEC } from '../edit.js';
 import { edition, DESTS, DEST_KEYS } from '../editions.js';
 import Preview, { SizeButtons } from '../components/Preview.jsx';
+
+
+/* "How the price compares": a comparable template at Framer/Webflow and a comparable agency build (lib/compare.js). */
+function Compare({ t, full }) {
+  const c = compare(t.grade, t.price); if (!c) return null;
+  return (
+    <div className="cmp" data-testid="cmp">
+      <p className="m-0"><span className="mu">Template elsewhere:</span> <b>{c.tpl.label}</b>{full && <span className="mu"> ({c.tpl.what})</span>}</p>
+      <p className="m-0"><span className="mu">Agency:</span> <b>{c.agency.label}</b>{full && <span className="mu"> ({c.agency.what})</span>}</p>
+      {full && <details><summary>Where these numbers come from (checked {CHECKED})</summary><ul>{c.sources.map(s => <li key={s.url}><a href={s.url} target="_blank" rel="noopener">{s.name}</a>: {s.says}</li>)}</ul><p className="mu">Template prices are US dollars, agency prices Canadian dollars. Published ranges, not quotes.</p></details>}
+    </div>
+  );
+}
 
 /* Thumbnails are made one after another (Home page, 1280 px wide, cropped to 960 px, half scale, JPEG). */
 function PublishCard() {
@@ -87,7 +101,7 @@ export default function Step5() {
       <h2 id="h5s" className="sth">5. Templates</h2>
       <div className="card">
         <div className="bar">
-          <div className="flex-1 min-w-[220px]"><h3>{ok.length} of {all.length} templates fit your site</h3><p className="mu">Only templates that can show every section and your desktop menu style are listed, best rated first. Prices follow each template’s rating out of 99: 74 and lower free, then $50 at 75 rising to $500 at 90 and $7,500 at 99.</p></div>
+          <div className="flex-1 min-w-[220px]"><h3>{ok.length} of {all.length} templates fit your site</h3><p className="mu">Only templates that can show every section and your desktop menu style are listed, best rated first. Prices follow each template’s rating out of 99: 74 and lower free, then $50 at 75 rising to $500 at 90 and $7,500 at 99. Each one also shows what a comparable template costs at Framer or Webflow and what an agency charges, with sources.</p></div>
           <label className="ck"><input type="checkbox" checked={!!S.tpl.all} onChange={e => commit(S => { S.tpl.all = e.target.checked; })} /> Show templates that don’t fit</label>
           <label className="ck"><input type="checkbox" checked={!!S.tpl.favOnly} onChange={e => commit(S => { S.tpl.favOnly = e.target.checked; })} /> Favourites only</label>
         </div>
@@ -102,6 +116,7 @@ export default function Step5() {
                 <div className="tb">
                   <h4>{t.name}{on && <span className="chip on">Picked</span>}</h4>
                   <p className="tpr"><span className="chip" title="Rating out of 99">{t.grade}/99</span> <span className={'chip' + (t.price ? ' pay' : ' free')}>{Render.priceLabel(t)}</span></p>
+                  <Compare t={t} />
                   <p className="mu">{t.fam.desc}</p>
                   {!c.ok && <p className="why">Doesn’t fit: {c.why.join('; ')}.</p>}
                   <div className="row">
@@ -117,7 +132,7 @@ export default function Step5() {
 
       <div className="card" id="tpc">
         <div className="bar">
-          <div className="flex-1 min-w-[200px]"><h3>{vt.name} <span className="chip">{vt.grade}/99</span> <span className={'chip' + (vt.price ? ' pay' : ' free')}>{Render.priceLabel(vt)}</span></h3><p className="mu">{picked ? 'This is your picked template.' : vt.fam.desc + (vc.ok ? '' : ' Doesn’t fit: ' + vc.why.join('; ') + '.')}</p></div>
+          <div className="flex-1 min-w-[200px]"><h3>{vt.name} <span className="chip">{vt.grade}/99</span> <span className={'chip' + (vt.price ? ' pay' : ' free')}>{Render.priceLabel(vt)}</span></h3><p className="mu">{picked ? 'This is your picked template.' : vt.fam.desc + (vc.ok ? '' : ' Doesn’t fit: ' + vc.why.join('; ') + '.')}</p><Compare t={vt} full /></div>
           <button aria-label="Previous template" onClick={() => step(-1)}>←</button>
           <button aria-label="Next template" onClick={() => step(1)}>→</button>
           <button className={picked ? '' : 'pri'} aria-pressed={picked} onClick={() => commit(S => { S.tpl.pick = S.tpl.view; })}>{picked ? 'Picked' : 'Use this template'}</button>

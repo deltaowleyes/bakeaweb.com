@@ -170,6 +170,9 @@ test('step 5: thumbnails, pick a template and request development', async ({ pag
   // template thumbnails are real pictures
   const thumb = page.locator('.tc img').first();
   await expect(thumb).toHaveAttribute('src', /^(blob:|data:)/, { timeout: 30_000 });
+  // every template card shows what a comparable template and an agency would cost
+  await expect(page.getByTestId('cmp').first()).toContainText('Template elsewhere');
+  await expect(page.getByTestId('cmp').first()).toContainText('C$');
   await page.getByRole('button', { name: 'Request development' }).click();
   await expect(page.getByRole('alert')).toContainText('Pick a template first');
   await page.getByRole('button', { name: 'Use this template' }).click();
