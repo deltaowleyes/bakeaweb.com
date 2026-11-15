@@ -3,6 +3,7 @@
 import { Art } from './lib/art.js';
 import { Importer } from './lib/importer.js';
 import { S, save } from './store.js';
+import { samplePhotos, STARTER_PHOTOS } from './lib/photos.js';
 
 export const nid = Importer.id;
 export const VPW = { desktop: 1280, tablet: 820, phone: 390 };
@@ -87,6 +88,24 @@ export function starter(kind) {
   const home = { id: nid('p'), name: 'Home', url: '', status: 'new', sections: map.secs.map(defaultSection) }; home.sections[0].title = n;
   S.pages = [home].concat(map.menu.map(m => placeholderPage(m.label))); S.ui.page = home.id; S.lib = [];
   S.menu.items = map.menu; S.footer = { motto: '', text: '© ' + n };
+  addStarterPhotos(home, STARTER_PHOTOS[kind]);
+}
+/* Starter sites for food, shop and services get real sample photos (lib/photos.js): two hero options,
+   pictures on cards, gallery and featured story, and every photo in the site's image list. */
+function addStarterPhotos(home, kind) {
+  const ph = samplePhotos(kind); if (!ph.length) return;
+  const heroes = ph.filter(p => p.role == 'hero'), b = S.brand;
+  // mix topics (bread, soup, coffee…) so neighbouring cards don't repeat the same kind of picture
+  const groups = {}; ph.filter(p => p.role != 'hero').forEach(p => { (groups[p.topic] = groups[p.topic] || []).push(p); });
+  const items = []; for (let r = 0; items.length < ph.length; r++) { let any = false; Object.values(groups).forEach(g => { if (g[r]) { items.push(g[r]); any = true; } }); if (!any) break; }
+  addLib(ph.map(p => ({ id: nid('l'), src: p.src, label: p.label, logo: false })));
+  const opts = heroes.slice(0, 3).map(p => ({ id: nid('o'), kind: 'img', src: p.src, from: 'site', label: p.label }));
+  b.opts.hero = opts.concat(b.opts.hero); if (opts[0]) b.pick.hero = opts[0].id;
+  let n = 0; const next = () => { const p = items[n++ % items.length]; return { kind: 'img', src: p.src, label: p.label }; };
+  home.sections.forEach(s => {
+    if (s.type == 'tiles') { s.showImg = true; s.items.forEach(i => { i.image = next(); }); }
+    if (s.type == 'gallery' || s.type == 'feature') { if (s.items) s.items.forEach(i => { i.image = next(); }); else s.image = next(); }
+  });
 }
 
 /* ---------- importing ---------- */

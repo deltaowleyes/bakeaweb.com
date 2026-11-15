@@ -4,6 +4,7 @@ import { Importer } from '../lib/importer.js';
 import { Render } from '../lib/render.js';
 import { S, commit, useStudio } from '../store.js';
 import { EditionCards } from '../components/EditionPicker.jsx';
+import { PHOTO_SOURCE } from '../lib/photos.js';
 import { applyImport, importPage, logLine, starter, ensureArt, SEC } from '../edit.js';
 
 const STATUS = { imported: '✓ Imported', waiting: 'Not imported yet', blocked: 'Blocked: paste its code', importing: 'Importing…', 'new': 'Built here' };
@@ -101,6 +102,7 @@ export default function Step1({ go }) {
               <option value="shop">Shop</option><option value="services">Services or trades</option>
             </select>
             <div className="row"><button className="pri" id="mk" onClick={makeStarter}>Create starter site</button></div>
+            <p className="mu small mt-2">Restaurant, shop and services starters come with sample photos from <a href={PHOTO_SOURCE.url} target="_blank" rel="noopener">{PHOTO_SOURCE.name}</a>. Swap in your own any time.</p>
           </div>
         )}
       </div>

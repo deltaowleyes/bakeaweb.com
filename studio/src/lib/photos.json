@@ -3,7 +3,7 @@
  "sourceUrl": "https://pixabay.com/",
  "kinds": {
   "cafe": {
-   "name": "Café and restaurant",
+   "name": "Caf\u00e9 and restaurant",
    "photos": [
     {
      "id": "1869656",
@@ -15,17 +15,6 @@
      "tags": "cafe, barista, coffee shop, counter, coffee machine, caffeine, interior design, interior decoration, indoors, menu, coffee menu, cafe, cafe, cafe, cafe, cafe, coffee shop, coffee shop, coffee shop, coffee shop, menu",
      "by": "Pexels",
      "page": "https://pixabay.com/photos/cafe-barista-coffee-shop-counter-1869656/"
-    },
-    {
-     "id": "4343663",
-     "file": "photos/cafe/4343663.jpg",
-     "role": "hero",
-     "topic": "cafe interior",
-     "w": 5184,
-     "h": 3456,
-     "tags": "neon sign, coffee lovers, coffee, coffee shop, lettering, design, calligraphy, restaurant sign, advertising, coffee, coffee, coffee, coffee, coffee, coffee shop, coffee shop, coffee shop",
-     "by": "pixel2013",
-     "page": "https://pixabay.com/photos/neon-sign-coffee-lovers-coffee-4343663/"
     },
     {
      "id": "2600877",
@@ -149,17 +138,6 @@
      "page": "https://pixabay.com/photos/pumpkin-soup-soup-2972858/"
     },
     {
-     "id": "7238665",
-     "file": "photos/cafe/7238665.jpg",
-     "role": "item",
-     "topic": "soup bowl",
-     "w": 4024,
-     "h": 5030,
-     "tags": "ramen, soup, food, asian, pasta, chopsticks, japan, lunch, cook, kitchen, cooking, egg, meat, soup, food, food, food, japan, lunch, lunch, lunch, lunch, cook, kitchen, cooking, cooking, cooking, cooking, cooking, meat",
-     "by": "joannawielgosz",
-     "page": "https://pixabay.com/photos/ramen-soup-food-asian-pasta-7238665/"
-    },
-    {
      "id": "4508015",
      "file": "photos/cafe/4508015.jpg",
      "role": "item",
@@ -193,17 +171,6 @@
      "page": "https://pixabay.com/photos/coffee-pen-notebook-open-notebook-2306471/"
     },
     {
-     "id": "2242213",
-     "file": "photos/cafe/2242213.jpg",
-     "role": "item",
-     "topic": "latte art",
-     "w": 5997,
-     "h": 4000,
-     "tags": "coffee, wallpaper 4k, 4k wallpaper 1920x1080, workspace, wallpaper hd, free background, cafe, drink, hd wallpaper, notebook, beverage, free wallpaper, beautiful wallpaper, laptop wallpaper, mac wallpaper, flat lay, windows wallpaper, 4k wallpaper, copy space, full hd wallpaper, desktop backgrounds, background, cool backgrounds, wallpaper",
-     "by": "Engin_Akyurt",
-     "page": "https://pixabay.com/photos/coffee-workspace-cafe-drink-2242213/"
-    },
-    {
      "id": "2608864",
      "file": "photos/cafe/2608864.jpg",
      "role": "item",
@@ -224,17 +191,6 @@
      "tags": "coffee, drink, hot, cup, cappuccino, coffee cup, saucer, caffeine, food",
      "by": "grafmex",
      "page": "https://pixabay.com/photos/coffee-drink-hot-cup-cappuccino-3120750/"
-    },
-    {
-     "id": "4351813",
-     "file": "photos/cafe/4351813.jpg",
-     "role": "item",
-     "topic": "tacos",
-     "w": 3648,
-     "h": 5472,
-     "tags": "tacos al pastor, mexican-style pork tacos, tacos, pork tacos, mexican cuisine, mexican food, dining, meal, dinner, delicious, tacos, tacos, tacos, tacos, tacos, mexican food, mexican food, dinner, dinner",
-     "by": "SallyMeza",
-     "page": "https://pixabay.com/photos/tacos-al-pastor-4351813/"
     },
     {
      "id": "1613795",
@@ -270,28 +226,6 @@
      "page": "https://pixabay.com/photos/tacos-pastor-tacos-tacos-mexico-4505032/"
     },
     {
-     "id": "2539163",
-     "file": "photos/cafe/2539163.jpg",
-     "role": "item",
-     "topic": "lemonade",
-     "w": 6000,
-     "h": 4000,
-     "tags": "lemons, lemonade, submerged, lemon slices, drink, citrus fruits, refreshment, underwater, air bubbles, yellow, angry, vitamin c, vitamins, soft drink, close up, lemons, lemons, lemonade, lemonade, drink, underwater, yellow, yellow, yellow, vitamin c, vitamin c, vitamin c, vitamin c, vitamin c, vitamins, vitamins",
-     "by": "ulleo",
-     "page": "https://pixabay.com/photos/lemons-lemonade-submerged-2539163/"
-    },
-    {
-     "id": "1444025",
-     "file": "photos/cafe/1444025.jpg",
-     "role": "item",
-     "topic": "lemonade",
-     "w": 3500,
-     "h": 2333,
-     "tags": "lemon, lemonade, mac wallpaper, cool backgrounds, wallpaper 4k, fruit, sour, slice of lemon, windows wallpaper, beautiful wallpaper, wallpaper hd, 4k wallpaper, laptop wallpaper, desktop backgrounds, 4k wallpaper 1920x1080, full hd wallpaper, hd wallpaper, free wallpaper, citrus fruit, free background, refreshment, background, drink, yellow fruits",
-     "by": "51581",
-     "page": "https://pixabay.com/photos/lemon-lemonade-fruit-sour-1444025/"
-    },
-    {
      "id": "907124",
      "file": "photos/cafe/907124.jpg",
      "role": "item",
@@ -312,39 +246,6 @@
      "tags": "pink lemonade, summer, outdoors, beverage, refreshment, flower vase, pink flowers, nature, cold, thirsty",
      "by": "JillWellington",
      "page": "https://pixabay.com/photos/pink-lemonade-summer-outdoors-795029/"
-    },
-    {
-     "id": "8408369",
-     "file": "photos/cafe/8408369.jpg",
-     "role": "item",
-     "topic": "friends eating together",
-     "w": 5100,
-     "h": 3712,
-     "tags": "girls, casual, eating, sitting, stairs, building, urban, sunny, women, friends, eating, eating, eating, eating, eating, friends, friends",
-     "by": "Surprising_Media",
-     "page": "https://pixabay.com/photos/girls-casual-eating-sitting-stairs-8408369/"
-    },
-    {
-     "id": "9171514",
-     "file": "photos/cafe/9171514.jpg",
-     "role": "item",
-     "topic": "friends eating together",
-     "w": 5740,
-     "h": 3826,
-     "tags": "women, people, casual, sitting, bench, pavement, street, urban, eating, relaxation, lifestyle",
-     "by": "Surprising_Media",
-     "page": "https://pixabay.com/photos/women-people-casual-sitting-bench-9171514/"
-    },
-    {
-     "id": "7757473",
-     "file": "photos/cafe/7757473.jpg",
-     "role": "item",
-     "topic": "friends eating together",
-     "w": 4000,
-     "h": 3000,
-     "tags": "couple, friends, ice cream, eating, woman, man, together, street, urban, lifestyle, people",
-     "by": "Surprising_Media",
-     "page": "https://pixabay.com/photos/couple-friends-ice-cream-eating-7757473/"
     },
     {
      "id": "943245",
@@ -400,17 +301,6 @@
      "tags": "pancakes, maple syrup, raspberries, breakfast, pouring syrup, plate, breakfast plate, stack, stack of pancakes, breakfast food, breakfast meal, sweet, food, delicious, morning, tasty, fruits, food photography, pancakes, breakfast, breakfast, food, food, food, food, food",
      "by": "piviso",
      "page": "https://pixabay.com/photos/pancakes-maple-syrup-raspberries-2291908/"
-    },
-    {
-     "id": "2020863",
-     "file": "photos/cafe/2020863.jpg",
-     "role": "item",
-     "topic": "pancakes breakfast",
-     "w": 5472,
-     "h": 3080,
-     "tags": "pancakes, crepe, pancake, süsspeise, eggs, to bake, cook, kitchen, meal, plate, food, dessert, cute, enjoy, yummy, enjoy the meal, enjoyment, to dish out, ingredients, pancakes, food, food, food, food, food",
-     "by": "RitaE",
-     "page": "https://pixabay.com/photos/pancakes-crepe-pancake-s%C3%BCsspeise-2020863/"
     },
     {
      "id": "1984716",
@@ -482,28 +372,6 @@
      "tags": "electrician, electric, electricity, worker, building, professional, employee, builder, repair, operator, architect, security, business, body, man, factory, helmet, surveyor, helm, corporation, people, foreman, mechanics, male, tools, work, the production of, the industry, industrial, development, hand, electrician, electrician, electrician, electrician, electrician",
      "by": "jarmoluk",
      "page": "https://pixabay.com/photos/electrician-electric-electricity-2755683/"
-    },
-    {
-     "id": "3094035",
-     "file": "photos/trades/3094035.jpg",
-     "role": "hero",
-     "topic": "construction worker",
-     "w": 5851,
-     "h": 3567,
-     "tags": "handyman, construction site, workers, force, characters, fun, diy, construction work, work, to build, construction worker, building, housebuilding, craft, tool, architecture, maurer, renovation, hard work, helmet, building trade, works, handyman, handyman, workers, workers, workers, workers, diy, work, work, work, work, work, construction worker, building, hard work",
-     "by": "Alexas_Fotos",
-     "page": "https://pixabay.com/photos/handyman-construction-site-workers-3094035/"
-    },
-    {
-     "id": "1080592",
-     "file": "photos/trades/1080592.jpg",
-     "role": "hero",
-     "topic": "construction worker",
-     "w": 4256,
-     "h": 2832,
-     "tags": "architect, man, jump, jumping, building, joy, planning, professional, employee, builder, worker, contractor, male, work, development, housing, home, build, building, worker, worker, work, work, work, home, home, home, home, home",
-     "by": "jarmoluk",
-     "page": "https://pixabay.com/photos/architect-man-jump-jumping-1080592/"
     },
     {
      "id": "5736096",
@@ -585,7 +453,7 @@
     {
      "id": "1477987",
      "file": "photos/trades/1477987.jpg",
-     "role": "item",
+     "role": "hero",
      "topic": "solar panels roof",
      "w": 4608,
      "h": 3072,
@@ -622,7 +490,7 @@
      "topic": "electric car charging",
      "w": 2048,
      "h": 1365,
-     "tags": "tesla, tesla model x, charging, supercharger, transportation, automobile, car, auto, vehicle, electricity, electrical, electric, green, infrastructure, car wallpapers, transport, eco, plug, station, renewable, Norway, Nordland, Mosjøen",
+     "tags": "tesla, tesla model x, charging, supercharger, transportation, automobile, car, auto, vehicle, electricity, electrical, electric, green, infrastructure, car wallpapers, transport, eco, plug, station, renewable, Norway, Nordland, Mosj\u00f8en",
      "by": "Blomst",
      "page": "https://pixabay.com/photos/tesla-tesla-model-x-charging-1738969/"
     },
@@ -647,17 +515,6 @@
      "tags": "car, electric car, hybrid car, charging post, car wallpapers, automotive, environmentally conscious, clean fuel, emission, transport, vehicle",
      "by": "Joenomias",
      "page": "https://pixabay.com/photos/car-electric-car-hybrid-car-3117778/"
-    },
-    {
-     "id": "2301604",
-     "file": "photos/trades/2301604.jpg",
-     "role": "item",
-     "topic": "electric car charging",
-     "w": 5290,
-     "h": 3885,
-     "tags": "electric charge, road sign, sign, hybrid, automobile, electric, car, energy, station, battery, eco, charge, vehicle, power, transportation, technology, ecological, alternative, environment, icon, cable, plug, car wallpapers, green, electrical, ev, charging, electricity, system, symbol, gray car, gray technology, gray road, gray energy, gray power",
-     "by": "paulbr75",
-     "page": "https://pixabay.com/photos/electric-charge-road-sign-sign-2301604/"
     },
     {
      "id": "864983",
@@ -706,7 +563,7 @@
     {
      "id": "1836070",
      "file": "photos/trades/1836070.jpg",
-     "role": "item",
+     "role": "hero",
      "topic": "house exterior",
      "w": 5408,
      "h": 3605,
@@ -748,17 +605,6 @@
      "page": "https://pixabay.com/photos/large-home-residential-house-389271/"
     },
     {
-     "id": "1875268",
-     "file": "photos/trades/1875268.jpg",
-     "role": "item",
-     "topic": "electrical wiring",
-     "w": 4000,
-     "h": 2667,
-     "tags": "light bulbs, wire, many, bulb, light, lamp, bright, electric, glowing, energy, electricity, illuminated, shiny, illumination, power, glow, decoration, decorative, decor, cable",
-     "by": "qimono",
-     "page": "https://pixabay.com/photos/light-bulbs-wire-many-bulb-light-1875268/"
-    },
-    {
      "id": "1098059",
      "file": "photos/trades/1098059.jpg",
      "role": "item",
@@ -792,17 +638,6 @@
      "page": "https://pixabay.com/photos/tool-work-repair-electrician-2766835/"
     },
     {
-     "id": "2759503",
-     "file": "photos/trades/2759503.jpg",
-     "role": "item",
-     "topic": "hard hat worker",
-     "w": 3508,
-     "h": 2480,
-     "tags": "woman, construction helmet, tool, construction worker, construction manager, headgear, engineer, isolated, construction site, business woman, architect, hammer, smile, laugh, thumbs up, architecture, workwear, construction worker, construction worker, construction worker, construction worker, engineer, engineer, engineer, engineer, engineer, construction site, architect, thumbs up",
-     "by": "whitesession",
-     "page": "https://pixabay.com/photos/woman-construction-helmet-tool-2759503/"
-    },
-    {
      "id": "569126",
      "file": "photos/trades/569126.jpg",
      "role": "item",
@@ -823,17 +658,6 @@
      "tags": "building, professional, employee, builder, worker, architect, repair, operator, security, business, build, body, man, factory, helmet, surveyor, helm, corporation, people, foreman, mechanics, male, tools, work, the production of, the industry, industrial, development, employee, employee, builder, builder, builder, builder, worker, worker, architect, architect, architect, architect, architect, factory",
      "by": "jarmoluk",
      "page": "https://pixabay.com/photos/building-professional-employee-2762319/"
-    },
-    {
-     "id": "4274431",
-     "file": "photos/trades/4274431.jpg",
-     "role": "item",
-     "topic": "hard hat worker",
-     "w": 5312,
-     "h": 2988,
-     "tags": "hard hat, safety hat, construction, hardhat, industrial, work, worker, engineer, safe, safety, professional, protective, protection, helmet, builder, hat, contractor, wear, occupation, industry, business, hard, hard hat, hard hat, construction, construction, construction, worker, engineer, safe, safety, safety, safety, safety, safety, contractor",
-     "by": "ZeeChow",
-     "page": "https://pixabay.com/photos/hard-hat-safety-hat-construction-4274431/"
     }
    ]
   },
@@ -852,17 +676,6 @@
      "page": "https://pixabay.com/photos/merry-christmas-knit-sew-craft-869221/"
     },
     {
-     "id": "5076212",
-     "file": "photos/crafts/5076212.jpg",
-     "role": "hero",
-     "topic": "craft fair handmade",
-     "w": 5694,
-     "h": 3796,
-     "tags": "hydrangea, paper, wallpaper 4k, flowers, purple, wallpaper hd, romantic, laptop wallpaper, paper flowers, free background, craft, crafting, hd wallpaper, women, holding, young, woman, lifestyle, handmade, beautiful flowers, nature, cool backgrounds, desktop backgrounds, windows wallpaper, flower background, bouquet, paper flower, do it your self, background, free wallpaper, handmade paper, art paper, crafter, girl, 4k wallpaper 1920x1080, style, florist, beautiful wallpaper, 4k wallpaper, paper florist, mac wallpaper, full hd wallpaper, flower wallpaper",
-     "by": "amydiycraft",
-     "page": "https://pixabay.com/photos/hydrangea-paper-flowers-purple-5076212/"
-    },
-    {
      "id": "1139098",
      "file": "photos/crafts/1139098.jpg",
      "role": "hero",
@@ -872,17 +685,6 @@
      "tags": "clay, pottery, hands, potter, potter's wheel, dirty, artist, craft, work, art, handicraft, workshop, closeup, clay, pottery, pottery, potter, artist, work, work, work, work, work, art",
      "by": "LubosHouska",
      "page": "https://pixabay.com/photos/clay-pottery-hands-potter-1139098/"
-    },
-    {
-     "id": "7590059",
-     "file": "photos/crafts/7590059.jpg",
-     "role": "hero",
-     "topic": "craft fair handmade",
-     "w": 6000,
-     "h": 4000,
-     "tags": "heart, music, sheet music, love, romantic, winter, nature, snow, paper art, handmade, diy, craft, creativity, notes, melody, decoration, holiday, artistic, music lover, valentine, symbol, harmony, minimalism, blurred background, inspiration, emotional",
-     "by": "Van3ssa_",
-     "page": "https://pixabay.com/photos/heart-music-sheet-music-love-7590059/"
     },
     {
      "id": "4524838",
@@ -929,39 +731,6 @@
      "page": "https://pixabay.com/photos/adult-artisan-tools-workshop-1866533/"
     },
     {
-     "id": "1144448",
-     "file": "photos/crafts/1144448.jpg",
-     "role": "item",
-     "topic": "beads",
-     "w": 4237,
-     "h": 2490,
-     "tags": "rain drops, nature, surface, wet, water droplets, dropetals, glass surface, rain, water, drips, beading, United States, Texas, Houston",
-     "by": "Brett_Hondow",
-     "page": "https://pixabay.com/photos/rain-drops-surface-wet-1144448/"
-    },
-    {
-     "id": "1867900",
-     "file": "photos/crafts/1867900.jpg",
-     "role": "item",
-     "topic": "beads",
-     "w": 6016,
-     "h": 4016,
-     "tags": "bridal, beads, veil, white, pearls, bride, elegant, embroidery, lace, ornate, pearl beads, wedding, pearls, pearls, pearls, bride, lace, lace, wedding, wedding, wedding, wedding, wedding",
-     "by": "Pexels",
-     "page": "https://pixabay.com/photos/bridal-beads-veil-white-pearls-1867900/"
-    },
-    {
-     "id": "5246705",
-     "file": "photos/crafts/5246705.jpg",
-     "role": "item",
-     "topic": "beads",
-     "w": 3070,
-     "h": 2046,
-     "tags": "rain, rainbeads, water, raindrops, raindrop, wet, nature, drip, dew, beaded, liquid, blue, dewdrop, droplets, surface, drops, texture, window, rain, rain, rain, rain, rain, raindrops, liquid, texture, texture, texture, texture",
-     "by": "Thecheapshot",
-     "page": "https://pixabay.com/photos/rain-rainbeads-water-raindrops-5246705/"
-    },
-    {
      "id": "809385",
      "file": "photos/crafts/809385.jpg",
      "role": "item",
@@ -995,17 +764,6 @@
      "page": "https://pixabay.com/photos/jewelry-manufacturing-manufacturing-1381501/"
     },
     {
-     "id": "1751883",
-     "file": "photos/crafts/1751883.jpg",
-     "role": "item",
-     "topic": "handmade jewelry",
-     "w": 5184,
-     "h": 3456,
-     "tags": "craft, wooden, treasure, box, wood, storage, jewelry, trunk, light, chest, secret, precious, lock, wealth, open, safe, security, treasure box, unlock, figurative, perception, explore, object, past, symbol, look, search, exploration, saturated, souvenir, discover, old, nostalgic, toy, key, undo, gift, treasure, treasure, box, box, box, box, box, secret, secret, secret, secret, lock, safe, safe, safe, safe, treasure box, treasure box, treasure box, unlock, unlock, souvenir, discover, discover, discover",
-     "by": "bomei615",
-     "page": "https://pixabay.com/photos/craft-wooden-treasure-box-wood-1751883/"
-    },
-    {
      "id": "1198740",
      "file": "photos/crafts/1198740.jpg",
      "role": "item",
@@ -1015,17 +773,6 @@
      "tags": "bracelet, silver, gemstones, jeweller, jewelry, fashion, blue, jewel, glamour, jewelry woman, brown fashion, brown jewelry, bracelet, bracelet, bracelet, jewelry, jewelry, jewelry, jewelry, jewelry",
      "by": "pony_up",
      "page": "https://pixabay.com/photos/bracelet-silver-gemstones-jeweller-1198740/"
-    },
-    {
-     "id": "2613527",
-     "file": "photos/crafts/2613527.jpg",
-     "role": "item",
-     "topic": "quilt",
-     "w": 2471,
-     "h": 1766,
-     "tags": "sewing machine, sewing, sew, machine, needle, work, clothing, textile, craft, tailor, fashion, seamstress, thread, equipment, sewing-machine, needlework, industry, tailoring, stitch, needlecraft, foot, adjust, stitching, quilting, quilt, sewing machine, sewing machine, sewing machine, sewing machine, sewing machine, sewing, sewing, sewing, tailor, tailor, tailoring, quilting, quilt",
-     "by": "wnk1029",
-     "page": "https://pixabay.com/photos/sewing-machine-sewing-sew-machine-2613527/"
     },
     {
      "id": "716838",
@@ -1118,7 +865,7 @@
     {
      "id": "6526674",
      "file": "photos/crafts/6526674.jpg",
-     "role": "item",
+     "role": "hero",
      "topic": "basket weaving",
      "w": 6000,
      "h": 4000,
@@ -1129,7 +876,7 @@
     {
      "id": "1314017",
      "file": "photos/crafts/1314017.jpg",
-     "role": "item",
+     "role": "hero",
      "topic": "basket weaving",
      "w": 2000,
      "h": 1327,
@@ -1171,17 +918,6 @@
      "page": "https://pixabay.com/photos/knit-yarn-wool-handwork-knitwear-2469094/"
     },
     {
-     "id": "1240622",
-     "file": "photos/crafts/1240622.jpg",
-     "role": "item",
-     "topic": "yarn knitting",
-     "w": 3000,
-     "h": 2000,
-     "tags": "wool, cat's cradle, knitting, knitting accessories, woollen, coloured, colored, soft, cotton, close up, freedom of text, negative space, knitting, knitting, knitting, knitting, knitting, cotton, cotton, cotton, negative space",
-     "by": "Pezibear",
-     "page": "https://pixabay.com/photos/wool-cats-cradle-knitting-1240622/"
-    },
-    {
      "id": "5447556",
      "file": "photos/crafts/5447556.jpg",
      "role": "item",
@@ -1191,17 +927,6 @@
      "tags": "ball of string, string, yarn, ball, crochet, twine, thread, craft, wool, hobby, white, fiber, fibre, knitting, handmade, natural, texture, cotton, textile, material, homemade, diy, string, yarn, yarn, yarn, crochet, crochet, crochet, crochet, crochet, twine, twine",
      "by": "ClaradoodlaK",
      "page": "https://pixabay.com/photos/ball-of-string-string-yarn-ball-5447556/"
-    },
-    {
-     "id": "1838494",
-     "file": "photos/crafts/1838494.jpg",
-     "role": "item",
-     "topic": "leather craft",
-     "w": 3800,
-     "h": 2534,
-     "tags": "background, leather, brown, hd wallpaper, free wallpaper, cool backgrounds, close up, design, wallpaper hd, 4k wallpaper 1920x1080, free background, fashion, desktop backgrounds, full hd wallpaper, macro, material, mac wallpaper, laptop wallpaper, pattern, structure, style, texture, textured, beautiful wallpaper, wallpaper 4k, 4k wallpaper, windows wallpaper, brown background, brown texture",
-     "by": "Pexels",
-     "page": "https://pixabay.com/photos/background-leather-brown-close-up-1838494/"
     },
     {
      "id": "1687388",
@@ -1224,17 +949,6 @@
      "tags": "belt, belt buckle, leather, metal, costume, clothing, belt, belt, belt, belt, belt",
      "by": "Couleur",
      "page": "https://pixabay.com/photos/belt-belt-buckle-leather-metal-1688017/"
-    },
-    {
-     "id": "540142",
-     "file": "photos/crafts/540142.jpg",
-     "role": "item",
-     "topic": "leather craft",
-     "w": 6061,
-     "h": 4000,
-     "tags": "leather, brown, structure, clothing, nature, naturally, abstract, texture, leather, leather, leather, leather, leather",
-     "by": "FrankyFromGermany",
-     "page": "https://pixabay.com/photos/leather-brown-structure-clothing-540142/"
     },
     {
      "id": "1209519",
@@ -1283,5 +997,6 @@
    ]
   }
  },
- "updated": "2026-11-15"
+ "updated": "2026-11-15",
+ "note": "Picked by Claude from the photo robot's candidates on 2026-11-15. Running the robot again replaces them."
 }
