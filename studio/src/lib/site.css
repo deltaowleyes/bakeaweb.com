@@ -662,9 +662,9 @@
 
 
 /* designer families on dark or accent bands: everything inside switches to the band's text colour */
-.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom) .s.bg-ink>.w{--ink:var(--oi);--line:color-mix(in srgb,var(--oi) 28%,transparent);--mute:color-mix(in srgb,var(--oi) 72%,transparent);--card:color-mix(in srgb,var(--oi) 8%,transparent);--soft:color-mix(in srgb,var(--oi) 12%,transparent)}
-.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom) .s.bg-acc>.w{--ink:var(--oa);--line:color-mix(in srgb,var(--oa) 30%,transparent);--mute:color-mix(in srgb,var(--oa) 78%,transparent);--card:color-mix(in srgb,var(--oa) 10%,transparent);--soft:color-mix(in srgb,var(--oa) 14%,transparent)}
-.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom) .s.bg-ink .meta,.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom) .s.bg-acc .meta{color:inherit}
+.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .s.bg-ink>.w{--ink:var(--oi);--line:color-mix(in srgb,var(--oi) 28%,transparent);--mute:color-mix(in srgb,var(--oi) 72%,transparent);--card:color-mix(in srgb,var(--oi) 8%,transparent);--soft:color-mix(in srgb,var(--oi) 12%,transparent)}
+.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .s.bg-acc>.w{--ink:var(--oa);--line:color-mix(in srgb,var(--oa) 30%,transparent);--mute:color-mix(in srgb,var(--oa) 78%,transparent);--card:color-mix(in srgb,var(--oa) 10%,transparent);--soft:color-mix(in srgb,var(--oa) 14%,transparent)}
+.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .s.bg-ink .meta,.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .s.bg-acc .meta{color:inherit}
 /* designer families: tablet */
 @container (min-width:600px) and (max-width:1023.98px){
 .pv:is(.tf-tide,.tf-craft,.tf-bento) h1{font-size:48px}
@@ -726,15 +726,15 @@
    Photo-led, with gentle motion. Motion only moves things (never hides them), so screenshots stay correct,
    and it switches off for visitors who ask for less motion.
    ====================================================================== */
-.pv:is(.tf-hearth,.tf-volt,.tf-loom) .ti,.pv:is(.tf-hearth,.tf-volt,.tf-loom) .bt{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom) .tim>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom) .gl figure>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom) .fm>img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom) .ti:hover .tim>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom) .gl figure:hover>img{transform:scale(1.06)}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom) .bt:hover{transform:translateY(-2px)}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom) .gl figure{overflow:hidden;border-radius:var(--r)}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .ti,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .bt{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .tim>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .gl figure>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .fm>img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .ti:hover .tim>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .gl figure:hover>img{transform:scale(1.06)}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .bt:hover{transform:translateY(-2px)}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .gl figure{overflow:hidden;border-radius:var(--r)}
 @media (prefers-reduced-motion:no-preference){
-  .pv:is(.tf-hearth,.tf-volt,.tf-loom) .s-hero .hm>img{animation:bk-drift 24s ease-in-out infinite alternate}
+  .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .s-hero .hm>img{animation:bk-drift 24s ease-in-out infinite alternate}
   @supports (animation-timeline:view()){
-    .pv:is(.tf-hearth,.tf-volt,.tf-loom) main>.s:not(.s-hero) .w>*{animation:bk-rise linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
+    .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) main>.s:not(.s-hero) .w>*{animation:bk-rise linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
   }
 }
 @keyframes bk-drift{from{transform:scale(1)}to{transform:scale(1.08) translate(-1%,-1%)}}
@@ -883,7 +883,7 @@
 /* flagships: tablet */
 @container (min-width:600px) and (max-width:1023.98px){
 .pv.tf-hearth h1{font-size:72px}.pv.tf-volt h1{font-size:68px}.pv.tf-loom h1{font-size:60px}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom) h2,.pv:is(.tf-hearth,.tf-volt,.tf-loom) .s-cta h2{font-size:42px}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) h2,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .s-cta h2{font-size:42px}
 .pv.tf-hearth .tl-menu{grid-template-columns:1fr!important}
 .pv.tf-hearth .hl-overlay .hx{min-height:600px}
 .pv.tf-volt .hl-split .hx,.pv.tf-loom .hl-split .hx{gap:32px}
@@ -893,8 +893,8 @@
 @container (max-width:599.98px){
 .pv.tf-hearth{--sy:60px}
 .pv.tf-hearth h1{font-size:54px}.pv.tf-volt h1{font-size:54px}.pv.tf-loom h1{font-size:44px}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom) h2,.pv:is(.tf-hearth,.tf-volt,.tf-loom) .s-cta h2{font-size:34px}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom) .fe h3{font-size:32px}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) h2,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .s-cta h2{font-size:34px}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .fe h3{font-size:32px}
 .pv.tf-hearth .hl-overlay .hx{min-height:560px}
 .pv.tf-hearth .tl-menu{grid-template-columns:1fr!important;gap:24px}
 .pv.tf-hearth .tl-menu .tim{flex-basis:76px;width:76px}
@@ -960,3 +960,196 @@
 .pv.tf-loom .pr-bd{background:var(--acc);color:var(--oa)}
 .pv.tf-loom .pr-btn{color:var(--ink);text-decoration:underline dashed var(--acc);text-underline-offset:5px}
 @container (max-width:599.98px){.pv.tf-volt .bk-a h2{font-size:36px}.pv.tf-hearth .mu-h{font-size:28px}.pv.tf-hearth .mu-l strong,.pv.tf-hearth .mu-p{font-size:20px}.pv.tf-hearth .mu-im{flex-basis:64px;width:64px;height:64px}.pv.tf-loom .pr-t h3{font-size:19px}}
+
+/* ======================================================================
+   Flagships, round 2 (2026-11-14): Bloom (salons), Pulse (fitness), Commons (community organizations).
+   ====================================================================== */
+/* ---------- Bloom: salons and beauty ---------- */
+.pv.tf-bloom{--sy:96px}
+.pv.tf-bloom h1{font-size:92px;line-height:.98;font-weight:500;letter-spacing:-.02em}
+.pv.tf-bloom h2{font-size:54px;font-weight:500;letter-spacing:-.015em}
+.pv.tf-bloom h3{font-weight:500}
+.pv.tf-bloom .hd{border-bottom:1px solid var(--line)}
+.pv.tf-bloom :is(.mn,.dr>summary){font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:12px}
+.pv.tf-bloom .bt{border-radius:999px;background:var(--ink);color:var(--oi);font-weight:600;letter-spacing:.06em;padding:15px 30px}
+.pv.tf-bloom .bt2{background:transparent;color:inherit}
+.pv.tf-bloom .ey{color:var(--acc);letter-spacing:.3em;font-weight:600;font-size:12px}
+.pv.tf-bloom .hl-split .hx{grid-template-columns:1fr 1fr;gap:80px;padding-top:72px;padding-bottom:96px}
+.pv.tf-bloom .hl-split .hm{aspect-ratio:4/5;border-radius:240px 240px 24px 240px;position:relative;box-shadow:30px 30px 0 var(--soft)}
+.pv.tf-bloom .hl-split p{font-size:19px;max-width:36ch}
+.pv.tf-bloom .sh{flex-direction:column;align-items:center;text-align:center;gap:6px}
+.pv.tf-bloom .sh h2:before{content:"✦";display:block;font-size:14px;color:var(--acc);margin-bottom:12px}
+.pv.tf-bloom .in{text-align:center;margin:0 auto 44px}
+.pv.tf-bloom .s-menu .w{max-width:1200px}
+.pv.tf-bloom .mu-g{gap:48px 56px}
+.pv.tf-bloom .mu-h{font:italic 500 30px var(--hf);letter-spacing:0;text-transform:none;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:12px}
+.pv.tf-bloom .mu-l strong{font-weight:600;font-size:17px}
+.pv.tf-bloom .mu-p{font:500 20px var(--hf)}
+.pv.tf-bloom .mu-f{text-align:center}
+.pv.tf-bloom .bk{grid-template-columns:5fr 6fr;gap:72px;align-items:center}
+.pv.tf-bloom .bk-a h2{font-size:54px}
+.pv.tf-bloom .bk-ar li{border-color:var(--ink);font-weight:500}
+.pv.tf-bloom .bk-b{background:var(--soft);border:0;border-radius:32px;padding:40px;box-shadow:none}
+.pv.tf-bloom .bk-b h3{font-size:30px}
+.pv.tf-bloom .bk-i{border-color:color-mix(in srgb,var(--ink) 15%,transparent)}
+.pv.tf-bloom .bk-i b{color:var(--ink);font:500 20px var(--hf)}
+.pv.tf-bloom .tl-cards .ti{border:0;background:transparent;padding:0;text-align:center}
+.pv.tf-bloom .tl-cards .tim{aspect-ratio:3/4;border-radius:200px 200px 16px 16px;margin-bottom:16px}
+.pv.tf-bloom .tl-cards .tx{align-items:center}
+.pv.tf-bloom .tl-cards h3{font-size:26px}
+.pv.tf-bloom .meta{color:var(--acc);letter-spacing:.2em}
+.pv.tf-bloom .fe-split{grid-template-columns:1fr 1fr;gap:80px}
+.pv.tf-bloom .fm{aspect-ratio:4/5;border-radius:24px 240px 24px 24px}
+.pv.tf-bloom .fe h3{font-size:52px;font-weight:500;line-height:1.02}
+.pv.tf-bloom .gl{grid-template-columns:repeat(4,1fr);gap:18px;padding-bottom:48px}
+.pv.tf-bloom .gl figure{margin:0;border-radius:20px}
+.pv.tf-bloom .gl figure:nth-child(even){transform:translateY(48px)}
+.pv.tf-bloom .gl figure>:is(img,svg){aspect-ratio:3/4;border-radius:20px}
+.pv.tf-bloom .gl figcaption{text-align:center;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.pv.tf-bloom .qs blockquote{background:transparent;text-align:center;padding:0 12px;color:inherit}
+.pv.tf-bloom .qs blockquote p{font:italic 500 26px/1.3 var(--hf)}
+.pv.tf-bloom .qs cite{letter-spacing:.16em;text-transform:uppercase;font-size:12px;color:var(--acc)}
+.pv.tf-bloom .stt b{font:500 54px var(--hf);color:var(--ink)}
+.pv.tf-bloom .stt span{letter-spacing:.16em;text-transform:uppercase;font-size:11px}
+.pv.tf-bloom .ct{text-align:center}
+.pv.tf-bloom .s-contact .w{text-align:center}
+.pv.tf-bloom .s-cta,.pv.tf-bloom .s-cta.bg-default{background:transparent}
+.pv.tf-bloom .s-cta .w{background:var(--soft);border-radius:36px;padding:80px 40px;max-width:calc(1200px - 2 * var(--pad))}
+.pv.tf-bloom .s-cta h2{font-size:64px}
+.pv.tf-bloom .wm-i{border-radius:50%;background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink);font-weight:500}
+.pv.tf-bloom .ft .wm-i{color:var(--oi);box-shadow:inset 0 0 0 1.5px var(--oi)}
+.pv.tf-bloom .wm-n{font-size:28px;letter-spacing:.04em;font-weight:500}
+
+/* ---------- Pulse: gyms and fitness (dark) ---------- */
+.pv.tf-pulse h1,.pv.tf-pulse h2,.pv.tf-pulse h3{text-transform:uppercase;font-weight:400;letter-spacing:.005em}
+.pv.tf-pulse h1{font-size:132px;line-height:.88}
+.pv.tf-pulse h2{font-size:72px;line-height:.92}
+.pv.tf-pulse h3{font-size:28px}
+.pv.tf-pulse .hd{border-bottom:1px solid var(--line);background:var(--bg)}
+.pv.tf-pulse :is(.mn,.dr>summary){text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:700}
+.pv.tf-pulse .bt{border-radius:0;text-transform:uppercase;letter-spacing:.12em;font-weight:800;font-size:14px;padding:17px 32px;clip-path:polygon(0 0,100% 0,100% 72%,92% 100%,0 100%)}
+.pv.tf-pulse .bt2{clip-path:none;box-shadow:inset 0 0 0 2px currentColor}
+.pv.tf-pulse .ey{display:inline-block;background:var(--acc);color:var(--oa);padding:6px 12px;letter-spacing:.18em;font-weight:800}
+.pv.tf-pulse .hl-overlay .hx{min-height:820px;padding-bottom:96px}
+.pv.tf-pulse .hl-overlay .hm:after{background:linear-gradient(0deg,var(--bg) 2%,rgba(0,0,0,.35) 45%,rgba(0,0,0,.15)),linear-gradient(90deg,rgba(0,0,0,.6),transparent 60%)}
+.pv.tf-pulse .hl-overlay .ht{max-width:980px}
+.pv.tf-pulse .hl-overlay p{font-size:20px;max-width:44ch}
+.pv.tf-pulse .s-stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pv.tf-pulse .stt b{font:400 88px/1 var(--hf);color:transparent;-webkit-text-stroke:2px var(--acc)}
+.pv.tf-pulse .stt span{text-transform:uppercase;letter-spacing:.16em;font-weight:700;font-size:12px}
+.pv.tf-pulse .sh{align-items:flex-end}
+.pv.tf-pulse .sh h2:after{content:"";display:block;width:80px;height:6px;background:var(--acc);margin-top:14px;transform:skewX(-20deg)}
+.pv.tf-pulse .mu-g{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.pv.tf-pulse .mu-c{background:var(--card);border:1px solid var(--line);padding:24px}
+.pv.tf-pulse .mu-h{font:400 30px var(--hf);letter-spacing:.02em;color:var(--acc);border-color:var(--line)}
+.pv.tf-pulse .mu-l{flex-direction:column;gap:2px}
+.pv.tf-pulse .mu-d{display:none}
+.pv.tf-pulse .mu-l strong{font-size:18px;text-transform:uppercase;letter-spacing:.04em}
+.pv.tf-pulse .mu-p{order:-1;font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--acc)}
+.pv.tf-pulse .mu-i{border-bottom:1px solid var(--line)}.pv.tf-pulse .mu-i:last-child{border:0}
+.pv.tf-pulse .bk{align-items:center}
+.pv.tf-pulse .bk-ar li{border-radius:0;border-color:var(--acc);color:var(--ink);text-transform:uppercase;letter-spacing:.08em;font-size:12px}
+.pv.tf-pulse .bk-at{color:var(--ink)}
+.pv.tf-pulse .bk-b{background:var(--card);border:2px solid var(--acc);border-radius:0;padding:36px;box-shadow:16px 16px 0 color-mix(in srgb,var(--acc) 35%,transparent)}
+.pv.tf-pulse .bk-b h3{font-size:36px}
+.pv.tf-pulse .bk-i b{font:400 30px var(--hf);color:var(--acc)}
+.pv.tf-pulse .tl-cards{gap:12px}
+.pv.tf-pulse .tl-cards .ti{position:relative;border:0;padding:0;border-radius:0;overflow:hidden;min-height:420px;background:var(--card);color:#fff}
+.pv.tf-pulse .tl-cards .tim{position:absolute;inset:0;margin:0;aspect-ratio:auto;border-radius:0}
+.pv.tf-pulse .tl-cards .tim:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,.05) 70%)}
+.pv.tf-pulse .tl-cards .tx{position:relative;margin-top:auto;padding:24px;justify-content:flex-end}
+.pv.tf-pulse .tl-cards .ti :is(p,.meta){color:rgba(255,255,255,.85)}
+.pv.tf-pulse .tl-cards .ti b{margin-top:8px;color:var(--acc);text-transform:uppercase;letter-spacing:.1em;font-size:13px}
+.pv.tf-pulse .tl-cards .ti:hover .tim>img{transform:scale(1.08)}
+.pv.tf-pulse .fe-split{grid-template-columns:1fr 1fr;gap:64px}
+.pv.tf-pulse .fm{border-radius:0;aspect-ratio:1;clip-path:polygon(0 0,100% 0,100% 88%,88% 100%,0 100%)}
+.pv.tf-pulse .fe h3{font-size:64px;line-height:.92}
+.pv.tf-pulse .gl{gap:6px}
+.pv.tf-pulse .gl figure{margin:0;position:relative;border-radius:0}
+.pv.tf-pulse .gl figure>:is(img,svg){border-radius:0;aspect-ratio:4/5;filter:grayscale(1) contrast(1.1);transition:filter .5s,transform .8s}
+.pv.tf-pulse .gl figure:hover>:is(img,svg){filter:none}
+.pv.tf-pulse .gl figcaption{position:absolute;left:0;bottom:0;margin:0;background:var(--acc);color:var(--oa);padding:6px 12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:12px}
+.pv.tf-pulse .qs blockquote{background:var(--card);border-left:4px solid var(--acc);border-radius:0;color:var(--ink)}
+.pv.tf-pulse .qs blockquote p{font:400 26px/1.15 var(--hf);text-transform:uppercase}
+.pv.tf-pulse .ct>div{border-left:4px solid var(--acc);padding-left:16px}
+.pv.tf-pulse .s-cta,.pv.tf-pulse .s-cta.bg-default{background:var(--acc);color:var(--oa);background-image:repeating-linear-gradient(-60deg,transparent 0 30px,color-mix(in srgb,var(--oa) 8%,transparent) 30px 60px)}
+.pv.tf-pulse .s-cta h2{font-size:104px}
+.pv.tf-pulse .s-cta .bt{background:var(--oa);color:var(--acc)}
+.pv.tf-pulse .ft{background:var(--bg);color:var(--ink);border-top:1px solid var(--line)}
+.pv.tf-pulse .ft .wm{color:var(--ink)}
+.pv.tf-pulse .wm-i{transform:skewX(-14deg);border-radius:0}
+.pv.tf-pulse .wm-n{text-transform:uppercase;font-size:30px;letter-spacing:.03em}
+
+/* ---------- Commons: community organizations and band offices ---------- */
+.pv.tf-commons{font-size:18px}
+.pv.tf-commons h1{font-size:56px;line-height:1.1;letter-spacing:-.01em}
+.pv.tf-commons .fe h3{font-size:38px}
+.pv.tf-commons h2{font-size:40px;line-height:1.15}
+.pv.tf-commons h3{font-size:22px}
+.pv.tf-commons .hd{border-bottom:4px solid var(--acc)}
+.pv.tf-commons :is(.mn,.dr>summary){font-weight:700;font-size:16px}
+.pv.tf-commons .bt{border-radius:8px;font-size:17px;padding:15px 26px}
+.pv.tf-commons .bt:focus-visible,.pv.tf-commons a:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.pv.tf-commons .ey{display:inline-flex;align-items:center;gap:10px;background:var(--card);color:var(--ink);border:1px solid var(--line);padding:8px 14px;border-radius:999px;letter-spacing:.04em;text-transform:none;font-size:15px}
+.pv.tf-commons .ey:before{content:"";width:10px;height:10px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 25%,transparent)}
+.pv.tf-commons .s-hero{background:var(--soft)}
+.pv.tf-commons .hl-split .hx{grid-template-columns:1fr 1fr;gap:56px;padding-top:72px;padding-bottom:72px}
+.pv.tf-commons .hl-split .hm{aspect-ratio:4/3;border-radius:20px;box-shadow:0 30px 60px -30px rgba(0,0,0,.45)}
+.pv.tf-commons .hl-split p{font-size:20px}
+.pv.tf-commons .sh h2{position:relative;padding-left:20px}
+.pv.tf-commons .sh h2:before{content:"";position:absolute;left:0;top:.2em;bottom:.2em;width:6px;border-radius:3px;background:var(--acc)}
+.pv.tf-commons .tl-cards .ti{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:0;overflow:hidden;color:var(--ink)}
+.pv.tf-commons .tl-cards .ti:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(0,0,0,.35)}
+.pv.tf-commons .tl-cards .tim{margin:0;border-radius:0;aspect-ratio:16/9}
+.pv.tf-commons .tl-cards .tx{padding:20px 22px 24px}
+.pv.tf-commons .meta{color:var(--acc);letter-spacing:.08em}
+.pv.tf-commons .ti b{font-size:16px}
+.pv.tf-commons .ls{border:0;display:grid;gap:12px}
+.pv.tf-commons .lr{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--acc);border-radius:12px;padding:18px 22px;color:var(--ink)}
+.pv.tf-commons .lr strong{font-size:18px}
+.pv.tf-commons .lr .mo{background:var(--soft);padding:8px 14px;border-radius:8px}
+.pv.tf-commons .bk-b{border-radius:16px}
+.pv.tf-commons .bk-ar li{background:var(--soft);border-color:transparent;font-size:15px}
+.pv.tf-commons .bk-i b{color:var(--ink);font-weight:700}
+.pv.tf-commons .stt>div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 12px;color:var(--ink)}
+.pv.tf-commons .stt b{font-family:var(--hf)}
+.pv.tf-commons .fe-split{grid-template-columns:1fr 1fr;gap:56px}
+.pv.tf-commons .fm{border-radius:20px}
+.pv.tf-commons .gl figure>:is(img,svg){border-radius:16px;aspect-ratio:4/3}
+.pv.tf-commons .gl figcaption{font-size:15px;font-weight:600;color:var(--ink)}
+.pv.tf-commons .qs blockquote{background:var(--card);border:1px solid var(--line);border-radius:16px}
+.pv.tf-commons .qs blockquote p{font-size:19px;line-height:1.5}
+.pv.tf-commons .ct>div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;color:var(--ink)}
+.pv.tf-commons .ct dd{font-size:18px;font-weight:600}
+.pv.tf-commons .s-cta,.pv.tf-commons .s-cta.bg-default{background:var(--ink);color:var(--oi)}
+.pv.tf-commons .wm-i{border-radius:12px}
+.pv.tf-commons .wm-n{font-size:22px;line-height:1.15;white-space:normal;max-width:260px}
+
+/* round 2: tablet and phone */
+@container (min-width:600px) and (max-width:1023.98px){
+.pv.tf-bloom h1{font-size:64px}.pv.tf-pulse h1{font-size:92px}.pv.tf-commons h1{font-size:48px}
+.pv:is(.tf-bloom,.tf-pulse) h2,.pv:is(.tf-bloom,.tf-pulse) .s-cta h2,.pv.tf-pulse .fe h3{font-size:48px}
+.pv.tf-bloom .gl{grid-template-columns:repeat(2,1fr)}
+.pv:is(.tf-bloom,.tf-commons) .hl-split .hx,.pv.tf-bloom .bk{gap:36px}
+}
+@container (max-width:599.98px){
+.pv.tf-bloom{--sy:60px}
+.pv.tf-bloom h1{font-size:50px}.pv.tf-pulse h1{font-size:68px}.pv.tf-commons h1{font-size:38px}
+.pv:is(.tf-bloom,.tf-pulse,.tf-commons) h2,.pv:is(.tf-bloom,.tf-pulse) .s-cta h2,.pv.tf-bloom .bk-a h2{font-size:36px}
+.pv:is(.tf-bloom,.tf-pulse,.tf-commons) .fe h3{font-size:32px}
+.pv:is(.tf-bloom,.tf-commons) .hl-split .hx{grid-template-columns:1fr;gap:36px;padding-top:40px;padding-bottom:56px}
+.pv.tf-bloom .hl-split .hm{box-shadow:16px 16px 0 var(--soft);border-radius:160px 160px 16px 160px}
+.pv:is(.tf-bloom,.tf-pulse,.tf-commons) .fe-split{grid-template-columns:1fr;gap:28px}
+.pv.tf-bloom .bk{grid-template-columns:1fr;gap:28px}.pv.tf-bloom .bk-b{padding:24px}
+.pv.tf-bloom .gl{grid-template-columns:1fr 1fr;padding-bottom:24px}.pv.tf-bloom .gl figure:nth-child(even){transform:translateY(24px)}
+.pv.tf-pulse .hl-overlay .hx{min-height:620px;padding-bottom:48px}
+.pv.tf-pulse .stt{grid-template-columns:1fr 1fr;row-gap:20px}.pv.tf-pulse .stt b{font-size:56px}
+.pv.tf-pulse .tl-cards .ti{min-height:320px}
+.pv.tf-pulse .bk-b{box-shadow:8px 8px 0 color-mix(in srgb,var(--acc) 35%,transparent);padding:24px}
+.pv.tf-commons .stt{grid-template-columns:1fr 1fr}
+.pv.tf-commons .lr .mo{display:inline-block;margin-top:8px}
+}
+
+/* buttons stay readable on dark and accent bands */
+.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons) .s.bg-acc .bt:not(.bt2){background:var(--bg);color:var(--acc)}
+.pv.tf-bloom .s.bg-ink .bt:not(.bt2){background:var(--acc);color:var(--oa)}
