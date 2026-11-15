@@ -57,7 +57,11 @@ var Render = (function () {
     /* 2026-11-14 Indigenous business series, run 3: lodges, cabins and outdoor tourism */
     { k: 'timber', wordmark: 1, videos: 'grid', name: 'Timber', desc: 'For northern lodges and fishing camps: deep forest colours, slab-serif type, a full-screen lake photo and cabin rates like a trail sign.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, dark: 1, gf: { h: 'Zilla Slab', hcat: 'r', hw: 700, b: 'Source Sans 3', bcat: 's' } },
     { k: 'shoreline', wordmark: 1, videos: 'grid', name: 'Shoreline', desc: 'For lake resorts and cottages: light and calm, elegant italic headings, a wave under the opener and big soft photos.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Cormorant Garamond', hcat: 'r', hw: 600, b: 'Jost', bcat: 's' } },
-    { k: 'basecamp', wordmark: 1, videos: 'grid', name: 'Basecamp', desc: 'For outfitters and adventure tourism: topographic-map backgrounds, badge labels and bold activity cards.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Rubik', hcat: 's', hw: 800, b: 'Rubik', bcat: 's' } }
+    { k: 'basecamp', wordmark: 1, videos: 'grid', name: 'Basecamp', desc: 'For outfitters and adventure tourism: topographic-map backgrounds, badge labels and bold activity cards.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Rubik', hcat: 's', hw: 800, b: 'Rubik', bcat: 's' } },
+    /* 2026-11-14 Indigenous business series, run 4: film, video and media production */
+    { k: 'reel', wordmark: 1, videos: 'lead', name: 'Reel', desc: 'For film and video studios: cinematic and dark, a letterboxed opener, laurel awards, a screening-room film list and credits that roll.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, dark: 2, gf: { h: 'DM Serif Display', hcat: 'r', hw: 400, b: 'Inter Tight', bcat: 's' } },
+    { k: 'marquee', wordmark: 1, videos: 'grid', name: 'Marquee', desc: 'For filmmakers and festivals: poster-style type, film posters as cards, laurels for every selection and a bright festival feel.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Syne', hcat: 's', hw: 800, b: 'Space Grotesk', bcat: 's' } },
+    { k: 'frame', wordmark: 1, videos: 'row', name: 'Frame', desc: 'For photographers and directors: a quiet gallery wall with wide stills, numbered projects and elegant italic type.', hero: 'editorial', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Newsreader', hcat: 'r', hw: 500, b: 'Inter', bcat: 's' } }
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -71,7 +75,8 @@ var Render = (function () {
   var GRADES = { news: 45, app: 50, mag: 52, min: 50, bold: 48, portal: 50, story: 55, board: 42,
     tide: 72, ember: 73, folio: 74, block: 70, bento: 72, craft: 66, glow: 67, swiss: 71, retro: 70, lens: 64,
     hearth: 86, volt: 85, loom: 85, bloom: 85, pulse: 84, commons: 80, council: 80, meridian: 84, bridge: 80,
-    convoy: 80, homeward: 84, 'homeward-b': 85, freight: 76, timber: 85, shoreline: 85, 'shoreline-b': 86, basecamp: 80 };
+    convoy: 80, homeward: 84, 'homeward-b': 85, freight: 76, timber: 85, shoreline: 85, 'shoreline-b': 86, basecamp: 80,
+    reel: 88, marquee: 84, frame: 86 };
   var PRICE_BANDS = [[90, 500], [85, 250], [80, 100], [75, 50], [70, 0]];
   var MIN_GRADE = 70;
   function priceFor(g) { for (var i = 0; i < PRICE_BANDS.length; i++) if (g >= PRICE_BANDS[i][0]) return PRICE_BANDS[i][1]; return null; }
