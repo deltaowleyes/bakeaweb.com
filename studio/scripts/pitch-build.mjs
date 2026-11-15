@@ -1,7 +1,7 @@
 /* Pitch builder: turns a pitch spec (a real business's details, kept OUTSIDE this public repo) into a studio
    project and screenshots of it in chosen templates, for the private Pitch Book (pitches.html, Supabase redesign_pitches).
    Usage: cd studio && node scripts/pitch-build.mjs /path/to/spec.json /path/to/outDir
-   spec = { biz:{name,desc}, pal:{bg,ink,acc,soft} | palIndex, logo:"url"?, hero:"url", templates:["convoy-a",…],
+   spec = { biz:{name,desc}, pal:{bg,ink,acc,soft} | palIndex, logo:"url"?, logoMark:true? (a picture-only logo shown beside the name), hero:"url", templates:["convoy-a",…],
             menu:[label | {label, children:[label]}], cta:"label", footer:{motto,text},
             sections:[{ type, …fields, image?:"url", items?:[{ title, text, …fields, image?:"url" }] }] }
    Writes outDir/project.json (studio project without view state) and outDir/<tpl>-d.png / -p.png. */
@@ -25,19 +25,19 @@ await page.waitForFunction(() => window.BAKE);
 const project = await page.evaluate(async spec => {
   const st = await import('/src/store.js'), ed = await import('/src/edit.js'), { Art } = await import('/src/lib/art.js'), photos = await import('/src/lib/photos.js');
   const rid = p => p + Math.random().toString(36).slice(2, 8);
-  /* a photo is a real URL, or "sample:<kind>:<topic word>" for one of the studio's own sample photos */
+  /* a photo is a real URL, or "sample:<kind>:<topic word or photo id>" for one of the studio's own sample photos */
   const used = new Set();
   const img = src => {
     if (!src) return undefined;
     const m = /^sample:(\w+):?(.*)$/.exec(src);
-    if (m) { const ps = photos.samplePhotos(m[1]); const p = ps.find(x => !used.has(x.id) && (!m[2] || x.topic.includes(m[2]))) || ps.find(x => !used.has(x.id)) || ps[0]; used.add(p.id); return { kind: 'img', src: p.src, label: p.label }; }
+    if (m) { const ps = photos.samplePhotos(m[1]); const p = ps.find(x => !used.has(x.id) && (!m[2] || x.id == m[2] || x.topic.includes(m[2]))) || ps.find(x => !used.has(x.id)) || ps[0]; used.add(p.id); return { kind: 'img', src: p.src, label: p.label }; }
     return { kind: 'img', src, label: '' };
   };
   st.commit(S => {
     S.biz = Object.assign({}, spec.biz);
     S.brand.pal = Object.assign({}, spec.pal || Art.PALETTES[spec.palIndex || 0]);
     ['logo', 'hero', 'ill'].forEach(t => { ed.genSvg(t); const o = S.brand.opts[t]; if (o[0]) S.brand.pick[t] = (t == 'logo' ? (o.find(x => x.lay === 0) || o[0]) : o[0]).id; });
-    if (spec.logo) { const o = { id: 'o-logo', kind: 'img', src: spec.logo, from: 'site', label: S.biz.name + ' logo' }; S.brand.opts.logo.unshift(o); S.brand.pick.logo = o.id; }
+    if (spec.logo) { const o = { id: 'o-logo', kind: 'img', src: spec.logo, from: 'site', label: S.biz.name + ' logo' }; if (spec.logoMark) o.mark = 1; S.brand.opts.logo.unshift(o); S.brand.pick.logo = o.id; }
     if (spec.hero) { const h = img(spec.hero); const o = { id: 'o-hero', kind: 'img', src: h.src, from: 'site', label: h.label }; S.brand.opts.hero.unshift(o); S.brand.pick.hero = o.id; }
     const sections = spec.sections.map(s => {
       const o = Object.assign(ed.defaultSection(s.type), s, { id: rid('s') });

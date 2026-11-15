@@ -82,6 +82,10 @@ var Render = (function () {
     { k: 'trapline', wordmark: 1, videos: 'grid', name: 'Trapline', desc: 'For trappers and wildlife control: a dark bush-at-dawn opener, a trail of tracks between sections, numbers on pelt tags and a price list for tanning and sharpening.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Zilla Slab', hcat: 'r', hw: 700, b: 'Work Sans', bcat: 's' } },
     { k: 'tannery', wordmark: 1, videos: 'grid', name: 'Tannery', desc: 'For tanners and leather workers: warm buckskin colours, the opening photo stretched like a hide on a frame, saddle-stitched cards and an oval maker’s stamp.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Alegreya', hcat: 'r', hw: 800, b: 'Alegreya Sans', bcat: 's' } },
     { k: 'birchbark', wordmark: 1, videos: 'grid', name: 'Birchbark', desc: 'For knowledge keepers, carvers and land-based teachers: birch-bark bands, an arched photo, cedar-green accents and teachings set out like a field journal.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Spectral', hcat: 'r', hw: 600, b: 'Source Sans 3', bcat: 's' } },
+    /* 2026-11-15 pitch run: water savings, plumbing and building-efficiency products (made for a family pitch; demo business Clearwell Water Savings is invented) */
+    { k: 'gauge', mono: 'IBM Plex Mono', wordmark: 1, videos: 'lead', name: 'Gauge', desc: 'For building-efficiency and engineered products: a blueprint opener, results on pressure-gauge dials, a spec sheet of numbered steps and data-style labels.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Archivo', hcat: 's', hw: 800, b: 'IBM Plex Sans', bcat: 's' } },
+    { k: 'flowline', wordmark: 1, videos: 'lead', name: 'Flowline', desc: 'For water, plumbing and clean-tech companies: a full-bleed water opener with a wave edge, drop-shaped numbers and bullets, flowing section edges and soft rounded cards.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Outfit', hcat: 's', hw: 700, b: 'Outfit', bcat: 's' } },
+    { k: 'ledger', mono: 'DM Mono', wordmark: 1, videos: 'grid', name: 'Ledger', desc: 'For products sold on savings to property managers and owners: results laid out like a utility statement, case studies on receipts with a SAVED stamp and a before-and-after bill.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'DM Serif Display', hcat: 'r', hw: 400, b: 'DM Sans', bcat: 's' } },
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -101,7 +105,8 @@ var Render = (function () {
     press: 87, stitch: 85, merch: 84,
     taproom: 85, roadside: 85, patio: 84,
     bedrock: 85, breakwater: 84, rebar: 84,
-    trapline: 85, tannery: 86, birchbark: 84 };
+    trapline: 85, tannery: 86, birchbark: 84,
+    gauge: 84, flowline: 85, ledger: 84 };
   var PRICE_BY_GRADE = { 75: 50, 76: 60, 77: 70, 78: 80, 79: 90, 80: 100, 81: 120, 82: 140, 83: 160, 84: 180, 85: 200, 86: 250, 87: 300, 88: 350, 89: 400,
     90: 500, 91: 600, 92: 700, 93: 800, 94: 900, 95: 1000, 96: 1500, 97: 2500, 98: 4000, 99: 7500 };
   var MIN_GRADE = 65;
@@ -317,6 +322,8 @@ var Render = (function () {
   function logoHtml(P, h) {
     var a = picked(P, 'logo'), n = String(P.biz.name || '').trim();
     if (FAM && FAM.wordmark && n && (!a || a.kind != 'img')) return '<span class="wm" role="img" aria-label="' + esc(n) + ' logo"><span class="wm-i" aria-hidden="true">' + esc(n.charAt(0).toUpperCase()) + '</span><span class="wm-n" aria-hidden="true">' + esc(n) + '</span></span>';
+    /* a picture-only logo (a mark with no name in it, flagged mark: 1) sits beside the business name in the template's type */
+    if (FAM && FAM.wordmark && n && a && a.kind == 'img' && a.mark) return '<span class="wm wm-pic" role="img" aria-label="' + esc(n) + ' logo"><img class="wm-m" src="' + esc(a.src) + '" alt=""><span class="wm-n" aria-hidden="true">' + esc(n) + '</span></span>';
     return asset(P, a, 'logo', h);
   }
   function groupsOf(items) { var o = [], m = {}; items.forEach(function (it, i) { var g = String(it.group || '').trim(); if (!m.hasOwnProperty(g)) { m[g] = o.length; o.push({ name: g, items: [] }); } o[m[g]].items.push([it, i]); }); return o; }
