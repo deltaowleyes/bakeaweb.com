@@ -3,7 +3,7 @@
  "sourceUrl": "https://pixabay.com/",
  "kinds": {
   "cafe": {
-   "name": "Caf\u00e9 and restaurant",
+   "name": "Café and restaurant",
    "photos": [
     {
      "id": "1869656",
@@ -644,7 +644,7 @@
      "topic": "electric car charging",
      "w": 2048,
      "h": 1365,
-     "tags": "tesla, tesla model x, charging, supercharger, transportation, automobile, car, auto, vehicle, electricity, electrical, electric, green, infrastructure, car wallpapers, transport, eco, plug, station, renewable, Norway, Nordland, Mosj\u00f8en",
+     "tags": "tesla, tesla model x, charging, supercharger, transportation, automobile, car, auto, vehicle, electricity, electrical, electric, green, infrastructure, car wallpapers, transport, eco, plug, station, renewable, Norway, Nordland, Mosjøen",
      "by": "Blomst",
      "page": "https://pixabay.com/photos/tesla-tesla-model-x-charging-1738969/"
     },
@@ -1309,7 +1309,7 @@
      "topic": "handmade quilt",
      "w": 5184,
      "h": 3456,
-     "tags": "sewing, patchwork, k\u00f6rk\u00e9s, thread, pink, spindle, pin, needle, clipboard, textile, textiles, material, materials, heart, polka dots, patterned, sample, sewing, sewing, sewing, sewing, sewing",
+     "tags": "sewing, patchwork, körkés, thread, pink, spindle, pin, needle, clipboard, textile, textiles, material, materials, heart, polka dots, patterned, sample, sewing, sewing, sewing, sewing, sewing",
      "by": "Miller_Eszter",
      "page": "https://pixabay.com/photos/sewing-patchwork-k%C3%B6rk%C3%A9s-thread-2321532/"
     },
@@ -1962,7 +1962,7 @@
      "topic": "community garden",
      "w": 4160,
      "h": 3120,
-     "tags": "orchard, urban, labor city of culture, gij\u00f3n, asturias, spain, yard, terraces, vegetables, tourist, walk, holiday, tourism, nature",
+     "tags": "orchard, urban, labor city of culture, gijón, asturias, spain, yard, terraces, vegetables, tourist, walk, holiday, tourism, nature",
      "by": "PortalJardin",
      "page": "https://pixabay.com/photos/orchard-urban-labor-city-of-culture-1114524/"
     },
@@ -2352,7 +2352,7 @@
      "topic": "forest aerial",
      "w": 4797,
      "h": 6000,
-     "tags": "heaven, road, drone, nature, path, landscape, goal, clouds, horizon, bird's eye view, air, forest, trees, green, automobile, to travel, travel, fall, aerial, curves, phone wallpaper, aerial view, streets, perspective, aesthetic wallpaper, iphone wallpaper, Germany, Baden-W\u00fcrttemberg, B\u00f6blingen",
+     "tags": "heaven, road, drone, nature, path, landscape, goal, clouds, horizon, bird's eye view, air, forest, trees, green, automobile, to travel, travel, fall, aerial, curves, phone wallpaper, aerial view, streets, perspective, aesthetic wallpaper, iphone wallpaper, Germany, Baden-Württemberg, Böblingen",
      "by": "BarneyElo",
      "page": "https://pixabay.com/photos/heaven-road-drone-nature-path-5281668/"
     },
@@ -2396,7 +2396,7 @@
      "topic": "office building glass",
      "w": 4608,
      "h": 3072,
-     "tags": "architecture, skyscraper, glass facades, modern, facade, sky, building, d\u00fcsseldorf, city, nature, modern architecture, glass, modern building, glass front, windows, glass windows, reflection, exterior, perspective, office building, urban, high, downtown, low angle shot, structure, mirroring",
+     "tags": "architecture, skyscraper, glass facades, modern, facade, sky, building, düsseldorf, city, nature, modern architecture, glass, modern building, glass front, windows, glass windows, reflection, exterior, perspective, office building, urban, high, downtown, low angle shot, structure, mirroring",
      "by": "652234",
      "page": "https://pixabay.com/photos/architecture-skyscraper-2256489/"
     },
@@ -2407,7 +2407,7 @@
      "topic": "office building glass",
      "w": 4608,
      "h": 3456,
-     "tags": "architecture, modern, building, facade, skyscraper, geometric, windows, glass windows, perspective, d\u00fcsseldorf, office building, mirroring, reflection, architecture, building, building, building, building, building",
+     "tags": "architecture, modern, building, facade, skyscraper, geometric, windows, glass windows, perspective, düsseldorf, office building, mirroring, reflection, architecture, building, building, building, building, building",
      "by": "652234",
      "page": "https://pixabay.com/photos/architecture-modern-building-facade-1048092/"
     },
@@ -3409,6 +3409,539 @@
      "tags": "boat tie up, mooring, rope, cleat, tied, moored, boat, nautical, dock, vessel, marine, knot, white, maritime, yacht, line, marina, cord, deck, transportation, boating, equipment, anchor, secure, pier, brown boat, brown security, rope, cleat, yacht, yacht, yacht, yacht, yacht, deck, anchor, anchor",
      "by": "paulbr75",
      "page": "https://pixabay.com/photos/boat-tie-up-mooring-rope-cleat-1646964/"
+    }
+   ]
+  },
+  "print": {
+   "name": "Custom apparel, embroidery and printing",
+   "photos": [
+    {
+     "id": "1452987",
+     "file": "photos/print/1452987.jpg",
+     "role": "hero",
+     "topic": "embroidery machine",
+     "w": 5383,
+     "h": 3511,
+     "tags": "macro, cogwheel, gear, engine, vintage, industrial, work, mechanism, mechanics, technology, accuracy, clock, analogue, time, engineering, machine, metal, mechanical, equipment, industry, repair, parts, old, retro, gear, engine, industrial, work, work, work, technology, technology, technology, technology, clock, clock, clock, time, time, time, time, time, engineering, engineering, machine, machine, machine, metal, metal, metal, industry",
+     "by": "Pavlofox",
+     "page": "https://pixabay.com/photos/macro-cogwheel-gear-engine-vintage-1452987/"
+    },
+    {
+     "id": "1236578",
+     "file": "photos/print/1236578.jpg",
+     "role": "hero",
+     "topic": "embroidery machine",
+     "w": 5655,
+     "h": 3775,
+     "tags": "gears, cogs, machine, machinery, mechanical, gears and cogs, technology, industry, industrial, engineering, cogwheels, metals, monochrome, black and white, gears, gears, gears, cogs, machine, machine, machine, machine, machine, machinery, machinery, mechanical, technology, technology, technology, technology, industry, industry, industry, industrial, engineering, engineering, engineering, engineering",
+     "by": "MustangJoe",
+     "page": "https://pixabay.com/photos/gears-cogs-machine-machinery-1236578/"
+    },
+    {
+     "id": "3010309",
+     "file": "photos/print/3010309.jpg",
+     "role": "hero",
+     "topic": "embroidery machine",
+     "w": 5184,
+     "h": 3456,
+     "tags": "robot, woman, face, cry, sad, artificial intelligence, future, machine, digital, technology, sad girl, robotics, girl, human, android, circuit board, binary, connections, cyborg, digitization, science fiction, ai",
+     "by": "51581",
+     "page": "https://pixabay.com/photos/robot-woman-face-cry-sad-3010309/"
+    },
+    {
+     "id": "1248088",
+     "file": "photos/print/1248088.jpg",
+     "role": "hero",
+     "topic": "embroidery machine",
+     "w": 3500,
+     "h": 2333,
+     "tags": "typewriter, vintage, old, vintage typewriter, retro, type, antique, paper, text, write, nostalgia, letter, vintage type, machine, word, black, white, lettering, typing, classic, message, office, technology, black white, typewriter, typewriter, typewriter, typewriter, typewriter, vintage, letter, typing, technology",
+     "by": "ha11ok",
+     "page": "https://pixabay.com/photos/typewriter-vintage-old-1248088/"
+    },
+    {
+     "id": "849822",
+     "file": "photos/print/849822.jpg",
+     "role": "hero",
+     "topic": "screen printing",
+     "w": 3000,
+     "h": 2000,
+     "tags": "student, typing, keyboard, text, woman, startup, business, people, students, office, strategy, work, technology, company, corporate, communication, young, plan, marketing, computer, design, professional, planning, internet, project, laptop, presentation, web, display, monitor, women, girls, screen, digital, electronic, pc, modern, student, business, business, business, business, students, office, work, work, work, work, marketing, marketing, computer, computer, computer, computer, computer, laptop, laptop, laptop",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/student-typing-keyboard-text-woman-849822/"
+    },
+    {
+     "id": "1868496",
+     "file": "photos/print/1868496.jpg",
+     "role": "hero",
+     "topic": "screen printing",
+     "w": 5184,
+     "h": 3456,
+     "tags": "apple, computer, desk, workspace, work place, white, imac, desktop, apple devices, mockup, office, home office, lamp, monitor, screen, technology, modern, tidy, computer, computer, computer, computer, computer, office, technology",
+     "by": "Pexels",
+     "page": "https://pixabay.com/photos/apple-computer-desk-workspace-1868496/"
+    },
+    {
+     "id": "1433427",
+     "file": "photos/print/1433427.jpg",
+     "role": "hero",
+     "topic": "screen printing",
+     "w": 6016,
+     "h": 4016,
+     "tags": "digital marketing, technology, notebook, stats, statistics, internet, analyst, analysis, plan, tablet, office, work desk, modern, business, marketing, digital, computer, mobile technologies, work, electronics, web browser, diagrams, data, percentages, calculation, screen, seo, advertising, digital marketing, digital marketing, digital marketing, statistics, business, business, marketing, marketing, marketing, marketing, work, data, data, data, data, data, seo, seo",
+     "by": "AS_Photography",
+     "page": "https://pixabay.com/photos/digital-marketing-technology-1433427/"
+    },
+    {
+     "id": "820272",
+     "file": "photos/print/820272.jpg",
+     "role": "hero",
+     "topic": "screen printing",
+     "w": 3000,
+     "h": 2000,
+     "tags": "hands, ipad, tablet, technology, digital tablet, touch, computer, screen, communication, wireless, internet, device, digital, electronic, pc, portable, multimedia, touchscreen, modern, laptop, display, mobile, media, input, ipad, tablet, technology, technology, technology, technology, technology, computer, computer, computer, internet, internet, internet, internet, digital, digital, digital, laptop, media",
+     "by": "fancycrave1",
+     "page": "https://pixabay.com/photos/hands-ipad-tablet-technology-820272/"
+    },
+    {
+     "id": "5248183",
+     "file": "photos/print/5248183.jpg",
+     "role": "item",
+     "topic": "thread spools colorful",
+     "w": 6000,
+     "h": 4000,
+     "tags": "embroidery thread, colorful yarn, crochet, knitting, craft supplies, handmade, needlework, textile art, vibrant colors, yarn balls, sewing, embroidery, thread spools, hobby, diy crafts, home crafts, textile threads, fiber arts, colorful threads, yarn closeup, craft materials, wool, cotton thread, multicolor yarn, creative tools",
+     "by": "Van3ssa_",
+     "page": "https://pixabay.com/photos/embroidery-thread-colorful-yarn-5248183/"
+    },
+    {
+     "id": "1615524",
+     "file": "photos/print/1615524.jpg",
+     "role": "item",
+     "topic": "thread spools colorful",
+     "w": 4608,
+     "h": 3456,
+     "tags": "yarn, thread, sew, thread spool, multicoloured, sewing thread, twisted, haberdashery, fashion, design, thread roll, role, needlework, schneider, craft, coil, sewing supplies, sewing accessories, sewing kits, fadenrollen, tailoring, yarn, yarn, yarn, yarn, thread, thread, thread, thread, thread, sewing thread, craft, craft, tailoring, tailoring",
+     "by": "Bru-nO",
+     "page": "https://pixabay.com/photos/yarn-thread-sew-thread-spool-1615524/"
+    },
+    {
+     "id": "5063401",
+     "file": "photos/print/5063401.jpg",
+     "role": "item",
+     "topic": "thread spools colorful",
+     "w": 5811,
+     "h": 3879,
+     "tags": "sewing kit, thread, scissors, sewing tools, sewing accessories, colorful, yarn, needlework, handicraft, closeup, thread, thread, thread, scissors, scissors, scissors, scissors, sewing tools, yarn, yarn, yarn, yarn, yarn, handicraft",
+     "by": "webentwicklerin",
+     "page": "https://pixabay.com/photos/sewing-kit-thread-scissors-5063401/"
+    },
+    {
+     "id": "931889",
+     "file": "photos/print/931889.jpg",
+     "role": "item",
+     "topic": "thread spools colorful",
+     "w": 4543,
+     "h": 3407,
+     "tags": "thread, sewing, colorful, sew, tailor, craft, embroidery, needlework, hobby, spool, thread, thread, thread, thread, sewing, sewing, sewing, sewing, sewing, tailor, embroidery, embroidery, embroidery, embroidery",
+     "by": "tookapic",
+     "page": "https://pixabay.com/photos/thread-sewing-colorful-sew-tailor-931889/"
+    },
+    {
+     "id": "1886001",
+     "file": "photos/print/1886001.jpg",
+     "role": "item",
+     "topic": "t-shirt stack",
+     "w": 1920,
+     "h": 1929,
+     "tags": "blank, tshirt, male, fashion, top, clothes, man, wear, tshirt, tshirt, tshirt, tshirt, tshirt",
+     "by": "nattyjeff",
+     "page": "https://pixabay.com/photos/blank-tshirt-male-fashion-top-1886001/"
+    },
+    {
+     "id": "1468032",
+     "file": "photos/print/1468032.jpg",
+     "role": "item",
+     "topic": "t-shirt stack",
+     "w": 5472,
+     "h": 3648,
+     "tags": "asian man, portrait, young man, man, eyeglasses, glasses, chinese, striped t-shirt, asian man, man, man, man, man, man",
+     "by": "Locies",
+     "page": "https://pixabay.com/photos/asian-man-portrait-young-man-man-1468032/"
+    },
+    {
+     "id": "1278404",
+     "file": "photos/print/1278404.jpg",
+     "role": "item",
+     "topic": "t-shirt stack",
+     "w": 1920,
+     "h": 1920,
+     "tags": "t-shirt, white, clothes, rags, empty, cancas, model, t-shirt, t-shirt, t-shirt, t-shirt, t-shirt",
+     "by": "VersionFrancaise",
+     "page": "https://pixabay.com/photos/t-shirt-white-clothes-rags-empty-1278404/"
+    },
+    {
+     "id": "1886008",
+     "file": "photos/print/1886008.jpg",
+     "role": "item",
+     "topic": "t-shirt stack",
+     "w": 1920,
+     "h": 1929,
+     "tags": "blank, tshirt, male, fashion, top, clothes, man, wear, tshirt, tshirt, tshirt, tshirt, tshirt",
+     "by": "nattyjeff",
+     "page": "https://pixabay.com/photos/blank-tshirt-male-fashion-top-1886008/"
+    },
+    {
+     "id": "2591874",
+     "file": "photos/print/2591874.jpg",
+     "role": "item",
+     "topic": "hoodie",
+     "w": 5472,
+     "h": 3648,
+     "tags": "people, woman, nature, travel, adventure, trek, mountain, rock, sunset, cliff, black, hoodie, jacket, alone, thinking, freedom",
+     "by": "StockSnap",
+     "page": "https://pixabay.com/photos/people-woman-travel-adventure-trek-2591874/"
+    },
+    {
+     "id": "2048905",
+     "file": "photos/print/2048905.jpg",
+     "role": "item",
+     "topic": "hoodie",
+     "w": 5326,
+     "h": 3593,
+     "tags": "woman, sad, portrait, crying, desperate, depressed, cry, hopeless, loss, teenager, despair, depression, girl, tormented, torment, sadness, fear, anxious, tears, mourning, alone, lonely, sad girl, bullying, hoodie, emotion, young, person, human, problem, monochrome, black and white",
+     "by": "Anemone123",
+     "page": "https://pixabay.com/photos/woman-sad-portrait-crying-2048905/"
+    },
+    {
+     "id": "875617",
+     "file": "photos/print/875617.jpg",
+     "role": "item",
+     "topic": "hoodie",
+     "w": 2398,
+     "h": 2998,
+     "tags": "people, hoodie, male, person, man, young, portrait, one, lifestyle, adult, black, dark, urban, guy, fashion, hood, attractive, human, casual, model, hooded, confident, men, style, shirt, expression, black city, black fashion, black model, black portrait, black dark, black human, men, men, men, men, men",
+     "by": "Leroy_Skalstad",
+     "page": "https://pixabay.com/photos/people-hoodie-male-person-man-875617/"
+    },
+    {
+     "id": "1283576",
+     "file": "photos/print/1283576.jpg",
+     "role": "item",
+     "topic": "hoodie",
+     "w": 2818,
+     "h": 5009,
+     "tags": "man, faceless, horror, anonymous, surreal, creepy, scary, hoodie, ghost, jacket, green hoodie, green jacket, disguise, halloween, horror, horror, horror, horror, horror, hoodie, ghost",
+     "by": "Pexels",
+     "page": "https://pixabay.com/photos/man-faceless-horror-anonymous-1283576/"
+    },
+    {
+     "id": "2525910",
+     "file": "photos/print/2525910.jpg",
+     "role": "item",
+     "topic": "baseball cap",
+     "w": 2048,
+     "h": 1687,
+     "tags": "hat, head, red, helmet, cap, hat, cap, cap, cap, cap, cap",
+     "by": "studiopromomobile",
+     "page": "https://pixabay.com/photos/hat-head-red-helmet-cap-2525910/"
+    },
+    {
+     "id": "1505036",
+     "file": "photos/print/1505036.jpg",
+     "role": "item",
+     "topic": "baseball cap",
+     "w": 3504,
+     "h": 2336,
+     "tags": "baseball, player, pitcher, ball, athlete, field, american, team, uniform, action, playing, activity, pitching, throwing, stadium, sport, competition, mound, pitcher's mound, athletic, game, competitive, pitch, college, baseball player, texas, texan, baseball, baseball, baseball, baseball, baseball",
+     "by": "KeithJJ",
+     "page": "https://pixabay.com/photos/baseball-player-pitcher-ball-1505036/"
+    },
+    {
+     "id": "1493118",
+     "file": "photos/print/1493118.jpg",
+     "role": "item",
+     "topic": "baseball cap",
+     "w": 2779,
+     "h": 2200,
+     "tags": "jack roosevelt robinson, said jackie robinson, baseball player, american, 1919-1972, sport, athletic, athlete, baseball bat, cap, major league from 1947 to 1956, robinson plays several sports, athletics, basketball, football, baseball, tennis, golf, swimming, baseball player, basketball, baseball, baseball, baseball, baseball, baseball",
+     "by": "FotoshopTofs",
+     "page": "https://pixabay.com/photos/jack-roosevelt-robinson-1493118/"
+    },
+    {
+     "id": "1396886",
+     "file": "photos/print/1396886.jpg",
+     "role": "item",
+     "topic": "baseball cap",
+     "w": 2336,
+     "h": 3504,
+     "tags": "baseball, little league, pitcher, pitching mound, coach, conference, children, game, boy, baseball player, baseball coach, athlete, uniform, kid, coaching, counseling, baseball, coach, coach, coach, coach, coach, baseball coach, coaching, coaching, coaching, coaching, counseling",
+     "by": "KeithJJ",
+     "page": "https://pixabay.com/photos/baseball-little-league-pitcher-1396886/"
+    },
+    {
+     "id": "2744912",
+     "file": "photos/print/2744912.jpg",
+     "role": "item",
+     "topic": "hockey jersey",
+     "w": 4898,
+     "h": 3265,
+     "tags": "hockey, slavia, skater, hockey player, winter, winter sports, winter sport, joy, hockey stick, captain, puck, ice, skating, sport, emotion, face, hockey, hockey, hockey, hockey, hockey",
+     "by": "LuckyLife11",
+     "page": "https://pixabay.com/photos/hockey-slavia-skater-hockey-player-2744912/"
+    },
+    {
+     "id": "557219",
+     "file": "photos/print/557219.jpg",
+     "role": "item",
+     "topic": "hockey jersey",
+     "w": 5184,
+     "h": 3456,
+     "tags": "hockey, helmet, face, sport, portrait, grid, hockey player, freckles, boy, athlete, freckled face, braces, hockey, hockey, hockey, hockey, hockey, helmet, braces",
+     "by": "Patrice_Audet",
+     "page": "https://pixabay.com/photos/hockey-helmet-face-sport-portrait-557219/"
+    },
+    {
+     "id": "2180834",
+     "file": "photos/print/2180834.jpg",
+     "role": "item",
+     "topic": "hockey jersey",
+     "w": 3002,
+     "h": 2002,
+     "tags": "hockey, sport, athlete, player, puck, stick, play, ice, rink, arena, skate, cold, skating, helmet, competitive, activity, action, hockey, hockey, hockey, hockey, hockey",
+     "by": "KeithJJ",
+     "page": "https://pixabay.com/photos/hockey-sport-athlete-player-puck-2180834/"
+    },
+    {
+     "id": "9076472",
+     "file": "photos/print/9076472.jpg",
+     "role": "item",
+     "topic": "hockey jersey",
+     "w": 4896,
+     "h": 3264,
+     "tags": "hockey, goal, net, sport, match, indoors",
+     "by": "Familyschaffner",
+     "page": "https://pixabay.com/photos/hockey-goal-net-sport-match-9076472/"
+    },
+    {
+     "id": "933098",
+     "file": "photos/print/933098.jpg",
+     "role": "item",
+     "topic": "large format printer",
+     "w": 4781,
+     "h": 3187,
+     "tags": "printer, ink, toner, technology, print, equipment, computer, printing, cartridge, ink-jet, inkjet, machine, printout, brown computer, brown technology, brown laptop, printer, printer, printer, printer, printer, print, printing, printing, printing",
+     "by": "tookapic",
+     "page": "https://pixabay.com/photos/printer-ink-toner-technology-print-933098/"
+    },
+    {
+     "id": "541625",
+     "file": "photos/print/541625.jpg",
+     "role": "item",
+     "topic": "large format printer",
+     "w": 4752,
+     "h": 3168,
+     "tags": "magnifying glass, color fan, pantone, printing inks, full tone, grid, four color printing, cmyk, thread counter, precision, check, proof, pigments, selection, gradient, graphic design, communication, printing house, pantone, cmyk, graphic design, printing house, printing house, printing house, printing house, printing house",
+     "by": "stux",
+     "page": "https://pixabay.com/photos/magnifying-glass-color-fan-pantone-541625/"
+    },
+    {
+     "id": "2416269",
+     "file": "photos/print/2416269.jpg",
+     "role": "item",
+     "topic": "large format printer",
+     "w": 5096,
+     "h": 3397,
+     "tags": "printer, 3d, print, 3d printing, white, 3d model, technology, electronics, product, shape, wait, whole body, filament, print head, pressure plate, plastic, copy, figure, board, 3d printing, 3d printing, 3d printing, 3d printing, 3d printing",
+     "by": "LPArt",
+     "page": "https://pixabay.com/photos/printer-3d-print-3d-printing-white-2416269/"
+    },
+    {
+     "id": "790396",
+     "file": "photos/print/790396.jpg",
+     "role": "item",
+     "topic": "large format printer",
+     "w": 5472,
+     "h": 3648,
+     "tags": "printer, desk, office, fax, scanner, home office, technology, duplicator, copier, laser printer, wireless printer, brown office, brown home, brown technology, brown desk, printer, printer, printer, printer, printer",
+     "by": "stevepb",
+     "page": "https://pixabay.com/photos/printer-desk-office-fax-scanner-790396/"
+    },
+    {
+     "id": "2425121",
+     "file": "photos/print/2425121.jpg",
+     "role": "item",
+     "topic": "coffee mug",
+     "w": 4460,
+     "h": 2973,
+     "tags": "merry christmas, man, woman, dog, pet, animal, pug, owners, couple, relationship, warm clothes, cozy, scarf, jackets, jeans, boots, fashion, people, happy, love, female, young, male, adult, caucasian, happiness, romantic, portrait, smile, smiling, girlfriend, date, boyfriend, together, person, lovers, sitting, relaxing, rustic, cushions, couch, laughing, enjoying, coffee",
+     "by": "5688709",
+     "page": "https://pixabay.com/photos/merry-christmas-man-woman-dog-pet-2425121/"
+    },
+    {
+     "id": "624440",
+     "file": "photos/print/624440.jpg",
+     "role": "item",
+     "topic": "coffee mug",
+     "w": 4926,
+     "h": 3284,
+     "tags": "valentine's day, heart, cup, coffee, coffee cup, caffeine, hot coffee, nature, hot drink, hot beverage, heart shape, valentine, love, heart mug, snow, winter, steaming cup, romantic",
+     "by": "JillWellington",
+     "page": "https://pixabay.com/photos/valentines-day-heart-cup-coffee-624440/"
+    },
+    {
+     "id": "1975215",
+     "file": "photos/print/1975215.jpg",
+     "role": "item",
+     "topic": "coffee mug",
+     "w": 5760,
+     "h": 3840,
+     "tags": "warm and cozy, popcorn, coffee, fireplace, cozy, warm, home, christmas, cold, fire, coffee cup, cup, comfort, comfortable, mug",
+     "by": "JillWellington",
+     "page": "https://pixabay.com/photos/warm-and-cozy-popcorn-coffee-1975215/"
+    },
+    {
+     "id": "1979674",
+     "file": "photos/print/1979674.jpg",
+     "role": "item",
+     "topic": "coffee mug",
+     "w": 5310,
+     "h": 3637,
+     "tags": "christmas wallpaper, relaxing, lounging, saturday, cozy, fireplace, winter, lounge, relaxation, relax, comfortable, home, ipad, iphone, coffee, weekend, homey, resting, december",
+     "by": "JillWellington",
+     "page": "https://pixabay.com/photos/christmas-wallpaper-relaxing-1979674/"
+    },
+    {
+     "id": "3267505",
+     "file": "photos/print/3267505.jpg",
+     "role": "item",
+     "topic": "graphic designer sketch",
+     "w": 5472,
+     "h": 3648,
+     "tags": "startup, whiteboard, room, indoors, adult, office, business, technology, male, corporate, design, designer, brainstorm, startup, office, business, business, business, business, business, technology, design, designer",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/startup-whiteboard-room-indoors-3267505/"
+    },
+    {
+     "id": "2838945",
+     "file": "photos/print/2838945.jpg",
+     "role": "item",
+     "topic": "graphic designer sketch",
+     "w": 5100,
+     "h": 3648,
+     "tags": "blogger, screenwriter, desperate, unimaginative, uncreative, writer's block, thinking blockade, hair-tearing, headache, workplace, unmotivated, desk, home office, computer, office, macbook, mockup, exhausted, profession, work, resigned, writer, multimedia, graphic design, media specialist, young man, employees, entrepreneur, author, programmer, frustration, frustrated, resignation, the media, media-creating, burnout, headache, headache, computer, computer, office, work, work, work, work, work, writer, frustration, frustrated, burnout",
+     "by": "lukasbieri",
+     "page": "https://pixabay.com/photos/blogger-screenwriter-desperate-2838945/"
+    },
+    {
+     "id": "1857175",
+     "file": "photos/print/1857175.jpg",
+     "role": "item",
+     "topic": "graphic designer sketch",
+     "w": 6000,
+     "h": 4000,
+     "tags": "floor plan, construction, building, pencil, architecture, blueprint, design, architect, sketch, drawing, technical, draft, white, ruler, contemporary architecture, construction, construction, construction, construction, construction, architecture",
+     "by": "3844328",
+     "page": "https://pixabay.com/photos/floor-plan-construction-building-1857175/"
+    },
+    {
+     "id": "2838921",
+     "file": "photos/print/2838921.jpg",
+     "role": "item",
+     "topic": "graphic designer sketch",
+     "w": 5472,
+     "h": 3252,
+     "tags": "laptop, mockup, graphics tablet, tablet, graphic design, designer, macbook, work, workplace, home office, apple, webdesign, computer, office, monitor, business, keyboard, graphic tablet, office work, internet, independent, freelancer, notebook, creative, wooden table, blogger, laptop, laptop, laptop, laptop, graphic design, graphic design, graphic design, designer, work, work, computer, computer, computer, computer, computer, office, office, business, business, blogger",
+     "by": "lukasbieri",
+     "page": "https://pixabay.com/photos/laptop-mockup-graphics-tablet-2838921/"
+    },
+    {
+     "id": "2163323",
+     "file": "photos/print/2163323.jpg",
+     "role": "item",
+     "topic": "tote bag",
+     "w": 6000,
+     "h": 4000,
+     "tags": "shopping, fashion, purchasing, pocket, bag, sale, woman, shop, shopping bag, shopping, shopping, shopping, shopping, shopping, sale, shopping bag",
+     "by": "webandi",
+     "page": "https://pixabay.com/photos/shopping-fashion-purchasing-pocket-2163323/"
+    },
+    {
+     "id": "1052370",
+     "file": "photos/print/1052370.jpg",
+     "role": "item",
+     "topic": "tote bag",
+     "w": 5472,
+     "h": 3648,
+     "tags": "bag, purses, leather bag, bag, bag, bag, bag, bag, leather bag",
+     "by": "Threemountain",
+     "page": "https://pixabay.com/photos/bag-purses-leather-bag-1052370/"
+    },
+    {
+     "id": "4364558",
+     "file": "photos/print/4364558.jpg",
+     "role": "item",
+     "topic": "tote bag",
+     "w": 3264,
+     "h": 4928,
+     "tags": "bag, cotton, beautiful wallpaper, cotton bag, textile, wall, white, blank, template, design resource, background, hook, tote bag, mock up, iphone wallpaper",
+     "by": "BRRT",
+     "page": "https://pixabay.com/photos/bag-cotton-cotton-bag-textile-wall-4364558/"
+    },
+    {
+     "id": "421456",
+     "file": "photos/print/421456.jpg",
+     "role": "item",
+     "topic": "tote bag",
+     "w": 2000,
+     "h": 2000,
+     "tags": "bag, shopping, weave, jute, ecological, big, handle, single color, bag, bag, bag, jute, jute, jute, jute, jute",
+     "by": "articonn",
+     "page": "https://pixabay.com/photos/bag-shopping-weave-jute-ecological-421456/"
+    },
+    {
+     "id": "2575930",
+     "file": "photos/print/2575930.jpg",
+     "role": "item",
+     "topic": "sewing workshop",
+     "w": 5719,
+     "h": 3818,
+     "tags": "tailoring, tailor, costume, apparel, fashion, sewing, pattern, jacket, design, plot, measuring tape, textiles, mannequin, fabrics, crafts, tailoring, tailoring, tailor, tailor, tailor, tailor, tailor, sewing, sewing, sewing, mannequin",
+     "by": "nebulosagrafica",
+     "page": "https://pixabay.com/photos/tailoring-tailor-costume-apparel-2575930/"
+    },
+    {
+     "id": "2566559",
+     "file": "photos/print/2566559.jpg",
+     "role": "item",
+     "topic": "sewing workshop",
+     "w": 6000,
+     "h": 4000,
+     "tags": "mannequin, fashion, accessory, shopping, mall, sewing, boutique, mannequin, sewing, sewing, sewing, sewing, sewing, boutique, boutique",
+     "by": "StockSnap",
+     "page": "https://pixabay.com/photos/mannequin-fashion-accessory-2566559/"
+    },
+    {
+     "id": "1369658",
+     "file": "photos/print/1369658.jpg",
+     "role": "item",
+     "topic": "sewing workshop",
+     "w": 3652,
+     "h": 2592,
+     "tags": "sewing machine, sewing, thimble, wire scissors, sewing machine, sewing machine, sewing machine, sewing machine, sewing machine, sewing, sewing, sewing",
+     "by": "jackmac34",
+     "page": "https://pixabay.com/photos/sewing-machine-sewing-thimble-1369658/"
+    },
+    {
+     "id": "1008908",
+     "file": "photos/print/1008908.jpg",
+     "role": "item",
+     "topic": "sewing workshop",
+     "w": 5184,
+     "h": 3456,
+     "tags": "scissors, old, desktop backgrounds, sewing, tailored, work, dress, high, 4k wallpaper, background, textile, windows wallpaper, beautiful wallpaper, wallpaper 4k, tool, antique, retro, stroke, vintage, linen, fine, ponk, laptop wallpaper, free background, hd wallpaper, 4k wallpaper 1920x1080, cool backgrounds, free wallpaper, full hd wallpaper, mac wallpaper, tailor, gold, life, trade, sew, wallpaper hd, thread",
+     "by": "947051",
+     "page": "https://pixabay.com/photos/scissors-old-sewing-tailored-work-1008908/"
     }
    ]
   }
