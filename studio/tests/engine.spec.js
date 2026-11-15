@@ -39,7 +39,7 @@ test('every template makes complete page files', async ({ page }) => {
     }
     return { out, pages: S.pages.length };
   });
-  expect(res.out.length).toBe(90);
+  expect(res.out.length).toBe(99);
   for (const r of res.out) expect(r, r.id).toMatchObject({ pages: res.pages, index: true, ok: true });
 });
 
@@ -56,7 +56,7 @@ test('designer families bring their own fonts and dark families stay readable', 
     }
     return { out, n: Render.TEMPLATES.length };
   });
-  expect(r.n).toBe(90);
+  expect(r.n).toBe(99);
   for (const k in r.out) { expect(r.out[k].cls, k).toBe(true); expect(r.out[k].gf, k).toBe(true); }
   // Ember and Glow turn a light palette into a dark page
   for (const k of ['ember', 'glow']) expect(parseInt(r.out[k].bg.slice(1, 3), 16), k).toBeLessThan(80);
@@ -77,7 +77,7 @@ test('flagship templates and starter sites use the sample photos', async ({ page
   expect(r.heroImg).toBe(true);
   expect(r.tileImgs).toBe(true);
   expect(r.menu).toBe(true);
-  expect(r.flags).toEqual(['hearth', 'volt', 'loom', 'bloom', 'pulse', 'commons', 'council', 'meridian', 'bridge', 'convoy', 'homeward', 'freight']);
+  expect(r.flags).toEqual(['hearth', 'volt', 'loom', 'bloom', 'pulse', 'commons', 'council', 'meridian', 'bridge', 'convoy', 'homeward', 'freight', 'timber', 'shoreline', 'basecamp']);
   // the photo files are served
   const res = await page.request.get('photos/cafe/' + (await page.evaluate(async () => (await import('/src/lib/photos.json')).default.kinds.cafe.photos[0].id)) + '.jpg');
   expect(res.ok()).toBe(true);
@@ -120,4 +120,18 @@ test('the private Pitch Book asks for a sign-in and shows no data without one', 
   await expect(page.locator('#lf')).toBeVisible();
   await expect(page.locator('.pitch')).toHaveCount(0);
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
+});
+
+test('lodge series: Timber is a dark family and every lodge family draws its own look', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
+  await openStudio(page);
+  await makeStarter(page);
+  const r = await page.evaluate(async () => {
+    const { Render } = await import('/src/lib/render.js');
+    const S = window.BAKE.state(), out = {};
+    for (const k of ['timber', 'shoreline', 'basecamp']) { const h = Render.page(S, k + '-a'); out[k] = { cls: h.includes('tf-' + k), gf: /data-gf="[^"]+"/.test(h), bg: /--bg:(#[0-9a-f]{6})/.exec(h)[1] }; }
+    return out;
+  });
+  for (const k in r) { expect(r[k].cls, k).toBe(true); expect(r[k].gf, k).toBe(true); }
+  expect(parseInt(r.timber.bg.slice(1, 3), 16)).toBeLessThan(80);
 });
