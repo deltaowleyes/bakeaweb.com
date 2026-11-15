@@ -1,8 +1,8 @@
 # BAKE PRO roadmap
 
-Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do list. The list itself lives in `ROADMAP.json` (edit that file and the BAKE PRO buttons update too); this page is made from it by `node studio/scripts/roadmap.mjs`. Business plan: `VISION.md`. Updated 2026-11-14. 73 tasks.
+Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do list. The list itself lives in `ROADMAP.json` (edit that file and the BAKE PRO buttons update too); this page is made from it by `node studio/scripts/roadmap.mjs`. Business plan: `VISION.md`. Updated 2026-11-14. 72 tasks.
 
-**Already done:** Drag-and-drop sections (Step 3); Inspector sidebar (Step 3); Google Fonts; Image editor with crop and border/frame controls; Versions: EXPRESS, RezSite and BAKER preview the live page with View code; PRO previews screenshots; Page files and clickable screenshot pages (lib/site.js); Studio moved to bakeaweb.com; IndigiHub version renamed to RezSite (rezsite.com); Only the finished studio is published (GitHub Pages serves docs/); Automatic testing robot (Playwright tests, npm test, GitHub Actions); Undo, redo and history (Ctrl+Z, save points); Two Studios: BAKE Studio PRO and BAKE Studio BAKER (destination chosen at Publish).
+**Already done:** Drag-and-drop sections (Step 3); Inspector sidebar (Step 3); Google Fonts; Image editor with crop and border/frame controls; Versions: EXPRESS, RezSite and BAKER preview the live page with View code; PRO previews screenshots; Page files and clickable screenshot pages (lib/site.js); Studio moved to bakeaweb.com; IndigiHub version renamed to RezSite (rezsite.com); Only the finished studio is published (GitHub Pages serves docs/); Automatic testing robot (Playwright tests, npm test, GitHub Actions); Undo, redo and history (Ctrl+Z, save points); Two Studios: BAKE Studio PRO and BAKE Studio BAKER (destination chosen at Publish); Ten new designer template families (Tide, Ember, Folio, Block party, Bento, Handmade, Glow, Swiss grid, Sunny retro, Lens): 54 templates.
 
 **Top picks** are marked ★. **Plan first** means Claude shows a plan and costs and waits for an OK before building.
 **Ready:** ▶ now = can start now; ✎ plan = the planning part can start now; ⏳ after = waits for other tasks; ✋ you = waits for you.
@@ -17,11 +17,11 @@ Tasks in the same wave change different files, so they can all run at the same t
 
 **Wave 3** (2 tasks): More section types · Faster previews
 
-**Wave 4** (2 tasks): Three new template families · Guided tour and demo projects
+**Wave 4** (2 tasks): Guided tour and demo projects · Indigenous languages and syllabics
 
 **Wave 5** (1 task): English and French
 
-**Wave 6** (2 tasks): Indigenous languages and syllabics · Requests that write the brief
+**Wave 6** (1 task): Requests that write the brief
 
 ## Anytime: Studio improvements that need no accounts or services; do them whenever you like
 
@@ -41,7 +41,6 @@ Tasks in the same wave change different files, so they can all run at the same t
 |  | **Compare templates side by side**<br>Put 2 or 3 favourites next to each other and decide faster. | Design | Quick | ▶ now | — |
 |  | **Dark mode and seasonal looks**<br>Every template gets a dark version, plus optional holiday accents. | Design | Medium | ▶ now | — |
 |  | **More section types**<br>Events, team, FAQ, pricing, hours, map, logos strip, newsletter. | Design | Medium | ▶ now | — |
-|  | **Three new template families**<br>Fresh looks that make the gallery feel endless. | Design | Big | ▶ now | — |
 |  | **Presentation mode**<br>A full-window walkthrough for pitching a design in a meeting. | Sharing | Quick | ▶ now | — |
 |  | **Studio works great on phones**<br>Design a site from the couch, not just the desk. | Quality | Medium | ▶ now | — |
 |  | **Faster previews**<br>Thumbnails and screenshots that appear almost instantly. | Quality | Medium | ▶ now | — |

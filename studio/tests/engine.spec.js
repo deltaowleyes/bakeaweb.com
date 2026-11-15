@@ -39,6 +39,24 @@ test('every template makes complete page files', async ({ page }) => {
     }
     return { out, pages: S.pages.length };
   });
-  expect(res.out.length).toBe(24);
+  expect(res.out.length).toBe(54);
   for (const r of res.out) expect(r, r.id).toMatchObject({ pages: res.pages, index: true, ok: true });
+});
+
+test('designer families bring their own fonts and dark families stay readable', async ({ page }) => {
+  await openStudio(page);
+  await makeStarter(page);
+  const r = await page.evaluate(async () => {
+    const { Render } = await import('/src/lib/render.js');
+    const S = window.BAKE.state(), out = {};
+    for (const k of ['tide', 'ember', 'folio', 'block', 'bento', 'craft', 'glow', 'swiss', 'retro', 'lens']) {
+      const h = Render.page(S, k + '-a');
+      out[k] = { cls: h.includes('tf-' + k), gf: /data-gf="[^"]+"/.test(h), bg: /--bg:(#[0-9a-f]{6})/.exec(h)[1] };
+    }
+    return { out, n: Render.TEMPLATES.length };
+  });
+  expect(r.n).toBe(54);
+  for (const k in r.out) { expect(r.out[k].cls, k).toBe(true); expect(r.out[k].gf, k).toBe(true); }
+  // Ember and Glow turn a light palette into a dark page
+  for (const k of ['ember', 'glow']) expect(parseInt(r.out[k].bg.slice(1, 3), 16), k).toBeLessThan(80);
 });

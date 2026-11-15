@@ -24,6 +24,19 @@ var Render = (function () {
     { k: 'portal', videos: 'lead', name: 'Community portal', desc: 'A dark welcome panel with search-style shortcuts.', hero: 'portal', tiles: 'icons', feature: 'card', menus: ['mega', 'bar', 'hamburger'] },
     { k: 'story', videos: 'lead', name: 'Storyteller', desc: 'Photo-led, long-form pages for telling a story.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['split', 'bar', 'hamburger'], maxTiles: 6 },
     { k: 'board', videos: 'grid', name: 'Notice board', desc: 'Compact, two-column lists for lots of links.', hero: 'none', tiles: 'cols', feature: 'card', menus: ['mega', 'bar'], need: ['list', 'tiles'] }
+,
+    /* 2026-11-14: ten designer families. gf = the family's own Google Fonts (used unless the site picks fonts in the Inspector);
+       dark = shown on a dark background made from the palette; img = cards show pictures by default. */
+    { k: 'tide', videos: 'grid', name: 'Tide', desc: 'Airy and rounded: a floating menu, a big soft hero panel and pill buttons.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], gf: { h: 'Fraunces', hcat: 'r', hw: 600, b: 'Inter', bcat: 's' } },
+    { k: 'ember', videos: 'lead', name: 'Ember', desc: 'Dark and warm, like a candle-lit dining room. Elegant serif type and a menu-style list.', hero: 'overlay', tiles: 'cols', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], dark: 1, gf: { h: 'Playfair Display', hcat: 'r', hw: 600, b: 'Karla', bcat: 's' } },
+    { k: 'folio', videos: 'lead', name: 'Folio', desc: 'A fashion-magazine look: giant headlines, numbered sections and fine rules.', hero: 'editorial', tiles: 'rule', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], gf: { h: 'Instrument Serif', hcat: 'r', hw: 400, b: 'Inter Tight', bcat: 's' } },
+    { k: 'block', videos: 'grid', name: 'Block party', desc: 'Bold outlines, hard shadows and loud colour. Impossible to ignore.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], gf: { h: 'Space Grotesk', hcat: 's', hw: 700, b: 'Space Grotesk', bcat: 's' } },
+    { k: 'bento', videos: 'grid', name: 'Bento', desc: 'Everything sits in neat rounded panels, like a tidy lunch box.', hero: 'split', tiles: 'bento', feature: 'card', menus: ['bar', 'mega', 'split', 'hamburger'], gf: { h: 'Manrope', hcat: 's', hw: 800, b: 'Inter', bcat: 's' } },
+    { k: 'craft', videos: 'grid', name: 'Handmade', desc: 'Warm and crafted: arched pictures, stitched cards and a scalloped edge.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, gf: { h: 'Young Serif', hcat: 'r', hw: 400, b: 'Nunito Sans', bcat: 's' } },
+    { k: 'glow', videos: 'grid', name: 'Glow', desc: 'Dark and modern with soft coloured light and glowing buttons.', hero: 'center', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], dark: 2, gf: { h: 'Sora', hcat: 's', hw: 700, b: 'Inter', bcat: 's' } },
+    { k: 'swiss', videos: 'grid', name: 'Swiss grid', desc: 'Strict grid, huge type and section labels in their own column.', hero: 'editorial', tiles: 'rule', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], gf: { h: 'Archivo', hcat: 's', hw: 800, b: 'Archivo', bcat: 's' } },
+    { k: 'retro', videos: 'row', name: 'Sunny retro', desc: 'A cheerful 70s feel: chunky type, stripes and a sunburst.', hero: 'center', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], gf: { h: 'Bricolage Grotesque', hcat: 's', hw: 800, b: 'DM Sans', bcat: 's' } },
+    { k: 'lens', videos: 'row', name: 'Lens', desc: 'Photo first: a full-screen opener, picture cards and an edge-to-edge gallery.', hero: 'overlay', tiles: 'cards', feature: 'wide', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, gf: { h: 'Outfit', hcat: 's', hw: 600, b: 'Outfit', bcat: 's' } }
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -47,7 +60,8 @@ var Render = (function () {
   function pageOf(P, id) { var ps = P.pages || []; return ps.filter(function (p) { return p.id == id; })[0] || ps[0] || { sections: [] }; }
 
   /* ---------- art helpers ---------- */
-  function pal(P) { return P.brand.pal; }
+  var PALX = null; /* the palette in use while a dark family is drawn */
+  function pal(P) { return PALX || P.brand.pal; }
   function font(P) { return Art.FONTS[P.brand.font] || Art.FONTS[0]; }
   function asset(P, a, kind, h) {
     if (!a) return '';
@@ -185,6 +199,7 @@ var Render = (function () {
     },
     tiles: function (P, s, f) {
       var st = s.style && s.style != 'auto' ? s.style : f.tiles, cols = s.cols || 3;
+      if (s.showImg === undefined && f.img) s = Object.assign({}, s, { showImg: true });
       return '<section class="s s-tiles"><div class="w">' + head(s) + '<div class="tl tl-' + st + ' c' + cols + '">' + (s.items || []).map(function (it, i) {
         var pic = s.showImg === false && st != 'icons' ? '' : it.image ? '<span class="tim">' + tagImg(imageRef(P, it.image, i)) + '</span>' : (s.showImg || st == 'icons') ? '<span class="tim">' + tagImg(illAt(P, i)) + '</span>' : '';
         return '<a class="ti" href="' + href(it.link) + '"' + ii(i) + '>' + pic + '<span class="tx">' + (it.eyebrow ? '<small class="meta"' + ifk('eyebrow') + '>' + esc(it.eyebrow) + '</small>' : '') + '<h3' + ifk('title') + '>' + esc(it.title) + '</h3>' + (it.text ? '<p' + ifk('text') + '>' + esc(it.text) + '</p>' : '') + (it.linkText ? '<b' + ifk('linkText') + '>' + esc(it.linkText) + ' →</b>' : '') + '</span></a>';
@@ -237,21 +252,23 @@ var Render = (function () {
   }
 
   function page(P, tplId, opt) {
-    opt = opt || {}; var t = tpl(tplId), f = t.fam, v = t.v, p = pal(P), F = font(P);
+    opt = opt || {}; PALX = null; var t = tpl(tplId), f = t.fam, v = t.v, p = pal(P), F = font(P);
+    if (f.dark && Art.lum(p.bg) >= 110) { var nb = f.dark == 2 ? Art.mix(p.ink, '#05060a', .55) : Art.mix(p.ink, '#000000', .25); p = { bg: nb, ink: p.bg, acc: p.acc, soft: Art.mix(nb, p.bg, .08) }; PALX = p; }
     var dark = Art.lum(p.bg) < 110;
-    GF = {}; var gf = P.brand.gf || {};
+    GF = {}; var gf = P.brand.gf || f.gf || {};
     if (gf.h) { F = Object.assign({}, F, { h: fstack(gf.h, gf.hcat) }); useFont(gf.h, gf.hw || F.w); }
     if (gf.hw) F = Object.assign({}, F, { w: num(gf.hw) });
     if (gf.b) { F = Object.assign({}, F, { b: fstack(gf.b, gf.bcat) }); useFont(gf.b, 400); useFont(gf.b, 700); }
     var vars = '--bg:' + p.bg + ';--ink:' + p.ink + ';--acc:' + p.acc + ';--soft:' + p.soft + ';--oa:' + Art.onColor(p.acc) + ';--oi:' + Art.onColor(p.ink) + ';--line:' + Art.mix(p.bg, p.ink, dark ? .3 : .16) + ';--mute:' + Art.mix(p.ink, p.bg, .3) + ';--card:' + (dark ? Art.mix(p.bg, p.ink, .06) : '#ffffff') + ';--hf:' + F.h.replace(/"/g, "'") + ';--bf:' + F.b.replace(/"/g, "'") + ';--hw:' + F.w + ';--r:' + v.r + 'px';
     var secs = pageOf(P, opt.pageId).sections.map(function (s, i) {
-      FX = s.fx || null; var h = (SEC[s.type] || SEC.text)(P, s, f), lx = lxAttr(s); FX = null; var bg = s.bg && s.bg != 'auto' ? s.bg : (v.band != 'none' && i % 2 == 1 && s.type != 'hero' ? v.band : 'default');
+      FX = s.fx || null; var h = (SEC[s.type] || SEC.text)(P, s, f), lx = lxAttr(s); FX = null; var bg = s.bg && s.bg != 'auto' ? s.bg : (v.band != 'none' && i % 2 == 1 && s.type != 'hero' ? (f.dark && v.band == 'ink' ? 'soft' : v.band) : 'default');
       if (f.bands && s.type == 'cta') bg = 'acc';
       if (s.type == 'pagehead' && (!s.bg || s.bg == 'auto')) bg = f.k == 'bold' || f.k == 'portal' ? 'ink' : 'soft';
       return h.replace('<section class="s ', '<section data-sec="' + s.id + '" data-type="' + s.type + '" data-si="' + i + '"' + lx.style + ' class="s bg-' + bg + ' al-' + (s.align || 'auto') + lx.cls + (opt.sel == s.id ? ' sel' : '') + ' ');
     }).join('');
     var mv = opt.openMenu;
     FX = P.footer.fx || null; var foot = footer(P); FX = null;
+    PALX = null;
     var gfs = Object.keys(GF).map(function (k) { return k + ':' + Object.keys(GF[k]).join(','); }).join('|'); GF = null;
     return '<div class="pv tf-' + f.k + ' tv-' + v.k + ' dn-' + v.dens + '" style="' + vars + '"' + (gfs ? ' data-gf="' + esc(gfs) + '"' : '') + '>' +
       '<div class="vh vh-d">' + header(P, 'desktop', mv == 'desktop') + '</div><div class="vh vh-t">' + header(P, 'tablet', mv == 'tablet') + '</div><div class="vh vh-p">' + header(P, 'phone', mv == 'phone') + '</div>' +

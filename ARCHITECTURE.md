@@ -267,8 +267,10 @@ frame    = { art ('polaroid'|'tilt'|'mat'|'gold'|'double'|'vintage'|'circle'|'ar
 - The preview always shows Home. "Show the menu open" renders the `<details>` menus open.
 
 ### Step 5: Templates
-- **Templates:** `Render.TEMPLATES` = 8 families × 3 variants = **24**.
-  - Families: Newsroom, App grid, Magazine, Minimal, Bold blocks, Community portal, Storyteller, Notice board.
+- **Templates:** `Render.TEMPLATES` = 18 families × 3 variants = **54**.
+  - Original families: Newsroom, App grid, Magazine, Minimal, Bold blocks, Community portal, Storyteller, Notice board.
+  - Designer families (2026-11-14): Tide, Ember, Folio, Block party, Bento, Handmade, Glow, Swiss grid, Sunny retro, Lens. Their look lives at the end of `site.css` ("Designer families"). Extra family options in `render.js`: `gf` (the family's own Google Fonts, used unless the site picks fonts in the Inspector's Site tab), `dark` (a light palette is turned into a dark page; `pal()` returns that palette while drawing so logos and artwork match; `ink` bands become `soft`), `img` (cards show pictures unless turned off).
+  - **Contact sheet:** `cd studio && node scripts/template-shots.mjs <folder> [filter]` renders every template with a demo business (`DEMO=food|services`, `PAL=0–7` picks the palette) at 1280 and 390 px, for grading by eye.
   - Variants: Classic (square corners), Soft (rounded corners, soft bands), Crisp (tight spacing, dark bands).
 - **Fit check:** `Render.compat(template, S)` looks at every page's sections. A template doesn't fit if:
   - it doesn't offer the chosen **desktop** menu style;
