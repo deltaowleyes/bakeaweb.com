@@ -2,7 +2,8 @@
 import { test as base, expect } from '@playwright/test';
 
 /* Things that are not studio bugs: blocked outside requests (the robot works offline on purpose). */
-const IGNORE = [/Failed to load resource/i, /net::ERR_/i, /fonts\.(googleapis|gstatic)\.com/i, /Download the React DevTools/i];
+/* Previews are sandboxed iframes without allow-scripts on purpose, so the browser's 'Blocked script execution' notice is expected. */
+const IGNORE = [/Failed to load resource/i, /net::ERR_/i, /fonts\.(googleapis|gstatic)\.com/i, /Download the React DevTools/i, /Blocked script execution in 'about:(blank|srcdoc)' because the document's frame is sandboxed/i];
 
 export const test = base.extend({
   /** Every test gets a list of console errors and uncaught page errors; it must be empty at the end. */

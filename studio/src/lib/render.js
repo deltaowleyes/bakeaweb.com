@@ -69,7 +69,11 @@ var Render = (function () {
     /* 2026-11-15 Indigenous business series, run 6: custom apparel, embroidery and printing */
     { k: 'press', wordmark: 1, videos: 'grid', name: 'Press', desc: 'For print shops and screen printers: halftone dots, off-register colour headlines, registration marks and loud poster type.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Big Shoulders Display', hcat: 's', hw: 900, b: 'Karla', bcat: 's' } },
     { k: 'stitch', wordmark: 1, videos: 'grid', name: 'Stitch', desc: 'For embroidery, sewing and team uniforms: stitched borders, patch-shaped badges and a sturdy workwear feel.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Chivo', hcat: 's', hw: 800, b: 'Chivo', bcat: 's' } },
-    { k: 'merch', wordmark: 1, videos: 'grid', name: 'Merch', desc: 'For apparel and promo product shops: a clean storefront with product prices, category chips and an order-in-three-steps strip.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Onest', hcat: 's', hw: 700, b: 'Onest', bcat: 's' } }
+    { k: 'merch', wordmark: 1, videos: 'grid', name: 'Merch', desc: 'For apparel and promo product shops: a clean storefront with product prices, category chips and an order-in-three-steps strip.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Onest', hcat: 's', hw: 700, b: 'Onest', bcat: 's' } },
+    /* 2026-11-15 Indigenous business series, run 7: sports bars, pubs, roadside motels and riverside restaurants */
+    { k: 'taproom', wordmark: 1, videos: 'grid', name: 'Taproom', desc: 'For sports bars and pubs: dark and lively, a scoreboard of numbers, a chalkboard menu, game-night listings and jersey-stripe banners.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, dark: 2, gf: { h: 'Teko', hcat: 's', hw: 600, b: 'Barlow', bcat: 's' } },
+    { k: 'roadside', mono: 'Yellowtail', monoW: 400, wordmark: 1, videos: 'grid', name: 'Roadside', desc: 'For motels, diners and highway stops: a retro sunburst opener, neon script, highway-shield numbers, a diner menu and a room-key booking card.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Righteous', hcat: 'd', hw: 400, b: 'Nunito Sans', bcat: 's' } },
+    { k: 'patio', wordmark: 1, videos: 'grid', name: 'Patio', desc: 'For riverside restaurants, inns and patios: a scalloped awning, a photo opener with a menu-card welcome, plate-round numbers and a striped booking card.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Fraunces', hcat: 'r', hw: 600, b: 'DM Sans', bcat: 's' } }
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -86,7 +90,8 @@ var Render = (function () {
     convoy: 80, homeward: 84, 'homeward-b': 85, freight: 76, timber: 85, shoreline: 85, 'shoreline-b': 86, basecamp: 80,
     reel: 88, marquee: 84, frame: 86,
     harbour: 85, waterline: 84, dockside: 84,
-    press: 87, stitch: 85, merch: 84 };
+    press: 87, stitch: 85, merch: 84,
+    taproom: 85, roadside: 85, patio: 84 };
   var PRICE_BANDS = [[90, 500], [85, 250], [80, 100], [75, 50], [70, 0]];
   var MIN_GRADE = 70;
   function priceFor(g) { for (var i = 0; i < PRICE_BANDS.length; i++) if (g >= PRICE_BANDS[i][0]) return PRICE_BANDS[i][1]; return null; }
@@ -356,7 +361,7 @@ var Render = (function () {
     if (gf.h) { F = Object.assign({}, F, { h: fstack(gf.h, gf.hcat) }); useFont(gf.h, gf.hw || F.w); }
     if (gf.hw) F = Object.assign({}, F, { w: num(gf.hw) });
     if (gf.b) { F = Object.assign({}, F, { b: fstack(gf.b, gf.bcat) }); useFont(gf.b, 400); useFont(gf.b, 700); }
-    if (f.mono) { useFont(f.mono, 500); useFont(f.mono, 600); }   /* a family's label font (Freight) */
+    if (f.mono) { if (f.monoW) useFont(f.mono, f.monoW); else { useFont(f.mono, 500); useFont(f.mono, 600); } }   /* a family's label font (Freight) */
     var vars = '--bg:' + p.bg + ';--ink:' + p.ink + ';--acc:' + p.acc + ';--soft:' + p.soft + ';--oa:' + Art.onColor(p.acc) + ';--oi:' + Art.onColor(p.ink) + ';--line:' + Art.mix(p.bg, p.ink, dark ? .3 : .16) + ';--mute:' + Art.mix(p.ink, p.bg, .3) + ';--card:' + (dark ? Art.mix(p.bg, p.ink, .06) : '#ffffff') + ';--hf:' + F.h.replace(/"/g, "'") + ';--bf:' + F.b.replace(/"/g, "'") + ';--hw:' + F.w + ';--r:' + v.r + 'px';
     var secs = pageOf(P, opt.pageId).sections.map(function (s, i) {
       FX = s.fx || null; var h = (SEC[s.type] || SEC.text)(P, s, f), lx = lxAttr(s); FX = null; var bg = s.bg && s.bg != 'auto' ? s.bg : (v.band != 'none' && i % 2 == 1 && s.type != 'hero' ? (f.dark && v.band == 'ink' ? 'soft' : v.band) : 'default');
