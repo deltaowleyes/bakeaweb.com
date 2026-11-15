@@ -39,11 +39,12 @@ test('every template makes complete page files', async ({ page }) => {
     }
     return { out, pages: S.pages.length };
   });
-  expect(res.out.length).toBe(81);
+  expect(res.out.length).toBe(90);
   for (const r of res.out) expect(r, r.id).toMatchObject({ pages: res.pages, index: true, ok: true });
 });
 
 test('designer families bring their own fonts and dark families stay readable', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
   await openStudio(page);
   await makeStarter(page);
   const r = await page.evaluate(async () => {
@@ -55,13 +56,14 @@ test('designer families bring their own fonts and dark families stay readable', 
     }
     return { out, n: Render.TEMPLATES.length };
   });
-  expect(r.n).toBe(81);
+  expect(r.n).toBe(90);
   for (const k in r.out) { expect(r.out[k].cls, k).toBe(true); expect(r.out[k].gf, k).toBe(true); }
   // Ember and Glow turn a light palette into a dark page
   for (const k of ['ember', 'glow']) expect(parseInt(r.out[k].bg.slice(1, 3), 16), k).toBeLessThan(80);
 });
 
 test('flagship templates and starter sites use the sample photos', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
   await openStudio(page);
   await makeStarter(page, { kind: 'food' });
   const r = await page.evaluate(async () => {
@@ -75,13 +77,14 @@ test('flagship templates and starter sites use the sample photos', async ({ page
   expect(r.heroImg).toBe(true);
   expect(r.tileImgs).toBe(true);
   expect(r.menu).toBe(true);
-  expect(r.flags).toEqual(['hearth', 'volt', 'loom', 'bloom', 'pulse', 'commons', 'council', 'meridian', 'bridge']);
+  expect(r.flags).toEqual(['hearth', 'volt', 'loom', 'bloom', 'pulse', 'commons', 'council', 'meridian', 'bridge', 'convoy', 'homeward', 'freight']);
   // the photo files are served
   const res = await page.request.get('photos/cafe/' + (await page.evaluate(async () => (await import('/src/lib/photos.json')).default.kinds.cafe.photos[0].id)) + '.jpg');
   expect(res.ok()).toBe(true);
 });
 
 test('menu, booking and products sections render with prices in every template', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
   await openStudio(page);
   await makeStarter(page, { kind: 'services' });
   const r = await page.evaluate(async () => {
@@ -91,4 +94,30 @@ test('menu, booking and products sections render with prices in every template',
     return Render.TEMPLATES.map(t => { const h = Render.page(S, t.id); return (h.includes('s-menu') && h.includes('s-booking') && h.includes('s-products') && (h.match(/data-fk="price"/g) || []).length >= 9); });
   });
   expect(r.every(Boolean)).toBe(true);
+});
+
+test('movers series: Freight loads its label font, and list rows only show a link when there is one', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
+  await openStudio(page);
+  await makeStarter(page);
+  const r = await page.evaluate(async () => {
+    const { Render } = await import('/src/lib/render.js'), ed = await import('/src/edit.js');
+    const S = JSON.parse(JSON.stringify(window.BAKE.state()));
+    const l = ed.defaultSection('list');
+    l.items = [{ id: 'a', title: 'Fully insured', text: '', link: '#', linkText: '' }, { id: 'b', title: 'Storage', text: '', link: 'https://example.com/', linkText: '' }];
+    S.pages[0].sections = [l];
+    const h = Render.page(S, 'freight-a');
+    return { mono: /data-gf="[^"]*IBM Plex Mono/.test(h), links: (h.match(/class="lr"/g) || []).length, open: (h.match(/>Open</g) || []).length, fams: ['convoy', 'homeward', 'freight'].every(k => Render.page(S, k + '-b').includes('tf-' + k)) };
+  });
+  expect(r.mono).toBe(true);
+  expect(r.links).toBe(2);
+  expect(r.open).toBe(1);
+  expect(r.fams).toBe(true);
+});
+
+test('the private Pitch Book asks for a sign-in and shows no data without one', async ({ page }) => {
+  await page.goto('pitches.html');
+  await expect(page.locator('#lf')).toBeVisible();
+  await expect(page.locator('.pitch')).toHaveCount(0);
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
 });

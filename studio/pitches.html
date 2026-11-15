@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>BAKE Pitch Book</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232f5d62%22/%3E%3Ctext x=%2216%22 y=%2222%22 font-size=%2216%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22 font-weight=%22700%22%3EB%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f5f1;--ink:#1d2a2c;--mute:#5d6b6d;--line:#d9ddd8;--acc:#2f5d62;--card:#fff;--warn:#a8481f;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+*{box-sizing:border-box}body{margin:0}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px;background:var(--ink);color:#fff;position:sticky;top:0;z-index:5}
+header b{font-size:18px}header small{opacity:.7}
+main{max-width:1400px;margin:0 auto;padding:24px}
+button,.btn{font:inherit;font-weight:600;border:0;border-radius:8px;padding:9px 16px;background:var(--acc);color:#fff;cursor:pointer;text-decoration:none;display:inline-block}
+.btn2{background:transparent;color:var(--acc);box-shadow:inset 0 0 0 1.5px var(--acc)}
+header .btn2{color:#fff;box-shadow:inset 0 0 0 1.5px #fff8}
+input,select,textarea{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;width:100%}
+.login{max-width:420px;margin:60px auto;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;display:grid;gap:12px}
+.msg{color:var(--warn);min-height:1.5em;margin:0}
+.filters{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:20px}.filters select,.filters input{width:auto}
+.pitch{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin-bottom:28px}
+.ph{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.ph h2{margin:0;font-size:24px}.ph a{color:var(--acc)}
+.score{display:inline-flex;align-items:center;gap:8px;font-weight:700;background:#eef3f1;border-radius:999px;padding:4px 12px;font-size:14px}
+.score .b{color:var(--warn)}.score .a{color:#1f7a4a}
+.cols{display:grid;grid-template-columns:minmax(260px,1fr) 2.4fr;gap:22px;margin-top:18px}
+.before img{width:100%;border:1px solid var(--line);border-radius:10px;display:block;aspect-ratio:4/3;object-fit:cover;object-position:top;background:#eee}
+h3{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:16px 0 6px}
+.before ul{margin:0;padding-left:18px;font-size:14px}
+.info{font-size:14px;color:var(--mute)}.info div{margin:2px 0}
+.afters{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.after{border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.frame{position:relative;height:420px;overflow:hidden;background:#fff;border-bottom:1px solid var(--line)}
+.frame iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;pointer-events:none}
+.after .bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 12px;flex-wrap:wrap}
+.after .bar b{font-size:15px}.after .bar span{font-size:13px;color:var(--mute)}
+.after .bar .acts{display:flex;gap:6px}.after .bar button,.after .bar .btn{padding:6px 10px;font-size:13px}
+.talk{white-space:pre-wrap;font-size:14px;background:#f3f6f4;border-radius:10px;padding:12px 14px;margin:0}
+.edit{display:grid;grid-template-columns:200px 1fr auto;gap:10px;margin-top:16px;align-items:start}
+.saved{font-size:13px;color:#1f7a4a;align-self:center}
+dialog{border:0;border-radius:16px;padding:0;width:min(1320px,96vw);height:92vh}dialog::backdrop{background:#0009}
+dialog .top{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);gap:10px}
+dialog iframe{border:0;display:block;margin:0 auto;height:calc(92vh - 58px);background:#fff}
+.note{font-size:13px;color:var(--mute)}
+.empty{text-align:center;color:var(--mute);padding:60px 0}
+@media (max-width:800px){.cols{grid-template-columns:1fr}.edit{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div><b>BAKE Pitch Book</b> <small>private · admins only</small></div><div id="who"></div></header>
+<main id="app"><p class="empty">Loading…</p></main>
+<dialog id="dlg"><div class="top"><b id="dlgT"></b><div><button class="btn2" data-w="1280">Computer</button> <button class="btn2" data-w="820">Tablet</button> <button class="btn2" data-w="390">Phone</button> <button id="dlgX">Close</button></div></div><iframe id="dlgF" title="Redesign preview"></iframe></dialog>
+<script type="module" src="/src/pitches.js"></script>
+</body>
+</html>

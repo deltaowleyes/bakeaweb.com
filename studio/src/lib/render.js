@@ -48,7 +48,11 @@ var Render = (function () {
     /* 2026-11-14 Indigenous business series, run 1: consulting and professional services firms */
     { k: 'council', wordmark: 1, videos: 'grid', name: 'Council', desc: 'For consulting firms that work with government: formal, credible and easy to scan, with credentials up front.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Libre Baskerville', hcat: 'r', hw: 700, b: 'IBM Plex Sans', bcat: 's' } },
     { k: 'meridian', wordmark: 1, videos: 'grid', name: 'Meridian', desc: 'For modern consultancies: a dark, confident opener, glowing step cards and services that read like a pitch deck.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Plus Jakarta Sans', hcat: 's', hw: 800, b: 'Plus Jakarta Sans', bcat: 's' } },
-    { k: 'bridge', wordmark: 1, videos: 'grid', name: 'Bridge', desc: 'For people-first firms: warm photography, a step-by-step timeline and a welcoming, human tone.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Lora', hcat: 'r', hw: 600, b: 'Figtree', bcat: 's' } }
+    { k: 'bridge', wordmark: 1, videos: 'grid', name: 'Bridge', desc: 'For people-first firms: warm photography, a step-by-step timeline and a welcoming, human tone.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Lora', hcat: 'r', hw: 600, b: 'Figtree', bcat: 's' } },
+    /* 2026-11-14 Indigenous business series, run 2: movers, storage and logistics */
+    { k: 'convoy', wordmark: 1, videos: 'grid', name: 'Convoy', desc: 'For movers and trucking: loud condensed type, road-stripe accents, big numbers and a quote button that never leaves the screen.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Barlow Condensed', hcat: 's', hw: 800, b: 'Barlow', bcat: 's' } },
+    { k: 'homeward', wordmark: 1, videos: 'grid', name: 'Homeward', desc: 'For family movers: friendly and reassuring, with rounded photos, a three-step moving plan and a quote card up front.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Nunito', hcat: 's', hw: 800, b: 'Nunito Sans', bcat: 's' } },
+    { k: 'freight', mono: 'IBM Plex Mono', wordmark: 1, videos: 'grid', name: 'Freight', desc: 'For logistics, storage and delivery firms: a blueprint grid, data-style numbers and services laid out like a shipping manifest.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Space Grotesk', hcat: 's', hw: 700, b: 'IBM Plex Sans', bcat: 's' } }
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -223,7 +227,7 @@ var Render = (function () {
         '<h3' + fk('headline') + '>' + esc(s.headline || '') + '</h3>' + paras(s.text) + btn(s.linkText, s.link, 'bt', 'linkText') + '</div></div></div></section>';
     },
     list: function (P, s) {
-      return '<section class="s s-list"><div class="w">' + head(s) + '<div class="ls">' + (s.items || []).map(function (it, i) { return '<div class="lr"' + ii(i) + '><strong' + ifk('title') + '>' + esc(it.title) + '</strong>' + (it.text ? '<span' + ifk('text') + '>' + esc(it.text) + '</span>' : '') + btn(it.linkText || 'Open', it.link, 'mo', 'linkText', 1) + '</div>'; }).join('') + '</div>' + (s.linkText ? btn(s.linkText, s.link, 'mo', 'linkText') : '') + '</div></section>';
+      return '<section class="s s-list"><div class="w">' + head(s) + '<div class="ls">' + (s.items || []).map(function (it, i) { return '<div class="lr"' + ii(i) + '><strong' + ifk('title') + '>' + esc(it.title) + '</strong>' + (it.text ? '<span' + ifk('text') + '>' + esc(it.text) + '</span>' : '') + (it.linkText || (it.link && it.link != '#') ? btn(it.linkText || 'Open', it.link, 'mo', 'linkText', 1) : '') + '</div>'; }).join('') + '</div>' + (s.linkText ? btn(s.linkText, s.link, 'mo', 'linkText') : '') + '</div></section>';
     },
     text: function (P, s) {
       var img = s.image ? sectionImage(P, s) : '';
@@ -304,6 +308,7 @@ var Render = (function () {
     if (gf.h) { F = Object.assign({}, F, { h: fstack(gf.h, gf.hcat) }); useFont(gf.h, gf.hw || F.w); }
     if (gf.hw) F = Object.assign({}, F, { w: num(gf.hw) });
     if (gf.b) { F = Object.assign({}, F, { b: fstack(gf.b, gf.bcat) }); useFont(gf.b, 400); useFont(gf.b, 700); }
+    if (f.mono) { useFont(f.mono, 500); useFont(f.mono, 600); }   /* a family's label font (Freight) */
     var vars = '--bg:' + p.bg + ';--ink:' + p.ink + ';--acc:' + p.acc + ';--soft:' + p.soft + ';--oa:' + Art.onColor(p.acc) + ';--oi:' + Art.onColor(p.ink) + ';--line:' + Art.mix(p.bg, p.ink, dark ? .3 : .16) + ';--mute:' + Art.mix(p.ink, p.bg, .3) + ';--card:' + (dark ? Art.mix(p.bg, p.ink, .06) : '#ffffff') + ';--hf:' + F.h.replace(/"/g, "'") + ';--bf:' + F.b.replace(/"/g, "'") + ';--hw:' + F.w + ';--r:' + v.r + 'px';
     var secs = pageOf(P, opt.pageId).sections.map(function (s, i) {
       FX = s.fx || null; var h = (SEC[s.type] || SEC.text)(P, s, f), lx = lxAttr(s); FX = null; var bg = s.bg && s.bg != 'auto' ? s.bg : (v.band != 'none' && i % 2 == 1 && s.type != 'hero' ? (f.dark && v.band == 'ink' ? 'soft' : v.band) : 'default');

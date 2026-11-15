@@ -7,5 +7,5 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   base: './',
   plugins: [react(), tailwindcss()],
-  build: { outDir: 'dist', emptyOutDir: true }
+  build: { outDir: 'dist', emptyOutDir: true, rollupOptions: { input: { main: 'index.html', pitches: 'pitches.html' } } }   // pitches.html = private Pitch Book (data behind admin login)
 });
