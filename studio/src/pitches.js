@@ -19,7 +19,7 @@ function project(p) {
   o.ui = b.ui; o.brand = Object.assign(blank().brand, o.brand || {}); o.menu = Object.assign(blank().menu, o.menu || {});
   return o;
 }
-const pageHtml = r => Site.html(project(r.project), r.tpl);
+const pageHtml = (row, d) => Site.html(project(d.project || row.base_project), d.tpl);
 
 async function start() {
   const { data } = await sb.auth.getSession();
@@ -62,9 +62,9 @@ function draw() {
   $('#fq').oninput = e => { filt.q = e.target.value.toLowerCase(); clearTimeout(draw.t); draw.t = setTimeout(() => { draw(); const q = $('#fq'); q.focus(); q.setSelectionRange(q.value.length, q.value.length); }, 300); };
   app.querySelectorAll('.after').forEach(el => {
     const r = rows.find(x => x.id == el.dataset.p), d = r.redesigns[+el.dataset.i], f = el.querySelector('iframe'), fr = el.querySelector('.frame');
-    f.srcdoc = pageHtml(d); const fit = () => { const s = fr.clientWidth / 1280; f.style.width = '1280px'; f.style.height = Math.ceil(420 / s) + 'px'; f.style.transform = 'scale(' + s + ')'; }; fit(); new ResizeObserver(fit).observe(fr);
+    f.srcdoc = pageHtml(r, d); const fit = () => { const s = fr.clientWidth / 1280; f.style.width = '1280px'; f.style.height = Math.ceil(420 / s) + 'px'; f.style.transform = 'scale(' + s + ')'; }; fit(); new ResizeObserver(fit).observe(fr);
     el.querySelector('.big').onclick = () => open(r, d);
-    el.querySelector('.studio').onclick = () => toStudio(d);
+    el.querySelector('.studio').onclick = () => toStudio(r, d);
   });
   app.querySelectorAll('.save').forEach(b => b.onclick = async () => {
     const box = b.closest('.pitch'), r = rows.find(x => x.id == box.dataset.p);
@@ -95,15 +95,15 @@ function card(r) {
 }
 
 let cur = null;
-function open(r, d) { cur = d; $('#dlgT').textContent = r.business_name + ' · ' + d.name; size(1280); $('#dlgF').srcdoc = pageHtml(d); $('#dlg').showModal(); }
+function open(r, d) { cur = d; $('#dlgT').textContent = r.business_name + ' · ' + d.name; size(1280); $('#dlgF').srcdoc = pageHtml(r, d); $('#dlg').showModal(); }
 function size(w) { $('#dlgF').style.width = Math.min(w, innerWidth * .96 - 4) + 'px'; }
 document.querySelectorAll('#dlg [data-w]').forEach(b => b.onclick = () => size(+b.dataset.w));
 $('#dlgX').onclick = () => $('#dlg').close();
 
 /* Load a redesign into the studio on this browser (a save point keeps the work that was there). */
-function toStudio(d) {
+function toStudio(r, d) {
   addPoint('Before opening a pitch');
-  const p = project(d.project); p.tpl.pick = d.tpl; p.step = 5;
+  const p = project(d.project || r.base_project); p.tpl.pick = d.tpl; p.step = 5;
   try { localStorage.setItem(KEY, JSON.stringify(p)); } catch (e) { alert('Not enough browser storage to open it.'); return; }
   location.href = './?v=pro#step-5';
 }
