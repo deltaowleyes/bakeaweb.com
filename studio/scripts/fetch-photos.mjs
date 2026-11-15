@@ -11,11 +11,11 @@ if (!KEY) { console.error('PIXABAY_API_KEY is missing (add it under Settings →
 
 /* Each kind: searches in order; role says where a photo is meant to go (hero = wide opener, item = cards and gallery). */
 const KINDS = {
-  cafe: { name: 'Café and restaurant', q: [['hero', 'cafe interior'], ['hero', 'restaurant table food'], ['item', 'fresh bread bakery'], ['item', 'soup bowl'], ['item', 'latte coffee cup'], ['item', 'tacos food'], ['item', 'lemonade drink'], ['item', 'friends eating dinner'], ['item', 'baker hands dough']] },
-  trades: { name: 'Trades and services', q: [['hero', 'electrician working'], ['hero', 'construction worker house'], ['item', 'electrical panel'], ['item', 'solar panels roof'], ['item', 'electric car charging'], ['item', 'tools workbench'], ['item', 'modern house exterior'], ['item', 'light bulb led']] },
-  crafts: { name: 'Arts and crafts shop', q: [['hero', 'craft market stall'], ['hero', 'artisan workshop'], ['item', 'colorful beads'], ['item', 'handmade jewelry'], ['item', 'quilt fabric'], ['item', 'pottery hands'], ['item', 'weaving basket'], ['item', 'knitting yarn']] }
+  cafe: { name: 'Café and restaurant', q: [['hero', 'cafe interior', 'cafe|coffee shop|coffeehouse'], ['hero', 'restaurant interior', 'restaurant'], ['item', 'bread loaf', 'bread'], ['item', 'soup bowl', 'soup'], ['item', 'latte art', 'latte|coffee|cappuccino'], ['item', 'tacos', 'taco'], ['item', 'lemonade', 'lemonade'], ['item', 'friends eating together', 'eating|dinner|meal|food'], ['item', 'kneading dough', 'dough|baking'], ['item', 'pancakes breakfast', 'pancake|breakfast']] },
+  trades: { name: 'Trades and services', q: [['hero', 'electrician', 'electrician|electric|electrical'], ['hero', 'construction worker', 'worker|construction|builder'], ['item', 'electrical panel', 'fuse|panel|circuit|electrical'], ['item', 'solar panels roof', 'solar'], ['item', 'electric car charging', 'charging|charger|charge'], ['item', 'tools workbench', 'tool|tools|workshop'], ['item', 'house exterior', 'house|home'], ['item', 'electrical wiring', 'wire|wiring|cable'], ['item', 'hard hat worker', 'helmet|hard hat|worker']] },
+  crafts: { name: 'Arts and crafts shop', q: [['hero', 'craft fair handmade', 'craft|handmade|market'], ['hero', 'artisan workshop', 'workshop|artisan|craftsman'], ['item', 'beads', 'bead'], ['item', 'handmade jewelry', 'jewelry|jewellery|necklace|earring|bracelet'], ['item', 'quilt', 'quilt|patchwork'], ['item', 'pottery hands', 'pottery|ceramic|clay'], ['item', 'basket weaving', 'basket|weaving|wicker'], ['item', 'yarn knitting', 'yarn|knitting|wool'], ['item', 'leather craft', 'leather'], ['item', 'painting artist', 'paint|painting|artist']] }
 };
-const PER = 2;   // photos kept per search
+const PER = 4;   // candidates kept per search (Claude picks the best by eye; the rest are deleted)
 const want = (process.argv[2] || Object.keys(KINDS).join(',')).split(',').map(s => s.trim()).filter(k => KINDS[k]);
 
 const root = new URL('../', import.meta.url);
@@ -25,23 +25,22 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 async function search(q, horizontal) {
   const base = 'https://pixabay.com/api/?key=' + encodeURIComponent(KEY) + '&q=' + encodeURIComponent(q) +
-    '&image_type=photo&safesearch=true&per_page=30&min_width=1200' + (horizontal ? '&orientation=horizontal' : '');
-  for (const ec of ['&editors_choice=true', '']) {   // Pixabay's hand-picked photos first, then everything
+    '&image_type=photo&safesearch=true&per_page=80&min_width=1200' + (horizontal ? '&orientation=horizontal' : '');
+  for (const ec of ['']) {
     const r = await fetch(base + ec);
     if (!r.ok) throw new Error('Pixabay said ' + r.status + ': ' + (await r.text()).slice(0, 200));
     const j = await r.json();
-    if ((j.hits || []).length >= PER) return j.hits;
-    await sleep(800);
+    return j.hits || [];
   }
-  return [];
 }
 
 for (const k of want) {
   const K = KINDS[k], dir = new URL('public/photos/' + k + '/', root);
   rmSync(dir, { recursive: true, force: true }); mkdirSync(dir, { recursive: true });
   const seen = new Set(), photos = [];
-  for (const [role, q] of K.q) {
-    const hits = (await search(q, role == 'hero')).sort((a, b) => (b.likes + b.downloads / 50) - (a.likes + a.downloads / 50));
+  for (const [role, q, must] of K.q) {
+    const re = new RegExp('\\b(' + must + ')', 'i');
+    const hits = (await search(q, role == 'hero')).filter(h => re.test(h.tags)).sort((a, b) => (b.likes + b.downloads / 50) - (a.likes + a.downloads / 50));
     let kept = 0;
     for (const h of hits) {
       if (kept >= PER) break;
