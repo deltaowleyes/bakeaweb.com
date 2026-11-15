@@ -136,16 +136,16 @@ test('lodge series: Timber is a dark family and every lodge family draws its own
   expect(parseInt(r.timber.bg.slice(1, 3), 16)).toBeLessThan(80);
 });
 
-test('grades and prices: only 70+ templates are offered, priced by their rating out of 99', async ({ page }) => {
+test('grades and prices: only 65+ templates are offered, priced by their rating out of 99', async ({ page }) => {
   test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
   await openStudio(page);
   const r = await page.evaluate(async () => {
     const { Render } = await import('/src/lib/render.js');
-    return { off: Render.OFFERED.map(t => [t.grade, t.price]), all: Render.TEMPLATES.length, p: [69, 70, 74, 75, 79, 80, 84, 85, 86, 88, 90, 95, 96, 99].map(Render.priceFor), lab: Render.priceLabel({ price: 7500 }) };
+    return { off: Render.OFFERED.map(t => [t.grade, t.price]), all: Render.TEMPLATES.length, p: [64, 65, 69, 70, 74, 75, 79, 80, 84, 85, 86, 88, 90, 95, 96, 99].map(Render.priceFor), lab: Render.priceLabel({ price: 7500 }) };
   });
   expect(r.all).toBeGreaterThan(r.off.length);
-  for (const [g] of r.off) expect(g).toBeGreaterThanOrEqual(70);
-  expect(r.p).toEqual([null, 0, 0, 50, 90, 100, 180, 200, 250, 350, 500, 1000, 1500, 7500]);
+  for (const [g] of r.off) expect(g).toBeGreaterThanOrEqual(65);
+  expect(r.p).toEqual([null, 0, 0, 0, 0, 50, 90, 100, 180, 200, 250, 350, 500, 1000, 1500, 7500]);
   expect(r.lab).toBe('$7,500');
 });
 
