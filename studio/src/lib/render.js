@@ -86,6 +86,10 @@ var Render = (function () {
     { k: 'gauge', mono: 'IBM Plex Mono', wordmark: 1, videos: 'lead', name: 'Gauge', desc: 'For building-efficiency and engineered products: a blueprint opener, results on pressure-gauge dials, a spec sheet of numbered steps and data-style labels.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Archivo', hcat: 's', hw: 800, b: 'IBM Plex Sans', bcat: 's' } },
     { k: 'flowline', wordmark: 1, videos: 'lead', name: 'Flowline', desc: 'For water, plumbing and clean-tech companies: a full-bleed water opener with a wave edge, drop-shaped numbers and bullets, flowing section edges and soft rounded cards.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Outfit', hcat: 's', hw: 700, b: 'Outfit', bcat: 's' } },
     { k: 'ledger', mono: 'DM Mono', wordmark: 1, videos: 'grid', name: 'Ledger', desc: 'For products sold on savings to property managers and owners: results laid out like a utility statement, case studies on receipts with a SAVED stamp and a before-and-after bill.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'DM Serif Display', hcat: 'r', hw: 400, b: 'DM Sans', bcat: 's' } },
+    /* 2026-11-15 pitch run: specialty drink cafés, coffee houses and drive-thrus */
+    { k: 'whip', wordmark: 1, videos: 'grid', name: 'Whip', desc: 'For specialty drink bars and dessert cafés: syrup drips, sprinkle confetti, cup-shaped photos, a striped straw and a sticker-style drink menu.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Caprasimo', hcat: 'd', hw: 400, b: 'Figtree', bcat: 's' } },
+    { k: 'pourover', mono: 'IBM Plex Mono', wordmark: 1, videos: 'grid', name: 'Pourover', desc: 'For coffee houses and roasters: warm paper tones, coffee-ring stamps, origin tags, tasting-card menus and a receipt-style order card.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Instrument Serif', hcat: 'r', hw: 400, b: 'Instrument Sans', bcat: 's' } },
+    { k: 'letterboard', wordmark: 1, videos: 'grid', name: 'Letterboard', desc: 'For drive-thrus, coffee stands and snack bars: a framed felt letterboard menu, drive-thru lane stripes, a loyalty punch card and a gift-card call to action.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, dark: 2, gf: { h: 'Bebas Neue', hcat: 's', hw: 400, b: 'Work Sans', bcat: 's' } },
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -106,7 +110,8 @@ var Render = (function () {
     taproom: 85, roadside: 85, patio: 84,
     bedrock: 85, breakwater: 84, rebar: 84,
     trapline: 85, tannery: 86, birchbark: 84,
-    gauge: 84, flowline: 85, ledger: 84 };
+    gauge: 84, flowline: 85, ledger: 84,
+    whip: 85, pourover: 84, letterboard: 86 };
   var PRICE_BY_GRADE = { 75: 50, 76: 60, 77: 70, 78: 80, 79: 90, 80: 100, 81: 120, 82: 140, 83: 160, 84: 180, 85: 200, 86: 250, 87: 300, 88: 350, 89: 400,
     90: 500, 91: 600, 92: 700, 93: 800, 94: 900, 95: 1000, 96: 1500, 97: 2500, 98: 4000, 99: 7500 };
   var MIN_GRADE = 65;
