@@ -67,9 +67,9 @@ test('flagship templates and starter sites use the sample photos', async ({ page
   const r = await page.evaluate(async () => {
     const { Render } = await import('/src/lib/render.js');
     const S = window.BAKE.state(), home = S.pages[0];
-    const tiles = home.sections.find(s => s.type == 'tiles');
+    const tiles = home.sections.find(s => s.type == 'menu');
     const h = Render.page(S, 'hearth-a');
-    return { lib: S.lib.length, heroImg: S.brand.opts.hero.some(o => o.kind == 'img' && /\/photos\/cafe\//.test(o.src)), tileImgs: tiles.items.every(i => i.image && i.image.kind == 'img'), menu: h.includes('tl-menu'), flags: Render.FAMILIES.filter(f => f.flag).map(f => f.k) };
+    return { lib: S.lib.length, heroImg: S.brand.opts.hero.some(o => o.kind == 'img' && /\/photos\/cafe\//.test(o.src)), tileImgs: tiles.items.every(i => i.image && i.image.kind == 'img'), menu: h.includes('mu-g') && h.includes('class="wm"'), flags: Render.FAMILIES.filter(f => f.flag).map(f => f.k) };
   });
   expect(r.lib).toBeGreaterThan(10);
   expect(r.heroImg).toBe(true);
@@ -79,4 +79,16 @@ test('flagship templates and starter sites use the sample photos', async ({ page
   // the photo files are served
   const res = await page.request.get('photos/cafe/' + (await page.evaluate(async () => (await import('/src/lib/photos.json')).default.kinds.cafe.photos[0].id)) + '.jpg');
   expect(res.ok()).toBe(true);
+});
+
+test('menu, booking and products sections render with prices in every template', async ({ page }) => {
+  await openStudio(page);
+  await makeStarter(page, { kind: 'services' });
+  const r = await page.evaluate(async () => {
+    const { Render } = await import('/src/lib/render.js'), ed = await import('/src/edit.js');
+    const S = JSON.parse(JSON.stringify(window.BAKE.state()));
+    S.pages[0].sections = ['menu', 'booking', 'products'].map(t => ed.defaultSection(t));
+    return Render.TEMPLATES.map(t => { const h = Render.page(S, t.id); return (h.includes('s-menu') && h.includes('s-booking') && h.includes('s-products') && (h.match(/data-fk="price"/g) || []).length >= 9); });
+  });
+  expect(r.every(Boolean)).toBe(true);
 });

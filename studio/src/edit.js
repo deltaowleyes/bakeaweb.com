@@ -57,6 +57,7 @@ export function shrink(file, max) {
 
 /* ---------- starting content ---------- */
 export function sec(type, o) { const s = { id: nid('s'), type, title: '', text: '' }; for (const k in o) s[k] = o[k]; if (s.items) s.items.forEach(i => { i.id = nid('i'); }); return s; }
+function mi(g, t, x, p, lt) { const o = item(t, x, '#', lt || ''); o.price = p; if (g) o.group = g; return o; }
 function item(t, x, l, lt) { return { title: t, text: x || '', link: l || '', linkText: lt || '' }; }
 export function defaultSection(type) {
   const d = {
@@ -72,7 +73,10 @@ export function defaultSection(type) {
     contact: { title: 'Contact', items: [item('Email', 'hello@example.com', 'mailto:hello@example.com'), item('Phone', '000-000-0000'), item('Address', 'Street, Town')] },
     videos: { title: 'Videos', items: [item('First video', '', '#'), item('Second video', '', '#'), item('Third video', '', '#'), item('Fourth video', '', '#')] },
     podcast: { title: 'Podcasts', items: [item('Episode one', 'What this episode is about.', '#'), item('Episode two', 'What this episode is about.', '#')] },
-    pagehead: { title: 'Page title', text: 'A short introduction to this page.' }
+    pagehead: { title: 'Page title', text: 'A short introduction to this page.' },
+    menu: { title: 'Our menu', text: '', linkText: 'Full menu', link: '#', items: [mi('Starters', 'Soup of the day', 'Made fresh every morning.', '$8'), mi('Starters', 'House salad', 'Greens, berries and toasted seeds.', '$9'), mi('Mains', 'Fish and chips', 'Fresh pickerel, hand-cut fries.', '$18'), mi('Mains', 'Classic burger', 'With cheese, pickles and fries.', '$16'), mi('Drinks', 'Coffee', 'Fresh brewed, free refills.', '$3'), mi('Drinks', 'Lemonade', 'Squeezed to order.', '$4')] },
+    booking: { title: 'Book a visit', text: 'Tell us what you need and we’ll get back to you within a day.', areasTitle: 'Areas we serve', areas: 'Your town, The next town, The whole county', cardTitle: 'Services and prices', linkText: 'Book now', link: '#contact', note: 'We reply within 24 hours.', items: [mi('', 'Consultation', 'About 30 minutes', 'Free'), mi('', 'Standard service', 'Most jobs', 'From $99'), mi('', 'Emergency call', 'Any time, day or night', 'From $149')] },
+    products: { title: 'Shop', text: '', cols: 3, items: [mi('', 'First product', 'A short description.', '$25', 'View'), mi('', 'Second product', 'A short description.', '$40', 'View'), mi('', 'Third product', 'A short description.', '$60', 'View')] }
   }[type];
   return sec(type, JSON.parse(JSON.stringify(d)));
 }
@@ -81,9 +85,9 @@ export function starter(kind) {
   const G = (l, kids) => ({ id: nid('g'), label: l, href: '', children: kids });
   const map = {
     community: { secs: ['hero', 'tiles', 'feature', 'list', 'text', 'cta'], menu: [L('News'), L('Events'), G('Community', [L('Directory'), L('Resources'), L('Groups')]), L('About'), L('Contact')] },
-    food: { secs: ['hero', 'tiles', 'gallery', 'testimonial', 'contact', 'cta'], menu: [L('Menu'), L('Order online'), L('Gallery'), L('Visit us')] },
-    shop: { secs: ['hero', 'tiles', 'feature', 'testimonial', 'cta'], menu: [G('Shop', [L('New arrivals'), L('Best sellers'), L('Sale')]), L('About'), L('Contact')] },
-    services: { secs: ['hero', 'tiles', 'stats', 'testimonial', 'contact', 'cta'], menu: [L('Services'), L('Our work'), L('Reviews'), L('Contact')] }
+    food: { secs: ['hero', 'menu', 'gallery', 'testimonial', 'contact', 'cta'], menu: [L('Menu'), L('Order online'), L('Gallery'), L('Visit us')] },
+    shop: { secs: ['hero', 'products', 'feature', 'testimonial', 'cta'], menu: [G('Shop', [L('New arrivals'), L('Best sellers'), L('Sale')]), L('About'), L('Contact')] },
+    services: { secs: ['hero', 'tiles', 'stats', 'booking', 'testimonial', 'contact', 'cta'], menu: [L('Services'), L('Our work'), L('Reviews'), L('Contact')] }
   }[kind];
   const home = { id: nid('p'), name: 'Home', url: '', status: 'new', sections: map.secs.map(defaultSection) }; home.sections[0].title = n;
   S.pages = [home].concat(map.menu.map(m => placeholderPage(m.label))); S.ui.page = home.id; S.lib = [];
@@ -104,6 +108,7 @@ function addStarterPhotos(home, kind) {
   let n = 0; const next = () => { const p = items[n++ % items.length]; return { kind: 'img', src: p.src, label: p.label }; };
   home.sections.forEach(s => {
     if (s.type == 'tiles') { s.showImg = true; s.items.forEach(i => { i.image = next(); }); }
+    if (s.type == 'menu' || s.type == 'products') s.items.forEach(i => { i.image = next(); });
     if (s.type == 'gallery' || s.type == 'feature') { if (s.items) s.items.forEach(i => { i.image = next(); }); else s.image = next(); }
   });
 }
@@ -155,7 +160,10 @@ export const FIELDS = {
   text: [['title', 'Title'], ['text', 'Text (blank line = new paragraph)', 'area'], ['linkText', 'Link label'], ['link', 'Link'], IMG],
   stats: [['title', 'Title'], ['text', 'Intro text', 'area']], gallery: [['title', 'Title'], ['text', 'Intro text', 'area']], testimonial: [['title', 'Title']],
   cta: [['title', 'Title'], ['text', 'Text', 'area'], ['linkText', 'Button label'], ['link', 'Button link']],
-  contact: [['title', 'Title'], ['text', 'Intro text', 'area'], ['linkText', 'Button label'], ['link', 'Button link']]
+  contact: [['title', 'Title'], ['text', 'Intro text', 'area'], ['linkText', 'Button label'], ['link', 'Button link']],
+  menu: [['title', 'Title'], ['text', 'Intro text', 'area'], ['linkText', 'Button label (like Full menu)'], ['link', 'Button link'], ['showImg', 'Show dish photos', 'chk']],
+  booking: [['title', 'Title'], ['text', 'Text', 'area'], ['areasTitle', 'Areas heading'], ['areas', 'Areas served (separate with commas)', 'area'], ['cardTitle', 'Services heading'], ['linkText', 'Booking button label'], ['link', 'Booking button link'], ['note', 'Small print (like hours or reply time)']],
+  products: [['title', 'Title'], ['text', 'Intro text', 'area'], ['moreText', 'Header link label'], ['moreLink', 'Header link'], ['cols', 'Columns', 'sel', [['2', '2'], ['3', '3'], ['4', '4']]]]
 };
 export const ITEMF = {
   videos: [['image', 'Thumbnail', 'pick'], ['title', 'Title'], ['eyebrow', 'Small line (show, date or byline)'], ['duration', 'Length (like 3:45)'], ['link', 'Link']],
@@ -163,7 +171,10 @@ export const ITEMF = {
   tiles: [['image', 'Image', 'pick'], ['eyebrow', 'Small line (category or date)'], ['title', 'Title'], ['text', 'Text'], ['link', 'Link'], ['linkText', 'Link label (optional)']],
   list: [['title', 'Title'], ['text', 'Detail (optional)'], ['linkText', 'Link label'], ['link', 'Link']],
   stats: [['title', 'Number'], ['text', 'Label']], gallery: [['image', 'Image', 'pick'], ['title', 'Caption']], testimonial: [['text', 'Quote'], ['title', 'Name']],
-  contact: [['title', 'Label'], ['text', 'Value'], ['link', 'Link (optional)']]
+  contact: [['title', 'Label'], ['text', 'Value'], ['link', 'Link (optional)']],
+  menu: [['group', 'Category (like Breakfast)'], ['image', 'Photo', 'pick'], ['title', 'Dish'], ['text', 'Description'], ['price', 'Price']],
+  booking: [['title', 'Service'], ['text', 'Details'], ['price', 'Price (or Free quote)']],
+  products: [['image', 'Photo', 'pick'], ['eyebrow', 'Badge (like New)'], ['title', 'Product'], ['price', 'Price'], ['text', 'Description'], ['linkText', 'Button label'], ['link', 'Link']]
 };
 export const FOOTER_F = [['motto', 'Motto or tagline'], ['text', 'Bottom line (for example © name)']];
 /** The object a field path points at: 'footer', 'sec' (selected section) or 'item:N'. */
@@ -174,7 +185,7 @@ export function imageDefault(type, itemIndex) {
   if (type == 'hero') return { kind: 'hero' };
   if (type == 'feature') return { kind: 'ill', i: 1 };
   if (type == 'podcast') return { kind: 'ill', i: i + 2 };
-  if (type == 'tiles' || type == 'gallery' || type == 'videos') return { kind: 'ill', i };
+  if (type == 'tiles' || type == 'gallery' || type == 'videos' || type == 'products') return { kind: 'ill', i };
   return null;
 }
 /** Element id of an editor field, so the preview overlays can jump to it. */

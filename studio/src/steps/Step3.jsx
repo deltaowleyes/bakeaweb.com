@@ -104,7 +104,7 @@ export default function Step3() {
                     </div>
                   ))}
                 </div>
-                <div className="row"><button onClick={() => commit(() => { s.items = s.items || []; s.items.push({ id: nid('i'), title: 'New item', text: '', link: '', linkText: '' }); })}>Add item</button></div>
+                <div className="row"><button onClick={() => commit(() => { s.items = s.items || []; const last = s.items[s.items.length - 1] || {}; s.items.push(Object.assign({ id: nid('i'), title: 'New item', text: '', link: '', linkText: '' }, last.group ? { group: last.group } : {}, last.price != null ? { price: '' } : {})); })}>Add item</button></div>
               </>}
             </>}
           </div>

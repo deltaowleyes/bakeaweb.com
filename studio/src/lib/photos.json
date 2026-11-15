@@ -3,7 +3,7 @@
  "sourceUrl": "https://pixabay.com/",
  "kinds": {
   "cafe": {
-   "name": "Café and restaurant",
+   "name": "Caf\u00e9 and restaurant",
    "photos": [
     {
      "id": "1869656",
@@ -369,17 +369,6 @@
      "page": "https://pixabay.com/photos/buffet-korean-food-birthday-3955616/"
     },
     {
-     "id": "1869902",
-     "file": "photos/cafe/1869902.jpg",
-     "role": "item",
-     "topic": "gift box food",
-     "w": 5760,
-     "h": 3840,
-     "tags": "christmas background, christmas, christmas tree, presents, gifts, boxes, gift boxes, christmas presents, christmas gifts, decoration, xmas, christmas wallpaper",
-     "by": "Pexels",
-     "page": "https://pixabay.com/photos/christmas-background-christmas-1869902/"
-    },
-    {
      "id": "1420830",
      "file": "photos/cafe/1420830.jpg",
      "role": "item",
@@ -389,28 +378,6 @@
      "tags": "gift, present, wood, package, gift box, surprise, happy birthday, ribbon, bow, father's day, packaging, gift packaging, closeup, copy space",
      "by": "image4you",
      "page": "https://pixabay.com/photos/gift-present-wood-package-gift-box-1420830/"
-    },
-    {
-     "id": "3026685",
-     "file": "photos/cafe/3026685.jpg",
-     "role": "item",
-     "topic": "gift box food",
-     "w": 5456,
-     "h": 3632,
-     "tags": "christmas, presents, gifts, xmas, packages, christmasbackground, happychristmas, christmas wallpaper, christmas, christmas, christmas, christmas, christmas",
-     "by": "Ylanite",
-     "page": "https://pixabay.com/photos/christmas-presents-gifts-xmas-3026685/"
-    },
-    {
-     "id": "2999722",
-     "file": "photos/cafe/2999722.jpg",
-     "role": "item",
-     "topic": "gift box food",
-     "w": 5760,
-     "h": 3840,
-     "tags": "merry christmas, christmas tree, santa, woman, decoration, gifts, presents, gift boxes, socks, feet, girl, christmas, celebration, xmas, holiday, december, elf, santa's elf, closeup",
-     "by": "JillWellington",
-     "page": "https://pixabay.com/photos/merry-christmas-christmas-tree-santa-2999722/"
     },
     {
      "id": "428094",
@@ -446,17 +413,6 @@
      "page": "https://pixabay.com/photos/raspberries-berries-fruits-red-2431029/"
     },
     {
-     "id": "539695",
-     "file": "photos/cafe/539695.jpg",
-     "role": "item",
-     "topic": "jam jar",
-     "w": 3885,
-     "h": 2548,
-     "tags": "candies, jars, candy jars, assorted candies, glass jars, sweets, heart shaped candies, heart candies, fruit jelly, sugar, calories, candies, candies, candies, jars, sweets, sweets, sweets, sweets, sweets, sugar, sugar, sugar, sugar, calories, calories",
-     "by": "congerdesign",
-     "page": "https://pixabay.com/photos/candies-jars-candy-jars-539695/"
-    },
-    {
      "id": "1284438",
      "file": "photos/cafe/1284438.jpg",
      "role": "item",
@@ -479,39 +435,6 @@
      "page": "https://pixabay.com/photos/coffee-bread-food-snack-pastry-842020/"
     },
     {
-     "id": "2027177",
-     "file": "photos/cafe/2027177.jpg",
-     "role": "item",
-     "topic": "fry bread",
-     "w": 4032,
-     "h": 2539,
-     "tags": "wine, pair, aperitif, drink, glass, table, alcohol, red wine, bread, sausage, rustic, salami",
-     "by": "3938030",
-     "page": "https://pixabay.com/photos/wine-pair-aperitif-drink-glass-2027177/"
-    },
-    {
-     "id": "1077984",
-     "file": "photos/cafe/1077984.jpg",
-     "role": "item",
-     "topic": "fry bread",
-     "w": 6000,
-     "h": 4000,
-     "tags": "bread, toaster, food, toast, white bread, slices of toast, breakfast, snack, meal, tasty, bread, bread, bread, bread, toaster, toast, toast, toast, toast, toast, breakfast",
-     "by": "CordMediaDigitalServices",
-     "page": "https://pixabay.com/photos/bread-toaster-food-toast-1077984/"
-    },
-    {
-     "id": "370114",
-     "file": "photos/cafe/370114.jpg",
-     "role": "item",
-     "topic": "chili bowl",
-     "w": 4277,
-     "h": 2833,
-     "tags": "spices, chilies, paprika, powder, chili powder, pepper, grain, dried, ingredients, cayenne, food, hot, mexican, spicy, cuisine, seasonings, pottery, bowls, cups, food, food, food, food, food",
-     "by": "babawawa",
-     "page": "https://pixabay.com/photos/spices-chilies-paprika-powder-370114/"
-    },
-    {
      "id": "2105233",
      "file": "photos/cafe/2105233.jpg",
      "role": "item",
@@ -521,17 +444,6 @@
      "tags": "fish, food, thai, thailand, dinner, meal, nutrition, gourmet, healthy, restaurant, diet, cooking, delicious, cuisine, lunch, seafood, tasty, ingredient, organic, vegetable, dish, protein, eat, omega, sea, boiling, sauce, lime, coriander, fresh, leaves, sliced, whole, yum, juicy, freshness, table, leaf, rice, nature, natural, bowl, seafood, seafood, seafood, seafood, seafood, protein, protein",
      "by": "qimono",
      "page": "https://pixabay.com/photos/fish-food-thai-thailand-dinner-2105233/"
-    },
-    {
-     "id": "667115",
-     "file": "photos/cafe/667115.jpg",
-     "role": "item",
-     "topic": "chili bowl",
-     "w": 3490,
-     "h": 2438,
-     "tags": "spices, mac wallpaper, seasoning, aroma, wallpaper hd, free background, free wallpaper, taste, spicy, cook, wallpaper 4k, kitchen, laptop wallpaper, bowls, gastronomy, windows wallpaper, smells, aromatic, hd wallpaper, colored, 4k wallpaper, flavor, curry, desktop backgrounds, black pepper, chili pepper, coriander, cloves, full hd wallpaper, 4k wallpaper 1920x1080, beautiful wallpaper, ground, dust, fabric, raw, jute, fringe, background, composition, cool backgrounds, six",
-     "by": "nataliaaggiato",
-     "page": "https://pixabay.com/photos/spices-seasoning-aroma-taste-spicy-667115/"
     },
     {
      "id": "8667981",
@@ -565,28 +477,6 @@
      "tags": "tea, biscuit, still life, cookie, pears, tea cup, fruit, teacup, cup, drink, beverage, breakfast, snack, healthy, light and airy",
      "by": "JillWellington",
      "page": "https://pixabay.com/photos/tea-biscuit-still-life-cookie-6101059/"
-    },
-    {
-     "id": "7862820",
-     "file": "photos/cafe/7862820.jpg",
-     "role": "item",
-     "topic": "iced tea",
-     "w": 5757,
-     "h": 3838,
-     "tags": "food, sweet, cream, tea, affogato, green, coffee, food, food, food, food, food, tea",
-     "by": "thaoantran0101",
-     "page": "https://pixabay.com/photos/food-sweet-cream-tea-affogato-7862820/"
-    },
-    {
-     "id": "4402053",
-     "file": "photos/cafe/4402053.jpg",
-     "role": "item",
-     "topic": "iced tea",
-     "w": 3456,
-     "h": 5184,
-     "tags": "boba, pearl milk tea, boba milk tea, boba tea, tapioca tea, boba, boba, boba tea, boba tea, boba tea, boba tea, boba tea",
-     "by": "knd61",
-     "page": "https://pixabay.com/photos/boba-pearl-milk-tea-boba-milk-tea-4402053/"
     }
    ]
   },
@@ -754,7 +644,7 @@
      "topic": "electric car charging",
      "w": 2048,
      "h": 1365,
-     "tags": "tesla, tesla model x, charging, supercharger, transportation, automobile, car, auto, vehicle, electricity, electrical, electric, green, infrastructure, car wallpapers, transport, eco, plug, station, renewable, Norway, Nordland, Mosjøen",
+     "tags": "tesla, tesla model x, charging, supercharger, transportation, automobile, car, auto, vehicle, electricity, electrical, electric, green, infrastructure, car wallpapers, transport, eco, plug, station, renewable, Norway, Nordland, Mosj\u00f8en",
      "by": "Blomst",
      "page": "https://pixabay.com/photos/tesla-tesla-model-x-charging-1738969/"
     },
@@ -924,28 +814,6 @@
      "page": "https://pixabay.com/photos/building-professional-employee-2762319/"
     },
     {
-     "id": "4340698",
-     "file": "photos/trades/4340698.jpg",
-     "role": "item",
-     "topic": "home inspection",
-     "w": 3000,
-     "h": 2000,
-     "tags": "magnifying, glass, detective, looking, lens, proof, lead, investigate, research, eyeball, focus, vision, eye, surprise, evidence, examine, see, funny, 404, error, page, not found, inspection, gray funny, gray eye, gray zoom, gray glass, gray research, gray glasses, gray surprise, gray vision, gray focus, detective, detective, detective, detective, detective, proof, proof, investigate, research, research, research, research, focus, focus, focus, surprise, surprise, surprise, evidence, evidence, see, see, funny, inspection, inspection",
-     "by": "Tumisu",
-     "page": "https://pixabay.com/photos/magnifying-glass-detective-looking-4340698/"
-    },
-    {
-     "id": "4190944",
-     "file": "photos/trades/4190944.jpg",
-     "role": "item",
-     "topic": "home inspection",
-     "w": 3000,
-     "h": 1767,
-     "tags": "audit, auditor, analysis, examination, document, accounting, verify, review, investigation, magnifying, glass, inspection, financial, annual, report, statement, business, finance, calculator, pen, paper, gray business, gray paper, gray finance, gray zoom, gray glass, gray company, gray glasses, gray document, gray accounting, audit, audit, audit, audit, audit, accounting, accounting",
-     "by": "Tumisu",
-     "page": "https://pixabay.com/photos/audit-auditor-analysis-examination-4190944/"
-    },
-    {
      "id": "2945401",
      "file": "photos/trades/2945401.jpg",
      "role": "item",
@@ -955,17 +823,6 @@
      "tags": "checklist, list, ticked off, hook, mark with a cross, check mark, standard, scaling, yes, done, certification, check, checklist, checklist, checklist, checklist, checklist, list",
      "by": "DCG_MAK",
      "page": "https://pixabay.com/photos/checklist-list-ticked-off-hook-2945401/"
-    },
-    {
-     "id": "3075839",
-     "file": "photos/trades/3075839.jpg",
-     "role": "item",
-     "topic": "home inspection",
-     "w": 6000,
-     "h": 3214,
-     "tags": "businessman, quality control, quality, control, control element, certification, check, rubber stamp, inspection, review, examination, symbol, best, sample, label, emblem, circular, round, high class, high quality, sticker, intelligent, networked, taxes, wifi, button, automation, things, internet, interface, turn on, switch off, industry, energy, power, digital, digitization, technology, hand, touch, finger, man, theme, issue, truth, character, future, collaboration, stud, quality control, quality, quality, quality, quality, quality",
-     "by": "geralt",
-     "page": "https://pixabay.com/photos/businessman-quality-control-quality-3075839/"
     },
     {
      "id": "1080573",
@@ -1012,39 +869,6 @@
      "page": "https://pixabay.com/photos/electrician-electric-electricity-2755682/"
     },
     {
-     "id": "7844283",
-     "file": "photos/trades/7844283.jpg",
-     "role": "item",
-     "topic": "commercial lighting",
-     "w": 6000,
-     "h": 4000,
-     "tags": "travelling, travel, holiday, plane, flying, air, inside, seats, airport, airplane, lights, plane, airport, airport, airport, airport, airport, airplane, airplane, airplane, airplane",
-     "by": "Michael_Pointner",
-     "page": "https://pixabay.com/photos/travelling-travel-holiday-plane-7844283/"
-    },
-    {
-     "id": "1867286",
-     "file": "photos/trades/1867286.jpg",
-     "role": "item",
-     "topic": "commercial lighting",
-     "w": 4862,
-     "h": 3241,
-     "tags": "advertising, advertising agency, business, camera, composition, digital media, film production, frustration, full frame, lamps, nikon, passion, photo studio, photographer, photographic, photography, product photography, advertising agency, photo studio, photo studio, photo studio, product photography, product photography, product photography, product photography, product photography",
-     "by": "Pexels",
-     "page": "https://pixabay.com/photos/advertising-advertising-agency-1867286/"
-    },
-    {
-     "id": "70165",
-     "file": "photos/trades/70165.jpg",
-     "role": "item",
-     "topic": "commercial lighting",
-     "w": 4267,
-     "h": 2846,
-     "tags": "cabin, aircraft, luggage compartments, interior, storage space, lighting, seating, empty, design, plane, jet, passenger jet, aircraft, aircraft, aircraft, aircraft, aircraft, plane",
-     "by": "12019",
-     "page": "https://pixabay.com/photos/cabin-aircraft-luggage-compartments-70165/"
-    },
-    {
      "id": "9628266",
      "file": "photos/trades/9628266.jpg",
      "role": "item",
@@ -1054,94 +878,6 @@
      "tags": "lobby, waiting room, television, tables, chairs, trashcan, modern, contemporary, water fountain, florence lighting, recessed lighting, decorative",
      "by": "Mollyroselee",
      "page": "https://pixabay.com/photos/lobby-waiting-room-television-9628266/"
-    },
-    {
-     "id": "1868726",
-     "file": "photos/trades/1868726.jpg",
-     "role": "item",
-     "topic": "service van",
-     "w": 6000,
-     "h": 3376,
-     "tags": "auto, car, garage, auto shop, car wallpapers, vintage, vehicle, antique, automobile, automotive, classic, equipment, fix, mechanic, nostalgia, repair, retro, sepia, service, repair shop, tools, transportation, workshop",
-     "by": "Pexels",
-     "page": "https://pixabay.com/photos/auto-car-garage-auto-shop-vintage-1868726/"
-    },
-    {
-     "id": "1846759",
-     "file": "photos/trades/1846759.jpg",
-     "role": "item",
-     "topic": "service van",
-     "w": 7952,
-     "h": 5622,
-     "tags": "arches national park, van, drive, road trip, journey, desert, arid, canyon, nature, colorado, daylight, erosion, geology, landscape, mountains, outdoors, road, rocky, sandstone, scenic, tourism, travel, vacation, valley, monument valley, rock formations",
-     "by": "Pexels",
-     "page": "https://pixabay.com/photos/arches-national-park-van-drive-1846759/"
-    },
-    {
-     "id": "7356817",
-     "file": "photos/trades/7356817.jpg",
-     "role": "item",
-     "topic": "service van",
-     "w": 3000,
-     "h": 1688,
-     "tags": "volkswagen, vehicle, classic van, vintage van, volkswagen, volkswagen, vehicle, vehicle, vehicle, vehicle, vehicle",
-     "by": "WildPixar",
-     "page": "https://pixabay.com/photos/volkswagen-vehicle-classic-van-7356817/"
-    },
-    {
-     "id": "4974678",
-     "file": "photos/trades/4974678.jpg",
-     "role": "item",
-     "topic": "service van",
-     "w": 6587,
-     "h": 4391,
-     "tags": "airplane, runway, airport, tarmac, aircraft, vehicle, truck, airliner, clouds, asphalt, jet, flight, transportation system, air travel, nature, outdoor, airline, plane, transportation, travel, airfield",
-     "by": "TobiasRehbein",
-     "page": "https://pixabay.com/photos/airplane-runway-airport-tarmac-4974678/"
-    },
-    {
-     "id": "274614",
-     "file": "photos/trades/274614.jpg",
-     "role": "item",
-     "topic": "ceiling light installation",
-     "w": 3264,
-     "h": 2448,
-     "tags": "staircase, upwards, rails, railings, stairway, stairs, flight, flight of stairs, illusion, optical illusion, interiors, interior design, lighthouse, architecture, up, upstairs, stairs, stairs, stairs, illusion, interior design, interior design, interior design, lighthouse, architecture, architecture, architecture, architecture, architecture",
-     "by": "fda54",
-     "page": "https://pixabay.com/photos/staircase-upwards-rails-railings-274614/"
-    },
-    {
-     "id": "398845",
-     "file": "photos/trades/398845.jpg",
-     "role": "item",
-     "topic": "ceiling light installation",
-     "w": 1556,
-     "h": 2000,
-     "tags": "lobby, hotel, interior, hallway, lights, lighting, luxurious, building, sheraton palace hotel, san francisco, hotel, hotel, hotel, hotel, hotel",
-     "by": "12019",
-     "page": "https://pixabay.com/photos/lobby-hotel-interior-hallway-398845/"
-    },
-    {
-     "id": "7768312",
-     "file": "photos/trades/7768312.jpg",
-     "role": "item",
-     "topic": "ceiling light installation",
-     "w": 4987,
-     "h": 3323,
-     "tags": "pipe system, tube, construction site, light, cable, industry, system, connection, flow through, embarrassed, plug-in system, round, circles, channel, industry, industry, industry, industry, industry, circles, circles",
-     "by": "Kranich17",
-     "page": "https://pixabay.com/photos/pipe-system-tube-construction-site-7768312/"
-    },
-    {
-     "id": "2209152",
-     "file": "photos/trades/2209152.jpg",
-     "role": "item",
-     "topic": "ceiling light installation",
-     "w": 4896,
-     "h": 3264,
-     "tags": "sculptures, bronze, listen to, figures, listening, bronze sculptures, bronze statues, brick wall, red brick wall, art installations, statues, men, art, college of music, freiburg, listen, listening, listening, listening, listening, listening, listen, listen, listen, listen",
-     "by": "Couleur",
-     "page": "https://pixabay.com/photos/sculptures-bronze-listen-to-figures-2209152/"
     }
    ]
   },
@@ -1479,17 +1215,6 @@
      "page": "https://pixabay.com/photos/brush-paint-color-watercolor-art-96240/"
     },
     {
-     "id": "5767334",
-     "file": "photos/crafts/5767334.jpg",
-     "role": "item",
-     "topic": "knitted scarf",
-     "w": 2569,
-     "h": 3295,
-     "tags": "cat, scarf, tabby, warm, portrait, nature, cat portrait, tabby cat, pet, domestic, feline, heat, comfort, kitten, mammal, animal, animal photography",
-     "by": "Be_Stasya",
-     "page": "https://pixabay.com/photos/cat-scarf-tabby-warm-portrait-5767334/"
-    },
-    {
      "id": "7506621",
      "file": "photos/crafts/7506621.jpg",
      "role": "item",
@@ -1499,28 +1224,6 @@
      "tags": "winter, cozy, cup, comfort, tea cup, warmth, gloves, scarf, tea",
      "by": "Monikas_Wunderwelt",
      "page": "https://pixabay.com/photos/winter-cozy-cup-comfort-warmth-7506621/"
-    },
-    {
-     "id": "1102086",
-     "file": "photos/crafts/1102086.jpg",
-     "role": "item",
-     "topic": "knitted scarf",
-     "w": 2709,
-     "h": 3386,
-     "tags": "girl, scarf, winter, cold, season, young, little girl, winter clothing, portrait, girl portrait, russian, winter season, girl, girl, girl, girl, girl, scarf, little girl, little girl, little girl, portrait, russian",
-     "by": "822640",
-     "page": "https://pixabay.com/photos/girl-scarf-winter-cold-season-1102086/"
-    },
-    {
-     "id": "5943325",
-     "file": "photos/crafts/5943325.jpg",
-     "role": "item",
-     "topic": "knitted scarf",
-     "w": 6240,
-     "h": 4160,
-     "tags": "child, girl, winter, fashion, hat, scarf, cold, kid, young, little girl, person, childhood, cute, charming, model, outdoors, portrait, winter, scarf, scarf, scarf, scarf, scarf, cold, cold, cold",
-     "by": "Mitrey",
-     "page": "https://pixabay.com/photos/child-girl-winter-fashion-hat-5943325/"
     },
     {
      "id": "881324",
@@ -1545,17 +1248,6 @@
      "page": "https://pixabay.com/photos/jewelry-treasure-pearls-beads-gems-611867/"
     },
     {
-     "id": "908604",
-     "file": "photos/crafts/908604.jpg",
-     "role": "item",
-     "topic": "beaded earrings",
-     "w": 3227,
-     "h": 3271,
-     "tags": "first nation, headdress, feather, beads, indian, chippewa, anishinaabe, native, american, regalia, pow wow, powwow, dance, ontario, canada, first nation, first nation, beads, pow wow, pow wow, pow wow, pow wow, pow wow, powwow, powwow, powwow, powwow",
-     "by": "NatashaG",
-     "page": "https://pixabay.com/photos/first-nation-headdress-feather-908604/"
-    },
-    {
      "id": "962484",
      "file": "photos/crafts/962484.jpg",
      "role": "item",
@@ -1567,39 +1259,6 @@
      "page": "https://pixabay.com/photos/earrings-ear-beads-head-her-face-962484/"
     },
     {
-     "id": "1149289",
-     "file": "photos/crafts/1149289.jpg",
-     "role": "item",
-     "topic": "leather bag handmade",
-     "w": 4752,
-     "h": 3168,
-     "tags": "luggage, travel, sunlight, vacations, summer, stickers, volkswagen bus, hawaii, nature, malibu, beach, paradise, holidays, dream, sun rays, suitcase, bag",
-     "by": "stux",
-     "page": "https://pixabay.com/photos/luggage-travel-sunlight-vacations-1149289/"
-    },
-    {
-     "id": "3040029",
-     "file": "photos/crafts/3040029.jpg",
-     "role": "item",
-     "topic": "leather bag handmade",
-     "w": 5472,
-     "h": 3648,
-     "tags": "happy holidays, woman, shopping, lifestyle, adult, bags, buy, shopping bags, retail, sale, woman shopping",
-     "by": "gonghuimin468",
-     "page": "https://pixabay.com/photos/happy-holidays-woman-shopping-3040029/"
-    },
-    {
-     "id": "2001739",
-     "file": "photos/crafts/2001739.jpg",
-     "role": "item",
-     "topic": "leather bag handmade",
-     "w": 1980,
-     "h": 1316,
-     "tags": "pink leather, leather texture, skin, texture, background, windows wallpaper, 4k wallpaper, full hd wallpaper, leatherette, decorative, hd wallpaper, cool backgrounds, pattern, beautiful wallpaper, laptop wallpaper, leather, free wallpaper, surface, design, wallpaper hd, mac wallpaper, wallpaper 4k, 4k wallpaper 1920x1080, free background, pink, desktop backgrounds, material",
-     "by": "AKuptsova",
-     "page": "https://pixabay.com/photos/pink-leather-leather-texture-skin-2001739/"
-    },
-    {
      "id": "1868758",
      "file": "photos/crafts/1868758.jpg",
      "role": "item",
@@ -1609,17 +1268,6 @@
      "tags": "bag, book, man, fashion, pants, satchel, walk, teacher, professor, men's fashion, style, stylish man, teacher, teacher, teacher, teacher, teacher",
      "by": "Pexels",
      "page": "https://pixabay.com/photos/bag-book-man-fashion-pants-1868758/"
-    },
-    {
-     "id": "171653",
-     "file": "photos/crafts/171653.jpg",
-     "role": "item",
-     "topic": "ceramic mug",
-     "w": 3454,
-     "h": 2302,
-     "tags": "coffee, coffee beans, cup, coffee cup, caffeine, coffee seeds, coffee, coffee, coffee, coffee, coffee",
-     "by": "Christoph",
-     "page": "https://pixabay.com/photos/coffee-coffee-beans-cup-coffee-cup-171653/"
     },
     {
      "id": "819362",
@@ -1655,37 +1303,15 @@
      "page": "https://pixabay.com/photos/christmas-background-mug-coffee-1974841/"
     },
     {
-     "id": "2613527",
-     "file": "photos/crafts/2613527.jpg",
-     "role": "item",
-     "topic": "handmade quilt",
-     "w": 2471,
-     "h": 1766,
-     "tags": "sewing machine, sewing, sew, machine, needle, work, clothing, textile, craft, tailor, fashion, seamstress, thread, equipment, sewing-machine, needlework, industry, tailoring, stitch, needlecraft, foot, adjust, stitching, quilting, quilt, sewing machine, sewing machine, sewing machine, sewing machine, sewing machine, sewing, sewing, sewing, tailor, tailor, tailoring, quilting, quilt",
-     "by": "wnk1029",
-     "page": "https://pixabay.com/photos/sewing-machine-sewing-sew-machine-2613527/"
-    },
-    {
      "id": "2321532",
      "file": "photos/crafts/2321532.jpg",
      "role": "item",
      "topic": "handmade quilt",
      "w": 5184,
      "h": 3456,
-     "tags": "sewing, patchwork, körkés, thread, pink, spindle, pin, needle, clipboard, textile, textiles, material, materials, heart, polka dots, patterned, sample, sewing, sewing, sewing, sewing, sewing",
+     "tags": "sewing, patchwork, k\u00f6rk\u00e9s, thread, pink, spindle, pin, needle, clipboard, textile, textiles, material, materials, heart, polka dots, patterned, sample, sewing, sewing, sewing, sewing, sewing",
      "by": "Miller_Eszter",
      "page": "https://pixabay.com/photos/sewing-patchwork-k%C3%B6rk%C3%A9s-thread-2321532/"
-    },
-    {
-     "id": "996552",
-     "file": "photos/crafts/996552.jpg",
-     "role": "item",
-     "topic": "handmade quilt",
-     "w": 4288,
-     "h": 2848,
-     "tags": "patchwork, fabric, manual, crafts, quilt, patchwork, quilt, quilt, quilt, quilt, quilt",
-     "by": "eniast",
-     "page": "https://pixabay.com/photos/patchwork-fabric-manual-crafts-996552/"
     },
     {
      "id": "100160",

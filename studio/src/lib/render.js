@@ -5,7 +5,8 @@ var Render = (function () {
   var SECTION_TYPES = {
     hero: 'Hero banner', tiles: 'Card grid', feature: 'Featured story', list: 'Link list', text: 'Text block',
     stats: 'Numbers', gallery: 'Gallery', testimonial: 'Quotes', cta: 'Call to action', contact: 'Contact details',
-    videos: 'Video gallery', podcast: 'Podcasts / audio', pagehead: 'Page header'
+    videos: 'Video gallery', podcast: 'Podcasts / audio', pagehead: 'Page header',
+    menu: 'Menu with prices', booking: 'Booking and service area', products: 'Products with prices'
   };
   var MENU_TYPES = {
     bar: { name: 'Links bar', desc: 'Links in a row. Groups open as dropdowns.', vps: ['desktop', 'tablet'] },
@@ -28,19 +29,19 @@ var Render = (function () {
     /* 2026-11-14: ten designer families. gf = the family's own Google Fonts (used unless the site picks fonts in the Inspector);
        dark = shown on a dark background made from the palette; img = cards show pictures by default. */
     { k: 'tide', videos: 'grid', name: 'Tide', desc: 'Airy and rounded: a floating menu, a big soft hero panel and pill buttons.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], gf: { h: 'Fraunces', hcat: 'r', hw: 600, b: 'Inter', bcat: 's' } },
-    { k: 'ember', videos: 'lead', name: 'Ember', desc: 'Dark and warm, like a candle-lit dining room. Elegant serif type and a menu-style list.', hero: 'overlay', tiles: 'cols', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], dark: 1, gf: { h: 'Playfair Display', hcat: 'r', hw: 600, b: 'Karla', bcat: 's' } },
+    { k: 'ember', wordmark: 1, videos: 'lead', name: 'Ember', desc: 'Dark and warm, like a candle-lit dining room. Elegant serif type and a menu-style list.', hero: 'overlay', tiles: 'cols', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], dark: 1, gf: { h: 'Playfair Display', hcat: 'r', hw: 600, b: 'Karla', bcat: 's' } },
     { k: 'folio', videos: 'lead', name: 'Folio', desc: 'A fashion-magazine look: giant headlines, numbered sections and fine rules.', hero: 'editorial', tiles: 'rule', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], gf: { h: 'Instrument Serif', hcat: 'r', hw: 400, b: 'Inter Tight', bcat: 's' } },
     { k: 'block', videos: 'grid', name: 'Block party', desc: 'Bold outlines, hard shadows and loud colour. Impossible to ignore.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], gf: { h: 'Space Grotesk', hcat: 's', hw: 700, b: 'Space Grotesk', bcat: 's' } },
     { k: 'bento', videos: 'grid', name: 'Bento', desc: 'Everything sits in neat rounded panels, like a tidy lunch box.', hero: 'split', tiles: 'bento', feature: 'card', menus: ['bar', 'mega', 'split', 'hamburger'], gf: { h: 'Manrope', hcat: 's', hw: 800, b: 'Inter', bcat: 's' } },
     { k: 'craft', videos: 'grid', name: 'Handmade', desc: 'Warm and crafted: arched pictures, stitched cards and a scalloped edge.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, gf: { h: 'Young Serif', hcat: 'r', hw: 400, b: 'Nunito Sans', bcat: 's' } },
-    { k: 'glow', videos: 'grid', name: 'Glow', desc: 'Dark and modern with soft coloured light and glowing buttons.', hero: 'center', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], dark: 2, gf: { h: 'Sora', hcat: 's', hw: 700, b: 'Inter', bcat: 's' } },
+    { k: 'glow', wordmark: 1, videos: 'grid', name: 'Glow', desc: 'Dark and modern with soft coloured light and glowing buttons.', hero: 'center', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], dark: 2, gf: { h: 'Sora', hcat: 's', hw: 700, b: 'Inter', bcat: 's' } },
     { k: 'swiss', videos: 'grid', name: 'Swiss grid', desc: 'Strict grid, huge type and section labels in their own column.', hero: 'editorial', tiles: 'rule', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], gf: { h: 'Archivo', hcat: 's', hw: 800, b: 'Archivo', bcat: 's' } },
     { k: 'retro', videos: 'row', name: 'Sunny retro', desc: 'A cheerful 70s feel: chunky type, stripes and a sunburst.', hero: 'center', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], gf: { h: 'Bricolage Grotesque', hcat: 's', hw: 800, b: 'DM Sans', bcat: 's' } },
     { k: 'lens', videos: 'row', name: 'Lens', desc: 'Photo first: a full-screen opener, picture cards and an edge-to-edge gallery.', hero: 'overlay', tiles: 'cards', feature: 'wide', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, gf: { h: 'Outfit', hcat: 's', hw: 600, b: 'Outfit', bcat: 's' } },
     /* 2026-11-14 flagships: one per industry, photo-led, with gentle motion (see "Flagship families" in site.css) */
-    { k: 'hearth', videos: 'lead', name: 'Hearth', desc: 'Flagship for cafés and restaurants: a full-screen food photo, a menu with prices and a warm, elegant feel.', hero: 'overlay', tiles: 'menu', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Cormorant Garamond', hcat: 'r', hw: 600, b: 'Jost', bcat: 's' } },
-    { k: 'volt', videos: 'grid', name: 'Volt', desc: 'Flagship for trades and services: bold and trustworthy, with service cards, big numbers and a strong call to book.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Barlow Condensed', hcat: 's', hw: 700, b: 'Barlow', bcat: 's' } },
-    { k: 'loom', videos: 'grid', name: 'Loom', desc: 'Flagship for makers and craft shops: a product grid, an arched hero and a hand-stitched feel.', hero: 'split', tiles: 'shop', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'DM Serif Display', hcat: 'r', hw: 400, b: 'Work Sans', bcat: 's' } }
+    { k: 'hearth', wordmark: 1, videos: 'lead', name: 'Hearth', desc: 'Flagship for cafés and restaurants: a full-screen food photo, a menu with prices and a warm, elegant feel.', hero: 'overlay', tiles: 'menu', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Cormorant Garamond', hcat: 'r', hw: 600, b: 'Jost', bcat: 's' } },
+    { k: 'volt', wordmark: 1, videos: 'grid', name: 'Volt', desc: 'Flagship for trades and services: bold and trustworthy, with service cards, big numbers and a strong call to book.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Barlow Condensed', hcat: 's', hw: 700, b: 'Barlow', bcat: 's' } },
+    { k: 'loom', wordmark: 1, videos: 'grid', name: 'Loom', desc: 'Flagship for makers and craft shops: a product grid, an arched hero and a hand-stitched feel.', hero: 'split', tiles: 'shop', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'DM Serif Display', hcat: 'r', hw: 400, b: 'Work Sans', bcat: 's' } }
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -170,7 +171,7 @@ var Render = (function () {
     return (flat.length ? '<div class="dg"><strong>Main</strong>' + flat.map(linkHtml).join('') + '</div>' : '') + groups.map(function (g) { return '<div class="dg"><strong>' + esc(g.label) + '</strong>' + g.children.map(linkHtml).join('') + '</div>'; }).join('');
   }
   function header(P, vp, open) {
-    var c = P.menu.vp[vp], items = P.menu.items, t = c.type, L = '<a class="lg" href="#">' + asset(P, picked(P, 'logo'), 'logo', vp == 'phone' ? 34 : 44) + '</a>';
+    var c = P.menu.vp[vp], items = P.menu.items, t = c.type, L = '<a class="lg" href="#">' + logoHtml(P, vp == 'phone' ? 34 : 44) + '</a>';
     var extras = (c.search ? '<span class="sr" aria-label="Search">⌕</span>' : '') + (c.cta && P.menu.cta.label ? btn(P.menu.cta.label, P.menu.cta.href, 'bt hc') : '');
     var drawer = '<details class="dr"' + (open ? ' open' : '') + '><summary>☰ Menu</summary><div class="dw">' + tree(items) + '</div></details>';
     var cls = 'hd hd-' + t + ' lp-' + (t == 'split' ? 'center' : c.logo) + (c.sticky ? ' sk' : '');
@@ -249,14 +250,47 @@ var Render = (function () {
     contact: function (P, s) { return '<section class="s s-contact"><div class="w">' + head(s) + '<dl class="ct">' + (s.items || []).map(function (it, i) { return '<div' + ii(i) + '><dt' + ifk('title') + '>' + esc(it.title) + '</dt><dd' + ifk('text') + '>' + (it.link ? '<a href="' + href(it.link) + '">' + esc(it.text || it.link) + '</a>' : esc(it.text)) + '</dd></div>'; }).join('') + '</dl>' + btn(s.linkText, s.link, 'bt', 'linkText') + '</div></section>'; }
   };
 
+  /* Logo: an uploaded or site logo is shown as it is. Families with a wordmark draw the business name in the
+     template's own type with a monogram (first letter) instead of the generated sample logo. FAM = family being drawn. */
+  var FAM = null;
+  function logoHtml(P, h) {
+    var a = picked(P, 'logo'), n = String(P.biz.name || '').trim();
+    if (FAM && FAM.wordmark && n && (!a || a.kind != 'img')) return '<span class="wm" role="img" aria-label="' + esc(n) + ' logo"><span class="wm-i" aria-hidden="true">' + esc(n.charAt(0).toUpperCase()) + '</span><span class="wm-n" aria-hidden="true">' + esc(n) + '</span></span>';
+    return asset(P, a, 'logo', h);
+  }
+  function groupsOf(items) { var o = [], m = {}; items.forEach(function (it, i) { var g = String(it.group || '').trim(); if (!m.hasOwnProperty(g)) { m[g] = o.length; o.push({ name: g, items: [] }); } o[m[g]].items.push([it, i]); }); return o; }
+  SEC.menu = function (P, s) {
+    var items = s.items || [], pics = s.showImg !== false && items.some(function (it) { return it.image; });
+    return '<section class="s s-menu"><div class="w">' + head(s) + '<div class="mu-g' + (pics ? ' mu-pics' : '') + '">' + groupsOf(items).map(function (g) {
+      return '<div class="mu-c">' + (g.name ? '<h3 class="mu-h">' + esc(g.name) + '</h3>' : '') + g.items.map(function (x) {
+        var it = x[0], i = x[1];
+        return '<div class="mu-i"' + ii(i) + '>' + (pics && it.image ? '<span class="mu-im">' + tagImg(imageRef(P, it.image, i)) + '</span>' : '') + '<div class="mu-x"><div class="mu-l"><strong' + ifk('title') + '>' + esc(it.title) + '</strong><span class="mu-d" aria-hidden="true"></span>' + (it.price ? '<b class="mu-p"' + ifk('price') + '>' + esc(it.price) + '</b>' : '') + '</div>' + (it.text ? '<p' + ifk('text') + '>' + esc(it.text) + '</p>' : '') + '</div></div>';
+      }).join('') + '</div>';
+    }).join('') + '</div>' + (s.linkText ? '<div class="mu-f">' + btn(s.linkText, s.link, 'bt', 'linkText') + '</div>' : '') + '</div></section>';
+  };
+  SEC.booking = function (P, s) {
+    var areas = String(s.areas || '').split(',').map(function (a) { return a.trim(); }).filter(Boolean);
+    return '<section class="s s-booking"><div class="w"><div class="bk"><div class="bk-a">' + (s.title ? '<h2' + fk('title') + '>' + esc(s.title) + '</h2>' : '') + paras(s.text) +
+      (areas.length ? '<p class="bk-at"' + fk('areasTitle') + '>' + esc(s.areasTitle || 'Areas we serve') + '</p><ul class="bk-ar" data-fk="areas">' + areas.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ul>' : '') + '</div>' +
+      '<div class="bk-b">' + (s.cardTitle ? '<h3' + fk('cardTitle') + '>' + esc(s.cardTitle) + '</h3>' : '') + '<div class="bk-l">' + (s.items || []).map(function (it, i) {
+        return '<div class="bk-i"' + ii(i) + '><div class="bk-x"><strong' + ifk('title') + '>' + esc(it.title) + '</strong>' + (it.text ? '<span' + ifk('text') + '>' + esc(it.text) + '</span>' : '') + '</div>' + (it.price ? '<b' + ifk('price') + '>' + esc(it.price) + '</b>' : '') + '</div>';
+      }).join('') + '</div>' + btn(s.linkText, s.link, 'bt bk-bt', 'linkText') + (s.note ? '<p class="bk-n"' + fk('note') + '>' + esc(s.note) + '</p>' : '') + '</div></div></div></section>';
+  };
+  SEC.products = function (P, s) {
+    var cols = s.cols || 3;
+    return '<section class="s s-products"><div class="w">' + head(s) + '<div class="pr-g c' + cols + '">' + (s.items || []).map(function (it, i) {
+      return '<a class="pr-i" href="' + href(it.link) + '"' + ii(i) + '><span class="pr-im">' + tagImg(it.image ? imageRef(P, it.image, i) : illAt(P, i)) + (it.eyebrow ? '<small class="pr-bd"' + ifk('eyebrow') + '>' + esc(it.eyebrow) + '</small>' : '') + '</span><span class="pr-x"><span class="pr-t"><h3' + ifk('title') + '>' + esc(it.title) + '</h3>' + (it.price ? '<b class="pr-p"' + ifk('price') + '>' + esc(it.price) + '</b>' : '') + '</span>' + (it.text ? '<p' + ifk('text') + '>' + esc(it.text) + '</p>' : '') + (it.linkText ? '<span class="pr-btn"' + ifk('linkText') + '>' + esc(it.linkText) + '</span>' : '') + '</span></a>';
+    }).join('') + '</div></div></section>';
+  };
+
   function footer(P) {
     var items = P.menu.items, links = [];
     items.forEach(function (m) { if (m.children && m.children.length) links = links.concat(m.children); else links.push(m); });
-    return '<footer class="ft" data-sec="footer" data-type="footer" data-si="-1"><div class="w"><div class="fb">' + asset(P, picked(P, 'logo'), 'logo', 36) + (P.footer.motto ? '<p class="mt"' + fk('motto') + '>' + esc(P.footer.motto) + '</p>' : '') + '</div><nav>' + links.slice(0, 12).map(linkHtml).join('') + '</nav><p class="cp"' + fk('text') + '>' + esc(P.footer.text || ('© ' + P.biz.name)) + '</p></div></footer>';
+    return '<footer class="ft" data-sec="footer" data-type="footer" data-si="-1"><div class="w"><div class="fb">' + logoHtml(P, 36) + (P.footer.motto ? '<p class="mt"' + fk('motto') + '>' + esc(P.footer.motto) + '</p>' : '') + '</div><nav>' + links.slice(0, 12).map(linkHtml).join('') + '</nav><p class="cp"' + fk('text') + '>' + esc(P.footer.text || ('© ' + P.biz.name)) + '</p></div></footer>';
   }
 
   function page(P, tplId, opt) {
-    opt = opt || {}; PALX = null; var t = tpl(tplId), f = t.fam, v = t.v, p = pal(P), F = font(P);
+    opt = opt || {}; PALX = null; var t = tpl(tplId), f = t.fam, v = t.v, p = pal(P), F = font(P); FAM = f;
     if (f.dark && Art.lum(p.bg) >= 110) { var nb = f.dark == 2 ? Art.mix(p.ink, '#05060a', .55) : Art.mix(p.ink, '#000000', .25); p = { bg: nb, ink: p.bg, acc: p.acc, soft: Art.mix(nb, p.bg, .08) }; PALX = p; }
     var dark = Art.lum(p.bg) < 110;
     GF = {}; var gf = P.brand.gf || f.gf || {};

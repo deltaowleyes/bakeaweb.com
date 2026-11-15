@@ -267,6 +267,47 @@
 .pv .dw{grid-template-columns:1fr 1fr}
 }
 
+
+/* ---------- menu, booking and products sections (2026-11-14) ---------- */
+.pv .mu-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px 48px}
+.pv .mu-h{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--acc);font-family:var(--bf);font-weight:700;margin:0 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.pv .mu-i{display:flex;gap:16px;align-items:flex-start;padding:12px 0}
+.pv .mu-im{flex:0 0 72px;width:72px;height:72px;border-radius:var(--r);overflow:hidden}
+.pv .mu-im>:is(img,svg){width:100%;height:100%;object-fit:cover}
+.pv .mu-x{flex:1;min-width:0}
+.pv .mu-l{display:flex;align-items:baseline;gap:10px}
+.pv .mu-l strong{font-size:18px}
+.pv .mu-d{flex:1;min-width:16px;border-bottom:1px dotted var(--mute);transform:translateY(-4px)}
+.pv .mu-p{font-size:18px;white-space:nowrap}
+.pv .mu-x p{margin:4px 0 0;font-size:15px;color:var(--mute)}
+.pv .mu-f{margin-top:28px}
+.pv .bk{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.pv .bk-at{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--acc);margin:24px 0 10px}
+.pv .bk-ar{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pv .bk-ar li{padding:6px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;font-weight:600}
+.pv .bk-b{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);padding:28px;box-shadow:0 18px 40px -24px rgba(0,0,0,.35)}
+.pv .bk-b h3{margin:0 0 8px}
+.pv .bk-i{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.pv .bk-x{flex:1;display:grid;gap:2px}.pv .bk-x span{font-size:14px;color:var(--mute)}
+.pv .bk-i b{white-space:nowrap;color:var(--acc)}
+.pv .bk-bt{display:block;text-align:center;margin:20px 0 0}
+.pv .bk-n{font-size:13px;color:var(--mute);margin:10px 0 0;text-align:center;max-width:none}
+.pv .pr-g{display:grid;grid-template-columns:repeat(3,1fr);gap:28px var(--gap)}
+.pv .pr-g.c2{grid-template-columns:repeat(2,1fr)}.pv .pr-g.c4{grid-template-columns:repeat(4,1fr)}
+.pv .pr-i{display:flex;flex-direction:column;text-decoration:none;color:inherit;min-width:0}
+.pv .pr-im{position:relative;display:block;aspect-ratio:1;border-radius:var(--r);overflow:hidden;background:var(--soft);margin-bottom:14px}
+.pv .pr-im>:is(img,svg){width:100%;height:100%;object-fit:cover}
+.pv .pr-bd{position:absolute;left:12px;top:12px;background:var(--bg);color:var(--ink);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.pv .pr-t{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.pv .pr-t h3{font-size:19px;margin:0}
+.pv .pr-p{white-space:nowrap}
+.pv .pr-x p{font-size:15px;color:var(--mute);margin:6px 0 10px}
+.pv .pr-btn{font-weight:700;font-size:14px;color:var(--acc)}
+.pv .pr-btn:after{content:" →"}
+.pv.tf-board main>:is(.s-menu,.s-products,.s-booking){grid-column:1/-1}
+@container (max-width:1023.98px){.pv .pr-g,.pv .pr-g.c4{grid-template-columns:repeat(2,1fr)}.pv .bk{gap:32px}}
+@container (max-width:599.98px){.pv .bk{grid-template-columns:1fr}.pv .mu-g{grid-template-columns:1fr;gap:28px}.pv .pr-g,.pv .pr-g.c2,.pv .pr-g.c4{grid-template-columns:1fr 1fr;gap:20px 12px}.pv .pr-t{display:block}.pv .bk-b{padding:20px}}
+
 /* ---------- inspector overrides (set per section in step 3; see render.js lxAttr) ---------- */
 .pv .s.lx-pt{padding-top:var(--pt)!important}
 .pv .s.lx-pb{padding-bottom:var(--pb)!important}
@@ -875,3 +916,44 @@
 .pv.tf-loom .gl{columns:2;column-gap:10px}
 .pv.tf-loom .fe-split .fm{order:0;max-width:300px}
 }
+
+/* ---------- flagships: wordmark logos (business name in the template's type, with a monogram) ---------- */
+.pv .wm{display:inline-flex;align-items:center;gap:12px;color:inherit;white-space:nowrap;line-height:1}
+.pv .wm-i{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;background:var(--acc);color:var(--oa);font:var(--hw) 22px/1 var(--hf)}
+.pv .wm-n{font:var(--hw) 24px/1 var(--hf)}
+.pv .ft .wm{color:var(--oi)}
+.pv.tf-hearth .wm-i{border-radius:50%;font-style:italic;font-size:26px;box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--acc)}
+.pv.tf-hearth .wm-n{font-style:italic;font-size:30px;letter-spacing:.01em}
+.pv.tf-volt .wm-i{width:40px;height:40px;transform:skewX(-12deg);border-radius:3px;font-size:24px}
+.pv.tf-volt .wm-n{text-transform:uppercase;font-size:28px;letter-spacing:.02em}
+.pv.tf-loom .wm-i{border-radius:999px 999px 4px 4px;height:46px;font-size:24px;padding-top:4px}
+.pv.tf-loom .wm-n{font-size:27px;padding-bottom:4px;border-bottom:2px dashed var(--acc)}
+@container (max-width:599.98px){.pv .wm-n{font-size:17px!important}.pv .wm-i{width:34px;height:34px;flex-basis:34px;font-size:18px!important}.pv .wm{gap:9px}}
+.pv .ft .fb .wm{background:none}
+
+/* ---------- flagships: menu, booking and products ---------- */
+.pv.tf-hearth .s-menu .w{max-width:1100px}
+.pv.tf-hearth .mu-g{gap:48px 56px}
+.pv.tf-hearth .mu-h{font:italic 600 34px/1.1 var(--hf);letter-spacing:0;text-transform:none;text-align:center;border:0;margin-bottom:18px;color:var(--ink)}
+.pv.tf-hearth .mu-h:after{content:"";display:block;width:48px;height:2px;background:var(--acc);margin:12px auto 0}
+.pv.tf-hearth .mu-im{flex-basis:84px;width:84px;height:84px;border-radius:50%;box-shadow:0 10px 22px -10px rgba(0,0,0,.5)}
+.pv.tf-hearth .mu-l strong,.pv.tf-hearth .mu-p{font:600 25px var(--hf)}
+.pv.tf-hearth .mu-p{color:var(--acc)}
+.pv.tf-hearth .mu-f{text-align:center;margin-top:44px}
+.pv.tf-volt .bk-a h2{font-size:58px}
+.pv.tf-volt .bk-ar li{border-radius:4px;background:color-mix(in srgb,var(--acc) 14%,transparent);border-color:transparent;text-transform:uppercase;letter-spacing:.06em;font-size:13px}
+.pv.tf-volt .bk-b{border-radius:6px;border-top:6px solid var(--acc);padding:32px}
+.pv.tf-volt .bk-b h3{font-size:30px}
+.pv.tf-volt .bk-i strong{font-size:18px}
+.pv.tf-volt .bk-i b{font:700 22px var(--hf);text-transform:uppercase}
+.pv.tf-volt .bk-bt{font-size:16px;padding:18px}
+.pv.tf-loom .pr-g{gap:44px 28px}
+.pv.tf-loom .pr-im{border-radius:14px;transition:transform .35s}
+.pv.tf-loom .pr-i:hover .pr-im{transform:translateY(-4px)}
+.pv.tf-loom .pr-im>img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.pv.tf-loom .pr-i:hover .pr-im>img{transform:scale(1.06)}
+.pv.tf-loom .pr-t h3{font-size:24px}
+.pv.tf-loom .pr-p{background:var(--soft);padding:4px 12px;border-radius:999px;font-weight:600;font-size:15px}
+.pv.tf-loom .pr-bd{background:var(--acc);color:var(--oa)}
+.pv.tf-loom .pr-btn{color:var(--ink);text-decoration:underline dashed var(--acc);text-underline-offset:5px}
+@container (max-width:599.98px){.pv.tf-volt .bk-a h2{font-size:36px}.pv.tf-hearth .mu-h{font-size:28px}.pv.tf-hearth .mu-l strong,.pv.tf-hearth .mu-p{font-size:20px}.pv.tf-hearth .mu-im{flex-basis:64px;width:64px;height:64px}.pv.tf-loom .pr-t h3{font-size:19px}}
