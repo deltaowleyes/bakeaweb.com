@@ -77,7 +77,11 @@ var Render = (function () {
     /* 2026-11-15 Indigenous business series, run 8: civil, excavation, concrete and shoreline contractors */
     { k: 'bedrock', wordmark: 1, videos: 'grid', name: 'Bedrock', desc: 'For civil and excavation contractors: a full-screen site photo with a hazard-stripe edge, a spec-sheet of numbers, a numbered capability list and project cards.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Saira Condensed', hcat: 's', hw: 800, b: 'Barlow', bcat: 's' } },
     { k: 'breakwater', wordmark: 1, videos: 'grid', name: 'Breakwater', desc: 'For shoreline, landscape and environmental contractors: calm water colours, stacked armour-stone shapes, a water-line band and stone-shaped bullets.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Young Serif', hcat: 'r', hw: 400, b: 'Instrument Sans', bcat: 's' } },
-    { k: 'rebar', wordmark: 1, videos: 'grid', name: 'Rebar', desc: 'For concrete, foundation and septic contractors: a rebar-mesh opener with orange safety caps, concrete-block numbers with form-tie holes and cap-dot lists.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Familjen Grotesk', hcat: 's', hw: 700, b: 'Familjen Grotesk', bcat: 's' } }
+    { k: 'rebar', wordmark: 1, videos: 'grid', name: 'Rebar', desc: 'For concrete, foundation and septic contractors: a rebar-mesh opener with orange safety caps, concrete-block numbers with form-tie holes and cap-dot lists.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Familjen Grotesk', hcat: 's', hw: 700, b: 'Familjen Grotesk', bcat: 's' } },
+    /* 2026-11-15 pitch run: trappers, tanners and traditional-skills keepers */
+    { k: 'trapline', wordmark: 1, videos: 'grid', name: 'Trapline', desc: 'For trappers and wildlife control: a dark bush-at-dawn opener, a trail of tracks between sections, numbers on pelt tags and a price list for tanning and sharpening.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Zilla Slab', hcat: 'r', hw: 700, b: 'Work Sans', bcat: 's' } },
+    { k: 'tannery', wordmark: 1, videos: 'grid', name: 'Tannery', desc: 'For tanners and leather workers: warm buckskin colours, the opening photo stretched like a hide on a frame, saddle-stitched cards and an oval maker’s stamp.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Alegreya', hcat: 'r', hw: 800, b: 'Alegreya Sans', bcat: 's' } },
+    { k: 'birchbark', wordmark: 1, videos: 'grid', name: 'Birchbark', desc: 'For knowledge keepers, carvers and land-based teachers: birch-bark bands, an arched photo, cedar-green accents and teachings set out like a field journal.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Spectral', hcat: 'r', hw: 600, b: 'Source Sans 3', bcat: 's' } },
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -96,7 +100,8 @@ var Render = (function () {
     harbour: 85, waterline: 84, dockside: 84,
     press: 87, stitch: 85, merch: 84,
     taproom: 85, roadside: 85, patio: 84,
-    bedrock: 85, breakwater: 84, rebar: 84 };
+    bedrock: 85, breakwater: 84, rebar: 84,
+    trapline: 85, tannery: 86, birchbark: 84 };
   var PRICE_BY_GRADE = { 75: 50, 76: 60, 77: 70, 78: 80, 79: 90, 80: 100, 81: 120, 82: 140, 83: 160, 84: 180, 85: 200, 86: 250, 87: 300, 88: 350, 89: 400,
     90: 500, 91: 600, 92: 700, 93: 800, 94: 900, 95: 1000, 96: 1500, 97: 2500, 98: 4000, 99: 7500 };
   var MIN_GRADE = 65;

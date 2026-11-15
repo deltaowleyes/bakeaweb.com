@@ -39,7 +39,7 @@ test('every template makes complete page files', async ({ page }) => {
     }
     return { out, pages: S.pages.length };
   });
-  expect(res.out.length).toBe(144);
+  expect(res.out.length).toBe(153);
   for (const r of res.out) expect(r, r.id).toMatchObject({ pages: res.pages, index: true, ok: true });
 });
 
@@ -56,7 +56,7 @@ test('designer families bring their own fonts and dark families stay readable', 
     }
     return { out, n: Render.TEMPLATES.length };
   });
-  expect(r.n).toBe(144);
+  expect(r.n).toBe(153);
   for (const k in r.out) { expect(r.out[k].cls, k).toBe(true); expect(r.out[k].gf, k).toBe(true); }
   // Ember and Glow turn a light palette into a dark page
   for (const k of ['ember', 'glow']) expect(parseInt(r.out[k].bg.slice(1, 3), 16), k).toBeLessThan(80);
@@ -77,7 +77,7 @@ test('flagship templates and starter sites use the sample photos', async ({ page
   expect(r.heroImg).toBe(true);
   expect(r.tileImgs).toBe(true);
   expect(r.menu).toBe(true);
-  expect(r.flags).toEqual(['hearth', 'volt', 'loom', 'bloom', 'pulse', 'commons', 'council', 'meridian', 'bridge', 'convoy', 'homeward', 'freight', 'timber', 'shoreline', 'basecamp', 'reel', 'marquee', 'frame', 'harbour', 'waterline', 'dockside', 'press', 'stitch', 'merch', 'taproom', 'roadside', 'patio', 'bedrock', 'breakwater', 'rebar']);
+  expect(r.flags).toEqual(['hearth', 'volt', 'loom', 'bloom', 'pulse', 'commons', 'council', 'meridian', 'bridge', 'convoy', 'homeward', 'freight', 'timber', 'shoreline', 'basecamp', 'reel', 'marquee', 'frame', 'harbour', 'waterline', 'dockside', 'press', 'stitch', 'merch', 'taproom', 'roadside', 'patio', 'bedrock', 'breakwater', 'rebar', 'trapline', 'tannery', 'birchbark']);
   // the photo files are served
   const res = await page.request.get('photos/cafe/' + (await page.evaluate(async () => (await import('/src/lib/photos.json')).default.kinds.cafe.photos[0].id)) + '.jpg');
   expect(res.ok()).toBe(true);
