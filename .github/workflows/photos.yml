@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       kinds:
-        description: 'Kinds of business, separated by commas (cafe, trades, crafts)'
+        description: 'Kinds of business, separated by commas (cafe, trades, crafts, salon, fitness, community)'
         default: 'cafe,trades,crafts'
         required: false
       mode:
