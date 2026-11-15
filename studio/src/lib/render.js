@@ -61,7 +61,11 @@ var Render = (function () {
     /* 2026-11-14 Indigenous business series, run 4: film, video and media production */
     { k: 'reel', wordmark: 1, videos: 'lead', name: 'Reel', desc: 'For film and video studios: cinematic and dark, a letterboxed opener, laurel awards, a screening-room film list and credits that roll.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, dark: 2, gf: { h: 'DM Serif Display', hcat: 'r', hw: 400, b: 'Inter Tight', bcat: 's' } },
     { k: 'marquee', wordmark: 1, videos: 'grid', name: 'Marquee', desc: 'For filmmakers and festivals: poster-style type, film posters as cards, laurels for every selection and a bright festival feel.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Syne', hcat: 's', hw: 800, b: 'Space Grotesk', bcat: 's' } },
-    { k: 'frame', wordmark: 1, videos: 'row', name: 'Frame', desc: 'For photographers and directors: a quiet gallery wall with wide stills, numbered projects and elegant italic type.', hero: 'editorial', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Newsreader', hcat: 'r', hw: 500, b: 'Inter', bcat: 's' } }
+    { k: 'frame', wordmark: 1, videos: 'row', name: 'Frame', desc: 'For photographers and directors: a quiet gallery wall with wide stills, numbered projects and elegant italic type.', hero: 'editorial', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Newsreader', hcat: 'r', hw: 500, b: 'Inter', bcat: 's' } },
+    /* 2026-11-14 Indigenous business series, run 5: marinas, boating and waterfront */
+    { k: 'harbour', wordmark: 1, videos: 'grid', name: 'Harbour', desc: 'For marinas and yacht clubs: classic navy and white, signal-flag accents, GPS coordinates up top and a rate card like a harbour board.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Spectral', hcat: 'r', hw: 600, b: 'Work Sans', bcat: 's' } },
+    { k: 'waterline', wordmark: 1, videos: 'grid', name: 'Waterline', desc: 'For boat rentals and waterfront businesses: bright and modern, a wave line under the opener, amenity chips and a quick booking card.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Lexend', hcat: 's', hw: 700, b: 'Lexend', bcat: 's' } },
+    { k: 'dockside', wordmark: 1, videos: 'grid', name: 'Dockside', desc: 'For summer marinas, resorts and outfitters: sun-warmed colours, dock-plank stripes, tag-shaped cards and snapshot photos.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Gabarito', hcat: 's', hw: 800, b: 'Figtree', bcat: 's' } }
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -76,7 +80,8 @@ var Render = (function () {
     tide: 72, ember: 73, folio: 74, block: 70, bento: 72, craft: 66, glow: 67, swiss: 71, retro: 70, lens: 64,
     hearth: 86, volt: 85, loom: 85, bloom: 85, pulse: 84, commons: 80, council: 80, meridian: 84, bridge: 80,
     convoy: 80, homeward: 84, 'homeward-b': 85, freight: 76, timber: 85, shoreline: 85, 'shoreline-b': 86, basecamp: 80,
-    reel: 88, marquee: 84, frame: 86 };
+    reel: 88, marquee: 84, frame: 86,
+    harbour: 85, waterline: 84, dockside: 84 };
   var PRICE_BANDS = [[90, 500], [85, 250], [80, 100], [75, 50], [70, 0]];
   var MIN_GRADE = 70;
   function priceFor(g) { for (var i = 0; i < PRICE_BANDS.length; i++) if (g >= PRICE_BANDS[i][0]) return PRICE_BANDS[i][1]; return null; }
