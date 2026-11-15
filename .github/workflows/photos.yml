@@ -10,6 +10,10 @@ on:
         description: 'Kinds of business, separated by commas (cafe, trades, crafts)'
         default: 'cafe,trades,crafts'
         required: false
+      mode:
+        description: 'replace = new set of photos; add = keep the picked photos and add the extra topics'
+        default: 'replace'
+        required: false
 permissions:
   contents: write
 jobs:
@@ -25,12 +29,12 @@ jobs:
         working-directory: studio
         env:
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
-        run: node scripts/fetch-photos.mjs "${{ inputs.kinds }}"
+        run: node scripts/fetch-photos.mjs "${{ inputs.kinds }}" "${{ inputs.mode }}"
       - name: Save them to the repository
         run: |
           git config user.name "BAKE photo robot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add studio/public/photos studio/src/lib/photos.json
           git diff --cached --quiet && echo "No new photos." && exit 0
-          git commit -m "Photo robot: sample photos from Pixabay (${{ inputs.kinds }})"
+          git commit -m "Photo robot: sample photos from Pixabay (${{ inputs.kinds }}, ${{ inputs.mode }})"
           git push

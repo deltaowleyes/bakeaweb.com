@@ -15,7 +15,14 @@ const KINDS = {
   trades: { name: 'Trades and services', q: [['hero', 'electrician', 'electrician|electric|electrical'], ['hero', 'construction worker', 'worker|construction|builder'], ['item', 'electrical panel', 'fuse|panel|circuit|electrical'], ['item', 'solar panels roof', 'solar'], ['item', 'electric car charging', 'charging|charger|charge'], ['item', 'tools workbench', 'tool|tools|workshop'], ['item', 'house exterior', 'house|home'], ['item', 'electrical wiring', 'wire|wiring|cable'], ['item', 'hard hat worker', 'helmet|hard hat|worker']] },
   crafts: { name: 'Arts and crafts shop', q: [['hero', 'craft fair handmade', 'craft|handmade|market'], ['hero', 'artisan workshop', 'workshop|artisan|craftsman'], ['item', 'beads', 'bead'], ['item', 'handmade jewelry', 'jewelry|jewellery|necklace|earring|bracelet'], ['item', 'quilt', 'quilt|patchwork'], ['item', 'pottery hands', 'pottery|ceramic|clay'], ['item', 'basket weaving', 'basket|weaving|wicker'], ['item', 'yarn knitting', 'yarn|knitting|wool'], ['item', 'leather craft', 'leather'], ['item', 'painting artist', 'paint|painting|artist']] }
 };
+/* Extra topics, fetched with "add" (keeps the photos already picked and only adds new candidates). */
+const EXTRA = {
+  cafe: [['item', 'catering buffet', 'catering|buffet|banquet'], ['item', 'gift box food', 'gift|box|hamper|basket'], ['item', 'jam jar', 'jam|jar|preserve'], ['item', 'fry bread', 'bread|fried|dough'], ['item', 'chili bowl', 'chili|stew|bowl'], ['item', 'iced tea', 'tea|iced|drink']],
+  trades: [['item', 'home inspection', 'inspection|inspector|clipboard|checklist'], ['item', 'electrician outlet', 'outlet|socket|electrician'], ['item', 'commercial lighting', 'lighting|lights|lamp|led'], ['item', 'service van', 'van|truck|vehicle'], ['item', 'ceiling light installation', 'ceiling|light|lamp|installation']],
+  crafts: [['item', 'knitted scarf', 'scarf|knit|knitted|wool'], ['item', 'beaded earrings', 'earring|bead'], ['item', 'leather bag handmade', 'leather|bag|pouch'], ['item', 'ceramic mug', 'mug|cup|ceramic'], ['item', 'handmade quilt', 'quilt|patchwork']]
+};
 const PER = 4;   // candidates kept per search (Claude picks the best by eye; the rest are deleted)
+const ADD = process.argv[3] == 'add';
 const want = (process.argv[2] || Object.keys(KINDS).join(',')).split(',').map(s => s.trim()).filter(k => KINDS[k]);
 
 const root = new URL('../', import.meta.url);
@@ -35,10 +42,11 @@ async function search(q, horizontal) {
 }
 
 for (const k of want) {
-  const K = KINDS[k], dir = new URL('public/photos/' + k + '/', root);
-  rmSync(dir, { recursive: true, force: true }); mkdirSync(dir, { recursive: true });
-  const seen = new Set(), photos = [];
-  for (const [role, q, must] of K.q) {
+  const K = KINDS[k], dir = new URL('public/photos/' + k + '/', root), old = ADD && list.kinds[k] ? list.kinds[k].photos : [];
+  if (!ADD) rmSync(dir, { recursive: true, force: true });
+  mkdirSync(dir, { recursive: true });
+  const seen = new Set(old.map(p => +p.id)), photos = old.slice();
+  for (const [role, q, must] of (ADD ? EXTRA[k] || [] : K.q)) {
     const re = new RegExp('\\b(' + must + ')', 'i');
     const hits = (await search(q, role == 'hero')).filter(h => re.test(h.tags)).sort((a, b) => (b.likes + b.downloads / 50) - (a.likes + a.downloads / 50));
     let kept = 0;
