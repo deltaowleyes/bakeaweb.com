@@ -59,7 +59,7 @@ var Render = (function () {
     { k: 'shoreline', wordmark: 1, videos: 'grid', name: 'Shoreline', desc: 'For lake resorts and cottages: light and calm, elegant italic headings, a wave under the opener and big soft photos.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Cormorant Garamond', hcat: 'r', hw: 600, b: 'Jost', bcat: 's' } },
     { k: 'basecamp', wordmark: 1, videos: 'grid', name: 'Basecamp', desc: 'For outfitters and adventure tourism: topographic-map backgrounds, badge labels and bold activity cards.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Rubik', hcat: 's', hw: 800, b: 'Rubik', bcat: 's' } },
     /* 2026-11-14 Indigenous business series, run 4: film, video and media production */
-    { k: 'reel', wordmark: 1, videos: 'lead', name: 'Reel', desc: 'For film and video studios: cinematic and dark, a letterboxed opener, laurel awards, a screening-room film list and credits that roll.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, dark: 2, gf: { h: 'DM Serif Display', hcat: 'r', hw: 400, b: 'Inter Tight', bcat: 's' } },
+    { k: 'reel', wordmark: 1, videos: 'lead', name: 'Reel', desc: 'For film and video studios: cinematic and dark, a letterboxed 2.39:1 opener with viewfinder marks, festival laurels, numbered title cards, a screenings listing, a rate card, credits that roll and stills on a strip of 35 mm film.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, dark: 2, gf: { h: 'DM Serif Display', hcat: 'r', hw: 400, b: 'Inter Tight', bcat: 's' } },
     { k: 'marquee', wordmark: 1, videos: 'grid', name: 'Marquee', desc: 'For filmmakers and festivals: poster-style type, film posters as cards, laurels for every selection and a bright festival feel.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Syne', hcat: 's', hw: 800, b: 'Space Grotesk', bcat: 's' } },
     { k: 'frame', wordmark: 1, videos: 'row', name: 'Frame', desc: 'For photographers and directors: a quiet gallery wall with wide stills, numbered projects and elegant italic type.', hero: 'editorial', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Newsreader', hcat: 'r', hw: 500, b: 'Inter', bcat: 's' } },
     /* 2026-11-14 Indigenous business series, run 5: marinas, boating and waterfront */
@@ -92,7 +92,7 @@ var Render = (function () {
     tide: 72, ember: 73, folio: 74, block: 70, bento: 72, craft: 66, glow: 67, swiss: 71, retro: 70, lens: 64,
     hearth: 86, volt: 85, loom: 85, bloom: 85, pulse: 84, commons: 80, council: 80, meridian: 84, bridge: 80,
     convoy: 80, homeward: 84, 'homeward-b': 85, freight: 76, timber: 85, shoreline: 85, 'shoreline-b': 86, basecamp: 80,
-    reel: 88, marquee: 84, frame: 86,
+    reel: 92, marquee: 84, frame: 86,   /* Reel 2.0 (2026-11-15): 88 → 92 */
     harbour: 85, waterline: 84, dockside: 84,
     press: 87, stitch: 85, merch: 84,
     taproom: 85, roadside: 85, patio: 84,
