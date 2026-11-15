@@ -73,7 +73,11 @@ var Render = (function () {
     /* 2026-11-15 Indigenous business series, run 7: sports bars, pubs, roadside motels and riverside restaurants */
     { k: 'taproom', wordmark: 1, videos: 'grid', name: 'Taproom', desc: 'For sports bars and pubs: dark and lively, a scoreboard of numbers, a chalkboard menu, game-night listings and jersey-stripe banners.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, dark: 2, gf: { h: 'Teko', hcat: 's', hw: 600, b: 'Barlow', bcat: 's' } },
     { k: 'roadside', mono: 'Yellowtail', monoW: 400, wordmark: 1, videos: 'grid', name: 'Roadside', desc: 'For motels, diners and highway stops: a retro sunburst opener, neon script, highway-shield numbers, a diner menu and a room-key booking card.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Righteous', hcat: 'd', hw: 400, b: 'Nunito Sans', bcat: 's' } },
-    { k: 'patio', wordmark: 1, videos: 'grid', name: 'Patio', desc: 'For riverside restaurants, inns and patios: a scalloped awning, a photo opener with a menu-card welcome, plate-round numbers and a striped booking card.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Fraunces', hcat: 'r', hw: 600, b: 'DM Sans', bcat: 's' } }
+    { k: 'patio', wordmark: 1, videos: 'grid', name: 'Patio', desc: 'For riverside restaurants, inns and patios: a scalloped awning, a photo opener with a menu-card welcome, plate-round numbers and a striped booking card.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Fraunces', hcat: 'r', hw: 600, b: 'DM Sans', bcat: 's' } },
+    /* 2026-11-15 Indigenous business series, run 8: civil, excavation, concrete and shoreline contractors */
+    { k: 'bedrock', wordmark: 1, videos: 'grid', name: 'Bedrock', desc: 'For civil and excavation contractors: a full-screen site photo with a hazard-stripe edge, a spec-sheet of numbers, a numbered capability list and project cards.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Saira Condensed', hcat: 's', hw: 800, b: 'Barlow', bcat: 's' } },
+    { k: 'breakwater', wordmark: 1, videos: 'grid', name: 'Breakwater', desc: 'For shoreline, landscape and environmental contractors: calm water colours, stacked armour-stone shapes, a water-line band and stone-shaped bullets.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Young Serif', hcat: 'r', hw: 400, b: 'Instrument Sans', bcat: 's' } },
+    { k: 'rebar', wordmark: 1, videos: 'grid', name: 'Rebar', desc: 'For concrete, foundation and septic contractors: a rebar-mesh opener with orange safety caps, concrete-block numbers with form-tie holes and cap-dot lists.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Familjen Grotesk', hcat: 's', hw: 700, b: 'Familjen Grotesk', bcat: 's' } }
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -91,7 +95,8 @@ var Render = (function () {
     reel: 88, marquee: 84, frame: 86,
     harbour: 85, waterline: 84, dockside: 84,
     press: 87, stitch: 85, merch: 84,
-    taproom: 85, roadside: 85, patio: 84 };
+    taproom: 85, roadside: 85, patio: 84,
+    bedrock: 85, breakwater: 84, rebar: 84 };
   var PRICE_BY_GRADE = { 75: 50, 76: 60, 77: 70, 78: 80, 79: 90, 80: 100, 81: 120, 82: 140, 83: 160, 84: 180, 85: 200, 86: 250, 87: 300, 88: 350, 89: 400,
     90: 500, 91: 600, 92: 700, 93: 800, 94: 900, 95: 1000, 96: 1500, 97: 2500, 98: 4000, 99: 7500 };
   var MIN_GRADE = 65;
