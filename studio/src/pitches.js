@@ -149,8 +149,8 @@ function watchShot(img) {
   });
   if (img.complete) img.naturalWidth ? img.dispatchEvent(new Event('load')) : next();
 }
-/* Price from a redesign's grade (1–99), same bands as the studio. */
-function priceChip(d) { const p = Render.priceFor(+d.grade || 0); return p == null ? '' : ' <span>· ' + (p ? '$' + p : 'Free') + '</span>'; }
+/* Price from a redesign's grade (1–99), same ladder as the studio. */
+function priceChip(d) { const p = Render.priceFor(+d.grade || 0); return p == null ? '' : ' <span>· ' + (p ? Render.money(p) : 'Free') + '</span>'; }
 
 let cur = null;
 function open(r, d) { cur = d; $('#dlgT').textContent = r.business_name + ' · ' + d.name; size(1280); $('#dlgF').srcdoc = pageHtml(r, d); $('#dlg').showModal(); }

@@ -87,7 +87,7 @@ export default function Step5() {
       <h2 id="h5s" className="sth">5. Templates</h2>
       <div className="card">
         <div className="bar">
-          <div className="flex-1 min-w-[220px]"><h3>{ok.length} of {all.length} templates fit your site</h3><p className="mu">Only templates that can show every section and your desktop menu style are listed, best rated first. Prices follow each template’s rating out of 99: 70–74 free, 75–79 $50, 80–84 $100, 85–89 $250, 90+ $500.</p></div>
+          <div className="flex-1 min-w-[220px]"><h3>{ok.length} of {all.length} templates fit your site</h3><p className="mu">Only templates that can show every section and your desktop menu style are listed, best rated first. Prices follow each template’s rating out of 99: 74 and lower free, then $50 at 75 rising to $500 at 90 and $7,500 at 99.</p></div>
           <label className="ck"><input type="checkbox" checked={!!S.tpl.all} onChange={e => commit(S => { S.tpl.all = e.target.checked; })} /> Show templates that don’t fit</label>
           <label className="ck"><input type="checkbox" checked={!!S.tpl.favOnly} onChange={e => commit(S => { S.tpl.favOnly = e.target.checked; })} /> Favourites only</label>
         </div>

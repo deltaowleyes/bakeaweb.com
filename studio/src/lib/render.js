@@ -82,7 +82,7 @@ var Render = (function () {
   ];
   /* Grades on a 1–99 scale (Claude's grading from screenshots, 2026-11-14; the owner and Leah grade the finalists).
      A family's grade applies to its three variants unless a variant is listed (e.g. 'homeward-b').
-     Prices follow the grade (decided 2026-11-14): 70–74 free, 75–79 $50, 80–84 $100, 85–89 $250, 90+ $500.
+     Prices follow the grade point by point (decided 2026-11-15, VISION.md §5): 74 and lower free, 75 $50 … 99 $7,500 (PRICE_BY_GRADE).
      Templates under 70 are no longer offered in step 5 (they stay here so older saved projects still open). */
   var GRADES = { news: 45, app: 50, mag: 52, min: 50, bold: 48, portal: 50, story: 55, board: 42,
     tide: 72, ember: 73, folio: 74, block: 70, bento: 72, craft: 66, glow: 67, swiss: 71, retro: 70, lens: 64,
@@ -92,10 +92,12 @@ var Render = (function () {
     harbour: 85, waterline: 84, dockside: 84,
     press: 87, stitch: 85, merch: 84,
     taproom: 85, roadside: 85, patio: 84 };
-  var PRICE_BANDS = [[90, 500], [85, 250], [80, 100], [75, 50], [70, 0]];
+  var PRICE_BY_GRADE = { 75: 50, 76: 60, 77: 70, 78: 80, 79: 90, 80: 100, 81: 120, 82: 140, 83: 160, 84: 180, 85: 200, 86: 250, 87: 300, 88: 350, 89: 400,
+    90: 500, 91: 600, 92: 700, 93: 800, 94: 900, 95: 1000, 96: 1500, 97: 2500, 98: 4000, 99: 7500 };
   var MIN_GRADE = 70;
-  function priceFor(g) { for (var i = 0; i < PRICE_BANDS.length; i++) if (g >= PRICE_BANDS[i][0]) return PRICE_BANDS[i][1]; return null; }
-  function priceLabel(t) { return t.price == null ? 'Not offered' : t.price ? '$' + t.price : 'Free'; }
+  function priceFor(g) { g = Math.floor(+g || 0); if (g < MIN_GRADE) return null; if (g > 99) g = 99; return PRICE_BY_GRADE[g] || 0; }
+  function money(n) { return '$' + Number(n).toLocaleString('en-US'); }
+  function priceLabel(t) { return t.price == null ? 'Not offered' : t.price ? money(t.price) : 'Free'; }
   var TEMPLATES = [];
   FAMILIES.forEach(function (f) { VARIANTS.forEach(function (v) { var id = f.k + '-' + v.k, g = GRADES[id] || GRADES[f.k] || 0; TEMPLATES.push({ id: id, name: f.name + ' ' + v.name, fam: f, v: v, grade: g, price: priceFor(g), offered: g >= MIN_GRADE }); }); });
   var OFFERED = TEMPLATES.filter(function (t) { return t.offered; }).sort(function (a, b) { return b.grade - a.grade; });
@@ -380,7 +382,7 @@ var Render = (function () {
       (P.menu.vp.phone.type == 'bottom' ? '<div class="vh vh-p">' + bottomBar(P, 'phone', mv == 'phone') + '</div>' : '') + '</div>';
   }
 
-  return { page: page, credits: credits, GRADES: GRADES, PRICE_BANDS: PRICE_BANDS, MIN_GRADE: MIN_GRADE, priceFor: priceFor, priceLabel: priceLabel, OFFERED: OFFERED, pageOf: pageOf, allSections: allSections, imageRef: imageRef, imageRaw: imageRaw, decorate: decorate, SHADOWS: SHADOWS, FRAMES: FRAMES, BSTYLES: BSTYLES, TEMPLATES: TEMPLATES, FAMILIES: FAMILIES, tpl: tpl, compat: compat, SECTION_TYPES: SECTION_TYPES, MENU_TYPES: MENU_TYPES, asset: asset, picked: picked };
+  return { page: page, credits: credits, GRADES: GRADES, PRICE_BY_GRADE: PRICE_BY_GRADE, money: money, MIN_GRADE: MIN_GRADE, priceFor: priceFor, priceLabel: priceLabel, OFFERED: OFFERED, pageOf: pageOf, allSections: allSections, imageRef: imageRef, imageRaw: imageRaw, decorate: decorate, SHADOWS: SHADOWS, FRAMES: FRAMES, BSTYLES: BSTYLES, TEMPLATES: TEMPLATES, FAMILIES: FAMILIES, tpl: tpl, compat: compat, SECTION_TYPES: SECTION_TYPES, MENU_TYPES: MENU_TYPES, asset: asset, picked: picked };
 })();
 
 export { Render };
