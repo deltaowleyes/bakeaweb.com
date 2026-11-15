@@ -671,9 +671,9 @@
 
 
 /* designer families on dark or accent bands: everything inside switches to the band's text colour */
-.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .s.bg-ink>.w{--ink:var(--oi);--line:color-mix(in srgb,var(--oi) 28%,transparent);--mute:color-mix(in srgb,var(--oi) 72%,transparent);--card:color-mix(in srgb,var(--oi) 8%,transparent);--soft:color-mix(in srgb,var(--oi) 12%,transparent)}
-.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .s.bg-acc>.w{--ink:var(--oa);--line:color-mix(in srgb,var(--oa) 30%,transparent);--mute:color-mix(in srgb,var(--oa) 78%,transparent);--card:color-mix(in srgb,var(--oa) 10%,transparent);--soft:color-mix(in srgb,var(--oa) 14%,transparent)}
-.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .s.bg-ink .meta,.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .s.bg-acc .meta{color:inherit}
+.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .s.bg-ink>.w{--ink:var(--oi);--line:color-mix(in srgb,var(--oi) 28%,transparent);--mute:color-mix(in srgb,var(--oi) 72%,transparent);--card:color-mix(in srgb,var(--oi) 8%,transparent);--soft:color-mix(in srgb,var(--oi) 12%,transparent)}
+.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .s.bg-acc>.w{--ink:var(--oa);--line:color-mix(in srgb,var(--oa) 30%,transparent);--mute:color-mix(in srgb,var(--oa) 78%,transparent);--card:color-mix(in srgb,var(--oa) 10%,transparent);--soft:color-mix(in srgb,var(--oa) 14%,transparent)}
+.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .s.bg-ink .meta,.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .s.bg-acc .meta{color:inherit}
 /* designer families: tablet */
 @container (min-width:600px) and (max-width:1023.98px){
 .pv:is(.tf-tide,.tf-craft,.tf-bento) h1{font-size:48px}
@@ -735,15 +735,15 @@
    Photo-led, with gentle motion. Motion only moves things (never hides them), so screenshots stay correct,
    and it switches off for visitors who ask for less motion.
    ====================================================================== */
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .ti,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .bt{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .tim>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .gl figure>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .fm>img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .ti:hover .tim>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .gl figure:hover>img{transform:scale(1.06)}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .bt:hover{transform:translateY(-2px)}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .gl figure{overflow:hidden;border-radius:var(--r)}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .ti,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .bt{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .tim>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .gl figure>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fm>img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .ti:hover .tim>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .gl figure:hover>img{transform:scale(1.06)}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .bt:hover{transform:translateY(-2px)}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .gl figure{overflow:hidden;border-radius:var(--r)}
 @media (prefers-reduced-motion:no-preference){
-  .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .s-hero .hm>img{animation:bk-drift 24s ease-in-out infinite alternate}
+  .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .s-hero .hm>img{animation:bk-drift 24s ease-in-out infinite alternate}
   @supports (animation-timeline:view()){
-    .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) main>.s:not(.s-hero) .w>*{animation:bk-rise linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
+    .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) main>.s:not(.s-hero) .w>*{animation:bk-rise linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
   }
 }
 @keyframes bk-drift{from{transform:scale(1)}to{transform:scale(1.08) translate(-1%,-1%)}}
@@ -892,7 +892,7 @@
 /* flagships: tablet */
 @container (min-width:600px) and (max-width:1023.98px){
 .pv.tf-hearth h1{font-size:72px}.pv.tf-volt h1{font-size:68px}.pv.tf-loom h1{font-size:60px}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) h2,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .s-cta h2{font-size:42px}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) h2,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .s-cta h2{font-size:42px}
 .pv.tf-hearth .tl-menu{grid-template-columns:1fr!important}
 .pv.tf-hearth .hl-overlay .hx{min-height:600px}
 .pv.tf-volt .hl-split .hx,.pv.tf-loom .hl-split .hx{gap:32px}
@@ -902,8 +902,8 @@
 @container (max-width:599.98px){
 .pv.tf-hearth{--sy:60px}
 .pv.tf-hearth h1{font-size:54px}.pv.tf-volt h1{font-size:54px}.pv.tf-loom h1{font-size:44px}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) h2,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .s-cta h2{font-size:34px}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .fe h3{font-size:32px}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) h2,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .s-cta h2{font-size:34px}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe h3{font-size:32px}
 .pv.tf-hearth .hl-overlay .hx{min-height:560px}
 .pv.tf-hearth .tl-menu{grid-template-columns:1fr!important;gap:24px}
 .pv.tf-hearth .tl-menu .tim{flex-basis:76px;width:76px}
@@ -1144,11 +1144,11 @@
 @container (max-width:599.98px){
 .pv.tf-bloom{--sy:60px}
 .pv.tf-bloom h1{font-size:50px}.pv.tf-pulse h1{font-size:68px}.pv.tf-commons h1{font-size:38px}
-.pv:is(.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) h2,.pv:is(.tf-bloom,.tf-pulse) .s-cta h2,.pv.tf-bloom .bk-a h2{font-size:36px}
-.pv:is(.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .fe h3{font-size:32px}
+.pv:is(.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) h2,.pv:is(.tf-bloom,.tf-pulse) .s-cta h2,.pv.tf-bloom .bk-a h2{font-size:36px}
+.pv:is(.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe h3{font-size:32px}
 .pv:is(.tf-bloom,.tf-commons) .hl-split .hx{grid-template-columns:1fr;gap:36px;padding-top:40px;padding-bottom:56px}
 .pv.tf-bloom .hl-split .hm{box-shadow:16px 16px 0 var(--soft);border-radius:160px 160px 16px 160px}
-.pv:is(.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .fe-split{grid-template-columns:1fr;gap:28px}
+.pv:is(.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe-split{grid-template-columns:1fr;gap:28px}
 .pv.tf-bloom .bk{grid-template-columns:1fr;gap:28px}.pv.tf-bloom .bk-b{padding:24px}
 .pv.tf-bloom .gl{grid-template-columns:1fr 1fr;padding-bottom:24px}.pv.tf-bloom .gl figure:nth-child(even){transform:translateY(24px)}
 .pv.tf-pulse .hl-overlay .hx{min-height:620px;padding-bottom:48px}
@@ -1160,7 +1160,7 @@
 }
 
 /* buttons stay readable on dark and accent bands */
-.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .s.bg-acc .bt:not(.bt2){background:var(--bg);color:var(--acc)}
+.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .s.bg-acc .bt:not(.bt2){background:var(--bg);color:var(--acc)}
 .pv.tf-bloom .s.bg-ink .bt:not(.bt2){background:var(--acc);color:var(--oa)}
 
 /* ======================================================================
@@ -1281,10 +1281,10 @@
 }
 @container (max-width:599.98px){
 .pv.tf-council h1{font-size:36px}.pv.tf-meridian h1{font-size:40px}.pv.tf-bridge h1{font-size:42px}
-.pv:is(.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) h2,.pv.tf-bridge .s-cta h2{font-size:30px}
-.pv:is(.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .fe h3{font-size:28px}
+.pv:is(.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) h2,.pv.tf-bridge .s-cta h2{font-size:30px}
+.pv:is(.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe h3{font-size:28px}
 .pv:is(.tf-council,.tf-meridian) .hl-split .hx{grid-template-columns:1fr;gap:32px;padding-top:44px;padding-bottom:56px}
-.pv:is(.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .fe-split{grid-template-columns:1fr;gap:28px}
+.pv:is(.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe-split{grid-template-columns:1fr;gap:28px}
 .pv:is(.tf-council,.tf-meridian) .ls{grid-template-columns:1fr}
 .pv.tf-council .stt{grid-template-columns:1fr 1fr;row-gap:20px}.pv.tf-council .stt>div{border:0;padding:0}
 .pv.tf-meridian .stt{grid-template-columns:1fr 1fr;row-gap:16px}.pv.tf-meridian .stt>div+div{border:0}
@@ -1448,13 +1448,13 @@
 }
 @container (max-width:599.98px){
 .pv.tf-convoy h1{font-size:58px}.pv.tf-homeward h1{font-size:40px}.pv.tf-freight h1{font-size:42px}
-.pv:is(.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) h2{font-size:32px}.pv.tf-convoy .s-cta h2{font-size:42px}
-.pv:is(.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .fe h3{font-size:30px}
+.pv:is(.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) h2{font-size:32px}.pv.tf-convoy .s-cta h2{font-size:42px}
+.pv:is(.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe h3{font-size:30px}
 .pv.tf-convoy .hl-overlay .hx{min-height:560px;padding-bottom:84px}.pv.tf-convoy .s-hero:after{bottom:30px}
 .pv.tf-convoy .stt b{font-size:48px}
-.pv:is(.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .ls{grid-template-columns:1fr}
+.pv:is(.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .ls{grid-template-columns:1fr}
 .pv:is(.tf-homeward,.tf-freight) .hl-split .hx{grid-template-columns:1fr;gap:36px;padding-top:44px;padding-bottom:60px}
-.pv:is(.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .fe-split{grid-template-columns:1fr;gap:28px}
+.pv:is(.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe-split{grid-template-columns:1fr;gap:28px}
 .pv.tf-homeward .hl-split .hm:after{width:72px;height:72px;right:-8px;bottom:-12px}
 .pv.tf-homeward .s-cta>.w{padding:48px 24px;border-radius:28px}
 .pv.tf-freight .stt{grid-template-columns:1fr 1fr;row-gap:20px}.pv.tf-freight .stt>div{border:0;padding:0}
@@ -1609,16 +1609,16 @@
 }
 @container (max-width:599.98px){
 .pv.tf-timber h1{font-size:52px}.pv.tf-shoreline h1{font-size:48px}.pv.tf-basecamp h1{font-size:44px}
-.pv:is(.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) h2{font-size:34px}
-.pv:is(.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .s-cta h2{font-size:38px}
-.pv:is(.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .fe h3{font-size:32px}
+.pv:is(.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) h2{font-size:34px}
+.pv:is(.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .s-cta h2{font-size:38px}
+.pv:is(.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe h3{font-size:32px}
 .pv.tf-timber .hl-overlay .hx{min-height:600px;padding-bottom:64px}
 .pv.tf-timber .stt{grid-template-columns:1fr 1fr;row-gap:20px}.pv.tf-timber .stt>div+div{border:0}
 .pv:is(.tf-timber,.tf-basecamp) .stt b{font-size:38px}
 .pv.tf-timber .gl{grid-template-columns:1fr 1fr;grid-auto-rows:150px}
 .pv.tf-timber .mu-g{padding:24px 18px}
 .pv:is(.tf-shoreline,.tf-basecamp) .hl-split .hx{grid-template-columns:1fr;gap:36px;padding-top:40px;padding-bottom:72px}
-.pv:is(.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .fe-split{grid-template-columns:1fr;gap:28px}
+.pv:is(.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe-split{grid-template-columns:1fr;gap:28px}
 .pv.tf-shoreline .gl{grid-template-columns:1fr 1fr}
 .pv.tf-basecamp .hl-split .hm{transform:none;box-shadow:8px 8px 0 var(--ink)}
 }
@@ -1792,16 +1792,16 @@
 }
 @container (max-width:599.98px){
 .pv.tf-reel h1{font-size:52px}.pv.tf-marquee h1{font-size:58px}.pv.tf-frame h1{font-size:48px}
-.pv:is(.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) h2{font-size:36px}
-.pv:is(.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .s-cta h2{font-size:40px}
-.pv:is(.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .fe h3{font-size:34px}
+.pv:is(.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) h2{font-size:36px}
+.pv:is(.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .s-cta h2{font-size:40px}
+.pv:is(.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe h3{font-size:34px}
 .pv.tf-reel .hl-overlay .hx{min-height:520px}
 .pv:is(.tf-reel,.tf-marquee) .stt{grid-template-columns:1fr 1fr;row-gap:10px}
 .pv:is(.tf-reel,.tf-marquee) .stt{row-gap:28px}
 .pv.tf-marquee .hl-split .hx{grid-template-columns:1fr;padding-top:44px;padding-bottom:90px}
 .pv.tf-marquee .hl-split .hm{max-width:260px}
 .pv.tf-marquee .s-hero:before{font-size:100px;bottom:-18px}
-.pv:is(.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside) .fe-split{grid-template-columns:1fr;gap:28px}
+.pv:is(.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe-split{grid-template-columns:1fr;gap:28px}
 .pv:is(.tf-marquee,.tf-frame) .ls{grid-template-columns:1fr}
 .pv.tf-frame .ti,.pv.tf-frame .ti:nth-child(even){grid-template-columns:1fr;gap:16px}
 .pv.tf-frame .ti:nth-child(even) .tim{order:0}
@@ -1968,19 +1968,182 @@
 }
 @container (max-width:599.98px){
 .pv.tf-harbour h1{font-size:48px}.pv.tf-waterline h1{font-size:42px}.pv.tf-dockside h1{font-size:48px}
-.pv:is(.tf-harbour,.tf-waterline,.tf-dockside) h2{font-size:34px}
-.pv:is(.tf-harbour,.tf-waterline,.tf-dockside) .s-cta h2{font-size:38px}
-.pv:is(.tf-harbour,.tf-waterline,.tf-dockside) .fe h3{font-size:32px}
+.pv:is(.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) h2{font-size:34px}
+.pv:is(.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .s-cta h2{font-size:38px}
+.pv:is(.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe h3{font-size:32px}
 .pv.tf-harbour .hl-overlay .hx{min-height:560px;padding-bottom:72px}
 .pv.tf-harbour .stt{grid-template-columns:1fr 1fr;row-gap:20px}.pv.tf-harbour .stt>div+div{border:0}
 .pv.tf-harbour .stt b,.pv.tf-dockside .stt b{font-size:38px}
 .pv.tf-harbour .mu-g{padding:26px 20px}
 .pv:is(.tf-harbour,.tf-dockside) .ls{grid-template-columns:1fr}
 .pv:is(.tf-waterline,.tf-dockside) .hl-split .hx{grid-template-columns:1fr;gap:36px;padding-top:40px;padding-bottom:64px}
-.pv:is(.tf-harbour,.tf-waterline,.tf-dockside) .fe-split{grid-template-columns:1fr;gap:28px}
+.pv:is(.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch) .fe-split{grid-template-columns:1fr;gap:28px}
 .pv.tf-waterline .s-hero{background:var(--bg)}.pv.tf-waterline .s-hero:after{display:none}
 .pv.tf-waterline .stt{grid-template-columns:1fr 1fr}
 .pv.tf-waterline .s-cta>.w{padding:48px 24px;border-radius:24px}
 .pv.tf-dockside .hl-split .hm{transform:none;border-width:8px 8px 36px}
 .pv:is(.tf-harbour,.tf-dockside) .gl{grid-template-columns:1fr 1fr}
+}
+
+/* ======================================================================
+   Indigenous business series, run 6 (2026-11-15): custom apparel, embroidery and printing. Press, Stitch, Merch.
+   ====================================================================== */
+/* ---------- Press: screen-print poster ---------- */
+.pv.tf-press{font-size:17px}
+.pv.tf-press :is(h1,h2,h3){text-transform:uppercase;letter-spacing:.005em;line-height:.9}
+.pv.tf-press h1{font-size:128px;text-shadow:5px 4px 0 color-mix(in srgb,#00b8d9 70%,transparent),-4px -3px 0 color-mix(in srgb,#ff2e88 60%,transparent)}
+.pv.tf-press h2{font-size:72px;text-shadow:3px 2px 0 color-mix(in srgb,#00b8d9 55%,transparent)}
+.pv.tf-press h3{font-size:30px}
+.pv.tf-press .hd{border-bottom:3px solid var(--ink)}
+.pv.tf-press :is(.mn,.dr>summary){text-transform:uppercase;font-weight:800;letter-spacing:.06em;font-size:14px}
+.pv.tf-press .bt{border-radius:0;text-transform:uppercase;font-weight:800;letter-spacing:.08em;padding:16px 26px;border:3px solid var(--ink);box-shadow:5px 5px 0 #00b8d9}
+.pv.tf-press .bt2{background:var(--bg);box-shadow:5px 5px 0 #ff2e88}
+.pv.tf-press .ey{display:inline-flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.16em;color:var(--ink)}
+.pv.tf-press .ey:before{content:"";width:22px;height:22px;border-radius:50%;border:2px solid var(--ink);background:linear-gradient(var(--ink),var(--ink)) center/100% 2px no-repeat,linear-gradient(var(--ink),var(--ink)) center/2px 100% no-repeat}
+.pv.tf-press .s-hero{background:radial-gradient(circle,color-mix(in srgb,var(--acc) 30%,transparent) 2.2px,transparent 2.6px) 0 0/14px 14px,var(--bg);border-bottom:3px solid var(--ink)}
+.pv.tf-press .hl-split .hx{grid-template-columns:1.2fr 1fr;gap:48px;padding-top:72px;padding-bottom:84px}
+.pv.tf-press .hl-split .hm{aspect-ratio:4/4.4;border-radius:0;border:3px solid var(--ink);box-shadow:14px 14px 0 var(--acc);filter:contrast(1.08) saturate(1.15)}
+.pv.tf-press .hl-split p{font-size:20px}
+.pv.tf-press .s-stats,.pv.tf-press .s-stats.bg-default{background:var(--ink);color:var(--oi)}
+.pv.tf-press .stt b{font:900 72px/1 var(--hf);color:var(--oi);text-shadow:3px 2px 0 #ff2e88}
+.pv.tf-press .stt span{text-transform:uppercase;font-weight:800;letter-spacing:.1em;font-size:13px}
+.pv.tf-press .sh{border-bottom:3px solid var(--ink);padding-bottom:12px}
+.pv.tf-press .ti{border:3px solid var(--ink);border-radius:0;background:var(--card);box-shadow:8px 8px 0 var(--ink)}
+.pv.tf-press .tim{border-radius:0;border-bottom:3px solid var(--ink)}
+.pv.tf-press .ti .tx{padding:4px 20px 20px}
+.pv.tf-press .tl-steps .ti:before{border-radius:0;background:var(--acc);color:var(--oa);font:900 34px/56px var(--hf);width:56px;height:56px}
+.pv.tf-press .tl-steps .ti:after{display:none}
+.pv.tf-press .pr-im{border-radius:0;border:3px solid var(--ink)}
+.pv.tf-press .pr-t h3{font-size:26px}
+.pv.tf-press .pr-p{font:900 26px var(--hf);color:var(--acc)}
+.pv.tf-press .pr-bd{border-radius:0;background:var(--acc);color:var(--oa)}
+.pv.tf-press .ls{border:0;display:flex;flex-wrap:wrap;gap:12px}
+.pv.tf-press .lr{border:3px solid var(--ink);padding:12px 20px;background:var(--card)}
+.pv.tf-press .lr strong{font:900 24px var(--hf);text-transform:uppercase}
+.pv.tf-press .lr span{display:none}
+.pv.tf-press .fe-split{grid-template-columns:1fr 1fr;gap:64px}
+.pv.tf-press .fm{border-radius:0;border:3px solid var(--ink);box-shadow:-12px 12px 0 #00b8d9}
+.pv.tf-press .fe h3{font-size:68px}
+.pv.tf-press .qs blockquote{border:3px solid var(--ink);border-radius:0;background:var(--card)}
+.pv.tf-press .s-cta,.pv.tf-press .s-cta.bg-default{background:radial-gradient(circle,color-mix(in srgb,var(--oa) 25%,transparent) 2.2px,transparent 2.6px) 0 0/14px 14px,var(--acc);color:var(--oa)}
+.pv.tf-press .s-cta h2{font-size:96px;text-shadow:4px 3px 0 var(--ink)}
+.pv.tf-press .s-cta .bt{background:var(--ink);color:var(--oi);border-color:var(--ink)}
+.pv.tf-press .wm-i{border-radius:0;border:2px solid var(--ink);box-shadow:3px 3px 0 #ff2e88}
+.pv.tf-press .wm-n{font:900 30px var(--hf);text-transform:uppercase}
+
+/* ---------- Stitch: embroidery and workwear ---------- */
+.pv.tf-stitch{font-size:17px}
+.pv.tf-stitch h1{font-size:76px;line-height:1;letter-spacing:-.03em}
+.pv.tf-stitch h2{font-size:46px;letter-spacing:-.02em}
+.pv.tf-stitch .hd{border-bottom:2px dashed var(--line)}
+.pv.tf-stitch .bt{border-radius:12px;font-weight:700;padding:15px 26px;outline:2px dashed color-mix(in srgb,var(--oa) 60%,transparent);outline-offset:-6px}
+.pv.tf-stitch .bt2{outline-color:var(--line)}
+.pv.tf-stitch .ey{display:inline-block;background:var(--acc);color:var(--oa);padding:8px 16px;border-radius:999px;outline:2px dashed color-mix(in srgb,var(--oa) 70%,transparent);outline-offset:-5px;letter-spacing:.1em;font-weight:800;font-size:12px}
+.pv.tf-stitch .s-hero{background:var(--ink);color:var(--oi)}
+.pv.tf-stitch .s-hero .bt2{color:var(--oi);background:transparent;box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--oi) 40%,transparent);outline:0}
+.pv.tf-stitch .hl-split .hx{grid-template-columns:1fr 1.05fr;gap:56px;padding-top:80px;padding-bottom:88px}
+.pv.tf-stitch .hl-split .hm{aspect-ratio:1;border-radius:50%;outline:3px dashed var(--acc);outline-offset:12px}
+.pv.tf-stitch .hl-split p{font-size:19px;opacity:.9}
+.pv.tf-stitch .s-stats,.pv.tf-stitch .s-stats.bg-default{background:var(--soft)}
+.pv.tf-stitch .stt>div{background:var(--card);border-radius:22px;padding:22px 10px;outline:2px dashed var(--line);outline-offset:-8px}
+.pv.tf-stitch .stt b{font:800 42px/1 var(--hf);color:var(--acc);letter-spacing:-.03em}
+.pv.tf-stitch .stt{gap:16px}
+.pv.tf-stitch .ti{border-radius:20px;background:var(--card);border:1px solid var(--line);overflow:hidden;outline:2px dashed var(--line);outline-offset:-8px}
+.pv.tf-stitch .tim{border-radius:0}
+.pv.tf-stitch .ti .tx{padding:4px 22px 24px}
+.pv.tf-stitch .tl-steps .ti:before{border-radius:50%;background:var(--acc);outline:2px dashed color-mix(in srgb,var(--oa) 70%,transparent);outline-offset:-5px}
+.pv.tf-stitch .tl-steps .ti:after{border-top-style:dashed}
+.pv.tf-stitch .pr-im{border-radius:20px;outline:2px dashed color-mix(in srgb,var(--ink) 25%,transparent);outline-offset:-8px}
+.pv.tf-stitch .pr-p{font-weight:800;color:var(--acc)}
+.pv.tf-stitch .pr-bd{background:var(--acc);color:var(--oa)}
+.pv.tf-stitch .ls{border:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pv.tf-stitch .lr{flex-direction:column;align-items:center;text-align:center;border:0;background:var(--card);border-radius:999px;padding:16px 18px;outline:2px dashed var(--acc);outline-offset:-6px}
+.pv.tf-stitch .lr strong{font:800 17px var(--hf)}
+.pv.tf-stitch .lr span{font-size:13px;color:var(--mute)}
+.pv.tf-stitch .fe-split{grid-template-columns:1fr 1fr;gap:64px}
+.pv.tf-stitch .fm{border-radius:28px;outline:3px dashed var(--acc);outline-offset:10px}
+.pv.tf-stitch .fe h3{font-size:44px;letter-spacing:-.02em}
+.pv.tf-stitch .gl{gap:14px}
+.pv.tf-stitch .gl figure{margin:0;border-radius:18px;overflow:hidden;outline:2px dashed color-mix(in srgb,#fff 70%,transparent);outline-offset:-8px}
+.pv.tf-stitch .gl figure>:is(img,svg){width:100%;aspect-ratio:1;object-fit:cover}
+.pv.tf-stitch .gl figcaption{display:none}
+.pv.tf-stitch .qs blockquote{border-radius:20px;outline:2px dashed var(--line);outline-offset:-8px}
+.pv.tf-stitch .s-cta,.pv.tf-stitch .s-cta.bg-default{background:var(--acc);color:var(--oa)}
+.pv.tf-stitch .s-cta .w{outline:3px dashed color-mix(in srgb,var(--oa) 55%,transparent);outline-offset:-4px;border-radius:28px;padding-top:56px;padding-bottom:56px}
+.pv.tf-stitch .s-cta .bt{background:var(--ink);color:var(--oi)}
+.pv.tf-stitch .wm-i{border-radius:50%;outline:2px dashed color-mix(in srgb,var(--oa) 70%,transparent);outline-offset:-4px}
+.pv.tf-stitch .wm-n{font:800 24px var(--hf);letter-spacing:-.02em}
+
+/* ---------- Merch: clean storefront ---------- */
+.pv.tf-merch{font-size:16px}
+.pv.tf-merch h1{font-size:76px;line-height:1;letter-spacing:-.045em}
+.pv.tf-merch h2{font-size:42px;letter-spacing:-.035em}
+.pv.tf-merch h3{letter-spacing:-.02em}
+.pv.tf-merch .hd{border-bottom:1px solid var(--line)}
+.pv.tf-merch .bt{border-radius:10px;font-weight:600;padding:15px 24px}
+.pv.tf-merch .bt2{box-shadow:inset 0 0 0 1px var(--line);background:var(--card)}
+.pv.tf-merch .ey{color:var(--acc);letter-spacing:0;text-transform:none;font-weight:600;font-size:15px}
+.pv.tf-merch .s-hero{background:var(--bg)}
+.pv.tf-merch .hl-split .hx{grid-template-columns:1fr 1.25fr;gap:48px;padding-top:56px;padding-bottom:64px}
+.pv.tf-merch .hl-split .hm{aspect-ratio:5/4;border-radius:20px}
+.pv.tf-merch .hl-split .ht{align-self:center}
+.pv.tf-merch .hl-split p{font-size:18px;color:var(--mute)}
+.pv.tf-merch .s-stats,.pv.tf-merch .s-stats.bg-default{background:var(--soft)}
+.pv.tf-merch .stt{text-align:left}
+.pv.tf-merch .stt>div{display:flex;flex-direction:column;gap:2px;padding-left:16px;border-left:3px solid var(--acc)}
+.pv.tf-merch .stt b{font:700 34px/1.1 var(--hf);letter-spacing:-.04em}
+.pv.tf-merch .stt span{font-size:14px;color:var(--mute)}
+.pv.tf-merch .pr-g{gap:22px}
+.pv.tf-merch .pr-i{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:10px 10px 16px;transition:transform .2s,box-shadow .2s}
+.pv.tf-merch .pr-i:hover{transform:translateY(-3px);box-shadow:0 18px 40px -26px rgba(0,0,0,.4)}
+.pv.tf-merch .pr-im{border-radius:12px;background:var(--soft)}
+.pv.tf-merch .pr-x{padding:0 6px}
+.pv.tf-merch .pr-p{font-weight:700}
+.pv.tf-merch .pr-btn{display:inline-block;margin-top:2px}
+.pv.tf-merch .ti{border-radius:18px;border:1px solid var(--line);background:var(--card);overflow:hidden}
+.pv.tf-merch .tim{border-radius:0}
+.pv.tf-merch .ti .tx{padding:4px 20px 20px}
+.pv.tf-merch .tl-steps{gap:0;background:var(--ink);color:var(--oi);border-radius:22px;padding:8px}
+.pv.tf-merch .tl-steps .ti{background:transparent;border:0;color:var(--oi);padding:76px 24px 24px}
+.pv.tf-merch .tl-steps .ti+.ti{border-left:1px solid color-mix(in srgb,var(--oi) 18%,transparent)}
+.pv.tf-merch .tl-steps .ti p{color:color-mix(in srgb,var(--oi) 75%,transparent)}
+.pv.tf-merch .tl-steps .ti:before{background:var(--acc);color:var(--oa);border-radius:12px}
+.pv.tf-merch .tl-steps .ti:after{display:none}
+.pv.tf-merch .ls{border:0;display:flex;flex-wrap:wrap;gap:10px}
+.pv.tf-merch .lr{border:1px solid var(--line);border-radius:999px;padding:10px 18px;background:var(--card)}
+.pv.tf-merch .lr strong{font-weight:600;font-size:15px}
+.pv.tf-merch .lr span{display:none}
+.pv.tf-merch .fe-split{grid-template-columns:1fr 1fr;gap:56px}
+.pv.tf-merch .fm{border-radius:20px}
+.pv.tf-merch .fe h3{font-size:40px;letter-spacing:-.035em}
+.pv.tf-merch .gl{gap:12px}
+.pv.tf-merch .gl figure{margin:0;border-radius:16px;overflow:hidden}
+.pv.tf-merch .gl figure>:is(img,svg){width:100%;aspect-ratio:1;object-fit:cover}
+.pv.tf-merch .gl figcaption{display:none}
+.pv.tf-merch .qs blockquote{border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.pv.tf-merch .s-cta,.pv.tf-merch .s-cta.bg-default{background:var(--acc);color:var(--oa)}
+.pv.tf-merch .s-cta .bt{background:var(--bg);color:var(--ink)}
+.pv.tf-merch .wm-i{border-radius:10px}
+.pv.tf-merch .wm-n{font:700 22px var(--hf);letter-spacing:-.04em}
+
+/* run 6: tablet and phone */
+@container (min-width:600px) and (max-width:1023.98px){
+.pv.tf-press h1{font-size:88px}.pv.tf-stitch h1{font-size:56px}.pv.tf-merch h1{font-size:54px}
+.pv:is(.tf-press,.tf-stitch,.tf-merch) .hl-split .hx{gap:28px}
+.pv.tf-stitch .ls{grid-template-columns:1fr 1fr}
+.pv.tf-merch .tl-steps .ti+.ti{border-left:0}
+}
+@container (max-width:599.98px){
+.pv.tf-press h1{font-size:64px}.pv.tf-stitch h1{font-size:42px}.pv.tf-merch h1{font-size:42px}
+.pv:is(.tf-press,.tf-stitch,.tf-merch) h2{font-size:36px}.pv.tf-press h2{font-size:46px}
+.pv.tf-press .s-cta h2{font-size:52px}.pv.tf-press .fe h3{font-size:44px}
+.pv:is(.tf-stitch,.tf-merch) .fe h3{font-size:32px}
+.pv:is(.tf-press,.tf-stitch,.tf-merch) .hl-split .hx{grid-template-columns:1fr;gap:36px;padding-top:40px;padding-bottom:64px}
+.pv.tf-press .stt b{font-size:48px}
+.pv.tf-stitch .stt{grid-template-columns:1fr 1fr}
+.pv.tf-stitch .ls{grid-template-columns:1fr}
+.pv.tf-stitch .hl-split .hm{max-width:300px;justify-self:center}
+.pv:is(.tf-press,.tf-stitch,.tf-merch) .fe-split{grid-template-columns:1fr;gap:28px}
+.pv.tf-merch .tl-steps .ti+.ti{border-left:0;border-top:1px solid color-mix(in srgb,var(--oi) 18%,transparent)}
+.pv.tf-merch .stt{grid-template-columns:1fr 1fr;row-gap:18px}
 }

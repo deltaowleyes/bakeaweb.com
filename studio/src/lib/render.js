@@ -65,7 +65,11 @@ var Render = (function () {
     /* 2026-11-14 Indigenous business series, run 5: marinas, boating and waterfront */
     { k: 'harbour', wordmark: 1, videos: 'grid', name: 'Harbour', desc: 'For marinas and yacht clubs: classic navy and white, signal-flag accents, GPS coordinates up top and a rate card like a harbour board.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Spectral', hcat: 'r', hw: 600, b: 'Work Sans', bcat: 's' } },
     { k: 'waterline', wordmark: 1, videos: 'grid', name: 'Waterline', desc: 'For boat rentals and waterfront businesses: bright and modern, a wave line under the opener, amenity chips and a quick booking card.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Lexend', hcat: 's', hw: 700, b: 'Lexend', bcat: 's' } },
-    { k: 'dockside', wordmark: 1, videos: 'grid', name: 'Dockside', desc: 'For summer marinas, resorts and outfitters: sun-warmed colours, dock-plank stripes, tag-shaped cards and snapshot photos.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Gabarito', hcat: 's', hw: 800, b: 'Figtree', bcat: 's' } }
+    { k: 'dockside', wordmark: 1, videos: 'grid', name: 'Dockside', desc: 'For summer marinas, resorts and outfitters: sun-warmed colours, dock-plank stripes, tag-shaped cards and snapshot photos.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Gabarito', hcat: 's', hw: 800, b: 'Figtree', bcat: 's' } },
+    /* 2026-11-15 Indigenous business series, run 6: custom apparel, embroidery and printing */
+    { k: 'press', wordmark: 1, videos: 'grid', name: 'Press', desc: 'For print shops and screen printers: halftone dots, off-register colour headlines, registration marks and loud poster type.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Big Shoulders Display', hcat: 's', hw: 900, b: 'Karla', bcat: 's' } },
+    { k: 'stitch', wordmark: 1, videos: 'grid', name: 'Stitch', desc: 'For embroidery, sewing and team uniforms: stitched borders, patch-shaped badges and a sturdy workwear feel.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Chivo', hcat: 's', hw: 800, b: 'Chivo', bcat: 's' } },
+    { k: 'merch', wordmark: 1, videos: 'grid', name: 'Merch', desc: 'For apparel and promo product shops: a clean storefront with product prices, category chips and an order-in-three-steps strip.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Onest', hcat: 's', hw: 700, b: 'Onest', bcat: 's' } }
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -81,7 +85,8 @@ var Render = (function () {
     hearth: 86, volt: 85, loom: 85, bloom: 85, pulse: 84, commons: 80, council: 80, meridian: 84, bridge: 80,
     convoy: 80, homeward: 84, 'homeward-b': 85, freight: 76, timber: 85, shoreline: 85, 'shoreline-b': 86, basecamp: 80,
     reel: 88, marquee: 84, frame: 86,
-    harbour: 85, waterline: 84, dockside: 84 };
+    harbour: 85, waterline: 84, dockside: 84,
+    press: 87, stitch: 85, merch: 84 };
   var PRICE_BANDS = [[90, 500], [85, 250], [80, 100], [75, 50], [70, 0]];
   var MIN_GRADE = 70;
   function priceFor(g) { for (var i = 0; i < PRICE_BANDS.length; i++) if (g >= PRICE_BANDS[i][0]) return PRICE_BANDS[i][1]; return null; }
