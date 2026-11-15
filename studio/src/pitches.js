@@ -130,13 +130,23 @@ function card(r) {
 /* Before screenshots come from WordPress's free mshots service, which first answers with a small
    "Generating preview" picture (400 px wide). Retry it a few times, then fall back to Microlink's screenshot. */
 function watchShot(img) {
+  /* Before screenshots: mshots (WordPress) first, then Microlink if mshots fails or keeps showing "Generating preview",
+     and if both fail, a plain "visit the current site" box instead of a broken image. */
   let tries = 0;
-  const check = () => {
-    if (!img.naturalWidth || img.naturalWidth > 400 || !/mshots/.test(img.src)) return;
-    if (++tries <= 4) { setTimeout(() => { img.src = img.src.replace(/&t=\d+/, '') + '&t=' + Date.now(); }, 5000); return; }
-    img.src = 'https://api.microlink.io/?url=' + encodeURIComponent(img.dataset.url) + '&screenshot=true&meta=false&embed=screenshot.url';
+  const ML = () => 'https://api.microlink.io/?url=' + encodeURIComponent(img.dataset.url) + '&screenshot=true&meta=false&embed=screenshot.url';
+  const giveUp = () => {
+    const box = document.createElement('a'); box.href = img.dataset.url; box.target = '_blank'; box.rel = 'noopener'; box.className = 'noshot';
+    box.textContent = 'Picture not available right now. Visit the current site ↗';
+    box.style.cssText = 'display:flex;align-items:center;justify-content:center;text-align:center;aspect-ratio:4/3;border:1px dashed #b9c0bb;border-radius:10px;background:#eef0ec;color:#2f5d62;font-weight:600;padding:20px;text-decoration:none';
+    (img.closest('a') || img).replaceWith(box);
   };
-  img.addEventListener('load', check); if (img.complete) check();
+  const next = () => { if (/mshots/.test(img.src)) img.src = ML(); else giveUp(); };
+  img.addEventListener('error', next);
+  img.addEventListener('load', () => {
+    if (!/mshots/.test(img.src) || img.naturalWidth > 400) return;
+    if (++tries <= 3) setTimeout(() => { img.src = img.src.replace(/&t=\d+/, '') + '&t=' + Date.now(); }, 5000); else img.src = ML();
+  });
+  if (img.complete) img.naturalWidth ? img.dispatchEvent(new Event('load')) : next();
 }
 /* Price from a redesign's grade (1–99), same bands as the studio. */
 function priceChip(d) { const p = Render.priceFor(+d.grade || 0); return p == null ? '' : ' <span>· ' + (p ? '$' + p : 'Free') + '</span>'; }
