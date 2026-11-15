@@ -135,3 +135,29 @@ test('lodge series: Timber is a dark family and every lodge family draws its own
   for (const k in r) { expect(r[k].cls, k).toBe(true); expect(r[k].gf, k).toBe(true); }
   expect(parseInt(r.timber.bg.slice(1, 3), 16)).toBeLessThan(80);
 });
+
+test('grades and prices: only 70+ templates are offered, priced by their rating out of 99', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
+  await openStudio(page);
+  const r = await page.evaluate(async () => {
+    const { Render } = await import('/src/lib/render.js');
+    return { off: Render.OFFERED.map(t => [t.grade, t.price]), all: Render.TEMPLATES.length, p: [69, 70, 74, 75, 80, 85, 90, 99].map(Render.priceFor) };
+  });
+  expect(r.all).toBeGreaterThan(r.off.length);
+  for (const [g] of r.off) expect(g).toBeGreaterThanOrEqual(70);
+  expect(r.p).toEqual([null, 0, 0, 50, 100, 250, 500, 500]);
+});
+
+test('a page that uses sample photos credits the photographers and Pixabay in the footer', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
+  await openStudio(page);
+  await makeStarter(page, { kind: 'food' });
+  const r = await page.evaluate(async () => {
+    const { Render } = await import('/src/lib/render.js');
+    const S = window.BAKE.state(), h = Render.page(S, 'hearth-a');
+    const S2 = JSON.parse(JSON.stringify(S)); S2.pages[0].sections = []; S2.brand.opts.hero = S2.brand.opts.hero.filter(o => o.kind != 'img');
+    return { withPhotos: /class="pc">Photos by <a href="https:\/\/pixabay\.com\//.test(h), without: Render.page(S2, 'hearth-a').includes('class="pc"') };
+  });
+  expect(r.withPhotos).toBe(true);
+  expect(r.without).toBe(false);
+});

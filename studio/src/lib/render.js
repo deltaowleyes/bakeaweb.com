@@ -1,4 +1,5 @@
 import { Art } from './art.js';
+import photoList from './photos.json';
 /* BAKE Studio: turn a project into a web page (used for previews; data-sec / data-ii / data-fk attributes let Shot map where things land) */
 var Render = (function () {
   var esc = Art.esc;
@@ -63,8 +64,21 @@ var Render = (function () {
     { k: 'b', name: 'Soft', r: 14, band: 'soft', dens: 'l' },
     { k: 'c', name: 'Crisp', r: 4, band: 'ink', dens: 's' }
   ];
+  /* Grades on a 1–99 scale (Claude's grading from screenshots, 2026-11-14; the owner and Leah grade the finalists).
+     A family's grade applies to its three variants unless a variant is listed (e.g. 'homeward-b').
+     Prices follow the grade (decided 2026-11-14): 70–74 free, 75–79 $50, 80–84 $100, 85–89 $250, 90+ $500.
+     Templates under 70 are no longer offered in step 5 (they stay here so older saved projects still open). */
+  var GRADES = { news: 45, app: 50, mag: 52, min: 50, bold: 48, portal: 50, story: 55, board: 42,
+    tide: 72, ember: 73, folio: 74, block: 70, bento: 72, craft: 66, glow: 67, swiss: 71, retro: 70, lens: 64,
+    hearth: 86, volt: 85, loom: 85, bloom: 85, pulse: 84, commons: 80, council: 80, meridian: 84, bridge: 80,
+    convoy: 80, homeward: 84, 'homeward-b': 85, freight: 76, timber: 85, shoreline: 85, 'shoreline-b': 86, basecamp: 80 };
+  var PRICE_BANDS = [[90, 500], [85, 250], [80, 100], [75, 50], [70, 0]];
+  var MIN_GRADE = 70;
+  function priceFor(g) { for (var i = 0; i < PRICE_BANDS.length; i++) if (g >= PRICE_BANDS[i][0]) return PRICE_BANDS[i][1]; return null; }
+  function priceLabel(t) { return t.price == null ? 'Not offered' : t.price ? '$' + t.price : 'Free'; }
   var TEMPLATES = [];
-  FAMILIES.forEach(function (f) { VARIANTS.forEach(function (v) { TEMPLATES.push({ id: f.k + '-' + v.k, name: f.name + ' ' + v.name, fam: f, v: v }); }); });
+  FAMILIES.forEach(function (f) { VARIANTS.forEach(function (v) { var id = f.k + '-' + v.k, g = GRADES[id] || GRADES[f.k] || 0; TEMPLATES.push({ id: id, name: f.name + ' ' + v.name, fam: f, v: v, grade: g, price: priceFor(g), offered: g >= MIN_GRADE }); }); });
+  var OFFERED = TEMPLATES.filter(function (t) { return t.offered; }).sort(function (a, b) { return b.grade - a.grade; });
   function tpl(id) { return TEMPLATES.filter(function (t) { return t.id == id; })[0] || TEMPLATES[0]; }
 
   function compat(t, P) {
@@ -298,10 +312,25 @@ var Render = (function () {
     }).join('') + '</div></div></section>';
   };
 
-  function footer(P) {
+  /* Sample photos (photo robot, Pixabay) used on a page get a credit line in the footer:
+     the photographer and Pixabay, linked, so a Maker who keeps any of them gives credit automatically. */
+  var PHOTO_BY = {};
+  Object.keys(photoList.kinds || {}).forEach(function (k) { photoList.kinds[k].photos.forEach(function (p) { PHOTO_BY[p.file] = p; }); });
+  function credits(html) {
+    var re = /photos\/[a-z]+\/\d+\.jpg/g, m, seen = {}, out = [];
+    while ((m = re.exec(html))) { var p = PHOTO_BY[m[0]]; if (p && !seen[p.id]) { seen[p.id] = 1; out.push(p); } }
+    return out;
+  }
+  function creditLine(list) {
+    if (!list.length) return '';
+    var by = {}; list.forEach(function (p) { if (!by[p.by]) by[p.by] = p.page; });
+    var names = Object.keys(by).map(function (n) { return '<a href="' + esc(by[n]) + '">' + esc(n) + '</a>'; });
+    return '<p class="pc">Photos by ' + names.join(', ') + ' on <a href="' + esc(photoList.sourceUrl || 'https://pixabay.com/') + '">' + esc(photoList.source || 'Pixabay') + '</a></p>';
+  }
+  function footer(P, cr) {
     var items = P.menu.items, links = [];
     items.forEach(function (m) { if (m.children && m.children.length) links = links.concat(m.children); else links.push(m); });
-    return '<footer class="ft" data-sec="footer" data-type="footer" data-si="-1"><div class="w"><div class="fb">' + logoHtml(P, 36) + (P.footer.motto ? '<p class="mt"' + fk('motto') + '>' + esc(P.footer.motto) + '</p>' : '') + '</div><nav>' + links.slice(0, 12).map(linkHtml).join('') + '</nav><p class="cp"' + fk('text') + '>' + esc(P.footer.text || ('© ' + P.biz.name)) + '</p></div></footer>';
+    return '<footer class="ft" data-sec="footer" data-type="footer" data-si="-1"><div class="w"><div class="fb">' + logoHtml(P, 36) + (P.footer.motto ? '<p class="mt"' + fk('motto') + '>' + esc(P.footer.motto) + '</p>' : '') + '</div><nav>' + links.slice(0, 12).map(linkHtml).join('') + '</nav><p class="cp"' + fk('text') + '>' + esc(P.footer.text || ('© ' + P.biz.name)) + '</p>' + (cr || '') + '</div></footer>';
   }
 
   function page(P, tplId, opt) {
@@ -321,7 +350,7 @@ var Render = (function () {
       return h.replace('<section class="s ', '<section data-sec="' + s.id + '" data-type="' + s.type + '" data-si="' + i + '"' + lx.style + ' class="s bg-' + bg + ' al-' + (s.align || 'auto') + lx.cls + (opt.sel == s.id ? ' sel' : '') + ' ');
     }).join('');
     var mv = opt.openMenu;
-    FX = P.footer.fx || null; var foot = footer(P); FX = null;
+    FX = P.footer.fx || null; var foot = footer(P, creditLine(credits(secs))); FX = null;
     PALX = null;
     var gfs = Object.keys(GF).map(function (k) { return k + ':' + Object.keys(GF[k]).join(','); }).join('|'); GF = null;
     return '<div class="pv tf-' + f.k + ' tv-' + v.k + ' dn-' + v.dens + '" style="' + vars + '"' + (gfs ? ' data-gf="' + esc(gfs) + '"' : '') + '>' +
@@ -331,7 +360,7 @@ var Render = (function () {
       (P.menu.vp.phone.type == 'bottom' ? '<div class="vh vh-p">' + bottomBar(P, 'phone', mv == 'phone') + '</div>' : '') + '</div>';
   }
 
-  return { page: page, pageOf: pageOf, allSections: allSections, imageRef: imageRef, imageRaw: imageRaw, decorate: decorate, SHADOWS: SHADOWS, FRAMES: FRAMES, BSTYLES: BSTYLES, TEMPLATES: TEMPLATES, FAMILIES: FAMILIES, tpl: tpl, compat: compat, SECTION_TYPES: SECTION_TYPES, MENU_TYPES: MENU_TYPES, asset: asset, picked: picked };
+  return { page: page, credits: credits, GRADES: GRADES, PRICE_BANDS: PRICE_BANDS, MIN_GRADE: MIN_GRADE, priceFor: priceFor, priceLabel: priceLabel, OFFERED: OFFERED, pageOf: pageOf, allSections: allSections, imageRef: imageRef, imageRaw: imageRaw, decorate: decorate, SHADOWS: SHADOWS, FRAMES: FRAMES, BSTYLES: BSTYLES, TEMPLATES: TEMPLATES, FAMILIES: FAMILIES, tpl: tpl, compat: compat, SECTION_TYPES: SECTION_TYPES, MENU_TYPES: MENU_TYPES, asset: asset, picked: picked };
 })();
 
 export { Render };

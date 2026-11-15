@@ -4,6 +4,7 @@
    Their photos are links to their own website, never copies. */
 import { createClient } from '@supabase/supabase-js';
 import { Site } from './lib/site.js';
+import { Render } from './lib/render.js';
 import { blank, KEY, addPoint } from './store.js';
 
 const sb = createClient('https://gpwxuunutljcauoknhrh.supabase.co', 'sb_publishable_B7a1VEv6RX13n2JhA50tbQ_oR_oKfw9');
@@ -66,6 +67,7 @@ function draw() {
     el.querySelector('.big').onclick = () => open(r, d);
     el.querySelector('.studio').onclick = () => toStudio(r, d);
   });
+  app.querySelectorAll('img.bshot').forEach(watchShot);
   app.querySelectorAll('.save').forEach(b => b.onclick = async () => {
     const box = b.closest('.pitch'), r = rows.find(x => x.id == box.dataset.p);
     const upd = { status: box.querySelector('.st').value, notes: box.querySelector('.nt').value };
@@ -79,20 +81,34 @@ function card(r) {
   const best = (r.redesigns || []).reduce((m, d) => Math.max(m, +d.grade || 0), 0);
   return `<section class="pitch" data-p="${r.id}"><div class="ph"><div><h2>${esc(r.business_name)}</h2>
     <a href="${esc(r.website)}" target="_blank" rel="noopener">${esc(r.website)}</a>${r.run ? ' · run ' + r.run : ''} · ${new Date(r.created_at).toLocaleDateString()}</div>
-    <span class="score">Design <span class="b">${r.rating_before ?? '?'}/9</span> → <span class="a">${r.rating_after ?? best}/9</span></span></div>
+    <span class="score">Design <span class="b">${r.rating_before ?? '?'}/99</span> → <span class="a">${r.rating_after ?? best}/99</span></span></div>
     <div class="cols"><div class="before"><h3 style="margin-top:0">Before (their site today)</h3>
-      <a href="${esc(r.website)}" target="_blank" rel="noopener"><img src="${esc(r.before_shot)}" alt="Screenshot of ${esc(r.business_name)}'s current site" loading="lazy"></a>
+      <a href="${esc(r.website)}" target="_blank" rel="noopener"><img class="bshot" data-url="${esc(r.website)}" src="${esc(r.before_shot)}" alt="Screenshot of ${esc(r.business_name)}'s current site" loading="lazy"></a>
       ${r.before_notes ? '<h3>What we found</h3><ul>' + r.before_notes.split('\n').filter(Boolean).map(l => '<li>' + esc(l.replace(/^[-•]\s*/, '')) + '</li>').join('') + '</ul>' : ''}
       ${contact.length ? '<h3>Their details</h3><div class="info">' + contact.map(c => '<div><b>' + c[0] + ':</b> ' + esc(c[1]) + '</div>').join('') + '</div>' : ''}
       ${(r.photos || []).length ? '<h3>Their photos (links to their site)</h3><div class="info">' + r.photos.map(p => '<div><a href="' + esc(p.src) + '" target="_blank" rel="noopener">' + esc(p.what || p.src) + '</a></div>').join('') + '</div>' : ''}
     </div><div><h3 style="margin-top:0">After (our redesigns)</h3><div class="afters">${(r.redesigns || []).map((d, k) => `<div class="after" data-p="${r.id}" data-i="${k}">
       <div class="frame"><iframe title="${esc(d.name)}" loading="lazy" sandbox="allow-same-origin"></iframe></div>
-      <div class="bar"><div><b>${esc(d.name)}</b> <span>${d.grade ? d.grade + '/9' : ''}</span></div><div class="acts"><button class="big">Full view</button><button class="btn2 studio">Open in studio</button></div></div></div>`).join('')}</div>
+      <div class="bar"><div><b>${esc(d.name)}</b> <span>${d.grade ? d.grade + '/99' : ''}</span>${priceChip(d)}</div><div class="acts"><button class="big">Full view</button><button class="btn2 studio">Open in studio</button></div></div></div>`).join('')}</div>
       ${r.pitch ? '<h3>Talking points for the call</h3><p class="talk">' + esc(r.pitch) + '</p>' : ''}
       <div class="edit"><select class="st">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}"${r.status == k ? ' selected' : ''}>${v}</option>`).join('')}</select>
       <textarea class="nt" rows="2" placeholder="Notes (who you spoke to, what they said)">${esc(r.notes || '')}</textarea><div><button class="save">Save</button> <span class="saved"></span></div></div>
     </div></div></section>`;
 }
+
+/* Before screenshots come from WordPress's free mshots service, which first answers with a small
+   "Generating preview" picture (400 px wide). Retry it a few times, then fall back to Microlink's screenshot. */
+function watchShot(img) {
+  let tries = 0;
+  const check = () => {
+    if (!img.naturalWidth || img.naturalWidth > 400 || !/mshots/.test(img.src)) return;
+    if (++tries <= 4) { setTimeout(() => { img.src = img.src.replace(/&t=\d+/, '') + '&t=' + Date.now(); }, 5000); return; }
+    img.src = 'https://api.microlink.io/?url=' + encodeURIComponent(img.dataset.url) + '&screenshot=true&meta=false&embed=screenshot.url';
+  };
+  img.addEventListener('load', check); if (img.complete) check();
+}
+/* Price from a redesign's grade (1–99), same bands as the studio. */
+function priceChip(d) { const p = Render.priceFor(+d.grade || 0); return p == null ? '' : ' <span>· ' + (p ? '$' + p : 'Free') + '</span>'; }
 
 let cur = null;
 function open(r, d) { cur = d; $('#dlgT').textContent = r.business_name + ' · ' + d.name; size(1280); $('#dlgF').srcdoc = pageHtml(r, d); $('#dlg').showModal(); }

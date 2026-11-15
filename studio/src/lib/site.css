@@ -1622,3 +1622,7 @@
 .pv.tf-shoreline .gl{grid-template-columns:1fr 1fr}
 .pv.tf-basecamp .hl-split .hm{transform:none;box-shadow:8px 8px 0 var(--ink)}
 }
+
+/* photo credits for sample photos (Render.credits) */
+.pv .ft .pc{grid-column:1/-1;font-size:12px;opacity:.7;margin:-8px 0 0}
+.pv .ft .pc a{color:inherit;text-decoration:underline}

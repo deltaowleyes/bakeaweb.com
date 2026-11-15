@@ -56,7 +56,7 @@ function useThumbs(ids) {
 
 export default function Step5() {
   useStudio();
-  const all = Render.TEMPLATES.map(t => ({ t, c: Render.compat(t, S) })), ok = all.filter(x => x.c.ok);
+  const all = Render.OFFERED.map(t => ({ t, c: Render.compat(t, S) })), ok = all.filter(x => x.c.ok);
   const CUR = all.filter(x => (S.tpl.all || x.c.ok) && (!S.tpl.favOnly || S.tpl.fav[x.t.id]));
   if (!S.pages.some(p => p.id == S.ui.tpage)) S.ui.tpage = S.pages[0] && S.pages[0].id;
   if (!S.tpl.view) S.tpl.view = S.tpl.pick || (ok[0] || all[0]).t.id;
@@ -66,7 +66,7 @@ export default function Step5() {
   const vt = Render.tpl(S.tpl.view), vc = Render.compat(vt, S), picked = S.tpl.pick == vt.id;
   function view(id) { commit(S => { S.tpl.view = id; }); document.getElementById('tpc').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   function step(d) {
-    const L = CUR.length ? CUR : Render.TEMPLATES.map(t => ({ t }));
+    const L = CUR.length ? CUR : Render.OFFERED.map(t => ({ t }));
     let ix = L.map(x => x.t.id).indexOf(S.tpl.view); ix = (ix + d + L.length) % L.length;
     commit(S => { S.tpl.view = L[ix].t.id; });
   }
@@ -87,7 +87,7 @@ export default function Step5() {
       <h2 id="h5s" className="sth">5. Templates</h2>
       <div className="card">
         <div className="bar">
-          <div className="flex-1 min-w-[220px]"><h3>{ok.length} of {all.length} templates fit your site</h3><p className="mu">Only templates that can show every section and your desktop menu style are listed.</p></div>
+          <div className="flex-1 min-w-[220px]"><h3>{ok.length} of {all.length} templates fit your site</h3><p className="mu">Only templates that can show every section and your desktop menu style are listed, best rated first. Prices follow each template’s rating out of 99: 70–74 free, 75–79 $50, 80–84 $100, 85–89 $250, 90+ $500.</p></div>
           <label className="ck"><input type="checkbox" checked={!!S.tpl.all} onChange={e => commit(S => { S.tpl.all = e.target.checked; })} /> Show templates that don’t fit</label>
           <label className="ck"><input type="checkbox" checked={!!S.tpl.favOnly} onChange={e => commit(S => { S.tpl.favOnly = e.target.checked; })} /> Favourites only</label>
         </div>
@@ -101,6 +101,7 @@ export default function Step5() {
                 </div>
                 <div className="tb">
                   <h4>{t.name}{on && <span className="chip on">Picked</span>}</h4>
+                  <p className="tpr"><span className="chip" title="Rating out of 99">{t.grade}/99</span> <span className={'chip' + (t.price ? ' pay' : ' free')}>{Render.priceLabel(t)}</span></p>
                   <p className="mu">{t.fam.desc}</p>
                   {!c.ok && <p className="why">Doesn’t fit: {c.why.join('; ')}.</p>}
                   <div className="row">
@@ -116,7 +117,7 @@ export default function Step5() {
 
       <div className="card" id="tpc">
         <div className="bar">
-          <div className="flex-1 min-w-[200px]"><h3>{vt.name}</h3><p className="mu">{picked ? 'This is your picked template.' : vt.fam.desc + (vc.ok ? '' : ' Doesn’t fit: ' + vc.why.join('; ') + '.')}</p></div>
+          <div className="flex-1 min-w-[200px]"><h3>{vt.name} <span className="chip">{vt.grade}/99</span> <span className={'chip' + (vt.price ? ' pay' : ' free')}>{Render.priceLabel(vt)}</span></h3><p className="mu">{picked ? 'This is your picked template.' : vt.fam.desc + (vc.ok ? '' : ' Doesn’t fit: ' + vc.why.join('; ') + '.')}</p></div>
           <button aria-label="Previous template" onClick={() => step(-1)}>←</button>
           <button aria-label="Next template" onClick={() => step(1)}>→</button>
           <button className={picked ? '' : 'pri'} aria-pressed={picked} onClick={() => commit(S => { S.tpl.pick = S.tpl.view; })}>{picked ? 'Picked' : 'Use this template'}</button>
