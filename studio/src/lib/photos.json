@@ -3,7 +3,7 @@
  "sourceUrl": "https://pixabay.com/",
  "kinds": {
   "cafe": {
-   "name": "Caf\u00e9 and restaurant",
+   "name": "Café and restaurant",
    "photos": [
     {
      "id": "1869656",
@@ -644,7 +644,7 @@
      "topic": "electric car charging",
      "w": 2048,
      "h": 1365,
-     "tags": "tesla, tesla model x, charging, supercharger, transportation, automobile, car, auto, vehicle, electricity, electrical, electric, green, infrastructure, car wallpapers, transport, eco, plug, station, renewable, Norway, Nordland, Mosj\u00f8en",
+     "tags": "tesla, tesla model x, charging, supercharger, transportation, automobile, car, auto, vehicle, electricity, electrical, electric, green, infrastructure, car wallpapers, transport, eco, plug, station, renewable, Norway, Nordland, Mosjøen",
      "by": "Blomst",
      "page": "https://pixabay.com/photos/tesla-tesla-model-x-charging-1738969/"
     },
@@ -1309,7 +1309,7 @@
      "topic": "handmade quilt",
      "w": 5184,
      "h": 3456,
-     "tags": "sewing, patchwork, k\u00f6rk\u00e9s, thread, pink, spindle, pin, needle, clipboard, textile, textiles, material, materials, heart, polka dots, patterned, sample, sewing, sewing, sewing, sewing, sewing",
+     "tags": "sewing, patchwork, körkés, thread, pink, spindle, pin, needle, clipboard, textile, textiles, material, materials, heart, polka dots, patterned, sample, sewing, sewing, sewing, sewing, sewing",
      "by": "Miller_Eszter",
      "page": "https://pixabay.com/photos/sewing-patchwork-k%C3%B6rk%C3%A9s-thread-2321532/"
     },
@@ -1962,7 +1962,7 @@
      "topic": "community garden",
      "w": 4160,
      "h": 3120,
-     "tags": "orchard, urban, labor city of culture, gij\u00f3n, asturias, spain, yard, terraces, vegetables, tourist, walk, holiday, tourism, nature",
+     "tags": "orchard, urban, labor city of culture, gijón, asturias, spain, yard, terraces, vegetables, tourist, walk, holiday, tourism, nature",
      "by": "PortalJardin",
      "page": "https://pixabay.com/photos/orchard-urban-labor-city-of-culture-1114524/"
     },
@@ -2097,6 +2097,539 @@
      "tags": "soccer, ball, stadium, field, soccer stadium, football, soccer ball, sport, football stadium, football field, soccer field, grass, nature, game",
      "by": "jarmoluk",
      "page": "https://pixabay.com/photos/soccer-ball-stadium-field-488700/"
+    }
+   ]
+  },
+  "consulting": {
+   "name": "Consulting and professional services",
+   "photos": [
+    {
+     "id": "3213924",
+     "file": "photos/consulting/3213924.jpg",
+     "role": "hero",
+     "topic": "business meeting office",
+     "w": 2349,
+     "h": 1481,
+     "tags": "teamwork, cooperation, brainstorming, business, finance, office, team, partners, flat lay, meeting, collaboration, corporation, management, support, team building, unity, teamwork, business, business, business, business, business, office, office, team, team, meeting",
+     "by": "Mohamed_hassan",
+     "page": "https://pixabay.com/photos/teamwork-cooperation-brainstorming-3213924/"
+    },
+    {
+     "id": "1979261",
+     "file": "photos/consulting/1979261.jpg",
+     "role": "hero",
+     "topic": "business meeting office",
+     "w": 5760,
+     "h": 3840,
+     "tags": "people, business, meeting, business meeting, coworkers, agreement, men, women, professionals, office, employees, suit, work, greeting, boss, computer, group, handshake, desk, team, colleagues, arrangement, people, business, business, business, business, business, meeting, meeting, business meeting, office, office, work, team",
+     "by": "089photoshootings",
+     "page": "https://pixabay.com/photos/people-business-meeting-1979261/"
+    },
+    {
+     "id": "594090",
+     "file": "photos/consulting/594090.jpg",
+     "role": "hero",
+     "topic": "business meeting office",
+     "w": 5472,
+     "h": 3648,
+     "tags": "startup, meeting, brainstorming, business, teamwork, team, people, office, group, corporate, conference, colleagues, company, partnership, seminar, project, table, professionals, casual, partners, plan, sketch, notepad, coworkers, writing, coffee, laptop, computer, notes, working, meeting, meeting, meeting, business, business, business, business, business, teamwork, team, team, team, people, office, office, office, writing, computer, working",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/startup-meeting-brainstorming-594090/"
+    },
+    {
+     "id": "5382501",
+     "file": "photos/consulting/5382501.jpg",
+     "role": "hero",
+     "topic": "business meeting office",
+     "w": 3354,
+     "h": 2019,
+     "tags": "job, office, team, business, internet, technology, design, draft, portable, meeting, job, office, office, office, office, team, team, business, business, business, business, business, technology, meeting, meeting, meeting",
+     "by": "RonaldCandonga",
+     "page": "https://pixabay.com/photos/job-office-team-business-internet-5382501/"
+    },
+    {
+     "id": "593341",
+     "file": "photos/consulting/593341.jpg",
+     "role": "hero",
+     "topic": "team discussion office",
+     "w": 5472,
+     "h": 3648,
+     "tags": "startup, start-up, people, silicon valley, teamwork, business, team, office, group, meeting, corporate, conference, company, men, partnership, table, technology, casual, successful, seminar, colleagues, working, planning, network, strategy, cooperation, professional, notes, notepad, writing, laptop, computer, drinks, business, business, business, business, business, team, team, office, office, meeting, meeting, meeting, company, technology, writing, writing, computer",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/startup-start-up-people-593341/"
+    },
+    {
+     "id": "2557396",
+     "file": "photos/consulting/2557396.jpg",
+     "role": "hero",
+     "topic": "team discussion office",
+     "w": 3648,
+     "h": 2432,
+     "tags": "people, girls, women, students, friends, talking, meeting, study, group, activity, homework, group work, brainstorming, group study, people, people, people, students, students, students, friends, friends, friends, talking, meeting, meeting, meeting, meeting, meeting, study, study, group",
+     "by": "StockSnap",
+     "page": "https://pixabay.com/photos/people-girls-women-students-2557396/"
+    },
+    {
+     "id": "594091",
+     "file": "photos/consulting/594091.jpg",
+     "role": "hero",
+     "topic": "team discussion office",
+     "w": 5472,
+     "h": 3648,
+     "tags": "meeting, brainstorming, business, teamwork, team, people, office, group, corporate, conference, colleagues, company, partnership, project, table, partners, plan, sketch, notepad, coworkers, writing, drinks, laptop, computer, notes, working, meeting, meeting, meeting, meeting, business, business, business, business, business, teamwork, team, team, team, people, office, office, office, company",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/meeting-brainstorming-business-594091/"
+    },
+    {
+     "id": "593296",
+     "file": "photos/consulting/593296.jpg",
+     "role": "hero",
+     "topic": "team discussion office",
+     "w": 5472,
+     "h": 3648,
+     "tags": "laptops, meeting, businessmen, coworkers, colleagues, business meeting, conference room, meeting room, startup, start-up, notebooks, creative, company, silicon valley, modern, office, conference, table, discussion, business, team, computers, desk, technology, vaio, people, working, meeting, meeting, meeting, meeting, meeting, business meeting, office, office, discussion, discussion, business, business, business, team, team",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/laptops-meeting-businessmen-593296/"
+    },
+    {
+     "id": "3694993",
+     "file": "photos/consulting/3694993.jpg",
+     "role": "item",
+     "topic": "presentation workshop",
+     "w": 8000,
+     "h": 2666,
+     "tags": "business, office, training, problem, solution, ask, who, how, what, where, when, why, woman, lecturer, presentation, whiteboard, board, write, work, company, professional, creative, training, training, problem, solution, how, why, presentation, presentation, presentation, presentation, presentation, whiteboard",
+     "by": "geralt",
+     "page": "https://pixabay.com/photos/business-office-training-problem-3694993/"
+    },
+    {
+     "id": "2209239",
+     "file": "photos/consulting/2209239.jpg",
+     "role": "item",
+     "topic": "presentation workshop",
+     "w": 4862,
+     "h": 3249,
+     "tags": "board, pens, sticky notes, workshop, business, office, paper, meeting, event, workplace, work, whiteboard",
+     "by": "ClickerHappy",
+     "page": "https://pixabay.com/photos/board-pens-sticky-notes-workshop-2209239/"
+    },
+    {
+     "id": "3986809",
+     "file": "photos/consulting/3986809.jpg",
+     "role": "item",
+     "topic": "presentation workshop",
+     "w": 6000,
+     "h": 4000,
+     "tags": "lecture, instructor, lecture room, room, this special steel company, teacher, education, seminar, man, school, standing, study, this home, window companies 24, seoul business hub, crowd, people many, lecture, lecture, lecture, lecture, teacher, teacher, teacher, teacher, teacher, seminar, seminar, seminar, seminar",
+     "by": "LeeJeongSoo",
+     "page": "https://pixabay.com/photos/lecture-instructor-lecture-room-3986809/"
+    },
+    {
+     "id": "3248255",
+     "file": "photos/consulting/3248255.jpg",
+     "role": "item",
+     "topic": "presentation workshop",
+     "w": 6016,
+     "h": 4016,
+     "tags": "conference, lecture, training, presentation, lecture hall, education, university, lecturer, teacher, school, coach, communication, report, corporation, e-marketing, professional, development, marketing, conference, lecture, lecture, lecture, lecture, presentation, lecturer, teacher, teacher, teacher, teacher, teacher, coach, coach, report, marketing",
+     "by": "AS_Photography",
+     "page": "https://pixabay.com/photos/conference-lecture-training-3248255/"
+    },
+    {
+     "id": "3382503",
+     "file": "photos/consulting/3382503.jpg",
+     "role": "item",
+     "topic": "handshake business",
+     "w": 5339,
+     "h": 3161,
+     "tags": "virtual coworkers, virtual friends, online friends, laptop, online, partnership, business people, team, collaboration, teamwork, friendship, globalization, shaking hands, handshake, friends, business partners, online, online, online, partnership, team, team, team, collaboration, collaboration, collaboration, teamwork, teamwork, handshake, handshake, handshake, handshake, handshake",
+     "by": "geralt",
+     "page": "https://pixabay.com/photos/virtual-coworkers-virtual-friends-3382503/"
+    },
+    {
+     "id": "3100563",
+     "file": "photos/consulting/3100563.jpg",
+     "role": "item",
+     "topic": "handshake business",
+     "w": 2271,
+     "h": 1703,
+     "tags": "handshake, agreement, trade, business, profit, sale, commercial, money, contract, concept, gesture, handshake, trade, money, money, money, money, money",
+     "by": "Ralphs_Fotos",
+     "page": "https://pixabay.com/photos/handshake-agreement-trade-business-3100563/"
+    },
+    {
+     "id": "3371153",
+     "file": "photos/consulting/3371153.jpg",
+     "role": "item",
+     "topic": "handshake business",
+     "w": 3121,
+     "h": 1524,
+     "tags": "skills, professional development, competence, knowledge, success, strategy, ability, experience, goal, concept, performance, businessman, reliability, professionalism, flexibility, innovation, training, growth, handshake, skills, skills, skills, skills, professional development, knowledge, success, success, success, success, success, experience, goal, innovation, training, training, training, training, handshake",
+     "by": "geralt",
+     "page": "https://pixabay.com/photos/skills-professional-development-3371153/"
+    },
+    {
+     "id": "3091906",
+     "file": "photos/consulting/3091906.jpg",
+     "role": "item",
+     "topic": "handshake business",
+     "w": 4272,
+     "h": 2168,
+     "tags": "shaking hands, handshake, hands, welcome, agreement, contract, shake hands, negotiation, finger, business people, collaboration, friendship, together, binding, compatible, conclusion, liability, meet, relationship, connection, men's suit, office, business, symbol, promise, teamwork, team, result, company, human, handshake, handshake, handshake, handshake, handshake",
+     "by": "geralt",
+     "page": "https://pixabay.com/photos/shaking-hands-handshake-hands-3091906/"
+    },
+    {
+     "id": "798175",
+     "file": "photos/consulting/798175.jpg",
+     "role": "item",
+     "topic": "coaching mentor",
+     "w": 3696,
+     "h": 2448,
+     "tags": "traffic signs, place-name sign, training, skills, teaching, concept, presentation, coach, trainer, seminar, improvement, tutor, business, work, teacher, practice, talent, traffic sign, sign, street sign, traffic, training, training, skills, skills, skills, teaching, coach, improvement, teacher, practice, practice, practice, practice, practice",
+     "by": "geralt",
+     "page": "https://pixabay.com/photos/traffic-signs-place-name-sign-798175/"
+    },
+    {
+     "id": "2877134",
+     "file": "photos/consulting/2877134.jpg",
+     "role": "item",
+     "topic": "coaching mentor",
+     "w": 7555,
+     "h": 2991,
+     "tags": "training, businesswoman, men's suit, manager, skills, teaching, concept, presentation, coach, trainer, seminar, improvement, tutor, business, work, teacher, practice, talent, skills, skills, skills, skills, skills, practice, talent",
+     "by": "geralt",
+     "page": "https://pixabay.com/photos/training-businesswoman-mens-suit-2877134/"
+    },
+    {
+     "id": "3206326",
+     "file": "photos/consulting/3206326.jpg",
+     "role": "item",
+     "topic": "coaching mentor",
+     "w": 1920,
+     "h": 1280,
+     "tags": "coach, bus, holiday, modern bus, autocar, tourism, transportation, transport, travel, passenger transport, bus, bus, bus, bus, bus",
+     "by": "Freedommail",
+     "page": "https://pixabay.com/photos/coach-bus-holiday-modern-bus-3206326/"
+    },
+    {
+     "id": "3055704",
+     "file": "photos/consulting/3055704.jpg",
+     "role": "item",
+     "topic": "coaching mentor",
+     "w": 4066,
+     "h": 2734,
+     "tags": "consulting, training, to learn, finger, touch, advisor, knowledge, development, success, person, silhouette, mechanics, gear, gears, blue, way of thinking, way of life, attitude to life, life style, modern, drive, together, community, transmission, group, industry, collective, teamwork, technology, bikes, how works, concept, school, trainer, coach, work, teaching, skills, profession, professional school, improvement, career, business, consulting, consulting, consulting, consulting, consulting, improvement",
+     "by": "geralt",
+     "page": "https://pixabay.com/photos/consulting-training-to-learn-finger-3055704/"
+    },
+    {
+     "id": "3267505",
+     "file": "photos/consulting/3267505.jpg",
+     "role": "item",
+     "topic": "planning whiteboard",
+     "w": 5472,
+     "h": 3648,
+     "tags": "startup, whiteboard, room, indoors, adult, office, business, technology, male, corporate, design, designer, brainstorm, startup, office, business, business, business, business, business, technology, design, designer",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/startup-whiteboard-room-indoors-3267505/"
+    },
+    {
+     "id": "1868728",
+     "file": "photos/consulting/1868728.jpg",
+     "role": "item",
+     "topic": "planning whiteboard",
+     "w": 5472,
+     "h": 3648,
+     "tags": "concept, man, papers, person, plan, planning, research, thinking, whiteboard, blue paper, blue thinking, blue research, blue plan, blue planning, blue think, plan, plan, planning, planning, research, research, research, research, research, thinking, thinking, thinking, thinking",
+     "by": "Pexels",
+     "page": "https://pixabay.com/photos/concept-man-papers-person-plan-1868728/"
+    },
+    {
+     "id": "561388",
+     "file": "photos/consulting/561388.jpg",
+     "role": "item",
+     "topic": "planning whiteboard",
+     "w": 3000,
+     "h": 2000,
+     "tags": "innovation, business, businessman, information, presentation, graph, icons, illustrate, whiteboard, innovation, innovation, innovation, innovation, innovation, business, business, business, business, presentation, presentation",
+     "by": "jarmoluk",
+     "page": "https://pixabay.com/photos/innovation-business-businessman-561388/"
+    },
+    {
+     "id": "4702060",
+     "file": "photos/consulting/4702060.jpg",
+     "role": "item",
+     "topic": "planning whiteboard",
+     "w": 7730,
+     "h": 5156,
+     "tags": "woman, work, office, whiteboard, meeting, girl, female, employee, planning, business, smile, happy, work, work, office, office, office, meeting, meeting, meeting, meeting, meeting, employee, employee, business, business, business, business, smile, happy",
+     "by": "This_is_Engineering",
+     "page": "https://pixabay.com/photos/woman-work-office-whiteboard-4702060/"
+    },
+    {
+     "id": "3196481",
+     "file": "photos/consulting/3196481.jpg",
+     "role": "item",
+     "topic": "contract signing documents",
+     "w": 8736,
+     "h": 5824,
+     "tags": "laptop, office, hand, writing, business, document, contract, paper, education, work, notebook, data, pen, meeting, recruitment, agreement, paperwork, office, business, business, business, business, business, contract, contract, education, work, meeting, meeting",
+     "by": "AymaneJed",
+     "page": "https://pixabay.com/photos/laptop-office-hand-writing-3196481/"
+    },
+    {
+     "id": "5710164",
+     "file": "photos/consulting/5710164.jpg",
+     "role": "item",
+     "topic": "contract signing documents",
+     "w": 5000,
+     "h": 3333,
+     "tags": "man, sign, paper, write, document, contract, signing, agreement, signature, signing document, signing contract, signing paper, sign, contract, contract, contract, contract, contract, signing, agreement, signature, signature",
+     "by": "Maximilianovich",
+     "page": "https://pixabay.com/photos/man-sign-paper-write-document-5710164/"
+    },
+    {
+     "id": "948442",
+     "file": "photos/consulting/948442.jpg",
+     "role": "item",
+     "topic": "contract signing documents",
+     "w": 5472,
+     "h": 3648,
+     "tags": "binding contract, contract, secure, agreement, binding, legal, document, contractual, law, business, deal, sign, pen, signature, lawyer, paperwork, obligation, negotiation, finance, commitment, terms, lock, key, bond, committed, guarantee, locked, obligate, watertight contract, promise, word, contract, contract, contract, contract, legal, legal, legal, legal, legal, law, law, law, lawyer, lawyer, commitment, terms, lock, guarantee",
+     "by": "stevepb",
+     "page": "https://pixabay.com/photos/binding-contract-contract-secure-948442/"
+    },
+    {
+     "id": "1728448",
+     "file": "photos/consulting/1728448.jpg",
+     "role": "item",
+     "topic": "contract signing documents",
+     "w": 3072,
+     "h": 2048,
+     "tags": "agree, english, consent, contract, agreement, cross, mark with a cross, ballpoint pen, understanding, conclusion, business deal, arrangement, match, pact, form, business, paper, document, pen, agree, agree, consent, consent, contract, contract, contract, contract, contract, agreement, agreement, conclusion, form",
+     "by": "Catkin",
+     "page": "https://pixabay.com/photos/agree-english-consent-contract-1728448/"
+    },
+    {
+     "id": "2284501",
+     "file": "photos/consulting/2284501.jpg",
+     "role": "item",
+     "topic": "construction plans blueprint",
+     "w": 5400,
+     "h": 3375,
+     "tags": "meeting, business, architect, office, team, plan, blueprints, teamwork, group, people, project, workplace, table, desk, meeting, meeting, meeting, business, business, business, business, business, architect, office, office, office, office, team, team, teamwork, project, workplace",
+     "by": "mwitt1337",
+     "page": "https://pixabay.com/photos/meeting-business-architect-office-2284501/"
+    },
+    {
+     "id": "1857175",
+     "file": "photos/consulting/1857175.jpg",
+     "role": "item",
+     "topic": "construction plans blueprint",
+     "w": 6000,
+     "h": 4000,
+     "tags": "floor plan, construction, building, pencil, architecture, blueprint, design, architect, sketch, drawing, technical, draft, white, ruler, contemporary architecture, construction, construction, construction, construction, construction, architecture",
+     "by": "3844328",
+     "page": "https://pixabay.com/photos/floor-plan-construction-building-1857175/"
+    },
+    {
+     "id": "3979490",
+     "file": "photos/consulting/3979490.jpg",
+     "role": "item",
+     "topic": "construction plans blueprint",
+     "w": 3010,
+     "h": 1813,
+     "tags": "architect, plan, construction, protective helmet, engineering, team, occupation, construction, construction, construction, construction, construction, engineering",
+     "by": "borevina",
+     "page": "https://pixabay.com/photos/architect-plan-construction-3979490/"
+    },
+    {
+     "id": "1080589",
+     "file": "photos/consulting/1080589.jpg",
+     "role": "item",
+     "topic": "construction plans blueprint",
+     "w": 3771,
+     "h": 2510,
+     "tags": "architect, building, joy, planning, plans, professional, employee, builder, worker, repair, contractor, man, people, male, work, development, housing, home, build, architect, builder, builder, worker, worker, worker, contractor, contractor, contractor, contractor, home, home, home, home, home, build",
+     "by": "jarmoluk",
+     "page": "https://pixabay.com/photos/architect-building-joy-planning-1080589/"
+    },
+    {
+     "id": "547363",
+     "file": "photos/consulting/547363.jpg",
+     "role": "item",
+     "topic": "forest aerial",
+     "w": 2391,
+     "h": 1707,
+     "tags": "mountain, forest, clouds, fog, sea of clouds, trees, woods, conifers, coniferous, coniferous forest, scenic, idyllic, woodland, nature, mountain, mountain, mountain, mountain, mountain, forest, forest, forest, clouds, fog, fog",
+     "by": "cafepampas",
+     "page": "https://pixabay.com/photos/mountain-forest-clouds-fog-547363/"
+    },
+    {
+     "id": "5281668",
+     "file": "photos/consulting/5281668.jpg",
+     "role": "item",
+     "topic": "forest aerial",
+     "w": 4797,
+     "h": 6000,
+     "tags": "heaven, road, drone, nature, path, landscape, goal, clouds, horizon, bird's eye view, air, forest, trees, green, automobile, to travel, travel, fall, aerial, curves, phone wallpaper, aerial view, streets, perspective, aesthetic wallpaper, iphone wallpaper, Germany, Baden-Württemberg, Böblingen",
+     "by": "BarneyElo",
+     "page": "https://pixabay.com/photos/heaven-road-drone-nature-path-5281668/"
+    },
+    {
+     "id": "2147400",
+     "file": "photos/consulting/2147400.jpg",
+     "role": "item",
+     "topic": "forest aerial",
+     "w": 3992,
+     "h": 2242,
+     "tags": "nature, forest, frost, snowy, trees, scenery, road, snow, aerial, winter, season, scenic, environment, travel, outdoors, landscape, adventure, peaceful, discovery, spring, aerial photography, road, winter, travel, travel, travel, travel, travel, adventure",
+     "by": "invisiblepower",
+     "page": "https://pixabay.com/photos/nature-forest-frost-snowy-trees-2147400/"
+    },
+    {
+     "id": "3354063",
+     "file": "photos/consulting/3354063.jpg",
+     "role": "item",
+     "topic": "forest aerial",
+     "w": 3000,
+     "h": 4000,
+     "tags": "water, travel, ocean, nature, beach, landscape, tropical, seascape, shore, sand, tourism, outdoors, paradise, island, resort, sea, summer, coast, vacation, traveling, aerial, reef, coastline, exotic, aerial photography, travel, travel, island, island, island, island, island, traveling, traveling, traveling",
+     "by": "ollivves",
+     "page": "https://pixabay.com/photos/water-travel-ocean-nature-beach-3354063/"
+    },
+    {
+     "id": "530055",
+     "file": "photos/consulting/530055.jpg",
+     "role": "item",
+     "topic": "parliament ottawa",
+     "w": 5423,
+     "h": 3622,
+     "tags": "palace, london, parliament, big ben, england, river thames, palace of westminster, buildings, architecture, city, skyline, clock tower, bridge, river, westminster, tower, british, travel, uk, thames, clock, landmark, urban, history, capital, tourism, historical, europe, cityscape, historical architecture, gothic architecture, london, london, london, london, london, england",
+     "by": "derwiki",
+     "page": "https://pixabay.com/photos/palace-london-parliament-big-ben-530055/"
+    },
+    {
+     "id": "2393098",
+     "file": "photos/consulting/2393098.jpg",
+     "role": "item",
+     "topic": "parliament ottawa",
+     "w": 1999,
+     "h": 1376,
+     "tags": "big ben, bridge, city, sunrise, river, nature, palace of westminster, buildings, skyline, tower, landmarks, historic, historical, downtown, parliament, tourist attractions, attractions, tourism, westminster, thames, london, england, great britain, united kingdom, uk",
+     "by": "12019",
+     "page": "https://pixabay.com/photos/big-ben-bridge-city-sunrise-river-2393098/"
+    },
+    {
+     "id": "2463236",
+     "file": "photos/consulting/2463236.jpg",
+     "role": "item",
+     "topic": "parliament ottawa",
+     "w": 5868,
+     "h": 3517,
+     "tags": "bundestag, german flag, parliament, federal election, germany, capital city, flag, architecture, banner, building, government district, berlin, government, germany flag, nature, city, politics, government building, german, flutter, clouds, facade, story, sightseeing",
+     "by": "Felix-Mittermeier",
+     "page": "https://pixabay.com/photos/bundestag-german-flag-parliament-2463236/"
+    },
+    {
+     "id": "1440679",
+     "file": "photos/consulting/1440679.jpg",
+     "role": "item",
+     "topic": "parliament ottawa",
+     "w": 2000,
+     "h": 1333,
+     "tags": "parliament, building, architecture, illuminated, budapest, hungarian parliament, danube, river, night, hungary, city, budapest, budapest, budapest, budapest, budapest, hungary",
+     "by": "Walkerssk",
+     "page": "https://pixabay.com/photos/parliament-building-architecture-1440679/"
+    },
+    {
+     "id": "849825",
+     "file": "photos/consulting/849825.jpg",
+     "role": "item",
+     "topic": "laptop analytics",
+     "w": 3000,
+     "h": 2000,
+     "tags": "student, typing, keyboard, text, startup, people, students, office, strategy, work, technology, company, corporate, communication, young, plan, marketing, computer, design, professional, planning, internet, project, laptop, presentation, web, display, monitor, screen, digital, electronic, pc, modern, student, office, work, work, work, marketing, computer, computer, computer, computer, computer, laptop, laptop, laptop",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/student-typing-keyboard-text-849825/"
+    },
+    {
+     "id": "593313",
+     "file": "photos/consulting/593313.jpg",
+     "role": "item",
+     "topic": "laptop analytics",
+     "w": 5472,
+     "h": 3648,
+     "tags": "children, win, success, video game, play, happy, macbook, creative, computer, laptop, technology, happiness, portrait, children, children, success, success, success, happy, happy, happy, happy, happy, computer, computer, computer, computer, laptop, technology, technology",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/children-win-success-video-game-593313/"
+    },
+    {
+     "id": "3087585",
+     "file": "photos/consulting/3087585.jpg",
+     "role": "item",
+     "topic": "laptop analytics",
+     "w": 5472,
+     "h": 3648,
+     "tags": "laptop, woman, education, study, young, computer, beautiful, desk, girl, homework, college, school, internet, people, lifestyle, office, student, studying, learning, person, stressed, burn-out, spectacles, tense, pressure, laptop, education, education, education, study, study, study, study, study, computer, computer, computer, college, school, school, internet, people, office, student, student, student, studying, learning, learning, learning",
+     "by": "JESHOOTS-com",
+     "page": "https://pixabay.com/photos/laptop-woman-education-study-young-3087585/"
+    },
+    {
+     "id": "849822",
+     "file": "photos/consulting/849822.jpg",
+     "role": "item",
+     "topic": "laptop analytics",
+     "w": 3000,
+     "h": 2000,
+     "tags": "student, typing, keyboard, text, woman, startup, business, people, students, office, strategy, work, technology, company, corporate, communication, young, plan, marketing, computer, design, professional, planning, internet, project, laptop, presentation, web, display, monitor, women, girls, screen, digital, electronic, pc, modern, student, business, business, business, business, students, office, work, work, work, work, marketing, marketing, computer, computer, computer, computer, computer, laptop, laptop, laptop",
+     "by": "StartupStockPhotos",
+     "page": "https://pixabay.com/photos/student-typing-keyboard-text-woman-849822/"
+    },
+    {
+     "id": "2256489",
+     "file": "photos/consulting/2256489.jpg",
+     "role": "item",
+     "topic": "office building glass",
+     "w": 4608,
+     "h": 3072,
+     "tags": "architecture, skyscraper, glass facades, modern, facade, sky, building, düsseldorf, city, nature, modern architecture, glass, modern building, glass front, windows, glass windows, reflection, exterior, perspective, office building, urban, high, downtown, low angle shot, structure, mirroring",
+     "by": "652234",
+     "page": "https://pixabay.com/photos/architecture-skyscraper-2256489/"
+    },
+    {
+     "id": "1048092",
+     "file": "photos/consulting/1048092.jpg",
+     "role": "item",
+     "topic": "office building glass",
+     "w": 4608,
+     "h": 3456,
+     "tags": "architecture, modern, building, facade, skyscraper, geometric, windows, glass windows, perspective, düsseldorf, office building, mirroring, reflection, architecture, building, building, building, building, building",
+     "by": "652234",
+     "page": "https://pixabay.com/photos/architecture-modern-building-facade-1048092/"
+    },
+    {
+     "id": "3184798",
+     "file": "photos/consulting/3184798.jpg",
+     "role": "item",
+     "topic": "office building glass",
+     "w": 6000,
+     "h": 4000,
+     "tags": "skyscrapers, nature, singapore, city, sky, buildings, financial district, architecture, urban, high rise buildings",
+     "by": "cegoh",
+     "page": "https://pixabay.com/photos/skyscrapers-singapore-city-sky-3184798/"
+    },
+    {
+     "id": "22039",
+     "file": "photos/consulting/22039.jpg",
+     "role": "item",
+     "topic": "office building glass",
+     "w": 5000,
+     "h": 3333,
+     "tags": "architecture, buildings, city, skyscrapers, building exterior, glass exterior, glass windows, facade, urban, modern buildings, office buildings, apartment, corporate, real estate, buildings, city, apartment, corporate, corporate, real estate, real estate, real estate, real estate, real estate",
+     "by": "PublicDomainPictures",
+     "page": "https://pixabay.com/photos/architecture-buildings-city-22039/"
     }
    ]
   }
