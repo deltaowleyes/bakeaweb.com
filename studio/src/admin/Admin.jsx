@@ -23,7 +23,7 @@ function Login() {
     const { error } = await sb.auth.signInWithOtp({ email: em.trim(), options: { shouldCreateUser: false, emailRedirectTo: location.href.split('#')[0] + '#admin' } });
     setMsg(error ? error.message : 'Check your email for the sign-in link.');
   }
-  return <form className="card mx-auto grid max-w-md gap-3" onSubmit={go}>
+  return <form className="card mx-auto flex max-w-md flex-col gap-3" onSubmit={go}>
     <h2 className="m-0">Sign in to Admin</h2>
     <p className="mu m-0">For BAKE admins only. Same login as the Pitches page.</p>
     <input type="email" placeholder="Email" autoComplete="username" value={em} onChange={e => setEm(e.target.value)} required />
@@ -52,13 +52,13 @@ function PublishPanel({ title, designs, pitchId, sites, onDone, defaultDomain })
     setBusy(false);
   }
   if (!designs.length) return <p className="mu">No design to publish yet.</p>;
-  return <div className="mt-3 grid gap-3 rounded-xl border border-line p-3">
-    {designs.length > 1 && <label className="grid gap-1"><b>Design</b>
+  return <div className="mt-3 flex flex-col gap-3 rounded-xl border border-line p-3">
+    {designs.length > 1 && <label className="flex flex-col gap-1"><b>Design</b>
       <select value={di} onChange={e => setDi(+e.target.value)}>{designs.map((x, i) => <option key={i} value={i}>{x.name}{x.grade ? ' · ' + x.grade + '/99' : ''}</option>)}</select></label>}
     <fieldset className="m-0 border-0 p-0"><legend className="mb-1 font-bold">Address</legend>
       <div className="flex flex-wrap gap-2">{HOST_KEYS.map(k => <button key={k} type="button" aria-pressed={domain == k} onClick={() => setDomain(k)} title={HOSTS[k].who}>{k}</button>)}</div>
       <p className="mu small">{HOSTS[domain].who}.</p></fieldset>
-    <label className="grid gap-1"><b>Page name</b>
+    <label className="flex flex-col gap-1"><b>Page name</b>
       <input value={name} maxLength={12} onChange={e => setName(e.target.value.toLowerCase().replace(/\s+/g, '-'))} aria-invalid={!!bad} aria-describedby={'pn-' + (pitchId || 'w')} />
       <span id={'pn-' + (pitchId || 'w')} className={bad ? 'errmsg' : 'mu small'}>{bad || 'Will be at ' + url}{!bad && taken ? ' (already used: publishing replaces it)' : ''}</span></label>
     <div><button className="pri" disabled={!!bad || busy} onClick={go}>{busy ? 'Publishing…' : 'Publish to ' + url.replace('https://', '')}</button></div>
@@ -102,7 +102,7 @@ export default function Admin({ onClose }) {
   const studioDesigns = S.tpl && S.tpl.pick ? [{ name: (Render.tpl(S.tpl.pick) || {}).name || S.tpl.pick, tpl: S.tpl.pick, project: JSON.parse(JSON.stringify(S)) }] : [];
   const live = sites.filter(s => s.status == 'live').length;
 
-  return <div className="grid gap-2">
+  return <div className="flex flex-col gap-2">
     <div className="flex flex-wrap items-center justify-between gap-3">
       <div><h2 className="m-0">BAKER Admin</h2><p className="mu">Every pitch and published site. Publish to a free address: <b>name.rezsite.com</b>, <b>name.bakedby.me</b> or <b>bakedbya.pro/name/</b>.</p></div>
       <div className="flex gap-2">
