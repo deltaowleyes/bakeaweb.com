@@ -1,7 +1,9 @@
-/* BAKE Pitch Book (pitches.html): PRIVATE before/after redesigns for real businesses.
+/* BAKE Pitches (pitches.html, was the Pitch Book): PRIVATE before/after redesigns for real businesses.
    The page code is public, but the data is not: it lives in the Supabase table redesign_pitches,
    which only RezSite admins (rezsite_admins) can read or change (row-level security).
-   Their photos are links to their own website, never copies. */
+   Their photos are links to their own website, never copies.
+   Each pitch has a private prospect link (preview.html?p=<share_token>) to send to the business:
+   see src/preview.js and the Supabase functions get_shared_pitch / reply_shared_pitch. */
 import { createClient } from '@supabase/supabase-js';
 import { Site } from './lib/site.js';
 import { Render } from './lib/render.js';
@@ -12,6 +14,13 @@ const $ = s => document.querySelector(s);
 const app = $('#app');
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const STATUS = { drafted: 'Drafted', offered: 'Offered', interested: 'Interested', accepted: 'Accepted', declined: 'Declined' };
+const shareUrl = r => new URL('preview.html?p=' + r.share_token, location.href).href;
+const when = d => d ? new Date(d).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : '';
+async function copy(text, btn) {
+  try { await navigator.clipboard.writeText(text); } catch (e) { const t = document.createElement('textarea'); t.value = text; document.body.append(t); t.select(); document.execCommand('copy'); t.remove(); }
+  const o = btn.textContent; btn.textContent = 'Copied ✓'; setTimeout(() => btn.textContent = o, 1600);
+}
+const opened = r => r.share_views ? 'Opened ' + r.share_views + '× · last ' + when(r.share_last_view) : 'Not opened yet';
 let rows = [], filt = { status: '', q: '' };
 
 /** A full studio project from what is stored (missing keys come from blank()). */
@@ -58,7 +67,8 @@ function draw() {
   const list = rows.filter(r => (!filt.status || r.status == filt.status) && (!filt.q || (r.business_name + ' ' + (r.website || '')).toLowerCase().includes(filt.q)));
   app.innerHTML = `<div class="filters"><b>${rows.length} pitch${rows.length == 1 ? '' : 'es'}</b>
     <select id="fs"><option value="">All statuses</option>${Object.entries(STATUS).map(([k, v]) => `<option value="${k}"${filt.status == k ? ' selected' : ''}>${v}</option>`).join('')}</select>
-    <input id="fq" placeholder="Search name or site" value="${esc(filt.q)}"></div>` + list.map(card).join('');
+    <input id="fq" placeholder="Search name or site" value="${esc(filt.q)}"></div>` + summary(list) + list.map(card).join('');
+  app.querySelectorAll('[data-copy]').forEach(b => b.onclick = () => copy(b.dataset.copy, b));
   $('#fs').onchange = e => { filt.status = e.target.value; draw(); };
   $('#fq').oninput = e => { filt.q = e.target.value.toLowerCase(); clearTimeout(draw.t); draw.t = setTimeout(() => { draw(); const q = $('#fq'); q.focus(); q.setSelectionRange(q.value.length, q.value.length); }, 300); };
   app.querySelectorAll('.after').forEach(el => {
@@ -76,12 +86,33 @@ function draw() {
   });
 }
 
+/* All pitches at a glance, each with the link to send to that business. */
+function summary(list) {
+  return `<table class="sum"><thead><tr><th>Business</th><th class="hide">Score</th><th>Status</th><th class="hide">Prospect activity</th><th>Link to send</th></tr></thead><tbody>${list.map(r => {
+    const rep = (r.prospect_replies || []).length, u = shareUrl(r);
+    return `<tr><td><a href="#pitch-${r.id}">${esc(r.business_name)}</a><div class="note">${new Date(r.created_at).toLocaleDateString()}</div></td>
+      <td class="hide">${r.rating_before ?? '?'} → ${r.rating_after ?? '?'}</td>
+      <td><span class="tag${r.status == 'interested' || r.status == 'accepted' ? ' hot' : ''}">${STATUS[r.status] || esc(r.status)}</span></td>
+      <td class="hide">${opened(r)}${rep ? '<br><b>' + rep + ' repl' + (rep == 1 ? 'y' : 'ies') + '</b>' : ''}</td>
+      <td style="white-space:nowrap"><button data-copy="${esc(u)}">Copy link</button> <a class="btn btn2" href="${esc(u)}&me=1" target="_blank" rel="noopener" style="padding:6px 10px;font-size:13px">Open</a></td></tr>`;
+  }).join('')}</tbody></table>`;
+}
+
+function shareBox(r) {
+  const u = shareUrl(r), reps = r.prospect_replies || [];
+  return `<div class="share"><b>Link to send:</b> <input readonly value="${esc(u)}" onclick="this.select()"> <button data-copy="${esc(u)}">Copy link</button>
+    <a class="btn btn2" href="${esc(u)}&me=1" target="_blank" rel="noopener">Open as they see it</a> <span class="note">${opened(r)}</span></div>
+    ${reps.slice().reverse().map(x => `<div class="reply"><b>${x.choice == 'interested' ? '🔥 Interested' : '❓ Question'}</b>${x.pick ? ' in <b>' + esc(x.pick) + '</b>' : ''} · ${when(x.at)}<br>
+      ${esc(x.name || 'No name')} · ${esc(x.contact)}${x.message ? '<br>“' + esc(x.message) + '”' : ''}</div>`).join('')}`;
+}
+
 function card(r) {
   const i = r.info || {}, contact = [['Phone', i.phone], ['Email', i.email], ['Address', i.address], ['Hours', i.hours], ['Category', i.category], ['Community', i.community]].filter(x => x[1]);
   const best = (r.redesigns || []).reduce((m, d) => Math.max(m, +d.grade || 0), 0);
-  return `<section class="pitch" data-p="${r.id}"><div class="ph"><div><h2>${esc(r.business_name)}</h2>
+  return `<section class="pitch" id="pitch-${r.id}" data-p="${r.id}"><div class="ph"><div><h2>${esc(r.business_name)}</h2>
     <a href="${esc(r.website)}" target="_blank" rel="noopener">${esc(r.website)}</a>${r.run ? ' · run ' + r.run : ''} · ${new Date(r.created_at).toLocaleDateString()}</div>
     <span class="score">Design <span class="b">${r.rating_before ?? '?'}/99</span> → <span class="a">${r.rating_after ?? best}/99</span></span></div>
+    ${shareBox(r)}
     <div class="cols"><div class="before"><h3 style="margin-top:0">Before (their site today)</h3>
       <a href="${esc(r.website)}" target="_blank" rel="noopener"><img class="bshot" data-url="${esc(r.website)}" src="${esc(r.before_shot)}" alt="Screenshot of ${esc(r.business_name)}'s current site" loading="lazy"></a>
       ${r.before_notes ? '<h3>What we found</h3><ul>' + r.before_notes.split('\n').filter(Boolean).map(l => '<li>' + esc(l.replace(/^[-•]\s*/, '')) + '</li>').join('') + '</ul>' : ''}

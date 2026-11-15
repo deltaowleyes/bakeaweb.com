@@ -161,3 +161,9 @@ test('a page that uses sample photos credits the photographers and Pixabay in th
   expect(r.withPhotos).toBe(true);
   expect(r.without).toBe(false);
 });
+
+test('the prospect preview page shows a friendly message for a bad link and is hidden from search engines', async ({ page }) => {
+  await page.goto('preview.html');
+  await expect(page.locator('.empty')).toContainText("isn't working");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
+});
