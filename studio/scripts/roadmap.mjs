@@ -36,12 +36,13 @@ Tasks in the same wave change different files, so they can all run at the same t
 
 ${waves(d).map((w, i) => `**Wave ${i + 1}** (${w.length} task${w.length == 1 ? "" : "s"}): ` + w.map(t => t[f.title]).join(' · ')).join('\n\n')}
 `;
-// JavaScript puts number-like keys first, so list Anytime first on purpose.
-const order = ['Anytime', ...Object.keys(d.phases).filter(k => k !== 'Anytime')];
+// JavaScript puts number-like keys first, so list Anytime and other named sections (like Design quality) first on purpose.
+const isNum = k => /^\d+$/.test(k);
+const order = ['Anytime', ...Object.keys(d.phases).filter(k => k !== 'Anytime' && !isNum(k)), ...Object.keys(d.phases).filter(isNum)];
 for (const key of order) {
   const desc = d.phases[key];
   const rows = d.tasks.filter(t => t[f.phase] === key);
-  md += `\n## ${key === 'Anytime' ? 'Anytime' : 'Phase ' + key}: ${desc}\n\n| | Task | Area | Size | Ready | You'll need |\n|---|---|---|---|---|---|\n`;
+  md += `\n## ${isNum(key) ? 'Phase ' + key : key}: ${desc}\n\n| | Task | Area | Size | Ready | You'll need |\n|---|---|---|---|---|---|\n`;
   for (const t of rows)
     md += `| ${t[f.top] ? '★' : ''} | **${cell(t[f.title])}**${t[f.planFirst] ? ' (plan first)' : ''}<br>${cell(t[f.why])} | ${t[f.area]} | ${t[f.size]} | ${READY[t[f.ready]] || ''}${t[f.after] && t[f.after].length ? ' ' + t[f.after].join(', ') : ''} | ${cell(t[f.need]) || '—'} |\n`;
 }
