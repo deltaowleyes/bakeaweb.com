@@ -1,0 +1,12 @@
+# BAKE Host (Cloudflare Worker). Deployed by .github/workflows/host.yml; see README.md.
+name = "bake-host"
+main = "worker.js"
+compatibility_date = "2026-11-01"
+workers_dev = false
+
+routes = [
+  { pattern = "*.rezsite.com/*", zone_name = "rezsite.com" },
+  { pattern = "*.bakedby.me/*", zone_name = "bakedby.me" },
+  { pattern = "bakedbya.pro/*", zone_name = "bakedbya.pro" },
+  { pattern = "*.bakedbya.pro/*", zone_name = "bakedbya.pro" }
+]

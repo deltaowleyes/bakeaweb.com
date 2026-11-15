@@ -1,0 +1,35 @@
+# BAKE Host: deploys the Cloudflare Worker that serves free sites (pagename.rezsite.com, pagename.bakedby.me,
+# bakedbya.pro/pagename/) and sets up their DNS. Runs when host/ changes, or by hand (Actions → BAKE Host → Run workflow).
+# Needs two repository secrets: CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID (see host/README.md).
+name: BAKE Host
+on:
+  push:
+    branches: [main]
+    paths: ['host/**', '.github/workflows/host.yml']
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: host
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check the secrets are there
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::warning::Cloudflare secrets are not set yet, so nothing was deployed. See host/README.md."; exit 0; fi
+          echo "ok=1" >> "$GITHUB_ENV"
+      - name: Set up DNS (wildcards, proxy, SSL)
+        if: env.ok == '1'
+        run: node setup-dns.mjs
+      - name: Deploy the Worker
+        if: env.ok == '1'
+        run: npx --yes wrangler@4 deploy

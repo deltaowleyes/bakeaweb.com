@@ -1,5 +1,5 @@
 /* BAKE Studio: the app shell. Header with the five steps, undo / redo / history, the active step, and Back / Next. */
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import { S, commit, useStudio, isStorageFull, canUndo, canRedo, undoStep, redoStep, savePoints, addPoint, restorePoint, deletePoint } from './store.js';
 import { STEPS, ensureArt, ensurePages } from './edit.js';
 import { EditionMenu } from './components/EditionPicker.jsx';
@@ -10,6 +10,7 @@ import Step3 from './steps/Step3.jsx';
 import Step4 from './steps/Step4.jsx';
 import Step5 from './steps/Step5.jsx';
 
+const Admin = lazy(() => import('./admin/Admin.jsx'));   // BAKER Admin: pitches + publishing (loaded only when opened)
 const VIEWS = [Step1, Step2, Step3, Step4, Step5];
 const MAC = typeof navigator != 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
 const MOD = MAC ? '⌘' : 'Ctrl+';
@@ -72,6 +73,12 @@ export default function App() {
   useStudio();
   useUndoKeys();
   const [hist, setHist] = useState(false);
+  const [admin, setAdminOpen] = useState(() => typeof location != 'undefined' && location.hash == '#admin');
+  function setAdmin(on) {
+    setAdminOpen(on);
+    try { history.replaceState(null, '', on ? '#admin' : '#step-' + S.step); } catch (e) { /* ignore */ }
+    window.scrollTo(0, 0);
+  }
   ensureArt(); ensurePages();   // always have artwork options and a Home page
   const View = VIEWS[S.step - 1] || Step1;
   const insp = S.step == 3 && S.ui.insp && S.ui.insp.open ? 'insp-open' : undefined;   // make room for the Inspector
@@ -85,18 +92,20 @@ export default function App() {
           <button onClick={() => setHist(true)} title="Save points you can go back to">History</button>
         </div>
         <EditionMenu />
+        {(edition(S).markets || admin) && <button onClick={() => setAdmin(!admin)} aria-pressed={admin} title="Pitches and publishing (BAKE admins)">Admin</button>}
         <nav className="steps" aria-label="Steps">
-          {STEPS.map((n, i) => <button key={n} aria-current={S.step == i + 1 ? 'step' : undefined} onClick={() => go(i + 1)}>{i + 1}. {n}</button>)}
+          {STEPS.map((n, i) => <button key={n} aria-current={!admin && S.step == i + 1 ? 'step' : undefined} onClick={() => { if (admin) setAdminOpen(false); go(i + 1); }}>{i + 1}. {n}</button>)}
         </nav>
       </div>
     </header>
     <main id="app" className={insp}>
       {isStorageFull() && <p className="warn">Your browser’s storage is full, so the latest changes aren’t saved. Try removing some uploaded images.</p>}
+      {admin ? <Suspense fallback={<p className="mu">Loading Admin…</p>}><Admin onClose={() => setAdmin(false)} /></Suspense> : <>
       <View go={go} />
       <nav className="pager">
         {S.step > 1 ? <button onClick={() => go(S.step - 1)}>← Back: {STEPS[S.step - 2]}</button> : <span />}
         {S.step < 5 && <button className="pri" onClick={() => go(S.step + 1)}>Next: {STEPS[S.step]} →</button>}
-      </nav>
+      </nav></>}
     </main>
     <History open={hist} onClose={() => setHist(false)} />
   </>;
