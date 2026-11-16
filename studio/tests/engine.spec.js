@@ -149,6 +149,28 @@ test('grades and prices: only 65+ templates are offered, priced by their rating 
   expect(r.lab).toBe('$7,500');
 });
 
+test('step 5 designs: one card per family, Reel retired, best match first', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
+  await openStudio(page);
+  const r = await page.evaluate(async () => {
+    const { Render } = await import('/src/lib/render.js');
+    const P = { biz: { name: 'Owl News', desc: 'Indigenous news, reconciliation and community events for our First Nation.' }, menu: { items: [{ label: 'News' }, { label: 'Investigations' }] }, pages: [{ name: 'Home', sections: [] }], footer: {} };
+    const Q = { biz: { name: 'Sunny', desc: 'Coffee and fresh baking' }, menu: { items: [] }, pages: [], footer: {} };
+    const keys = Render.DESIGNS.map(d => d.k);
+    return { n: keys.length, uniq: new Set(keys).size, reel: keys.includes('reel'), reelStill: !!Render.tpl('reel-a') && Render.tpl('reel-a').fam.k == 'reel',
+      variants: Render.DESIGNS.every(d => d.variants.every(t => t.fam === d.fam)),
+      news: Render.designsFor(P).slice(0, 4).map(x => x.d.k), cafe: Render.designsFor(Q).slice(0, 2).map(x => x.d.k) };
+  });
+  expect(r.n).toBe(r.uniq);
+  expect(r.n).toBeLessThanOrEqual(60);
+  expect(r.reel).toBe(false);
+  expect(r.reelStill).toBe(true);
+  expect(r.variants).toBe(true);
+  expect(r.news).toContain('commons');
+  expect(r.news).not.toContain('marquee');
+  expect(r.cafe).toEqual(expect.arrayContaining(['hearth']));
+});
+
 test('a page that uses sample photos credits the photographers and Pixabay in the footer', async ({ page }) => {
   test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
   await openStudio(page);

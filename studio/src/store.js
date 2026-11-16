@@ -15,7 +15,7 @@ export function blank() {
     brand: { pal: Object.assign({}, Art.PALETTES[0]), palFound: null, font: 0, seed: { logo: 0, hero: 0, ill: 0 }, opts: { logo: [], hero: [], ill: [] }, pick: {}, star: {} },
     pages: [], lib: [], footer: { motto: '', text: '' },
     menu: { items: [], cta: { label: 'Contact us', href: '#contact' }, vp: { desktop: { type: 'bar', logo: 'left', sticky: true, cta: false, search: false }, tablet: { type: 'hamburger', logo: 'left', sticky: true, cta: false, search: false }, phone: { type: 'hamburger', logo: 'left', sticky: true, cta: false, search: false } } },
-    tpl: { pick: null, view: null, fav: {}, all: false, favOnly: false },
+    tpl: { pick: null, view: null, fav: {}, all: false, favOnly: false, vk: {} },
     notes: [], req: { name: '', email: '', dest: 'bakedby' }, ai: { endpoint: '' },
     ui: { vp: 'desktop', tvp: 'all', mvp: 'desktop', btab: 'logo', bsrc: 'svg', sel: null, open: false, prompt: {}, page: null, tpage: null, pasteFor: null, libq: '', insp: { open: false, tab: 'section', key: null, item: null } }
   };

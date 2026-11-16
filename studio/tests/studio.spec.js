@@ -170,6 +170,11 @@ test('step 5: thumbnails, pick a template and request development', async ({ pag
   // template thumbnails are real pictures
   const thumb = page.locator('.tc img').first();
   await expect(thumb).toHaveAttribute('src', /^(blob:|data:)/, { timeout: 30_000 });
+  // each design shows once, with Classic / Soft / Crisp to choose from
+  const fams = await page.locator('.tc').evaluateAll(els => els.map(e => e.dataset.design));
+  expect(new Set(fams).size).toBe(fams.length);
+  await page.locator('.tc').first().getByRole('radio', { name: 'Soft' }).click();
+  expect((await state(page)).tpl.vk[fams[0]]).toBe('b');
   // every template card shows what a comparable template and an agency would cost
   await expect(page.getByTestId('cmp').first()).toContainText('Template elsewhere');
   await expect(page.getByTestId('cmp').first()).toContainText('C$');

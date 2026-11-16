@@ -118,9 +118,99 @@ var Render = (function () {
   function priceFor(g) { g = Math.floor(+g || 0); if (g < MIN_GRADE) return null; if (g > 99) g = 99; return PRICE_BY_GRADE[g] || 0; }
   function money(n) { return '$' + Number(n).toLocaleString('en-US'); }
   function priceLabel(t) { return t.price == null ? 'Not offered' : t.price ? money(t.price) : 'Free'; }
+  /* Families taken out of step 5 (they stay in TEMPLATES so saved projects and pitches still open).
+     2026-11-15: Reel (92) removed: it only suits film studios, a tiny share of BAKE's businesses. */
+  var RETIRED = { reel: 1 };
   var TEMPLATES = [];
-  FAMILIES.forEach(function (f) { VARIANTS.forEach(function (v) { var id = f.k + '-' + v.k, g = GRADES[id] || GRADES[f.k] || 0; TEMPLATES.push({ id: id, name: f.name + ' ' + v.name, fam: f, v: v, grade: g, price: priceFor(g), offered: g >= MIN_GRADE }); }); });
+  FAMILIES.forEach(function (f) { VARIANTS.forEach(function (v) { var id = f.k + '-' + v.k, g = GRADES[id] || GRADES[f.k] || 0; TEMPLATES.push({ id: id, name: f.name + ' ' + v.name, fam: f, v: v, grade: g, price: priceFor(g), offered: g >= MIN_GRADE && !RETIRED[f.k] }); }); });
   var OFFERED = TEMPLATES.filter(function (t) { return t.offered; }).sort(function (a, b) { return b.grade - a.grade; });
+
+  /* ---------- one design per family (2026-11-15) ----------
+     The three variants of a family (Classic, Soft, Crisp) look alike, so step 5 shows each family once,
+     with the variant as a choice on the card. VARIANT_HINTS says what each variant changes. */
+  var VARIANT_HINTS = { a: 'Square corners, plain backgrounds, regular spacing', b: 'Rounded corners, soft colour bands, roomy spacing', c: 'Small corners, dark contrast bands, compact spacing' };
+  var DESIGNS = [];
+  FAMILIES.forEach(function (f) {
+    var vs = OFFERED.filter(function (t) { return t.fam === f; }).sort(function (a, b) { return a.v.k < b.v.k ? -1 : 1; });
+    if (vs.length) DESIGNS.push({ k: f.k, fam: f, name: f.name, variants: vs, grade: Math.max.apply(null, vs.map(function (t) { return t.grade; })) });
+  });
+  /* Best match first: words from the site (name, description, menu, page and section text) are matched against
+     the kinds of business each family is made for. All-purpose families (GENERAL) sit between real matches
+     and families made for other industries. If nothing matches at all, the order is simply by rating. */
+  var GENERAL = { tide: 1, ember: 1, folio: 1, block: 1, bento: 1, craft: 1, glow: 1, swiss: 1, retro: 1, lens: 1, news: 1, app: 1, mag: 1, min: 1, bold: 1, portal: 1, story: 1, board: 1 };
+  var FITS = {
+    folio: 'news|magazine|article|stories|story|blog|publish*|journal|editorial|investigation|media|reporting',
+    swiss: 'news|research|report|architect|design|studio|agency|publish*|investigation|education',
+    bento: 'directory|listing|resources|portal|app|startup|software|tech',
+    tide: 'wellness|health|clinic|therapy|counsel*|startup|service',
+    ember: 'restaurant|dining|wine|bistro|catering|event',
+    craft: 'handmade|craft|bakery|gift|artisan|beadwork',
+    glow: 'tech|software|music|night|club|gaming|app',
+    retro: 'ice cream|diner|kids|party|summer|festival',
+    block: 'youth|event|festival|music|campaign|shop',
+    hearth: 'cafe|café|coffee|baking|restaurant|bakery|food|menu|kitchen|diner|bistro|catering',
+    volt: 'electric|plumb*|hvac|roof|contractor|repair|renovat*|handyman|trades|install|heating',
+    loom: 'craft|handmade|maker|artisan|beadwork|jewel*|pottery|quilt|sewing|moccasin|art shop|etsy',
+    bloom: 'salon|hair|beauty|spa|nail|lash|barber|esthetic*|makeup',
+    pulse: 'gym|fitness|trainer|yoga|crossfit|workout|boxing|martial|athletic',
+    commons: 'community|first nation|band office|band council|nation|organization|non-profit|nonprofit|charity|society|centre|church|events|elders|youth|reconciliation|treaty|program|membership|directory|resources|education',
+    council: 'consult*|government|policy|advisory|governance|research|report|reconciliation|treaty|accountability|investigation|calls to action',
+    meridian: 'consult*|strategy|technology|advisory|management|firm',
+    bridge: 'consult*|counsel*|coaching|wellness|facilitat*|engagement|healing|people|education',
+    convoy: 'moving|movers|trucking|haul|transport|delivery',
+    homeward: 'moving|movers|relocation|packing',
+    freight: 'logistic*|storage|warehouse|shipping|freight|courier',
+    timber: 'lodge|cabin|fishing|hunting|camp|outfitter',
+    shoreline: 'resort|cottage|lake|beach|vacation|rental',
+    basecamp: 'outfitter|adventure|tour|canoe|kayak|hiking|guide|outdoor|tourism|camping',
+    reel: 'film|production|documentary|cinema|filmmaker',
+    marquee: 'film|festival|filmmaker|screening|cinema',
+    frame: 'photograph*|director|portfolio|gallery',
+    harbour: 'marina|yacht|boat|dock|slip',
+    waterline: 'boat rental|waterfront|kayak|paddle|marina',
+    dockside: 'marina|resort|dock|beach',
+    press: 'print|screen print|t-shirt|apparel',
+    stitch: 'embroider*|sewing|uniform|apparel|patch',
+    merch: 'apparel|merch|promo|clothing|store',
+    taproom: 'bar|pub|sports|grill|brewery|beer|wings',
+    roadside: 'motel|diner|gas bar|highway|inn',
+    patio: 'restaurant|inn|patio|riverside|dining',
+    bedrock: 'excavat*|civil|construction|contractor|grading|earthwork',
+    breakwater: 'shoreline|landscap*|environmental|erosion',
+    rebar: 'concrete|foundation|septic|contractor',
+    trapline: 'trapper|trapping|wildlife|nuisance|animal removal|fur',
+    tannery: 'tanning|tanner|hide|leather|fur',
+    birchbark: 'knowledge keeper|teaching|culture|language|traditional|carving|land-based|workshop|elder|ceremony|indigenous art',
+    gauge: 'efficien*|engineer*|building|energy|valve',
+    flowline: 'water|plumb*|clean tech|conservation',
+    ledger: 'savings|property manag*|landlord|roi',
+    whip: 'cafe|café|bubble tea|dessert|smoothie|sweets|ice cream|drinks|lemonade',
+    pourover: 'coffee|roaster|espresso|cafe|café',
+    letterboard: 'coffee|drive-thru|drive thru|snack|coffee stand|food truck|canteen'
+  };
+  var FITRE = {};
+  for (var fitK in FITS) FITRE[fitK] = FITS[fitK].split('|').map(function (w) { return { w: w, re: new RegExp('(^|[^a-z])' + w.replace(/\*$/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (/\*$/.test(w) ? '' : '(s|es)?(?![a-z])'), 'i') }; });
+  /* only words people wrote: skip ids, links, pictures and layout settings (a section type like 'menu' isn't a word on the site) */
+  var SKIPK = { src: 1, image: 1, href: 1, url: 1, id: 1, type: 1, layout: 1, style: 1, kind: 1, status: 1, align: 1, vp: 1, frame: 1, icon: 1, bg: 1, color: 1, cropSrc: 1, log: 1 };
+  function siteText(P) {
+    var out = [];
+    (function walk(x, d) { if (d > 6 || x == null) return; if (typeof x == 'string') { if (x.length < 400 && !/^(data:|https?:|#|\/)/.test(x)) out.push(x); return; } if (typeof x == 'object') for (var k in x) if (!SKIPK[k]) walk(x[k], d + 1); })([P.biz, P.menu && P.menu.items, P.pages, P.footer], 0);
+    return out.join(' \n ').toLowerCase();
+  }
+  /* {score, hits}: how many of the family's business words appear on the site */
+  function fit(k, P, text) {
+    text = text == null ? siteText(P) : text;
+    var hits = (FITRE[k] || []).filter(function (x) { return x.re.test(text); }).map(function (x) { return x.w.replace(/\*$/, ''); });
+    return { score: hits.length, hits: hits };
+  }
+  /* The designs in order, best match first: tier 2 = a match (more matching words rank higher),
+     tier 1 = all-purpose, tier 0 = made for other businesses. Ties go to the higher rating. */
+  function designsFor(P) {
+    var text = siteText(P);
+    var list = DESIGNS.map(function (d) { var m = fit(d.k, P, text), gen = !!GENERAL[d.k]; return { d: d, m: m, tier: m.score ? 2 : gen ? 1 : 0 }; });
+    if (!list.some(function (x) { return x.m.score; })) list.forEach(function (x) { x.tier = 1; });
+    return list.sort(function (a, b) { return b.tier - a.tier || (b.tier == 2 ? b.m.score - a.m.score : 0) || b.d.grade - a.d.grade; });
+  }
   function tpl(id) { return TEMPLATES.filter(function (t) { return t.id == id; })[0] || TEMPLATES[0]; }
 
   function compat(t, P) {
@@ -404,7 +494,7 @@ var Render = (function () {
       (P.menu.vp.phone.type == 'bottom' ? '<div class="vh vh-p">' + bottomBar(P, 'phone', mv == 'phone') + '</div>' : '') + '</div>';
   }
 
-  return { page: page, credits: credits, GRADES: GRADES, PRICE_BY_GRADE: PRICE_BY_GRADE, money: money, MIN_GRADE: MIN_GRADE, priceFor: priceFor, priceLabel: priceLabel, OFFERED: OFFERED, pageOf: pageOf, allSections: allSections, imageRef: imageRef, imageRaw: imageRaw, decorate: decorate, SHADOWS: SHADOWS, FRAMES: FRAMES, BSTYLES: BSTYLES, TEMPLATES: TEMPLATES, FAMILIES: FAMILIES, tpl: tpl, compat: compat, SECTION_TYPES: SECTION_TYPES, MENU_TYPES: MENU_TYPES, asset: asset, picked: picked };
+  return { DESIGNS: DESIGNS, designsFor: designsFor, fit: fit, siteText: siteText, VARIANT_HINTS: VARIANT_HINTS, RETIRED: RETIRED, page: page, credits: credits, GRADES: GRADES, PRICE_BY_GRADE: PRICE_BY_GRADE, money: money, MIN_GRADE: MIN_GRADE, priceFor: priceFor, priceLabel: priceLabel, OFFERED: OFFERED, pageOf: pageOf, allSections: allSections, imageRef: imageRef, imageRaw: imageRaw, decorate: decorate, SHADOWS: SHADOWS, FRAMES: FRAMES, BSTYLES: BSTYLES, TEMPLATES: TEMPLATES, FAMILIES: FAMILIES, tpl: tpl, compat: compat, SECTION_TYPES: SECTION_TYPES, MENU_TYPES: MENU_TYPES, asset: asset, picked: picked };
 })();
 
 export { Render };

@@ -68,21 +68,44 @@ function useThumbs(ids) {
   return urls;
 }
 
+/* The variant of a design shown on its card: the picked template if it's in this family, else the visitor's choice, else the best-rated variant. */
+function variantOf(d) {
+  if (S.tpl.pick && d.variants.some(t => t.id == S.tpl.pick)) return Render.tpl(S.tpl.pick);
+  const k = (S.tpl.vk || {})[d.k], v = d.variants.find(t => t.v.k == k);
+  return v || d.variants.slice().sort((a, b) => b.grade - a.grade)[0];
+}
+
+/* Classic / Soft / Crisp: the small differences between versions of one design (corners, colour bands, spacing). */
+function Variants({ d, cur, onPick }) {
+  if (d.variants.length < 2) return null;
+  return (
+    <div className="vrow" role="radiogroup" aria-label={'Style of ' + d.name}>
+      {d.variants.map(t => (
+        <button key={t.id} role="radio" aria-checked={cur.id == t.id} className={'vb' + (cur.id == t.id ? ' on' : '')} title={Render.VARIANT_HINTS[t.v.k]}
+          onClick={e => { e.stopPropagation(); onPick(t); }}>{t.v.name}</button>
+      ))}
+    </div>
+  );
+}
+
 export default function Step5() {
   useStudio();
-  const all = Render.OFFERED.map(t => ({ t, c: Render.compat(t, S) })), ok = all.filter(x => x.c.ok);
-  const CUR = all.filter(x => (S.tpl.all || x.c.ok) && (!S.tpl.favOnly || S.tpl.fav[x.t.id]));
+  const all = Render.designsFor(S).map(x => Object.assign(x, { c: Render.compat(x.d.variants[0], S) })), ok = all.filter(x => x.c.ok);
+  const CUR = all.filter(x => (S.tpl.all || x.c.ok) && (!S.tpl.favOnly || x.d.variants.some(t => S.tpl.fav[t.id])));
   if (!S.pages.some(p => p.id == S.ui.tpage)) S.ui.tpage = S.pages[0] && S.pages[0].id;
-  if (!S.tpl.view) S.tpl.view = S.tpl.pick || (ok[0] || all[0]).t.id;
-  const thumbs = useThumbs(CUR.map(x => x.t.id));
+  if (!S.tpl.view || !Render.tpl(S.tpl.view).offered && S.tpl.view != S.tpl.pick) S.tpl.view = S.tpl.pick || variantOf((ok[0] || all[0]).d).id;
+  const shown = CUR.map(x => variantOf(x.d));
+  const thumbs = useThumbs(shown.map(t => t.id));
   const [note, setNote] = useState(''), [msg, setMsg] = useState(null);
 
   const vt = Render.tpl(S.tpl.view), vc = Render.compat(vt, S), picked = S.tpl.pick == vt.id;
+  const vd = Render.DESIGNS.find(d => d.fam === vt.fam);
   function view(id) { commit(S => { S.tpl.view = id; }); document.getElementById('tpc').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-  function step(d) {
-    const L = CUR.length ? CUR : Render.OFFERED.map(t => ({ t }));
-    let ix = L.map(x => x.t.id).indexOf(S.tpl.view); ix = (ix + d + L.length) % L.length;
-    commit(S => { S.tpl.view = L[ix].t.id; });
+  function choose(d, t) { commit(S => { S.tpl.vk = Object.assign({}, S.tpl.vk, { [d.k]: t.v.k }); if (S.tpl.view && Render.tpl(S.tpl.view).fam === t.fam) S.tpl.view = t.id; if (S.tpl.pick && Render.tpl(S.tpl.pick).fam === t.fam) S.tpl.pick = t.id; }); }
+  function step(dir) {
+    const L = (CUR.length ? CUR : all).map(x => x.d);
+    let ix = L.findIndex(d => d.fam === vt.fam); ix = (ix + dir + L.length) % L.length;
+    commit(S => { S.tpl.view = variantOf(L[ix]).id; });
   }
   function request() {
     const nm = S.req.name.trim(), em = S.req.email.trim(), nt = note.trim();
@@ -101,23 +124,25 @@ export default function Step5() {
       <h2 id="h5s" className="sth">5. Templates</h2>
       <div className="card">
         <div className="bar">
-          <div className="flex-1 min-w-[220px]"><h3>{ok.length} of {all.length} templates fit your site</h3><p className="mu">Only templates that can show every section and your desktop menu style are listed, best rated first. Prices follow each template’s rating out of 99: 74 and lower free, then $50 at 75 rising to $500 at 90 and $7,500 at 99. Each one also shows what a comparable template costs at Framer or Webflow and what an agency charges, with sources.</p></div>
-          <label className="ck"><input type="checkbox" checked={!!S.tpl.all} onChange={e => commit(S => { S.tpl.all = e.target.checked; })} /> Show templates that don’t fit</label>
+          <div className="flex-1 min-w-[220px]"><h3>{ok.length} of {all.length} designs fit your site</h3><p className="mu">Best match for your kind of business first (we read the words on your site), then by rating. Each design is shown once: pick <b>Classic</b>, <b>Soft</b> or <b>Crisp</b> on its card for the small differences (corners, colour bands, spacing). Fonts and colours are yours to change in the editor. Prices follow each version’s rating out of 99: 74 and lower free, then $50 at 75 rising to $500 at 90. Each one also shows what a comparable template costs at Framer or Webflow and what an agency charges, with sources.</p></div>
+          <label className="ck"><input type="checkbox" checked={!!S.tpl.all} onChange={e => commit(S => { S.tpl.all = e.target.checked; })} /> Show designs that don’t fit</label>
           <label className="ck"><input type="checkbox" checked={!!S.tpl.favOnly} onChange={e => commit(S => { S.tpl.favOnly = e.target.checked; })} /> Favourites only</label>
         </div>
         <div className="tg">
-          {CUR.length ? CUR.map(({ t, c }) => {
-            const on = S.tpl.pick == t.id, fav = !!S.tpl.fav[t.id];
+          {CUR.length ? CUR.map(({ d, c, m, tier }, i) => {
+            const t = shown[i], on = S.tpl.pick == t.id, fav = !!S.tpl.fav[t.id];
             return (
-              <article key={t.id} className={'tc' + (on ? ' sel' : '') + (c.ok ? '' : ' no')}>
+              <article key={d.k} className={'tc' + (on ? ' sel' : '') + (c.ok ? '' : ' no')} data-design={d.k}>
                 <div className="tw" role="button" tabIndex={0} aria-label={'Preview ' + t.name} onClick={() => view(t.id)} onKeyDown={e => { if (e.key == 'Enter' || e.key == ' ') { e.preventDefault(); view(t.id); } }}>
                   <img alt={'Screenshot of ' + t.name} src={thumbs[t.id] || undefined} />
                 </div>
                 <div className="tb">
-                  <h4>{t.name}{on && <span className="chip on">Picked</span>}</h4>
+                  <h4>{d.name}{on && <span className="chip on">Picked</span>}</h4>
+                  {tier == 2 && <p className="match">Good match: {m.hits.slice(0, 3).join(', ')}</p>}
+                  <Variants d={d} cur={t} onPick={v => choose(d, v)} />
                   <p className="tpr"><span className="chip" title="Rating out of 99">{t.grade}/99</span> <span className={'chip' + (t.price ? ' pay' : ' free')}>{Render.priceLabel(t)}</span></p>
                   <Compare t={t} />
-                  <p className="mu">{t.fam.desc}</p>
+                  <p className="mu">{d.fam.desc}</p>
                   {!c.ok && <p className="why">Doesn’t fit: {c.why.join('; ')}.</p>}
                   <div className="row">
                     <button onClick={() => view(t.id)}>Preview</button>
@@ -126,15 +151,15 @@ export default function Step5() {
                 </div>
               </article>
             );
-          }) : <p className="mu">No templates to show. Try turning off “Favourites only”, or tick “Show templates that don’t fit”.</p>}
+          }) : <p className="mu">No designs to show. Try turning off “Favourites only”, or tick “Show designs that don’t fit”.</p>}
         </div>
       </div>
 
       <div className="card" id="tpc">
         <div className="bar">
-          <div className="flex-1 min-w-[200px]"><h3>{vt.name} <span className="chip">{vt.grade}/99</span> <span className={'chip' + (vt.price ? ' pay' : ' free')}>{Render.priceLabel(vt)}</span></h3><p className="mu">{picked ? 'This is your picked template.' : vt.fam.desc + (vc.ok ? '' : ' Doesn’t fit: ' + vc.why.join('; ') + '.')}</p><Compare t={vt} full /></div>
-          <button aria-label="Previous template" onClick={() => step(-1)}>←</button>
-          <button aria-label="Next template" onClick={() => step(1)}>→</button>
+          <div className="flex-1 min-w-[200px]"><h3>{vt.name} <span className="chip">{vt.grade}/99</span> <span className={'chip' + (vt.price ? ' pay' : ' free')}>{Render.priceLabel(vt)}</span></h3><p className="mu">{picked ? 'This is your picked template.' : vt.fam.desc + (vc.ok ? '' : ' Doesn’t fit: ' + vc.why.join('; ') + '.')}</p>{vd && <Variants d={vd} cur={vt} onPick={t => choose(vd, t)} />}<Compare t={vt} full /></div>
+          <button aria-label="Previous design" onClick={() => step(-1)}>←</button>
+          <button aria-label="Next design" onClick={() => step(1)}>→</button>
           <button className={picked ? '' : 'pri'} aria-pressed={picked} onClick={() => commit(S => { S.tpl.pick = S.tpl.view; })}>{picked ? 'Picked' : 'Use this template'}</button>
         </div>
         <div className="bar mt-2.5">
