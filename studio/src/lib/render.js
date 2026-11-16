@@ -90,6 +90,10 @@ var Render = (function () {
     { k: 'whip', wordmark: 1, videos: 'grid', name: 'Whip', desc: 'For specialty drink bars and dessert cafés: syrup drips, sprinkle confetti, cup-shaped photos, a striped straw and a sticker-style drink menu.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Caprasimo', hcat: 'd', hw: 400, b: 'Figtree', bcat: 's' } },
     { k: 'pourover', mono: 'IBM Plex Mono', wordmark: 1, videos: 'grid', name: 'Pourover', desc: 'For coffee houses and roasters: warm paper tones, coffee-ring stamps, origin tags, tasting-card menus and a receipt-style order card.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Instrument Serif', hcat: 'r', hw: 400, b: 'Instrument Sans', bcat: 's' } },
     { k: 'letterboard', wordmark: 1, videos: 'grid', name: 'Letterboard', desc: 'For drive-thrus, coffee stands and snack bars: a framed felt letterboard menu, drive-thru lane stripes, a loyalty punch card and a gift-card call to action.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, dark: 2, gf: { h: 'Bebas Neue', hcat: 's', hw: 400, b: 'Work Sans', bcat: 's' } },
+    /* 2026-11-16 pitch run: Indigenous consulting firms, government contracting and professional networks */
+    { k: 'tender', wordmark: 1, videos: 'grid', name: 'Tender', desc: 'For firms that bid on government contracts: a bid-binder look with numbered tab dividers, a credentials seal, a capability statement with check marks and a wall of the departments you serve.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Source Serif 4', hcat: 'r', hw: 700, b: 'Public Sans', bcat: 's' } },
+    { k: 'quill', wordmark: 1, videos: 'grid', name: 'Quill', desc: 'For Indigenous-led firms and organizations: a four-colour band under the menu, a gold feather sweeping through the opener, round step markers in four colours and warm ember accents.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Gelasio', hcat: 'r', hw: 700, b: 'Mulish', bcat: 's' } },
+    { k: 'lattice', wordmark: 1, videos: 'grid', name: 'Lattice', desc: 'For networks, matchmakers and staffing firms: a dark opener with a glowing web of connected people, a giant member counter, an opportunity-to-contract pipeline and partner cards.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, dark: 2, gf: { h: 'Schibsted Grotesk', hcat: 's', hw: 800, b: 'Inter', bcat: 's' } },
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -111,7 +115,8 @@ var Render = (function () {
     bedrock: 85, breakwater: 84, rebar: 84,
     trapline: 85, tannery: 86, birchbark: 84,
     gauge: 84, flowline: 85, ledger: 84,
-    whip: 85, pourover: 84, letterboard: 86 };
+    whip: 85, pourover: 84, letterboard: 86,
+    tender: 85, quill: 86, lattice: 85 };
   var PRICE_BY_GRADE = { 75: 50, 76: 60, 77: 70, 78: 80, 79: 90, 80: 100, 81: 120, 82: 140, 83: 160, 84: 180, 85: 200, 86: 250, 87: 300, 88: 350, 89: 400,
     90: 500, 91: 600, 92: 700, 93: 800, 94: 900, 95: 1000, 96: 1500, 97: 2500, 98: 4000, 99: 7500 };
   var MIN_GRADE = 65;
@@ -186,7 +191,10 @@ var Render = (function () {
     ledger: 'savings|property manag*|landlord|roi',
     whip: 'cafe|café|bubble tea|dessert|smoothie|sweets|ice cream|drinks|lemonade',
     pourover: 'coffee|roaster|espresso|cafe|café',
-    letterboard: 'coffee|drive-thru|drive thru|snack|coffee stand|food truck|canteen'
+    letterboard: 'coffee|drive-thru|drive thru|snack|coffee stand|food truck|canteen',
+    tender: 'consult*|government|contract*|procurement|proposal|rfp|standing offer|supply arrangement|tender|bid',
+    quill: 'indigenous|first nation|métis|inuit|consult*|engagement|reconciliation|community|organization',
+    lattice: 'network|match*|staffing|recruit*|talent|consultants|platform|members|partner*'
   };
   var FITRE = {};
   for (var fitK in FITS) FITRE[fitK] = FITS[fitK].split('|').map(function (w) { return { w: w, re: new RegExp('(^|[^a-z])' + w.replace(/\*$/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (/\*$/.test(w) ? '' : '(s|es)?(?![a-z])'), 'i') }; });
