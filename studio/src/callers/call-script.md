@@ -44,12 +44,12 @@ Then message **Chris right away** with the business name.
 
 | They ask about | You say |
 |---|---|
-| **Hosting** | "Hosting is **free**, with a small 'Baked with BAKE' badge at the bottom of your pages. If you'd rather not have it, it's a small monthly fee based on how busy your site is, **starting at $5 a month**." |
+| **Hosting** | "Hosting is **free**, on your free address **or on your own domain**, with a small 'Baked with BAKE' badge at the bottom of your pages. If you'd rather not have it, it's a small monthly fee based on how busy your site is, **starting at $5 a month**." |
 | **Address** | "You get a **free address** like *yourbusiness.rezsite.com* or *yourbusiness.bakedby.me*." |
 | **Their own domain** | "We can connect the domain you already have for **$100 one-time**." |
 | **A new domain** | "We can register a new one for you for **$50**, plus the yearly domain fee, usually **about $15 a year**." |
 | **Bigger firms** | "For a bigger site, Chris quotes it after you've seen the designs, and the launch-week discount applies." |
-| **Paying** | "By Interac e-Transfer. Chris sends the details with your designs." |
+| **Paying** | "By Interac e-Transfer. Your designs link has a **Buy** section: pick a name, you get a pay code, send the e-Transfer with that code, and your site goes live on rezsite.com as soon as it arrives." |
 
 ---
 

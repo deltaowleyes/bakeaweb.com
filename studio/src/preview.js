@@ -7,7 +7,8 @@ import { Site, pitchProject } from './lib/site.js';
 import { blank } from './store.js';
 import { Render } from './lib/render.js';
 import { compareHtml } from './lib/compare.js';
-import { launchDeal, dealLine, timeLeft } from './lib/launch.js';
+import { launchDeal, dealLine, timeLeft, salePrice } from './lib/launch.js';
+import { suggestName, nameProblem } from './lib/publish.js';
 import './lib/site.css';   // the generated site's look must apply in this page too, so the screenshot's link map and photo holes are measured with the real layout
 
 const sb = createClient('https://gpwxuunutljcauoknhrh.supabase.co', 'sb_publishable_B7a1VEv6RX13n2JhA50tbQ_oR_oKfw9');
@@ -32,7 +33,7 @@ async function start() {
   P = data;
   designs = (P.redesigns || []).slice().sort((a, b) => (+b.grade || 0) - (+a.grade || 0));
   document.title = 'A new website for ' + P.business_name + ' · BAKE preview';
-  draw();
+  draw(); loadOrders();
 }
 
 function gone() {
@@ -55,7 +56,8 @@ function draw() {
     <div class="stage" id="stage"><div class="frame" id="frame"><div class="sv" id="sv"><div class="pic" id="pic"></div></div><p class="wait" id="wait">Drawing the page…</p></div></div>
     <p class="hint">Every page of your new website is here: pick one above, or click a link inside the preview. Scroll inside the preview to see the whole page.${designs.length > 1 ? ' ★ = the design we think suits you best.' : ''}</p>
     <div class="card price"><h2>What this design costs, compared</h2><div id="deal"></div><div id="cmp"></div>
-      <p class="hint">Publishing to a free BAKE address is included. Your own domain is +$50 for a new one or +$100 to connect one you have.</p></div>
+      <p class="hint">Publishing to a free <b>yourname.rezsite.com</b> address is included. <b>Hosting is free</b>, on the free address or on your own domain, while a small “Baked with BAKE” badge shows at the bottom of your pages. Your own domain: +$50 to register a new one (plus the yearly domain fee, about $15) or +$100 to connect one you already have.</p></div>
+    <div class="card buy" id="buy"></div>
     <div class="grid">
       <div class="card before"><h2>${none ? 'Today' : 'Your website today'}</h2>
         ${P.before_shot ? `<a href="${esc(P.website)}" target="_blank" rel="noopener"><img id="bshot" data-url="${esc(P.website)}" src="${esc(P.before_shot)}" alt="Your current website" loading="lazy"></a>` : ''}
@@ -103,7 +105,7 @@ function show() {
   $('#pgs').innerHTML = names.map((n, i) => `<button data-p="${i}" aria-pressed="${i == at}">${esc(i == 0 ? 'Home' : n)}</button>`).join('');
   $('#pgs').querySelectorAll('[data-p]').forEach(b => b.onclick = () => { pg = names[+b.dataset.p]; show(); });
   const g = +d.grade || 0; $('#cmp').innerHTML = compareHtml(g, Render.priceFor(g), Render.money, { forProspect: true, deal: launchDeal() }) || '<p>Ask us about this design.</p>';
-  dealBanner();
+  dealBanner(); buyCard();
   fit();
 }
 function fit() {
@@ -176,3 +178,85 @@ function dealBanner() {
     <b style="color:#c2410c;font-size:17px">🎉 ${esc(dealLine(d))}</b><br><span>Time left at ${d.pct}% off: <b>${esc(timeLeft(d.msLeft))}</b>. The price below already includes today's discount.</span></div>` : '';
 }
 setInterval(dealBanner, 30000);
+
+/* ---------- Buy with Interac e-Transfer → live on rezsite.com ----------
+   The prospect picks a page name and address, and gets a pay code. order_shared_pitch() (Supabase) works out the
+   price and today's launch discount on the server and records the order in pitch_orders; when the e-Transfer
+   arrives, an admin clicks "Payment received → publish" in BAKER Admin and the site goes live at name.rezsite.com. */
+const PAY_TO = 'leah@rezsite.com';
+let orders = [], buyState = null, nameCheck = 0;
+async function loadOrders() { const { data } = await sb.rpc('shared_pitch_orders', { t: token }); orders = Array.isArray(data) ? data : []; buyCard(); }
+function payBox(o) {
+  const live = o.status == 'live', paid = o.status == 'paid';
+  return `<div class="paybox" style="border:2px solid ${live ? '#15803d' : '#0f766e'};border-radius:14px;padding:14px 16px;margin-top:12px;background:${live ? '#f0fdf4' : '#f0fdfa'}">
+    ${live ? `<b style="font-size:17px">✅ Your website is live: <a href="${esc(o.address)}" target="_blank" rel="noopener">${esc(o.address.replace('https://', '').replace(/\/$/, ''))}</a></b>`
+    : paid ? `<b style="font-size:17px">💚 Payment received for ${esc(o.pay_code)}.</b><p style="margin:6px 0 0">We're putting ${esc(o.design)} live at <b>${esc(o.address.replace('https://', '').replace(/\/$/, ''))}</b> now.</p>`
+    : `<b style="font-size:17px">Your pay code: <span style="font-family:ui-monospace,monospace;letter-spacing:.06em;background:#fff;border:1px solid #99d5cc;border-radius:8px;padding:2px 8px">${esc(o.pay_code)}</span></b>
+      <ol style="margin:10px 0 0;padding-left:20px;line-height:1.6">
+        <li>In your bank's app or website, choose <b>Interac e-Transfer</b> → <b>Send money</b>.</li>
+        <li>Send <b>${Render.money(o.amount)}</b> to <b>${PAY_TO}</b> <button type="button" class="copy" data-copy="${PAY_TO}" style="font-size:13px;padding:2px 10px">Copy</button></li>
+        <li>In the message, write <b>${esc(o.pay_code)}</b> <button type="button" class="copy" data-copy="${esc(o.pay_code)}" style="font-size:13px;padding:2px 10px">Copy</button> so we know it's yours.</li>
+        <li>That's it. As soon as it arrives, <b>${esc(o.design)}</b> goes live at <b>${esc(o.address.replace('https://', '').replace(/\/$/, ''))}</b>, usually within a few hours (9 am – 9 pm Eastern), and we'll let you know.</li>
+      </ol>
+      <p class="hint" style="margin:8px 0 0">${o.discount_pct ? `Your launch-week price (${o.discount_pct}% off) is locked in with this code. ` : ''}No security question is needed: the money is deposited automatically.</p>`}
+  </div>`;
+}
+function buyCard() {
+  const el = $('#buy'), d = designs[cur]; if (!el || !d) return;
+  const g = +d.grade || 0, reg = Render.priceFor(g), deal = launchDeal();
+  const firstOpen = orders.find(o => o.status == 'awaiting_payment');   /* newest unpaid order replaces older ones */
+  const mine = orders.filter(o => o.status == 'paid' || o.status == 'live' || o == firstOpen);
+  if (reg == null) { el.innerHTML = '<h2>Want this design?</h2><p>Send us a message below and we\'ll quote it.</p>'; return; }
+  const today = salePrice(reg, deal) || 0;
+  if (!buyState) buyState = { name: suggestName(P.business_name), opt: 'free', dom: '', who: '', contact: '', open: false };
+  const fee = { free: 0, connect: 100, new: 50 }[buyState.opt], total = today + fee;
+  el.innerHTML = `<h2 style="margin:0 0 6px">Buy ${esc(d.name)}: pay by Interac e-Transfer</h2>
+    <p style="margin:0 0 10px">Your new website goes live at <b>${esc((buyState.name || 'yourname') + '.rezsite.com')}</b> as soon as your e-Transfer arrives. No credit card, no account, no monthly fees.</p>
+    ${mine.map(payBox).join('')}
+    ${mine.some(o => o.status == 'awaiting_payment') && !buyState.open ? `<p style="margin:12px 0 0"><button type="button" id="buyAgain">Order a different design or name instead</button></p>` : `
+    <form id="bf" style="display:grid;gap:10px;margin-top:12px">
+      <label><b>1. Your page name</b> <span class="hint">(3–12 letters, numbers or hyphens)</span>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:4px"><input id="bn" value="${esc(buyState.name)}" maxlength="12" autocomplete="off" style="max-width:220px"><span style="font-weight:600">.rezsite.com</span></div>
+        <span id="bnm" class="msg" aria-live="polite" style="font-weight:500"></span></label>
+      <fieldset style="border:0;padding:0;margin:0"><legend><b>2. Your address</b></legend>
+        ${[['free', 'Just the free rezsite.com address', 'Included'], ['connect', 'Also connect a domain I already have', '+$100'], ['new', 'Also register a new domain for me', '+$50 + about $15/year for the domain']].map(([k, t, f]) =>
+          `<label style="display:flex;gap:8px;align-items:baseline;margin-top:6px"><input type="radio" name="bo" value="${k}" ${buyState.opt == k ? 'checked' : ''} style="width:auto"> <span>${t} <span class="hint">(${f})</span></span></label>`).join('')}
+        ${buyState.opt != 'free' ? `<input id="bd" value="${esc(buyState.dom)}" placeholder="${buyState.opt == 'connect' ? 'yourbusiness.ca' : 'the domain you would like, e.g. yourbusiness.ca'}" maxlength="120" style="margin-top:8px;max-width:360px">` : ''}
+        <p class="hint" style="margin:6px 0 0">Hosting is free on either address while the small “Baked with BAKE” badge shows.</p></fieldset>
+      <label><b>3. Your name</b><input id="bw" value="${esc(buyState.who)}" autocomplete="name" maxlength="120"></label>
+      <label><b>4. Phone or email</b> <span class="hint">(so we can tell you when it's live)</span><input id="bc" value="${esc(buyState.contact)}" maxlength="160" required></label>
+      <div style="background:var(--bg,#f6f7f7);border-radius:12px;padding:10px 14px;line-height:1.6">
+        ${esc(d.name)}: ${today != reg ? `<s>${Render.money(reg)}</s> ` : ''}<b>${today ? Render.money(today) : 'Free'}</b>${deal && reg ? ` <span class="hint">(${deal.pct}% launch-week discount, today only)</span>` : ''}
+        ${fee ? `<br>${buyState.opt == 'connect' ? 'Connect your domain' : 'Register a new domain'}: <b>${Render.money(fee)}</b>${buyState.opt == 'new' ? ' <span class="hint">(+ the yearly domain fee, about $15, which we confirm with you)</span>' : ''}` : ''}
+        <br><span style="font-size:18px">Total: <b>${Render.money(total)}</b></span></div>
+      <button type="submit" class="primary" style="justify-self:start;font-size:17px;padding:12px 22px">${total ? 'Get my pay code' : 'Publish my free site'}</button>
+      <p class="msg" id="bm" aria-live="polite"></p>
+    </form>`}`;
+  el.querySelectorAll('.copy').forEach(b => b.onclick = async () => { try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = 'Copied'; } catch (e) { b.textContent = b.dataset.copy; } });
+  if ($('#buyAgain')) $('#buyAgain').onclick = () => { buyState.open = true; buyCard(); };
+  const f = $('#bf'); if (!f) return;
+  const keep = () => { buyState.name = $('#bn').value.trim().toLowerCase(); buyState.who = $('#bw').value; buyState.contact = $('#bc').value; if ($('#bd')) buyState.dom = $('#bd').value; };
+  f.querySelectorAll('[name=bo]').forEach(r => r.onchange = () => { keep(); buyState.opt = r.value; buyCard(); });
+  const check = async () => {
+    const n = $('#bn').value.trim().toLowerCase(), bad = nameProblem(n), m = $('#bnm'), id = ++nameCheck;
+    if (bad) { m.className = 'msg err'; m.textContent = bad; return false; }
+    m.className = 'msg'; m.textContent = 'Checking…';
+    const { data } = await sb.rpc('pagename_free', { p_domain: 'rezsite.com', p_name: n, t: token });
+    if (id != nameCheck) return data !== false;
+    m.className = data === false ? 'msg err' : 'msg ok'; m.textContent = data === false ? n + '.rezsite.com is taken. Please try another name.' : '✓ ' + n + '.rezsite.com is available';
+    return data !== false;
+  };
+  let h; $('#bn').oninput = () => { $('#bn').value = $('#bn').value.toLowerCase().replace(/\s+/g, '-'); keep(); clearTimeout(h); h = setTimeout(check, 400); };
+  if (buyState.name) check();
+  f.onsubmit = async e => {
+    e.preventDefault(); keep();
+    if (!(await check())) { $('#bn').focus(); return; }
+    if (buyState.opt != 'free' && !/^[a-z0-9-]+(\.[a-z0-9-]+)+$/i.test(buyState.dom.trim())) { $('#bm').className = 'msg err'; $('#bm').textContent = 'Please type the domain, for example yourbusiness.ca'; $('#bd').focus(); return; }
+    if (buyState.contact.trim().length < 5) { $('#bm').className = 'msg err'; $('#bm').textContent = 'Please give a phone number or email.'; $('#bc').focus(); return; }
+    const btn = f.querySelector('[type=submit]'); btn.disabled = true; $('#bm').className = 'msg'; $('#bm').textContent = 'One moment…';
+    const { data, error } = await sb.rpc('order_shared_pitch', { t: token, pick: d.name, p_pagename: buyState.name, p_option: buyState.opt, p_own_domain: buyState.opt == 'free' ? '' : buyState.dom, p_name: buyState.who, p_contact: buyState.contact, p_message: '' });
+    if (error || !data) { btn.disabled = false; $('#bm').className = 'msg err'; $('#bm').textContent = (error && error.message) || 'Sorry, that didn\'t work. Please try again.'; return; }
+    buyState.open = false; await loadOrders();
+    $('#buy').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+}

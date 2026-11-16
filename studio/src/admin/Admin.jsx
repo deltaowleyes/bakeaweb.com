@@ -106,6 +106,56 @@ function LiveBadge({ row }) {
     : <span className="st st-blocked" title="The files are uploaded. The address starts working once the Cloudflare step in host/README.md is done.">Uploaded · address not active yet</span>;
 }
 
+/* e-Transfer orders placed from prospect preview links (pitch_orders). When the e-Transfer with the pay code
+   arrives in leah@rezsite.com, click "Payment received → publish": the design goes live at name.rezsite.com. */
+function Orders({ pitches, sites, onPublished }) {
+  const [rows, setRows] = useState(null), [busy, setBusy] = useState(null), [msg, setMsg] = useState('');
+  async function load() { const { data, error } = await sb.from('pitch_orders').select('*').order('created_at', { ascending: false }).limit(200); if (error) setMsg(error.message); setRows(data || []); }
+  useEffect(() => { load(); }, []);
+  const money = n => '$' + Number(n || 0).toLocaleString('en-US');
+  async function paid(o) {
+    const p = pitches.find(x => x.id == o.pitch_id), d = p && (p.redesigns || []).find(x => x.name == o.design);
+    if (!d) { alert('Could not find the design “' + o.design + '” in that pitch.'); return; }
+    const url = siteUrl('rezsite.com', o.pagename);
+    const taken = sites.find(s => s.domain == 'rezsite.com' && s.pagename == o.pagename && s.status == 'live' && s.pitch_id != o.pitch_id);
+    if (!confirm((o.amount ? 'Did the e-Transfer of ' + money(o.amount) + ' with ' + o.pay_code + ' arrive?\n\n' : '') + 'This publishes ' + o.design + ' at ' + url + (taken ? '\n\nWARNING: that address already shows “' + (taken.title || taken.pagename) + '” and will be replaced.' : ''))) return;
+    setBusy(o.id); setMsg('Publishing ' + url + '…');
+    try {
+      if (o.status == 'awaiting_payment') await sb.from('pitch_orders').update({ status: 'paid', paid_at: new Date().toISOString() }).eq('id', o.id);
+      const row = await publishSite({ domain: 'rezsite.com', name: o.pagename, project: pitchProject(d, p.base_project), tpl: d.tpl, meta: { pitch_id: p.id, design: d.name, title: p.business_name } });
+      await sb.from('pitch_orders').update({ status: 'live', live_at: new Date().toISOString(), published_site_id: row && row.id }).eq('id', o.id);
+      await sb.from('pitch_orders').update({ status: 'cancelled' }).eq('pitch_id', o.pitch_id).eq('status', 'awaiting_payment').neq('id', o.id);
+      await sb.from('redesign_pitches').update({ status: 'accepted' }).eq('id', p.id);
+      onPublished(row); setMsg('Live: ' + url + (o.own_domain ? ' · still to do: ' + (o.domain_option == 'connect' ? 'connect ' : 'register ') + o.own_domain : '') + '. Let ' + (o.name || 'them') + ' know (' + o.contact + ').');
+    } catch (e) { setMsg('Publishing failed: ' + e.message + ' (the order is marked paid; click again to retry).'); }
+    setBusy(null); load();
+  }
+  async function cancel(o) { if (!confirm('Cancel order ' + o.pay_code + '?')) return; await sb.from('pitch_orders').update({ status: 'cancelled' }).eq('id', o.id); load(); }
+  const biz = id => (pitches.find(x => x.id == id) || {}).business_name || '#' + id;
+  const open = (rows || []).filter(o => o.status != 'cancelled');
+  return <section className="card">
+    <h3 className="m-0">e-Transfer orders <span className="mu">({open.filter(o => o.status == 'awaiting_payment').length} waiting for payment)</span> <button className="small" onClick={load}>Refresh</button></h3>
+    <p className="mu small">Prospects get a pay code on their preview link and send the e-Transfer to leah@rezsite.com with the code in the message. When it arrives, click <b>Payment received → publish</b>.</p>
+    {msg && <p className="okmsg" role="status">{msg}</p>}
+    {rows == null ? <p className="mu">Loading…</p> : !open.length ? <p className="mu">No orders yet.</p> :
+      <div className="overflow-x-auto"><table className="w-full border-collapse text-sm">
+        <thead><tr className="text-left">{['Pay code', 'Business', 'Design', 'Address', 'Amount', 'Who', 'Ordered', 'Status', ''].map(h => <th key={h} className="border-b border-line p-2">{h}</th>)}</tr></thead>
+        <tbody>{open.map(o => <tr key={o.id}>
+          <td className="border-b border-line p-2 font-mono font-bold">{o.pay_code}</td>
+          <td className="border-b border-line p-2">{biz(o.pitch_id)}</td>
+          <td className="border-b border-line p-2">{o.design} <span className="mu">({o.grade}/99)</span></td>
+          <td className="border-b border-line p-2">{o.pagename}.rezsite.com{o.own_domain && <div className="small">{o.domain_option == 'connect' ? 'Connect ' : 'Register '}<b>{o.own_domain}</b></div>}</td>
+          <td className="border-b border-line p-2 whitespace-nowrap"><b>{money(o.amount)}</b><div className="mu small">{o.discount_pct ? <><s>{money(o.regular_price)}</s> −{o.discount_pct}%</> : money(o.design_price)}{o.domain_fee ? ' + ' + money(o.domain_fee) : ''}</div></td>
+          <td className="border-b border-line p-2">{o.name}<div className="small">{o.contact}</div></td>
+          <td className="border-b border-line p-2 whitespace-nowrap">{new Date(o.created_at).toLocaleString('en-CA', { timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}</td>
+          <td className="border-b border-line p-2"><span className="st">{{ awaiting_payment: 'Waiting for e-Transfer', paid: 'Paid, not live yet', live: 'Live' }[o.status]}</span></td>
+          <td className="border-b border-line p-2 whitespace-nowrap">{o.status != 'live' && <><button className="pri" disabled={busy == o.id} onClick={() => paid(o)}>{busy == o.id ? 'Publishing…' : o.status == 'paid' ? 'Publish again' : 'Payment received → publish'}</button>{' '}<button disabled={busy == o.id} onClick={() => cancel(o)}>Cancel</button></>}
+            {o.status == 'live' && <a href={siteUrl('rezsite.com', o.pagename)} target="_blank" rel="noopener">Open ↗</a>}</td>
+        </tr>)}</tbody>
+      </table></div>}
+  </section>;
+}
+
 export default function Admin({ onClose }) {
   const [session, setSession] = useState(undefined), [admin, setAdmin] = useState(null);
   const [views, setViews] = useState({}), [statsOpen, setStatsOpen] = useState(null);
@@ -147,6 +197,8 @@ export default function Admin({ onClose }) {
     {session === undefined ? <p className="mu">Loading…</p> : !session ? <Login /> : <>
       {admin === false && <p className="errmsg" role="alert">{session.user.email} isn’t on the admin list, so pitches and publishing are hidden.</p>}
       {err && <p className="errmsg" role="alert">{err}</p>}
+
+      {admin && <Orders pitches={pitches} sites={sites} onPublished={saved} />}
 
       <section className="card">
         <h3 className="m-0">Published sites <span className="mu">({live} live)</span></h3>
