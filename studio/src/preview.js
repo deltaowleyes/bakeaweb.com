@@ -84,7 +84,11 @@ function draw() {
     const btn = e.target.querySelector('[type=submit]'); btn.disabled = true; $('#rm').className = 'msg'; $('#rm').textContent = 'Sending…';
     const { data, error } = await sb.rpc('reply_shared_pitch', { t: token, choice, pick: designs[cur]?.name || '', name: $('#nm').value.trim(), contact: $('#ct').value.trim(), message: $('#ms').value.trim() });
     if (error || !data) { btn.disabled = false; $('#rm').className = 'msg err'; $('#rm').textContent = 'Sorry, that didn\'t send. Please try again, or reply to the message that brought you here.'; return; }
-    $('#rm').className = 'msg ok'; $('#rm').textContent = 'Thank you! We got your message and will be in touch soon.'; e.target.querySelectorAll('input,textarea,button').forEach(x => x.disabled = true);
+    const f = e.target, box = document.createElement('div');
+    box.className = 'sent'; box.setAttribute('role', 'status'); box.tabIndex = -1;
+    box.innerHTML = '<div class="sent-tick" aria-hidden="true">✓</div><h3>Message sent</h3><p>Thank you! We got your message and will be in touch within one business day.</p>';
+    f.replaceWith(box); box.scrollIntoView({ behavior: 'smooth', block: 'center' }); box.focus({ preventScroll: true });
+    toast('✓ Message sent. Thank you, we\'ll be in touch soon!');
   };
   if ($('#bshot')) watchShot($('#bshot'));
   show(); new ResizeObserver(fit).observe($('#stage'));

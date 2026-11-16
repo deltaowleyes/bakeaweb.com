@@ -219,3 +219,21 @@ test('every offered template has a sourced price comparison', async ({ page }) =
   expect(res.length).toBeGreaterThan(50);
   for (const r of res) expect(r, r.id).toMatchObject({ ok: true });
 });
+
+test('sending a reply from a pitch link shows a big green "Message sent" box and a popup', async ({ page }) => {
+  let sent = null;
+  await page.route('**/rest/v1/rpc/**', async route => {
+    const fn = route.request().url().split('/rpc/')[1].split('?')[0];
+    if (fn == 'reply_shared_pitch') { sent = route.request().postDataJSON(); return route.fulfill({ json: true }); }
+    if (fn == 'get_shared_pitch') return route.fulfill({ json: { business_name: 'Test Lodge', website: '', redesigns: [], before_notes: '' } });
+    return route.fulfill({ json: [] });
+  });
+  await page.goto('preview.html?p=abcdefabcdefabcdef12');
+  await page.fill('#nm', 'Pat');
+  await page.fill('#ct', '555-0100');
+  await page.click('#rf [type=submit]');
+  await expect(page.locator('.sent')).toContainText('Message sent');
+  await expect(page.locator('#toast')).toContainText('Message sent');
+  await expect(page.locator('#rf')).toHaveCount(0);
+  expect(sent).toMatchObject({ t: 'abcdefabcdefabcdef12', name: 'Pat', contact: '555-0100', choice: 'interested' });
+});

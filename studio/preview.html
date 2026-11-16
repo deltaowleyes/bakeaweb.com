@@ -40,6 +40,11 @@ ul{padding-left:20px;margin:10px 0 0}li{margin:4px 0}
 form{display:grid;gap:10px}
 input,textarea{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:10px;width:100%;background:#fff}
 .choices{display:flex;gap:8px;flex-wrap:wrap}
+.sent{background:#e7f6ec;border:2px solid #1f7a4a;border-radius:14px;padding:26px 22px;text-align:center;color:#14532d;outline:none;animation:sentIn .35s ease-out}
+.sent h3{margin:8px 0 6px;font-size:26px;color:#14532d}.sent p{margin:0;font-size:17px}
+.sent-tick{width:64px;height:64px;margin:0 auto;border-radius:50%;background:#1f7a4a;color:#fff;font-size:38px;line-height:64px;font-weight:700}
+@keyframes sentIn{from{transform:scale(.92);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.sent{animation:none}}
 .msg{min-height:1.4em;margin:0;font-weight:600}
 .ok{color:var(--good)}.err{color:var(--warn)}
 .cmp{font-size:14px;line-height:1.5;margin-top:8px}.cmp-row{display:flex;gap:10px;padding:4px 0;border-top:1px solid var(--line)}.cmp-row:first-child{border-top:0}
