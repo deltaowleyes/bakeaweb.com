@@ -86,3 +86,24 @@ test('real inner pages saved by a pitch run are kept, missing ones are made, and
   expect(r.pvHome).toBe(true);
   expect(r.homeMarker).toBe(true);
 });
+
+test('the prospect preview draws every page as a screenshot with clickable links, never the page code', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules');
+  await openStudio(page);
+  await makeStarter(page);
+  const r = await page.evaluate(async M => {
+    const S = JSON.parse(JSON.stringify(window.BAKE.state()));
+    Object.assign(S, { biz: M.biz, pages: M.pages }); S.menu = Object.assign(S.menu, { items: M.menu.items, cta: M.menu.cta });
+    S.pages[0].sections[1].items[0].image = { kind: 'img', src: 'https://photos.example.com/blocked.jpg' };   // a photo its site won't share
+    const full = window.BAKE.site.pitchProject(null, S);
+    const home = await window.BAKE.site.previewShot(full, 'hearth-a', 'home', 1280);
+    const inner = await window.BAKE.site.previewShot(full, 'hearth-a', 'Storage', 390);
+    return { url: /^blob:/.test(home.url), pages: home.links.filter(l => /^#@/.test(l.href)).map(l => decodeURIComponent(l.href.slice(2))),
+      hole: home.holes.some(h => h.src == 'https://photos.example.com/blocked.jpg' && h.width > 20), innerLogo: inner.links.some(l => l.href == '#@home'), innerH: inner.h };
+  }, SITE);
+  expect(r.url).toBe(true);
+  expect(r.pages).toEqual(expect.arrayContaining(['storage', 'contact', 'residential moving']));
+  expect(r.hole).toBe(true);
+  expect(r.innerLogo).toBe(true);
+  expect(r.innerH).toBeGreaterThan(600);
+});

@@ -52,7 +52,7 @@ var Shot = (function () {
   /* html: page markup; w: viewport width; opt.maxH: crop height; opt.scale: pixel density.
      Resolves to { url (picture), w, h, full, secs, map (see measure) } */
   async function take(html, w, opt) {
-    opt = opt || {}; var key = w + '|' + (opt.maxH || 0) + '|' + (opt.scale || 1) + '|' + html;
+    opt = opt || {}; var key = w + '|' + (opt.maxH || 0) + '|' + (opt.scale || 1) + '|' + (opt.holes ? 'h|' : '') + html;
     if (shotCache[key]) return shotCache[key];
     var style = await css();
     var gf = /data-gf="([^"]*)"/.exec(html);   // Google fonts the page uses: embed them so the screenshot can show them
@@ -62,10 +62,19 @@ var Shot = (function () {
     host.innerHTML = html; document.body.appendChild(host);
     var imgs = Array.prototype.slice.call(host.querySelectorAll('img'));
     imgs.forEach(function (im) { im.removeAttribute('loading'); });
-    await Promise.all(imgs.map(function (im) { return toData(im.getAttribute('src')).then(function (d) { if (d) im.setAttribute('src', d); else im.removeAttribute('src'); }); }));
+    /* opt.holes: a photo whose website won't let us read it (no CORS) stays in the layout and is left as a see-through
+       hole in the picture; map.holes says where, so the page around the picture can lay the real photo over it */
+    var miss = [];
+    await Promise.all(imgs.map(function (im) { return toData(im.getAttribute('src')).then(function (d) { if (d) im.setAttribute('src', d); else if (opt.holes && /^https?:/.test(im.getAttribute('src') || '')) miss.push(im); else im.removeAttribute('src'); }); }));
     await Promise.all(imgs.map(function (im) { return Promise.race([im.decode ? im.decode().catch(function () { }) : null, new Promise(function (ok) { setTimeout(ok, 4000); })]); }));
     var full = host.scrollHeight, h = Math.min(full, opt.maxH || full, 30000);
-    var map = measure(host, w, h);
+    var map = measure(host, w, h), o = host.getBoundingClientRect();
+    map.holes = miss.map(function (im) {
+      var r = im.getBoundingClientRect(), cs = getComputedStyle(im), src = im.getAttribute('src');
+      im.style.width = r.width + 'px'; im.style.height = r.height + 'px'; im.style.visibility = 'hidden';
+      im.setAttribute('src', 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+      return { x: Math.round(r.left - o.left), y: Math.round(r.top - o.top), width: Math.round(r.width), height: Math.round(r.height), src: src, fit: cs.objectFit, pos: cs.objectPosition, radius: cs.borderRadius };
+    }).filter(function (b) { return b.width >= 2 && b.height >= 2 && b.y < h; });
     var secs = map.boxes.filter(function (b) { return b.type == 'section'; }).map(function (b) { return { id: b.sectionId, y: b.y, h: b.height }; });
     host.style.cssText = 'width:' + w + 'px';
     var markup = new XMLSerializer().serializeToString(host); host.remove();

@@ -5,7 +5,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { Site, pitchProject } from './lib/site.js';
 import { blank } from './store.js';
-import { tameLinks } from './lib/tame.js';
 import { Render } from './lib/render.js';
 import { compareHtml } from './lib/compare.js';
 
@@ -50,7 +49,7 @@ function draw() {
     <div class="bar"><div class="tabs" role="tablist">${designs.map((d, i) => `<button data-i="${i}" aria-pressed="${i == cur}">${i == 0 && designs.length > 1 ? '★ ' : ''}${esc(d.name)}</button>`).join('')}</div>
       <div class="dev">${Object.keys(DEV).map(k => `<button data-d="${k}" aria-pressed="${k == dev}">${k[0].toUpperCase() + k.slice(1)}</button>`).join('')}</div></div>
     <div class="pages" aria-label="Pages of this website"><span class="pl" id="pgc">Pages</span><div class="tabs" id="pgs"></div></div>
-    <div class="stage" id="stage"><div class="frame" id="frame"><iframe id="f" title="Website preview" sandbox="allow-same-origin"></iframe></div></div>
+    <div class="stage" id="stage"><div class="frame" id="frame"><div class="sv" id="sv"><div class="pic" id="pic"></div></div><p class="wait" id="wait">Drawing the page…</p></div></div>
     <p class="hint">Every page of your new website is here: pick one above, or click the menu inside the preview. Scroll inside the preview to see the whole page.${designs.length > 1 ? ' ★ = the design we think suits you best.' : ''}</p>
     <div class="card price"><h2>What this design costs, compared</h2><div id="cmp"></div>
       <p class="hint">Publishing to a free BAKE address is included. Your own domain is +$50 for a new one or +$100 to connect one you have.</p></div>
@@ -83,7 +82,6 @@ function draw() {
     $('#rm').className = 'msg ok'; $('#rm').textContent = 'Thank you! We got your message and will be in touch soon.'; e.target.querySelectorAll('input,textarea,button').forEach(x => x.disabled = true);
   };
   if ($('#bshot')) watchShot($('#bshot'));
-  tameLinks($('#f'), label => toast(label == 'form' ? 'Forms will work on your finished site.' : (label ? '“' + label + '”' : 'This link') + ' will work on your finished site.'), name => { pg = name; show(); });
   show(); new ResizeObserver(fit).observe($('#stage'));
 }
 function toast(text) {
@@ -97,7 +95,7 @@ function show() {
   const d = designs[cur]; if (!d) return;
   const pr = project(pitchProject(d, P.base_project)), names = pr.pages.map(p => p.name || 'Page');
   let at = names.findIndex(n => n.trim().toLowerCase() == String(pg).trim().toLowerCase()); if (at < 0) at = 0;
-  $('#f').srcdoc = Site.previewPage(pr, d.tpl, names[at]);
+  draw1(pr, d.tpl, names[at]);
   $('#pgc').textContent = names.length + ' pages';
   $('#pgs').innerHTML = names.map((n, i) => `<button data-p="${i}" aria-pressed="${i == at}">${esc(i == 0 ? 'Home' : n)}</button>`).join('');
   $('#pgs').querySelectorAll('[data-p]').forEach(b => b.onclick = () => { pg = names[+b.dataset.p]; show(); });
@@ -105,11 +103,38 @@ function show() {
   fit();
 }
 function fit() {
-  const st = $('#stage'), fr = $('#frame'), f = $('#f'); if (!st) return;
+  const st = $('#stage'), fr = $('#frame'); if (!st) return;
   const [w, h] = DEV[dev], room = st.clientWidth - parseFloat(getComputedStyle(st).paddingLeft) * 2, s = Math.min(1, room / w);
   const vh = Math.min(h, Math.max(480, innerHeight - 160));
   fr.style.width = Math.floor(w * s) + 'px'; fr.style.height = vh + 'px';
-  f.style.width = w + 'px'; f.style.height = Math.ceil(vh / s) + 'px'; f.style.transform = 'scale(' + s + ')';
+  if (fit.w != w) { fit.w = w; if (fit.redraw) fit.redraw(); }
+}
+
+/* The preview is a SCREENSHOT of the page (the page code only reaches the client once it is paid for), with a
+   see-through link over every link: other pages open that page, "#part" links scroll to it. Photos whose
+   website won't let us copy them into the picture are laid over it at their exact spot (map.holes). */
+let drawId = 0;
+async function draw1(pr, tpl, name) {
+  const id = ++drawId, w = DEV[dev][0], pic = $('#pic'), sv = $('#sv');
+  fit.w = w; fit.redraw = () => draw1(pr, tpl, name);
+  $('#wait').hidden = false;
+  let r; try { r = await Site.previewShot(pr, tpl, name, w); } catch (e) { $('#wait').textContent = 'This page could not be drawn. Please try another page.'; return; }
+  if (id != drawId) return;
+  const pc = (v, t) => (v / t * 100).toFixed(3) + '%', box = b => 'left:' + pc(b.x, r.w) + ';top:' + pc(b.y, r.h) + ';width:' + pc(b.width, r.w) + ';height:' + pc(b.height, r.h);
+  pic.innerHTML = '<img class="shot" src="' + r.url + '" alt="' + esc(name) + ' page of the new website" draggable="false">' +
+    r.holes.map(b => '<img class="hole" src="' + esc(b.src) + '" alt="" style="' + box(b) + ';object-fit:' + esc(b.fit || 'cover') + ';object-position:' + esc(b.pos || '50% 50%') + ';border-radius:' + esc(b.radius || '0') + '">').join('') +
+    r.links.map((l, i) => '<a href="#" data-l="' + i + '" style="' + box(l) + '" aria-label="' + esc(l.label || 'Link') + '"></a>').join('');
+  pic.style.aspectRatio = r.w + ' / ' + r.h;
+  pic.querySelectorAll('a[data-l]').forEach(a => a.onclick = e => {
+    e.preventDefault();
+    const l = r.links[+a.dataset.l], h = l.href;
+    if (/^#@/.test(h)) { pg = decodeURIComponent(h.slice(2)); show(); sv.scrollTop = 0; return; }
+    if (h == '#top') { sv.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    if (/^#./.test(h)) { const s = r.secs.find(x => x.id == h.slice(1)); if (s) sv.scrollTo({ top: Math.max(0, s.y / r.h * pic.clientHeight - 70), behavior: 'smooth' }); return; }
+    if (/^https?:/.test(h)) { window.open(h, '_blank', 'noopener'); return; }
+    toast((l.label ? '“' + l.label + '”' : 'This link') + ' will work on your finished site.');
+  });
+  $('#wait').hidden = true;
 }
 
 /* Same before-screenshot fallback as the Pitches page: mshots first answers with a small "Generating preview" image. */

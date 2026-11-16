@@ -112,4 +112,15 @@ export function previewPage(P, tplId, name) {
   return out;
 }
 
-export const Site = { html, previewPage, pitchProject, files, shotSite, fontLink, slug };
+/** A page of a site as a screenshot for the prospect preview, so the page code never reaches their browser
+    before it is paid for. Resolves to { url, w, h, links, holes, secs } (see Shot.take); links to other pages
+    are "#@name", the logo of an inner page goes "#@home". */
+export async function previewShot(P, tplId, name, width) {
+  const key = String(name || '').trim().toLowerCase(), i = Math.max(0, P.pages.findIndex(p => String(p.name || '').trim().toLowerCase() == key));
+  let body = Render.page(P, tplId, { pageId: P.pages[i].id });
+  if (i > 0) body = body.replace(/class="lg" href="#top"/g, 'class="lg" href="#@home"');
+  const r = await Shot.take(body, width, { scale: width < 600 ? 2 : width < 1000 ? 1.5 : 1, type: 'image/webp', holes: true });
+  return { url: r.url, w: r.w, h: r.h, links: r.map.links || [], holes: r.map.holes || [], secs: r.secs };
+}
+
+export const Site = { html, previewPage, previewShot, pitchProject, files, shotSite, fontLink, slug };

@@ -23,7 +23,11 @@ button,.btn{font:inherit;font-weight:600;border:0;border-radius:999px;padding:9p
 button[aria-pressed=true],.primary{background:var(--acc);color:#fff}
 .stage{background:#e9ebe7;border-radius:18px;padding:14px;overflow:hidden}
 .frame{margin:0 auto;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 10px 30px #0002;position:relative}
-.frame iframe{border:0;display:block;transform-origin:0 0}
+.frame .sv{height:100%;overflow-y:auto;overflow-x:hidden}
+.frame .pic{position:relative;width:100%}.frame .pic .shot{display:block;width:100%;height:auto;user-select:none}
+.frame .pic .hole{position:absolute;display:block}.frame .pic a{position:absolute;display:block;border-radius:4px}
+.frame .pic a:hover,.frame .pic a:focus-visible{outline:2px solid rgba(37,99,235,.75);outline-offset:1px}
+.frame .wait{position:absolute;left:0;right:0;top:40%;text-align:center;color:var(--mute);font-weight:600;margin:0;pointer-events:none}.frame .wait[hidden]{display:none}
 .pages{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px}.pages .pl{font-weight:700;font-size:14px;color:var(--mute);margin-right:2px}
 .pages button{padding:6px 12px;font-size:14px}
 .hint{font-size:13px;color:var(--mute);margin:8px 2px 0}
