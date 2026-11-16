@@ -44,7 +44,11 @@ var Shot = (function () {
     /* every visible link (menus, buttons, cards), so a screenshot can be made clickable (lib/site.js shotSite) */
     var links = [];
     Array.prototype.forEach.call(host.querySelectorAll('a[href]'), function (a) {
-      var r = rect(a), href = a.getAttribute('href'); if (!r || !href || href == '#') return;
+      var href = a.getAttribute('href'); if (!href || href == '#') return;
+      /* links inside a closed drop-down (<details>) or otherwise hidden aren't in the picture: no click area for them */
+      if (a.closest('details:not([open])') && !a.closest('summary')) return;
+      if (a.checkVisibility && !a.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true })) return;
+      var r = rect(a); if (!r) return;
       links.push({ x: r.x, y: r.y, width: r.width, height: r.height, href: href, label: (a.textContent || '').trim().slice(0, 80) });
     });
     return { width: w, height: h, boxes: boxes, links: links };

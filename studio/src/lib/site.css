@@ -184,6 +184,8 @@
 .pv .tm{font-size:12px;color:var(--mute)}
 .pv .s-pagehead{padding:calc(var(--sy) * .8) 0}
 .pv .s-pagehead h1{font-size:46px;margin:0 0 10px}
+/* a page header followed by a section of the same colour reads as one block: don't stack two paddings into a blank gap */
+.pv .s-pagehead.bg-soft+.s.bg-soft,.pv .s-pagehead.bg-ink+.s.bg-ink,.pv .s-pagehead.bg-default+.s.bg-default{padding-top:0!important}
 .pv .crumb{font-size:13px;opacity:.75;margin:0 0 10px}.pv .crumb span{margin:0 4px}
 .pv .phm{max-width:1200px;margin:24px auto 0;padding:0 var(--pad)}.pv .phm img,.pv .phm svg{width:100%;aspect-ratio:21/6;object-fit:cover;border-radius:var(--r)}
 .pv.tf-news .s-videos h2,.pv.tf-news .s-podcast h2{font-size:15px;letter-spacing:.14em;text-transform:uppercase;font-family:var(--bf);font-weight:800;border-bottom:2px solid var(--ink);padding-bottom:6px;width:100%}
