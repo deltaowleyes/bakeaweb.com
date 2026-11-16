@@ -7,6 +7,7 @@ import { Site, pitchProject } from './lib/site.js';
 import { blank } from './store.js';
 import { Render } from './lib/render.js';
 import { compareHtml } from './lib/compare.js';
+import './lib/site.css';   // the generated site's look must apply in this page too, so the screenshot's link map and photo holes are measured with the real layout
 
 const sb = createClient('https://gpwxuunutljcauoknhrh.supabase.co', 'sb_publishable_B7a1VEv6RX13n2JhA50tbQ_oR_oKfw9');
 const $ = s => document.querySelector(s);
