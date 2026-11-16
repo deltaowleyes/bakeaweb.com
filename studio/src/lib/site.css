@@ -671,9 +671,9 @@
 
 
 /* designer families on dark or accent bands: everything inside switches to the band's text colour */
-.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .s.bg-ink>.w{--ink:var(--oi);--line:color-mix(in srgb,var(--oi) 28%,transparent);--mute:color-mix(in srgb,var(--oi) 72%,transparent);--card:color-mix(in srgb,var(--oi) 8%,transparent);--soft:color-mix(in srgb,var(--oi) 12%,transparent)}
-.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .s.bg-acc>.w{--ink:var(--oa);--line:color-mix(in srgb,var(--oa) 30%,transparent);--mute:color-mix(in srgb,var(--oa) 78%,transparent);--card:color-mix(in srgb,var(--oa) 10%,transparent);--soft:color-mix(in srgb,var(--oa) 14%,transparent)}
-.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .s.bg-ink .meta,.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .s.bg-acc .meta{color:inherit}
+.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s.bg-ink>.w{--ink:var(--oi);--line:color-mix(in srgb,var(--oi) 28%,transparent);--mute:color-mix(in srgb,var(--oi) 72%,transparent);--card:color-mix(in srgb,var(--oi) 8%,transparent);--soft:color-mix(in srgb,var(--oi) 12%,transparent)}
+.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s.bg-acc>.w{--ink:var(--oa);--line:color-mix(in srgb,var(--oa) 30%,transparent);--mute:color-mix(in srgb,var(--oa) 78%,transparent);--card:color-mix(in srgb,var(--oa) 10%,transparent);--soft:color-mix(in srgb,var(--oa) 14%,transparent)}
+.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s.bg-ink .meta,.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s.bg-acc .meta{color:inherit}
 /* designer families: tablet */
 @container (min-width:600px) and (max-width:1023.98px){
 .pv:is(.tf-tide,.tf-craft,.tf-bento) h1{font-size:48px}
@@ -735,15 +735,15 @@
    Photo-led, with gentle motion. Motion only moves things (never hides them), so screenshots stay correct,
    and it switches off for visitors who ask for less motion.
    ====================================================================== */
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .ti,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .bt{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .tim>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .gl figure>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .fm>img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .ti:hover .tim>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .gl figure:hover>img{transform:scale(1.06)}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .bt:hover{transform:translateY(-2px)}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .gl figure{overflow:hidden;border-radius:var(--r)}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .ti,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .bt{transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .tim>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .gl figure>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .fm>img{transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .ti:hover .tim>img,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .gl figure:hover>img{transform:scale(1.06)}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .bt:hover{transform:translateY(-2px)}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .gl figure{overflow:hidden;border-radius:var(--r)}
 @media (prefers-reduced-motion:no-preference){
-  .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .s-hero .hm>img{animation:bk-drift 24s ease-in-out infinite alternate}
+  .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s-hero .hm>img{animation:bk-drift 24s ease-in-out infinite alternate}
   @supports (animation-timeline:view()){
-    .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) main>.s:not(.s-hero) .w>*{animation:bk-rise linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
+    .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) main>.s:not(.s-hero) .w>*{animation:bk-rise linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
   }
 }
 @keyframes bk-drift{from{transform:scale(1)}to{transform:scale(1.08) translate(-1%,-1%)}}
@@ -892,7 +892,7 @@
 /* flagships: tablet */
 @container (min-width:600px) and (max-width:1023.98px){
 .pv.tf-hearth h1{font-size:72px}.pv.tf-volt h1{font-size:68px}.pv.tf-loom h1{font-size:60px}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) h2,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .s-cta h2{font-size:42px}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) h2,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s-cta h2{font-size:42px}
 .pv.tf-hearth .tl-menu{grid-template-columns:1fr!important}
 .pv.tf-hearth .hl-overlay .hx{min-height:600px}
 .pv.tf-volt .hl-split .hx,.pv.tf-loom .hl-split .hx{gap:32px}
@@ -902,8 +902,8 @@
 @container (max-width:599.98px){
 .pv.tf-hearth{--sy:60px}
 .pv.tf-hearth h1{font-size:54px}.pv.tf-volt h1{font-size:54px}.pv.tf-loom h1{font-size:44px}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) h2,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .s-cta h2{font-size:34px}
-.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .fe h3{font-size:32px}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) h2,.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s-cta h2{font-size:34px}
+.pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .fe h3{font-size:32px}
 .pv.tf-hearth .hl-overlay .hx{min-height:560px}
 .pv.tf-hearth .tl-menu{grid-template-columns:1fr!important;gap:24px}
 .pv.tf-hearth .tl-menu .tim{flex-basis:76px;width:76px}
@@ -1160,7 +1160,7 @@
 }
 
 /* buttons stay readable on dark and accent bands */
-.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .s.bg-acc .bt:not(.bt2){background:var(--bg);color:var(--acc)}
+.pv:is(.tf-tide,.tf-ember,.tf-folio,.tf-block,.tf-craft,.tf-glow,.tf-swiss,.tf-retro,.tf-lens,.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s.bg-acc .bt:not(.bt2){background:var(--bg);color:var(--acc)}
 .pv.tf-bloom .s.bg-ink .bt:not(.bt2){background:var(--acc);color:var(--oa)}
 
 /* ======================================================================
@@ -2702,7 +2702,7 @@
    All art drawn here in CSS/SVG: paw-print trails, pelt tags, a stretched hide on a frame,
    saddle stitching, a maker's stamp, birch-bark texture and cedar leaves.
    ====================================================================== */
-.pv:is(.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice){
+.pv:is(.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint){
   --paw:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cellipse cx='20' cy='27' rx='8' ry='7'/%3E%3Cellipse cx='9' cy='16' rx='3.4' ry='4.4' transform='rotate(-20 9 16)'/%3E%3Cellipse cx='16' cy='10' rx='3.4' ry='4.6'/%3E%3Cellipse cx='24' cy='10' rx='3.4' ry='4.6'/%3E%3Cellipse cx='31' cy='16' rx='3.4' ry='4.4' transform='rotate(20 31 16)'/%3E%3C/svg%3E");
   --leaf:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2c9 6 13 15 11 24-2 7-7 11-11 12-4-1-9-5-11-12C7 17 11 8 20 2z'/%3E%3Cpath d='M20 10v30' stroke='%23fff' stroke-width='1.6' fill='none'/%3E%3C/svg%3E")}
 
@@ -2888,7 +2888,7 @@
   .pv.tf-trapline h1{font-size:68px}.pv.tf-tannery h1{font-size:56px}.pv.tf-birchbark h1{font-size:52px}
   .pv.tf-trapline .ls{grid-template-columns:1fr 1fr}
   .pv.tf-trapline .stt{grid-template-columns:1fr 1fr;row-gap:44px}
-  .pv:is(.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .hl-split .hx{gap:36px}
+  .pv:is(.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .hl-split .hx{gap:36px}
 }
 @container (max-width:599.98px){
   .pv.tf-trapline h1{font-size:50px}.pv.tf-trapline h2{font-size:36px}.pv.tf-trapline .s-cta h2{font-size:38px}.pv.tf-trapline .fe h3{font-size:34px}
@@ -2920,7 +2920,7 @@
    All art drawn here in CSS/SVG: pressure-gauge dials, a blueprint grid, crop marks, water drops,
    wave edges, receipt edges, a SAVED stamp and statement rules.
    ====================================================================== */
-.pv:is(.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice){
+.pv:is(.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint){
   --drop:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 52'%3E%3Cpath d='M20 0C20 0 2 22 2 33a18 18 0 0 0 36 0C38 22 20 0 20 0z'/%3E%3C/svg%3E");
   --wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 80' preserveAspectRatio='none'%3E%3Cpath d='M0 40 C150 0 300 0 450 40 S750 80 900 40 S1100 0 1200 30 V80 H0z'/%3E%3C/svg%3E");
   --zig:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 10' preserveAspectRatio='none'%3E%3Cpath d='M0 0H20V0L10 10z'/%3E%3C/svg%3E")}
@@ -3096,16 +3096,16 @@
 .pv.tf-ledger .wm-i{border-radius:3px;font-family:var(--hf);font-weight:400}
 .pv.tf-ledger .wm-n{font:400 26px/1 var(--hf)}
 @media (max-width:760px){
-  .pv:is(.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) h1{font-size:44px}
-  .pv:is(.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) h2{font-size:32px}
-  .pv:is(.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) :is(.hl-split .hx){grid-template-columns:1fr;gap:28px;min-height:0}
-  .pv:is(.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) :is(.ls){grid-template-columns:1fr}
-  .pv:is(.tf-gauge,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .tl-steps .ti{border-right:0;border-bottom:1px solid var(--line);margin-right:0}
-  .pv:is(.tf-gauge,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .tl-steps .ti:after{display:none}
+  .pv:is(.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) h1{font-size:44px}
+  .pv:is(.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) h2{font-size:32px}
+  .pv:is(.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) :is(.hl-split .hx){grid-template-columns:1fr;gap:28px;min-height:0}
+  .pv:is(.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) :is(.ls){grid-template-columns:1fr}
+  .pv:is(.tf-gauge,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .tl-steps .ti{border-right:0;border-bottom:1px solid var(--line);margin-right:0}
+  .pv:is(.tf-gauge,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .tl-steps .ti:after{display:none}
   .pv.tf-flowline .tl-steps:before{display:none}
   .pv.tf-flowline .hl-overlay .hx{min-height:600px}
   .pv.tf-ledger .stt>div{border-right:0;border-bottom:1px dashed var(--line)}
-  .pv:is(.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .s-cta h2{font-size:34px}
+  .pv:is(.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s-cta h2{font-size:34px}
 }
 
 /* a picture-only logo mark beside the business name (wordmark families) */
@@ -3114,10 +3114,10 @@
 
 /* phones: a long business name or a wide logo image shrinks to fit beside the Menu button instead of pushing the page sideways */
 @container (max-width:599.98px){
-  .pv:is(.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .hd .lg{flex:0 1 auto;min-width:0}
-  .pv:is(.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .hd .lg img{height:auto;max-height:34px;max-width:100%;object-fit:contain}
-  .pv:is(.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .wm{min-width:0}
-  .pv:is(.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .wm-n{white-space:normal;line-height:1.05}
+  .pv:is(.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .hd .lg{flex:0 1 auto;min-width:0}
+  .pv:is(.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .hd .lg img{height:auto;max-height:34px;max-width:100%;object-fit:contain}
+  .pv:is(.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .wm{min-width:0}
+  .pv:is(.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .wm-n{white-space:normal;line-height:1.05}
 }
 
 /* ======================================================================
@@ -3364,13 +3364,13 @@
 .pv.tf-letterboard .ft{background:color-mix(in srgb,var(--bg) 70%,#000);color:var(--ink);--mute:color-mix(in srgb,var(--ink) 65%,transparent)}
 .pv.tf-letterboard .ft a{color:var(--ink)}
 
-.pv:is(.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .mu-d:last-child{visibility:hidden}
+.pv:is(.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .mu-d:last-child{visibility:hidden}
 
 /* Whip, Pourover, Letterboard: tablet and phone */
 @container (min-width:600px) and (max-width:1023.98px){
 .pv.tf-whip h1{font-size:66px}.pv.tf-pourover h1{font-size:80px}.pv.tf-letterboard h1{font-size:100px}
 .pv:is(.tf-whip,.tf-pourover) .hl-split .hx{gap:36px}
-.pv:is(.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .ls{grid-template-columns:1fr 1fr}
+.pv:is(.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .ls{grid-template-columns:1fr 1fr}
 .pv.tf-pourover .gl{grid-template-columns:repeat(3,1fr)}
 }
 @container (max-width:599.98px){
@@ -3378,7 +3378,7 @@
 .pv.tf-whip h2{font-size:38px}.pv.tf-pourover h2{font-size:44px}.pv.tf-letterboard h2{font-size:54px}
 .pv.tf-whip .s-cta h2{font-size:42px}.pv.tf-pourover .s-cta h2{font-size:50px}.pv.tf-letterboard .s-cta h2{font-size:56px}
 .pv.tf-whip .fe h3{font-size:36px}.pv.tf-pourover .fe h3{font-size:42px}.pv.tf-letterboard .fe h3{font-size:50px}
-.pv:is(.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .fe-split{grid-template-columns:1fr;gap:28px}
+.pv:is(.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .fe-split{grid-template-columns:1fr;gap:28px}
 .pv:is(.tf-whip,.tf-pourover) .hl-split .hx{grid-template-columns:1fr;gap:44px;padding-top:44px;padding-bottom:64px}
 .pv.tf-whip .hl-split .hx:after{right:18%;top:auto;bottom:calc(100% - 44px - 1px);display:none}
 .pv.tf-whip .hl-split .hm{border-width:7px;box-shadow:0 0 0 3px var(--ink),10px 12px 0 var(--acc)}
@@ -3390,9 +3390,9 @@
 .pv.tf-pourover .mu-c{padding:30px 20px 20px}
 .pv.tf-letterboard .mu-g{border-width:10px;padding:32px 18px 24px}
 .pv.tf-letterboard .mu-l strong{font-size:22px}.pv.tf-letterboard .mu-p{font-size:22px}
-.pv:is(.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .ls{grid-template-columns:1fr}
+.pv:is(.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .ls{grid-template-columns:1fr}
 .pv.tf-whip .lr{border-radius:26px}
-.pv:is(.tf-whip,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice) .gl{grid-template-columns:1fr 1fr;gap:12px}
+.pv:is(.tf-whip,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .gl{grid-template-columns:1fr 1fr;gap:12px}
 .pv.tf-pourover .gl{grid-template-columns:1fr 1fr}
 .pv.tf-letterboard .hl-overlay .hx{min-height:600px;padding-bottom:56px}
 .pv.tf-letterboard .s-cta .w{padding:88px 24px 40px;border-radius:20px}
@@ -3614,4 +3614,251 @@
   .pv.tf-lattice .tl-steps .ti,.pv.tf-lattice .tl-steps .ti:first-child,.pv.tf-lattice .tl-steps .ti:last-child{clip-path:none;border-radius:14px;margin:0 0 10px;padding-left:24px}
   .pv.tf-lattice .tl-steps .ti:not(:first-child):before{left:24px}
   .pv.tf-lattice .s-cta .w{padding:56px 22px}
+}
+
+/* ======================================================================
+   Pitch run (2026-11-16): commercial printers, graphic design studios and promotional products.
+   Colophon, Swatch, Imprint. All art drawn here in CSS: a printer's colour bar, crop marks, a fold line,
+   turned paper corners, a perforated job ticket, a fanned swatch deck, ink chips, dashed imprint areas
+   and a swing tag.
+   ====================================================================== */
+.pv:is(.tf-colophon,.tf-swatch,.tf-imprint){
+  --c3:color-mix(in oklab,var(--acc) 22%,#e0b04a);
+  --c4:color-mix(in oklab,var(--ink) 35%,#3f8a96);
+  --cbar:linear-gradient(90deg,#00a0dc 0 12.5%,#d4007a 12.5% 25%,#ffd200 25% 37.5%,#1b1b1b 37.5% 50%,var(--acc) 50% 62.5%,var(--c3) 62.5% 75%,var(--c4) 75% 87.5%,color-mix(in srgb,var(--ink) 25%,#fff) 87.5%);
+  --crop:linear-gradient(var(--ink),var(--ink)) 0 18px/14px 1px,linear-gradient(var(--ink),var(--ink)) 18px 0/1px 14px,
+         linear-gradient(var(--ink),var(--ink)) 100% 18px/14px 1px,linear-gradient(var(--ink),var(--ink)) calc(100% - 18px) 0/1px 14px,
+         linear-gradient(var(--ink),var(--ink)) 0 calc(100% - 18px)/14px 1px,linear-gradient(var(--ink),var(--ink)) 18px 100%/1px 14px,
+         linear-gradient(var(--ink),var(--ink)) 100% calc(100% - 18px)/14px 1px,linear-gradient(var(--ink),var(--ink)) calc(100% - 18px) 100%/1px 14px;
+  --mf:var(--mono,'IBM Plex Mono'),ui-monospace,monospace;
+}
+
+/* ---------- Colophon: the commercial printer (colour bar, press sheet, paper samples, job ticket) ---------- */
+.pv.tf-colophon{font-size:17px;counter-reset:cstp}
+.pv.tf-colophon h1{font-size:68px;line-height:1.02;letter-spacing:-.02em;font-weight:600}
+.pv.tf-colophon h1:first-line{font-style:italic}
+.pv.tf-colophon h2{font-size:44px;line-height:1.08;letter-spacing:-.015em}
+.pv.tf-colophon h3{font-size:22px;letter-spacing:-.005em}
+.pv.tf-colophon .hd{border-bottom:1px solid var(--line);background-image:var(--cbar);background-size:100% 6px;background-repeat:no-repeat;padding-top:6px}
+.pv.tf-colophon :is(.mn,.dr>summary){font-size:15px;font-weight:600}
+.pv.tf-colophon .bt{border-radius:2px;font-weight:700;padding:15px 26px}
+.pv.tf-colophon .ey{font:600 12px/1.2 var(--mf);letter-spacing:.14em;text-transform:uppercase;color:var(--acc);display:flex;align-items:center;gap:12px}
+.pv.tf-colophon .ey:after{content:"";flex:0 0 54px;height:1px;background:currentColor}
+.pv.tf-colophon .s-hero{background:linear-gradient(var(--soft),var(--soft)) right/38% 100% no-repeat}
+.pv.tf-colophon .hl-split .hx{grid-template-columns:1.1fr 1fr;gap:72px;padding-top:84px;padding-bottom:96px}
+.pv.tf-colophon .hl-split p{font-size:19px;max-width:540px}
+/* the press sheet: white paper, crop marks outside the trim, a fold line down the middle */
+.pv.tf-colophon .hl-split .hm{aspect-ratio:4/5;padding:34px;background:#fff;border-radius:0;overflow:visible;position:relative;box-shadow:0 30px 60px -28px rgba(0,0,0,.45),0 2px 0 rgba(0,0,0,.04)}
+.pv.tf-colophon .hl-split .hm:before{content:"";position:absolute;inset:0;background:var(--crop);background-repeat:no-repeat;pointer-events:none;z-index:1}
+.pv.tf-colophon .hl-split .hm:after{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed color-mix(in srgb,#000 22%,transparent);pointer-events:none;z-index:1}
+.pv.tf-colophon .hl-split .hm>img{border-radius:0;height:100%}
+.pv.tf-colophon .s-stats,.pv.tf-colophon .s-stats.bg-default{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:46px 0}
+.pv.tf-colophon .stt{gap:0}
+.pv.tf-colophon .stt>div{padding:0 26px;border-left:1px solid var(--line)}
+.pv.tf-colophon .stt>div:first-child{border-left:0}
+.pv.tf-colophon .stt b{font:600 50px/1 var(--hf);color:var(--ink);letter-spacing:-.02em}
+.pv.tf-colophon .stt span{display:block;margin-top:10px;font:500 12px/1.5 var(--mf);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.pv.tf-colophon .sh{border-bottom:1px solid var(--ink);padding-bottom:16px}
+/* paper samples with a turned corner and a spec line */
+.pv.tf-colophon .tl-cards .ti{background:#fff;color:#1d1d1d;border-radius:0;padding:14px 14px 22px;box-shadow:0 1px 0 var(--line),0 18px 36px -24px rgba(0,0,0,.35);clip-path:polygon(0 0,100% 0,100% calc(100% - 34px),calc(100% - 34px) 100%,0 100%);position:relative}
+.pv.tf-colophon .tl-cards .ti:after{content:"";position:absolute;right:0;bottom:0;width:34px;height:34px;background:linear-gradient(135deg,color-mix(in srgb,#000 14%,#eee) 50%,transparent 50%);box-shadow:-3px -3px 6px rgba(0,0,0,.08)}
+.pv.tf-colophon .tl-cards .tim{border-radius:0;aspect-ratio:4/3}
+.pv.tf-colophon .tl-cards .tx{padding:18px 6px 0}
+.pv.tf-colophon .tl-cards .tx:before{content:"No. " counter(card,decimal-leading-zero) " · 100 lb text · matte";counter-increment:card;display:block;font:500 11px/1 var(--mf);letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin-bottom:10px}
+.pv.tf-colophon .tl-cards{counter-reset:card}
+.pv.tf-colophon .tl-cards .ti p{color:#555}
+.pv.tf-colophon .tl-cards .ti b{color:var(--acc)}
+/* proof stages in roman numerals */
+.pv.tf-colophon .tl-steps{gap:0}
+.pv.tf-colophon .tl-steps .ti{padding:90px 26px 6px;border-left:1px solid var(--line);background:none}
+.pv.tf-colophon .tl-steps .ti:first-child{border-left:0;padding-left:0}
+.pv.tf-colophon .tl-steps .ti:before{content:counter(stp,upper-roman) ".";background:none;color:var(--acc);font:italic 600 58px/1 var(--hf);width:auto;height:auto;left:26px;top:0;border-radius:0;place-items:start}
+.pv.tf-colophon .tl-steps .ti:first-child:before{left:0}
+.pv.tf-colophon .tl-steps .ti:after{display:none}
+.pv.tf-colophon .fe-split{grid-template-columns:1fr 1fr;gap:76px}
+.pv.tf-colophon .fm{border-radius:0;outline:1px solid var(--line);outline-offset:14px}
+.pv.tf-colophon .fe h3{font-size:42px;line-height:1.08}
+/* the list: specimen lines with dotted leaders */
+.pv.tf-colophon .ls{display:grid;grid-template-columns:1fr 1fr;gap:0 64px;border:0}
+.pv.tf-colophon .lr{border:0;padding:16px 0;display:flex;align-items:baseline;gap:12px}
+.pv.tf-colophon .lr strong{font:600 21px var(--hf)}
+.pv.tf-colophon .lr:after{content:"";flex:1;border-bottom:2px dotted var(--line);order:2}
+.pv.tf-colophon .lr:before{content:"✓";order:3;color:var(--acc);font-weight:700}
+.pv.tf-colophon .lr>*{order:1}
+.pv.tf-colophon .pr-im{border-radius:0;box-shadow:inset 0 0 0 1px var(--line)}
+.pv.tf-colophon .pr-p{font-family:var(--mf)}
+.pv.tf-colophon .qs blockquote{border-top:3px solid var(--acc);padding-top:22px}
+.pv.tf-colophon .qs blockquote p{font:italic 500 21px/1.45 var(--hf)}
+.pv.tf-colophon .ct>div{border-top:1px solid var(--ink);padding-top:14px}
+.pv.tf-colophon .ct dt{font:600 11px/1 var(--mf);letter-spacing:.12em;text-transform:uppercase}
+/* the job ticket: perforated stub on the left */
+.pv.tf-colophon .s-cta .w{background:#fff;color:#1d1d1d;max-width:980px;margin:0 auto;padding:54px 56px 54px 150px;position:relative;text-align:left;box-shadow:0 24px 50px -30px rgba(0,0,0,.5);background-image:repeating-linear-gradient(to bottom,color-mix(in srgb,#000 30%,transparent) 0 7px,transparent 7px 13px);background-size:2px 100%;background-position:112px 0;background-repeat:no-repeat}
+.pv.tf-colophon .s-cta .w:before{content:"JOB TICKET";position:absolute;left:0;top:0;bottom:0;width:100px;display:grid;place-items:center;background:var(--acc);color:var(--oa);font:600 13px/1 var(--mf);letter-spacing:.3em;writing-mode:vertical-rl;transform:rotate(180deg)}
+.pv.tf-colophon .s-cta h2{color:#1d1d1d}
+.pv.tf-colophon .s-cta p{color:#555}
+.pv.tf-colophon .ft{border-top:0;background-image:var(--cbar);background-size:100% 6px;background-repeat:no-repeat}
+.pv.tf-colophon .ft .mt{font-family:var(--mf);letter-spacing:.2em}
+.pv.tf-colophon .wm-i{border-radius:50%;background:var(--acc);color:var(--oa);font-family:var(--hf);font-style:italic}
+.pv.tf-colophon .wm-n{font-size:22px;font-family:var(--hf)}
+
+/* ---------- Swatch: colour chips, a fanned swatch deck, ink codes ---------- */
+.pv.tf-swatch{font-size:17px}
+.pv.tf-swatch h1{font-size:76px;line-height:.96;letter-spacing:-.035em;font-weight:800}
+.pv.tf-swatch h2{font-size:48px;line-height:1;letter-spacing:-.03em;font-weight:800}
+.pv.tf-swatch h3{font-size:21px;font-weight:800;letter-spacing:-.01em}
+.pv.tf-swatch .hd{border-bottom:3px solid var(--ink)}
+.pv.tf-swatch :is(.mn,.dr>summary){font-weight:700;font-size:15px}
+.pv.tf-swatch .bt{border-radius:0;font-weight:800;padding:16px 26px;box-shadow:5px 5px 0 var(--ink);border:2px solid var(--ink)}
+.pv.tf-swatch .bt2{box-shadow:none}
+.pv.tf-swatch .ey{font:600 13px/1 var(--mf);letter-spacing:.06em;text-transform:uppercase;display:inline-flex;gap:8px;align-items:center}
+.pv.tf-swatch .ey:before{content:"";width:16px;height:16px;background:var(--acc);box-shadow:20px 0 0 var(--c3),40px 0 0 var(--c4);margin-right:44px}
+.pv.tf-swatch .hl-split .hx{grid-template-columns:1.05fr 1fr;gap:96px;padding-top:88px;padding-bottom:110px}
+.pv.tf-swatch .hl-split p{font-size:19px;max-width:520px}
+/* the swatch deck fanned behind the photo */
+.pv.tf-swatch .hl-split .hm{aspect-ratio:4/5;border-radius:0;overflow:visible;position:relative;z-index:0;box-shadow:0 0 0 10px #fff,0 30px 60px -24px rgba(0,0,0,.5)}
+.pv.tf-swatch .hl-split .hm>img{border-radius:0;position:relative;z-index:2}
+.pv.tf-swatch .hl-split .hm:before,.pv.tf-swatch .hl-split .hm:after{content:"";position:absolute;inset:0;transform-origin:50% 100%;box-shadow:0 0 0 10px #fff,0 18px 30px -16px rgba(0,0,0,.4);z-index:-1}
+.pv.tf-swatch .hl-split .hm:before{background:linear-gradient(var(--acc) 0 78%,#fff 78%);transform:rotate(-13deg)}
+.pv.tf-swatch .hl-split .hm:after{background:linear-gradient(var(--c3) 0 78%,#fff 78%);transform:rotate(-6.5deg)}
+.pv.tf-swatch .s-stats,.pv.tf-swatch .s-stats.bg-default{background:var(--ink);color:var(--oi)}
+.pv.tf-swatch .stt{gap:16px}
+.pv.tf-swatch .stt>div{background:#fff;color:#151515;padding:0 0 18px;text-align:left;box-shadow:0 10px 24px -14px rgba(0,0,0,.5)}
+.pv.tf-swatch .stt>div:before{content:"";display:block;height:84px;background:var(--acc);margin-bottom:16px}
+.pv.tf-swatch .stt>div:nth-child(4n+2):before{background:var(--c3)}
+.pv.tf-swatch .stt>div:nth-child(4n+3):before{background:var(--c4)}
+.pv.tf-swatch .stt>div:nth-child(4n+4):before{background:color-mix(in srgb,var(--ink) 85%,#fff)}
+.pv.tf-swatch .stt b{display:block;padding:0 16px;font:800 34px/1 var(--hf);color:#151515;letter-spacing:-.03em}
+.pv.tf-swatch .stt span{display:block;padding:6px 16px 0;font:500 12px/1.35 var(--mf);color:#555;text-transform:uppercase;letter-spacing:.04em}
+/* ink-chip cards: a colour block with the photo set in it, then the chip label */
+.pv.tf-swatch .tl-cards{counter-reset:chip}
+.pv.tf-swatch .tl-cards .ti{background:#fff;color:#151515;border-radius:0;padding:0;box-shadow:0 14px 30px -20px rgba(0,0,0,.5);counter-increment:chip}
+.pv.tf-swatch .tl-cards .tim{border-radius:0;margin:0;aspect-ratio:5/4;padding:16px 16px 0;background:var(--acc)}
+.pv.tf-swatch .tl-cards .ti:nth-child(4n+2) .tim{background:var(--c3)}
+.pv.tf-swatch .tl-cards .ti:nth-child(4n+3) .tim{background:var(--c4)}
+.pv.tf-swatch .tl-cards .ti:nth-child(4n+4) .tim{background:var(--ink)}
+.pv.tf-swatch .tl-cards .tim>img{border-radius:0}
+.pv.tf-swatch .tl-cards .tx{padding:18px 18px 22px;border-top:0}
+.pv.tf-swatch .tl-cards .tx:before{content:"INK " counter(chip,decimal-leading-zero) "-C";display:block;font:600 12px/1 var(--mf);letter-spacing:.06em;color:#777;margin-bottom:10px}
+.pv.tf-swatch .tl-cards .ti p{color:#555}
+.pv.tf-swatch .tl-cards .ti b{color:#151515;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.pv.tf-swatch .tl-steps .ti{background:#fff;color:#151515;border:2px solid var(--ink);border-radius:0;padding:84px 22px 22px}
+.pv.tf-swatch .tl-steps .ti:before{left:0;top:0;width:100%;height:58px;border-radius:0;background:var(--acc);color:var(--oa);place-items:center start;padding-left:22px;box-sizing:border-box;font:800 26px/1 var(--hf)}
+.pv.tf-swatch .tl-steps .ti:nth-child(4n+2):before{background:var(--c3);color:#151515}
+.pv.tf-swatch .tl-steps .ti:nth-child(4n+3):before{background:var(--c4);color:#fff}
+.pv.tf-swatch .tl-steps .ti:nth-child(4n+4):before{background:var(--ink);color:var(--oi)}
+.pv.tf-swatch .tl-steps .ti:after{display:none}
+.pv.tf-swatch .tl-steps .ti p{color:#555}
+.pv.tf-swatch .fe-split{grid-template-columns:1fr 1fr;gap:80px}
+.pv.tf-swatch .fm{border-radius:0;box-shadow:-18px 18px 0 var(--c3),-36px 36px 0 var(--acc)}
+.pv.tf-swatch .fe h3{font-size:44px;line-height:1.02;letter-spacing:-.03em}
+.pv.tf-swatch .ls{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;border:0}
+.pv.tf-swatch .lr{border:2px solid var(--ink);padding:16px 16px 16px 58px;position:relative;background:var(--bg)}
+.pv.tf-swatch .lr:before{content:"";position:absolute;left:0;top:0;bottom:0;width:40px;background:var(--acc)}
+.pv.tf-swatch .lr:nth-child(4n+2):before{background:var(--c3)}.pv.tf-swatch .lr:nth-child(4n+3):before{background:var(--c4)}.pv.tf-swatch .lr:nth-child(4n+4):before{background:var(--ink)}
+.pv.tf-swatch .lr strong{font-weight:800}
+.pv.tf-swatch .pr-im{border-radius:0;border:2px solid var(--ink)}
+.pv.tf-swatch .pr-p{background:var(--acc);color:var(--oa);padding:4px 10px;font-family:var(--mf)}
+.pv.tf-swatch .pr-bd{border-radius:0;background:var(--c3);color:#151515}
+.pv.tf-swatch .qs blockquote{background:#fff;color:#151515;border-left:12px solid var(--acc);padding:26px}
+.pv.tf-swatch .qs blockquote:nth-child(3n+2){border-left-color:var(--c3)}.pv.tf-swatch .qs blockquote:nth-child(3n+3){border-left-color:var(--c4)}
+.pv.tf-swatch .qs blockquote p{font-weight:600}
+.pv.tf-swatch .qs cite{color:#666}
+.pv.tf-swatch .ct>div{border-top:8px solid var(--acc);padding-top:12px}
+.pv.tf-swatch .ct>div:nth-child(4n+2){border-top-color:var(--c3)}.pv.tf-swatch .ct>div:nth-child(4n+3){border-top-color:var(--c4)}.pv.tf-swatch .ct>div:nth-child(4n+4){border-top-color:var(--ink)}
+.pv.tf-swatch .s-cta,.pv.tf-swatch .s-cta.bg-default{background:var(--acc);color:var(--oa);padding-bottom:0}
+.pv.tf-swatch .s-cta .w{padding-bottom:110px;position:relative}
+.pv.tf-swatch .s-cta .w:after{content:"";position:absolute;left:0;right:0;bottom:0;height:42px;background:var(--cbar)}
+.pv.tf-swatch .s-cta h2{font-size:64px;color:var(--oa)}
+.pv.tf-swatch .s-cta .bt{background:#fff;color:#151515;border-color:#151515}
+.pv.tf-swatch .wm-i{border-radius:0;background:var(--acc);color:var(--oa);box-shadow:6px 6px 0 var(--c3)}
+.pv.tf-swatch .wm-n{font-size:22px;font-weight:800;letter-spacing:-.02em}
+
+/* ---------- Imprint: promotional products (imprint areas, logo tags, a swing tag) ---------- */
+.pv.tf-imprint{font-size:17px}
+.pv.tf-imprint h1{font-size:70px;line-height:1;letter-spacing:-.03em}
+.pv.tf-imprint h2{font-size:46px;line-height:1.04;letter-spacing:-.025em}
+.pv.tf-imprint h3{font-size:21px;letter-spacing:-.01em}
+.pv.tf-imprint .hd{border-bottom:1px solid var(--line)}
+.pv.tf-imprint :is(.mn,.dr>summary){font-weight:600;font-size:15px}
+.pv.tf-imprint .bt{border-radius:999px;font-weight:700;padding:15px 28px}
+.pv.tf-imprint .ey{display:inline-flex;align-items:center;gap:8px;border:1.5px dashed var(--acc);color:var(--acc);border-radius:999px;padding:8px 14px;font:500 12px/1 var(--mf);letter-spacing:.06em;text-transform:uppercase}
+.pv.tf-imprint .s-hero{background:radial-gradient(circle at 1px 1px,color-mix(in srgb,var(--ink) 16%,transparent) 1px,transparent 1.5px) 0 0/22px 22px}
+.pv.tf-imprint .hl-split .hx{grid-template-columns:1.05fr 1fr;gap:72px;padding-top:80px;padding-bottom:96px}
+.pv.tf-imprint .hl-split p{font-size:19px;max-width:540px}
+.pv.tf-imprint .hl-split .hm{aspect-ratio:1;border-radius:28px;overflow:visible;position:relative;box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
+.pv.tf-imprint .hl-split .hm>img{border-radius:28px}
+/* the imprint area on the hero photo, with its size tag */
+.pv.tf-imprint .hl-split .hm:before{content:"";position:absolute;left:22%;top:26%;width:56%;height:36%;border:2px dashed #fff;border-radius:6px;background:rgba(255,255,255,.08);box-shadow:0 0 0 1px rgba(0,0,0,.15);pointer-events:none;z-index:1}
+.pv.tf-imprint .hl-split .hm:after{content:"IMPRINT AREA  ·  3″ × 2″";position:absolute;left:22%;top:calc(26% - 34px);background:var(--acc);color:var(--oa);font:600 11px/1 var(--mf);letter-spacing:.08em;padding:8px 10px;border-radius:4px;white-space:pre;z-index:2}
+.pv.tf-imprint .s-stats,.pv.tf-imprint .s-stats.bg-default{padding:30px 0}
+.pv.tf-imprint .stt{gap:14px}
+.pv.tf-imprint .stt>div{background:var(--soft);border-radius:999px;padding:18px 22px;display:flex;align-items:center;gap:14px;text-align:left}
+.pv.tf-imprint .stt b{font:700 30px/1 var(--hf);color:var(--acc);white-space:nowrap}
+.pv.tf-imprint .stt span{font-size:14px;line-height:1.3}
+/* every card and product photo gets a dashed imprint area and a "your logo here" tag */
+.pv.tf-imprint :is(.tl-cards .tim,.pr-im){position:relative;border-radius:20px}
+.pv.tf-imprint :is(.tl-cards .tim,.pr-im):after{content:"YOUR LOGO HERE";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:46%;aspect-ratio:2/1;display:grid;place-items:center;border:2px dashed rgba(255,255,255,.95);border-radius:6px;background:rgba(0,0,0,.18);color:#fff;font:600 10px/1 var(--mf);letter-spacing:.1em;text-align:center;pointer-events:none;opacity:0;transition:opacity .3s;z-index:1}
+.pv.tf-imprint .pr-i .pr-im:after,.pv.tf-imprint .tl-cards .ti:hover .tim:after{opacity:1}
+.pv.tf-imprint .tl-cards .ti{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:12px 12px 20px}
+.pv.tf-imprint .tl-cards .tx{padding:16px 8px 0}
+.pv.tf-imprint .tl-cards .ti b{display:inline-block;margin-top:6px;border:1.5px solid currentColor;border-radius:999px;padding:7px 14px;font-size:14px;color:var(--acc)}
+.pv.tf-imprint .pr-i{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:12px 12px 18px}
+.pv.tf-imprint .pr-x{padding:0 6px}
+.pv.tf-imprint .pr-p{background:var(--ink);color:var(--oi);border-radius:999px;padding:5px 12px;font:600 14px/1.2 var(--mf)}
+.pv.tf-imprint .pr-bd{border-radius:999px;background:var(--acc);color:var(--oa);z-index:2}
+.pv.tf-imprint .pr-btn{border:1.5px dashed var(--acc);color:var(--acc);border-radius:999px;padding:9px 14px;text-align:center}
+/* proof to delivery: a dashed track with round stops */
+.pv.tf-imprint .tl-steps{position:relative}
+.pv.tf-imprint .tl-steps:before{content:"";position:absolute;left:30px;right:30px;top:30px;border-top:2px dashed var(--acc)}
+.pv.tf-imprint .tl-steps .ti{background:none;padding-top:84px}
+.pv.tf-imprint .tl-steps .ti:before{width:60px;height:60px;background:var(--bg);color:var(--acc);border:2px solid var(--acc);font-size:24px}
+.pv.tf-imprint .tl-steps .ti:last-child:before{background:var(--acc);color:var(--oa)}
+.pv.tf-imprint .tl-steps .ti:after{display:none}
+.pv.tf-imprint .fe-split{grid-template-columns:1fr 1fr;gap:72px}
+.pv.tf-imprint .fm{border-radius:28px}
+.pv.tf-imprint .fe h3{font-size:42px;line-height:1.05}
+.pv.tf-imprint .ls{display:flex;flex-wrap:wrap;gap:12px;border:0}
+.pv.tf-imprint .lr{border:1.5px dashed var(--line);border-radius:999px;padding:12px 20px;background:var(--card)}
+.pv.tf-imprint .lr strong{font-weight:600}
+.pv.tf-imprint .qs blockquote{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;position:relative}
+.pv.tf-imprint .qs blockquote:before{content:"★★★★★";display:block;color:var(--acc);letter-spacing:.2em;margin-bottom:10px}
+.pv.tf-imprint .ct>div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+/* the call to action as a swing tag: notched top corners and a punched hole on a string */
+.pv.tf-imprint .s-cta .w{background:var(--acc);color:var(--oa);max-width:860px;margin:0 auto;padding:96px 60px 64px;border-radius:0 0 26px 26px;clip-path:polygon(70px 0,calc(100% - 70px) 0,100% 70px,100% 100%,0 100%,0 70px);position:relative}
+.pv.tf-imprint .s-cta .w:before{content:"";position:absolute;left:50%;top:30px;width:26px;height:26px;margin-left:-13px;border-radius:50%;background:var(--bg);box-shadow:inset 0 2px 4px rgba(0,0,0,.25)}
+.pv.tf-imprint .s-cta .w:after{content:"";position:absolute;left:50%;top:0;height:34px;border-left:2px solid color-mix(in srgb,var(--oa) 70%,transparent)}
+.pv.tf-imprint .s-cta h2{color:var(--oa)}
+.pv.tf-imprint .s-cta .bt{background:var(--oa);color:var(--acc)}
+.pv.tf-imprint .wm-i{border-radius:12px;background:var(--acc);color:var(--oa);outline:1.5px dashed var(--acc);outline-offset:3px}
+.pv.tf-imprint .wm-n{font-size:21px}
+
+@container (min-width:600px) and (max-width:1023.98px){
+  .pv.tf-colophon h1{font-size:52px}.pv.tf-swatch h1{font-size:58px}.pv.tf-imprint h1{font-size:54px}
+  .pv:is(.tf-colophon,.tf-swatch) .ls{grid-template-columns:1fr 1fr}
+  .pv.tf-colophon .s-cta .w{padding-left:130px}
+}
+@container (max-width:599.98px){
+  .pv.tf-colophon h1{font-size:44px}.pv.tf-swatch h1{font-size:46px}.pv.tf-imprint h1{font-size:44px}
+  .pv:is(.tf-colophon,.tf-swatch,.tf-imprint) h2{font-size:32px}
+  .pv.tf-swatch .s-cta h2{font-size:40px}
+  .pv:is(.tf-colophon,.tf-swatch,.tf-imprint) .fe h3{font-size:30px}
+  .pv:is(.tf-colophon,.tf-swatch,.tf-imprint) .hl-split .hx{grid-template-columns:1fr;gap:48px;padding-top:48px;padding-bottom:64px}
+  .pv:is(.tf-colophon,.tf-swatch,.tf-imprint) .fe-split{grid-template-columns:1fr;gap:32px}
+  .pv:is(.tf-colophon,.tf-swatch) .ls{grid-template-columns:1fr}
+  .pv.tf-colophon .s-hero{background:var(--bg)}
+  .pv.tf-colophon .hl-split .hm{padding:22px}
+  .pv.tf-swatch .hl-split .hm{margin:0 24px 0 40px}
+  .pv.tf-swatch .hl-split .hm:before{transform:rotate(-9deg)}.pv.tf-swatch .hl-split .hm:after{transform:rotate(-4.5deg)}
+  .pv:is(.tf-colophon,.tf-swatch,.tf-imprint) .stt{grid-template-columns:1fr 1fr;row-gap:20px}
+  .pv.tf-colophon .stt>div{border:0;padding:0}
+  .pv.tf-colophon .stt b{font-size:38px}
+  .pv.tf-imprint .stt{grid-template-columns:1fr}
+  .pv.tf-colophon .tl-steps .ti{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:80px}.pv.tf-colophon .tl-steps .ti:before{left:0}
+  .pv.tf-imprint .tl-steps:before{left:29px;right:auto;top:30px;bottom:30px;border-top:0;border-left:2px dashed var(--acc)}
+  .pv.tf-imprint .tl-steps .ti{padding:6px 0 18px 82px;min-height:80px}
+  .pv.tf-colophon .s-cta .w{padding:64px 24px 40px;background-image:repeating-linear-gradient(to right,color-mix(in srgb,#000 30%,transparent) 0 7px,transparent 7px 13px);background-size:100% 2px;background-position:0 44px}
+  .pv.tf-colophon .s-cta .w:before{left:0;right:0;bottom:auto;width:auto;height:34px;writing-mode:horizontal-tb;transform:none}
+  .pv.tf-swatch .fm{box-shadow:-10px 10px 0 var(--c3),-20px 20px 0 var(--acc);margin-left:20px}
+  .pv.tf-imprint .pr-i{padding:8px 8px 14px;border-radius:18px}.pv.tf-imprint .pr-btn{font-size:13px;padding:8px 10px}.pv.tf-imprint .pr-im:after{width:64%;font-size:9px}
+  .pv.tf-imprint .s-cta .w{padding:90px 24px 48px;clip-path:polygon(44px 0,calc(100% - 44px) 0,100% 44px,100% 100%,0 100%,0 44px)}
 }

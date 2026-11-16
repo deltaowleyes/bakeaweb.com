@@ -94,6 +94,10 @@ var Render = (function () {
     { k: 'tender', wordmark: 1, videos: 'grid', name: 'Tender', desc: 'For firms that bid on government contracts: a bid-binder look with numbered tab dividers, a credentials seal, a capability statement with check marks and a wall of the departments you serve.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Source Serif 4', hcat: 'r', hw: 700, b: 'Public Sans', bcat: 's' } },
     { k: 'quill', wordmark: 1, videos: 'grid', name: 'Quill', desc: 'For Indigenous-led firms and organizations: a four-colour band under the menu, a gold feather sweeping through the opener, round step markers in four colours and warm ember accents.', hero: 'overlay', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Gelasio', hcat: 'r', hw: 700, b: 'Mulish', bcat: 's' } },
     { k: 'lattice', wordmark: 1, videos: 'grid', name: 'Lattice', desc: 'For networks, matchmakers and staffing firms: a dark opener with a glowing web of connected people, a giant member counter, an opportunity-to-contract pipeline and partner cards.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, dark: 2, gf: { h: 'Schibsted Grotesk', hcat: 's', hw: 800, b: 'Inter', bcat: 's' } },
+    /* 2026-11-16 pitch run: commercial printers, graphic design studios and promotional products */
+    { k: 'colophon', mono: 'IBM Plex Mono', wordmark: 1, videos: 'grid', name: 'Colophon', desc: 'For commercial printers and design studios: a printer’s colour bar along the top, a press sheet with crop marks and a fold line, paper-sample cards with turned corners, proof stages in roman numerals and a perforated job ticket.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Fraunces', hcat: 'r', hw: 600, b: 'Instrument Sans', bcat: 's' } },
+    { k: 'swatch', mono: 'IBM Plex Mono', wordmark: 1, videos: 'grid', name: 'Swatch', desc: 'For print shops and brand studios that live in colour: a fanned swatch deck behind the opening photo, ink-chip cards with colour codes, chip numbers and a swatch strip along the call to action.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Archivo', hcat: 's', hw: 800, b: 'Archivo', bcat: 's' } },
+    { k: 'imprint', mono: 'DM Mono', wordmark: 1, videos: 'grid', name: 'Imprint', desc: 'For promotional product and branded merchandise sellers: dashed imprint areas with “your logo here” tags on every product, a proof-to-delivery track and a call to action shaped like a swing tag.', hero: 'split', tiles: 'cards', feature: 'split', menus: ['bar', 'mega', 'split', 'hamburger'], img: 1, flag: 1, gf: { h: 'Bricolage Grotesque', hcat: 's', hw: 700, b: 'DM Sans', bcat: 's' } },
   ];
   var VARIANTS = [
     { k: 'a', name: 'Classic', r: 0, band: 'none', dens: 'm' },
@@ -116,7 +120,8 @@ var Render = (function () {
     trapline: 85, tannery: 86, birchbark: 84,
     gauge: 84, flowline: 85, ledger: 84,
     whip: 85, pourover: 84, letterboard: 86,
-    tender: 85, quill: 86, lattice: 85 };
+    tender: 85, quill: 86, lattice: 85,
+    colophon: 86, swatch: 85, imprint: 85 };
   var PRICE_BY_GRADE = { 75: 50, 76: 60, 77: 70, 78: 80, 79: 90, 80: 100, 81: 120, 82: 140, 83: 160, 84: 180, 85: 200, 86: 250, 87: 300, 88: 350, 89: 400,
     90: 500, 91: 600, 92: 700, 93: 800, 94: 900, 95: 1000, 96: 1500, 97: 2500, 98: 4000, 99: 7500 };
   var MIN_GRADE = 65;
@@ -194,7 +199,10 @@ var Render = (function () {
     letterboard: 'coffee|drive-thru|drive thru|snack|coffee stand|food truck|canteen',
     tender: 'consult*|government|contract*|procurement|proposal|rfp|standing offer|supply arrangement|tender|bid',
     quill: 'indigenous|first nation|métis|inuit|consult*|engagement|reconciliation|community|organization',
-    lattice: 'network|match*|staffing|recruit*|talent|consultants|platform|members|partner*'
+    lattice: 'network|match*|staffing|recruit*|talent|consultants|platform|members|partner*',
+    colophon: 'print*|printer|offset|graphic design|brochure*|annual report|letterhead|stationery|publishing|imprimerie',
+    swatch: 'print*|colour|color|brand*|design studio|graphic design|signage|pantone',
+    imprint: 'promo*|promotional products|branded|merch*|swag|giveaway*|corporate gifts|mugs|pens'
   };
   var FITRE = {};
   for (var fitK in FITS) FITRE[fitK] = FITS[fitK].split('|').map(function (w) { return { w: w, re: new RegExp('(^|[^a-z])' + w.replace(/\*$/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (/\*$/.test(w) ? '' : '(s|es)?(?![a-z])'), 'i') }; });
