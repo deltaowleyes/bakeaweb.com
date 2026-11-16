@@ -1,7 +1,7 @@
 # Visitor stats for every site
 
 Plan for the roadmap task **Visitor stats for every site** (`visitor-stats-for-every-site`).
-Written 2026-11-16. **Waiting for the owner's OK.** Nothing is built yet.
+Written 2026-11-16. **Approved by the owner 2026-11-16** with the recommended answers (no unique visitors yet, admins only, 3 months of counts before billing, preview links not counted). **Built 2026-11-16.**
 
 ## 1. What you'll get
 

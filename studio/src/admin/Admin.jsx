@@ -9,6 +9,37 @@ import { Render } from '../lib/render.js';
 import { sb, HOSTS, HOST_KEYS, siteUrl, nameProblem, suggestName, publishSite, unpublishSite, checkLive, fullProject, publishProject, pitchProject } from '../lib/publish.js';
 
 const STATUS = { drafted: 'Drafted', offered: 'Offered', interested: 'Interested', accepted: 'Accepted', declined: 'Declined' };
+const num = n => n == null ? '0' : Number(n).toLocaleString();
+const key = r => r.domain + '/' + r.pagename;
+
+/* Visitor stats for one site (host/count.js counts, host/stats.sql keeps the daily totals). */
+function SiteStats({ row }) {
+  const [d, setD] = useState(null), [err, setErr] = useState('');
+  useEffect(() => { sb.rpc('site_view_detail', { p_domain: row.domain, p_pagename: row.pagename }).then(({ data, error }) => error ? setErr(error.message) : setD(data || {})); }, [row.domain, row.pagename]);
+  if (err) return <p className="errmsg" role="alert">{err}</p>;
+  if (!d) return <p className="mu">Loading stats…</p>;
+  const days = d.days || [], max = Math.max(1, ...days.map(x => x.views)), total = days.reduce((a, x) => a + x.views, 0);
+  const src = k => (d.sources || []).filter(x => x.kind == k);
+  const List = ({ title, rows, label }) => <div><b className="small">{title}</b>
+    {!rows.length ? <p className="mu small m-0">None yet</p> : <ul className="m-0 list-none p-0 small">{rows.map((x, i) => <li key={i} className="flex justify-between gap-3 border-b border-line py-1"><span>{label(x)}</span><span className="mu">{num(x.views)}</span></li>)}</ul>}</div>;
+  return <div className="flex flex-col gap-3 py-2" data-site-stats={key(row)}>
+    <div>
+      <b className="small">Page views, last 30 days ({num(total)})</b>
+      <div className="mt-1 flex h-20 items-end gap-px" role="img" aria-label={'Page views per day for the last 30 days, ' + total + ' in total'}>
+        {days.map(x => <div key={x.day} title={x.day + ': ' + x.views} className="flex-1 rounded-t-sm bg-[#2f5d62]" style={{ height: Math.max(x.views ? 4 : 1, x.views / max * 100) + '%', opacity: x.views ? 1 : .25 }} />)}
+      </div>
+      <div className="mu flex justify-between text-xs"><span>{days[0] && day(days[0].day + 'T12:00')}</span><span>today</span></div>
+    </div>
+    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <List title="Top pages" rows={d.pages || []} label={x => x.path} />
+      <List title="Came from" rows={src('referrer')} label={x => x.value} />
+      <List title="Country" rows={src('country')} label={x => x.value == '??' ? 'Unknown' : x.value} />
+      <List title="Device" rows={src('device')} label={x => x.value} />
+    </div>
+    <p className="mu small m-0">Counts pages people open: not images, bots, link previews or BAKE’s own checks. No cookies or personal data. Days are Ontario days.</p>
+  </div>;
+}
+
 const day = d => d ? new Date(d).toLocaleDateString([], { dateStyle: 'medium' }) : '';
 
 function Login() {
@@ -77,6 +108,7 @@ function LiveBadge({ row }) {
 
 export default function Admin({ onClose }) {
   const [session, setSession] = useState(undefined), [admin, setAdmin] = useState(null);
+  const [views, setViews] = useState({}), [statsOpen, setStatsOpen] = useState(null);
   const [pitches, setPitches] = useState([]), [sites, setSites] = useState([]), [open, setOpen] = useState(null), [err, setErr] = useState('');
   useEffect(() => {
     sb.auth.getSession().then(({ data }) => setSession(data.session));
@@ -84,11 +116,13 @@ export default function Admin({ onClose }) {
     return () => data.subscription.unsubscribe();
   }, []);
   async function load() {
-    const [p, s, a] = await Promise.all([
+    const [p, s, a, v] = await Promise.all([
       sb.from('redesign_pitches').select('id,business_name,website,status,rating_before,rating_after,redesigns,base_project,info,created_at').order('created_at', { ascending: false }),
       sb.from('published_sites').select('*').order('published_at', { ascending: false }),
-      sb.rpc('is_rezsite_admin')
+      sb.rpc('is_rezsite_admin'),
+      sb.rpc('site_view_summary')
     ]);
+    setViews(Object.fromEntries((v.data || []).map(r => [key(r), r])));
     if (p.error || s.error) setErr((p.error || s.error).message);
     setAdmin(a.data === true); setPitches(p.data || []); setSites(s.data || []);
   }
@@ -118,15 +152,23 @@ export default function Admin({ onClose }) {
         <h3 className="m-0">Published sites <span className="mu">({live} live)</span></h3>
         {!sites.length ? <p className="mu">Nothing published yet.</p> :
           <div className="overflow-x-auto"><table className="w-full border-collapse text-sm">
-            <thead><tr className="text-left">{['Site', 'Address', 'Design', 'Published', 'Status', ''].map(h => <th key={h} className="border-b border-line p-2">{h}</th>)}</tr></thead>
-            <tbody>{sites.map(r => <tr key={r.id}>
+            <thead><tr className="text-left">{['Site', 'Address', 'Design', 'Published', 'Status', 'Today', '7 days', '30 days', 'Monthly avg (badge tier)', ''].map(h => <th key={h} className="border-b border-line p-2">{h}</th>)}</tr></thead>
+            <tbody>{sites.map(r => [<tr key={r.id}>
               <td className="border-b border-line p-2">{r.title || r.pagename}</td>
               <td className="border-b border-line p-2"><a href={siteUrl(r.domain, r.pagename)} target="_blank" rel="noopener">{siteUrl(r.domain, r.pagename).replace('https://', '')}</a></td>
               <td className="border-b border-line p-2">{r.design || r.tpl}</td>
               <td className="border-b border-line p-2">{day(r.published_at)}</td>
               <td className="border-b border-line p-2"><LiveBadge row={r} /></td>
-              <td className="border-b border-line p-2">{r.status == 'live' && <button onClick={() => takeDown(r)}>Unpublish</button>}</td>
-            </tr>)}</tbody>
+              {(v => <>
+                <td className="border-b border-line p-2 text-right">{num(v.today)}</td>
+                <td className="border-b border-line p-2 text-right">{num(v.d7)}</td>
+                <td className="border-b border-line p-2 text-right">{num(v.d30)}</td>
+                <td className="border-b border-line p-2">{num(v.month_avg)} <span className="mu small">({v.tier || '$5 a month'}{v.first_day ? ', counting since ' + day(v.first_day + 'T12:00') : ''})</span></td>
+              </>)(views[key(r)] || {})}
+              <td className="border-b border-line p-2 whitespace-nowrap">
+                <button aria-expanded={statsOpen == key(r)} onClick={() => setStatsOpen(statsOpen == key(r) ? null : key(r))}>{statsOpen == key(r) ? 'Hide stats' : 'Stats'}</button>{' '}
+                {r.status == 'live' && <button onClick={() => takeDown(r)}>Unpublish</button>}</td>
+            </tr>, ...(statsOpen == key(r) ? [<tr key={r.id + '-stats'}><td colSpan={11} className="border-b border-line p-2"><SiteStats row={r} /></td></tr>] : [])]).flat()}</tbody>
           </table></div>}
       </section>
 

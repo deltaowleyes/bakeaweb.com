@@ -28,6 +28,10 @@ Only `rezsite.com`, `bakedby.me` and `bakedbya.pro` move to Cloudflare. **bakeaw
 5. **GitHub secrets:** https://github.com/deltaowleyes/bakeaweb.com/settings/secrets/actions → *New repository secret* → `CLOUDFLARE_API_TOKEN` (the token) and `CLOUDFLARE_ACCOUNT_ID` (the ID).
 6. Run **Actions → BAKE Host → Run workflow** (or ask Claude to). Admin's "Status" column turns from *Uploaded · address not active yet* to **Live**.
 
+## Visitor stats
+
+The Worker counts page views for every published site (see `count.js` and `stats.sql`, plan in `plans/visitor-stats-for-every-site.md`). It needs the GitHub secret `BAKE_COUNT_KEY`; the BAKE Host workflow copies it into the Worker. Without it, sites still work and nothing is counted. Counts show in BAKER Admin → Published sites.
+
 ## Later
 
 - Own domains (+$50 / +$100) can use the same Worker with Cloudflare for SaaS custom hostnames (free for the first 100).

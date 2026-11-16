@@ -102,7 +102,7 @@ export async function unpublishSite(row) {
 /** Is the address answering from BAKE Host yet? 'live' | 'waiting' (the Cloudflare step isn't done) */
 export async function checkLive(domain, name) {
   try {
-    const r = await fetch(siteUrl(domain, name) + '?check=' + Date.now(), { mode: 'cors', cache: 'no-store' });
+    const r = await fetch(siteUrl(domain, name) + '?bake-check=' + Date.now(), { mode: 'cors', cache: 'no-store' });
     return r.headers.get('x-bake-site') ? 'live' : 'waiting';
   } catch (e) { return 'waiting'; }
 }

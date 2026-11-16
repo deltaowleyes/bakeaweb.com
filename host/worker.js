@@ -6,7 +6,11 @@
    (GitHub Pages), so nothing that works today breaks.
    Files are uploaded by the Admin page in BAKE Studio BAKER (studio/src/admin/). See host/README.md. */
 
+import { shouldCount, viewRecord } from './count.js';
+
 const STORE = 'https://gpwxuunutljcauoknhrh.supabase.co/storage/v1/object/public/sites/';
+const COUNT_URL = 'https://gpwxuunutljcauoknhrh.supabase.co/rest/v1/rpc/count_view';
+const PUBLISHABLE_KEY = 'sb_publishable_B7a1VEv6RX13n2JhA50tbQ_oR_oKfw9';   // public key, same one the studio uses
 const DOMAINS = ['rezsite.com', 'bakedby.me', 'bakedbya.pro'];
 const PATH_DOMAINS = ['bakedbya.pro'];   // these use domain/pagename/ addresses
 const NAME = /^[a-z][a-z0-9-]{2,11}$/;
@@ -47,12 +51,23 @@ export default {
     else if (!/\.[a-z0-9]{2,5}$/i.test(file)) file += '.html';
 
     const res = await getFile(domain, name, file, ctx);
-    if (res) return res;
+    if (res) {
+      // Visitor stats: one page view, sent to Supabase after the page has gone out (visitors never wait for it).
+      if (env.BAKE_COUNT_KEY && shouldCount(request, file)) ctx.waitUntil(countView(env.BAKE_COUNT_KEY, viewRecord(request, domain, name, file)));
+      return res;
+    }
     // A name with no site at all: let the domain's normal website answer (e.g. its own 404 page).
     if (file != 'index.html' && await getFile(domain, name, 'index.html', ctx)) return notFound(domain, name);
     return sub ? notFound(domain, name) : fetch(request);
   }
 };
+
+// Adds one to today's total for this site and page (host/stats.sql). A failure only loses this one count.
+async function countView(key, rec) {
+  try {
+    await fetch(COUNT_URL, { method: 'POST', headers: { apikey: PUBLISHABLE_KEY, 'content-type': 'application/json' }, body: JSON.stringify({ p_key: key, ...rec }) });
+  } catch { /* never break a page over a count */ }
+}
 
 async function getFile(domain, name, file, ctx) {
   const src = STORE + domain + '/' + name + '/' + file.split('/').map(encodeURIComponent).join('/');
