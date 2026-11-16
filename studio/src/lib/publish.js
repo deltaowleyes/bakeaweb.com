@@ -4,7 +4,8 @@
    The Cloudflare Worker in host/ serves them at:
      pagename.rezsite.com · pagename.bakedby.me · bakedbya.pro/pagename/ */
 import { createClient } from '@supabase/supabase-js';
-import { Site } from './site.js';
+import { Site, pitchProject } from './site.js';
+export { pitchProject };
 import { completeSite } from './complete.js';
 import { blank } from '../store.js';
 

@@ -6,7 +6,7 @@
 import { useEffect, useState } from 'react';
 import { S } from '../store.js';
 import { Render } from '../lib/render.js';
-import { sb, HOSTS, HOST_KEYS, siteUrl, nameProblem, suggestName, publishSite, unpublishSite, checkLive, fullProject, publishProject } from '../lib/publish.js';
+import { sb, HOSTS, HOST_KEYS, siteUrl, nameProblem, suggestName, publishSite, unpublishSite, checkLive, fullProject, publishProject, pitchProject } from '../lib/publish.js';
 
 const STATUS = { drafted: 'Drafted', offered: 'Offered', interested: 'Interested', accepted: 'Accepted', declined: 'Declined' };
 const day = d => d ? new Date(d).toLocaleDateString([], { dateStyle: 'medium' }) : '';
@@ -98,7 +98,7 @@ export default function Admin({ onClose }) {
     if (!confirm('Take ' + siteUrl(row.domain, row.pagename) + ' offline? You can publish it again later.')) return;
     try { await unpublishSite(row); setSites(list => list.map(x => x.id == row.id ? { ...x, status: 'unpublished' } : x)); } catch (e) { alert('Could not unpublish: ' + e.message); }
   }
-  const pitchDesigns = p => (p.redesigns || []).slice().sort((a, b) => (+b.grade || 0) - (+a.grade || 0)).map(d => ({ name: d.name, grade: d.grade, tpl: d.tpl, project: d.project || p.base_project }));
+  const pitchDesigns = p => (p.redesigns || []).slice().sort((a, b) => (+b.grade || 0) - (+a.grade || 0)).map(d => ({ name: d.name, grade: d.grade, tpl: d.tpl, project: pitchProject(d, p.base_project) }));
   const studioDesigns = S.tpl && S.tpl.pick ? [{ name: (Render.tpl(S.tpl.pick) || {}).name || S.tpl.pick, tpl: S.tpl.pick, project: JSON.parse(JSON.stringify(S)) }] : [];
   const live = sites.filter(s => s.status == 'live').length;
 

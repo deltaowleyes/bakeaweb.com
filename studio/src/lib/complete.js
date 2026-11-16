@@ -5,8 +5,8 @@
      page header (the entry's name + a line from the matching part of Home)
      → the matching part(s) of Home (Render.matchSection, the same word matching as the one-page links)
      → the Home call to action, else the Home contact section.
-   Entries that point outside (another website, mailto:, tel:) are left alone. Sites that already have
-   inner pages are left as they are. Works on a copy; the saved project never changes. Site.files then
+   Entries that point outside (another website, mailto:, tel:) are left alone. Entries that already have a
+   page of their own (same name — real inner pages saved by a pitch run) keep it; only the missing ones are made. Works on a copy; the saved project never changes. Site.files then
    points every menu link, the logo and the footer at the right page file. */
 import { Render } from './render.js';
 
@@ -24,16 +24,18 @@ const firstLine = t => { t = plain(t); const m = /^(.{20,160}?[.!?])(\s|$)/.exec
 
 /** A copy of P with a real page for every menu entry. opt.max = most pages to add (default 12). */
 export function completeSite(P, opt = {}) {
-  if (!P || !P.pages || P.pages.length != 1) return P;
+  if (!P || !P.pages || !P.pages.length) return P;
   const out = clone(P), home = out.pages[0], secs = home.sections || [], homeUrl = P.source && P.source.url;
   const items = leaves((out.menu && out.menu.items) || []).filter(m => plain(m.label) && !outside(m.href, homeUrl));
   if (!items.length) return P;
   const byType = t => secs.filter(s => s.type == t)[0];
   const cta = byType('cta'), contact = byType('contact');
   const used = {}; let n = 0;
+  out.pages.forEach(p => { used[plain(p.name).toLowerCase()] = 1; });
   for (const m of items.slice(0, opt.max || 12)) {
     const label = plain(m.label), key = label.toLowerCase();
-    if (used[key] || key == 'home') continue; used[key] = 1; n++;
+    if (used[key]) { if (key != 'home' && !/^https?:/i.test(m.href || '')) m.href = '#'; continue; }   // already has a page
+    used[key] = 1; n++;
     const contactish = /\b(contact|find us|reach|location|directions|hours|visit)\b/i.test(label);
     let main = contactish && contact ? contact : Render.matchSection(P, secs, label);
     if (main && (main.type == 'hero' || main.type == 'pagehead')) main = null;
@@ -55,5 +57,17 @@ export function completeSite(P, opt = {}) {
     out.pages.push(page);
     m.href = '#';   // Site.files points "#" links named like a page at that page's file
   }
+  if (!opt.enrich) return out;
+  /* pitches only (opt.enrich): a thin inner page (little text came from the old site) gets the matching part of Home too,
+     and every inner page ends with the Home call to action (or contact) so visitors can act on any page */
+  const chars = sec => (sec.text || '').length + (sec.items || []).reduce((a, i) => a + (i.title || '').length + (i.text || '').length, 0);
+  out.pages.slice(1).forEach((pg, k) => {
+    const list = pg.sections || (pg.sections = []), sid = 'y' + k + '-';
+    if (list.reduce((a, x) => a + chars(x), 0) < 300) {
+      const add = Render.matchSection(P, secs.filter(x => x !== cta && x !== contact), pg.name);
+      if (add && add.type != 'hero' && add.type != 'pagehead' && !list.some(x => x.type == add.type && x.title == add.title)) list.push(Object.assign(clone(add), { id: sid + 'm-' + add.id }));
+    }
+    if (!list.some(x => /^(cta|contact|booking)$/.test(x.type))) { const end = cta || contact; if (end) list.push(Object.assign(clone(end), { id: sid + 'e-' + end.id })); }
+  });
   return out;
 }

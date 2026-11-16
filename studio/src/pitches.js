@@ -5,7 +5,7 @@
    Each pitch has a private prospect link (preview.html?p=<share_token>) to send to the business:
    see src/preview.js and the Supabase functions get_shared_pitch / reply_shared_pitch. */
 import { createClient } from '@supabase/supabase-js';
-import { Site } from './lib/site.js';
+import { Site, pitchProject } from './lib/site.js';
 import { Render } from './lib/render.js';
 import { compareHtml } from './lib/compare.js';
 import { blank, KEY, addPoint } from './store.js';
@@ -31,7 +31,7 @@ function project(p) {
   o.ui = b.ui; o.brand = Object.assign(blank().brand, o.brand || {}); o.menu = Object.assign(blank().menu, o.menu || {});
   return o;
 }
-const pageHtml = (row, d) => Site.html(project(d.project || row.base_project), d.tpl);
+const pageHtml = (row, d, name) => Site.previewPage(project(pitchProject(d, row.base_project)), d.tpl, name);
 
 async function start() {
   const { data } = await sb.auth.getSession();
@@ -153,17 +153,17 @@ function watchShot(img) {
 /* Price from a redesign's grade (1–99), same ladder as the studio. */
 function priceChip(d) { const p = Render.priceFor(+d.grade || 0); return p == null ? '' : ' <span>· ' + (p ? Render.money(p) : 'Free') + '</span>'; }
 
-let cur = null;
-function open(r, d) { cur = d; $('#dlgT').textContent = r.business_name + ' · ' + d.name; size(1280); $('#dlgF').srcdoc = pageHtml(r, d); $('#dlg').showModal(); }
+let cur = null, curRow = null;
+function open(r, d) { cur = d; curRow = r; $('#dlgT').textContent = r.business_name + ' · ' + d.name; size(1280); $('#dlgF').srcdoc = pageHtml(r, d); $('#dlg').showModal(); }
 function size(w) { $('#dlgF').style.width = Math.min(w, innerWidth * .96 - 4) + 'px'; }
 document.querySelectorAll('#dlg [data-w]').forEach(b => b.onclick = () => size(+b.dataset.w));
 $('#dlgX').onclick = () => $('#dlg').close();
-tameLinks($('#dlgF'));
+tameLinks($('#dlgF'), null, name => { if (cur) $('#dlgF').srcdoc = pageHtml(curRow, cur, name); });
 
 /* Load a redesign into the studio on this browser (a save point keeps the work that was there). */
 function toStudio(r, d) {
   addPoint('Before opening a pitch');
-  const p = project(d.project || r.base_project); p.tpl.pick = d.tpl; p.step = 5;
+  const p = project(pitchProject(d, r.base_project)); p.tpl.pick = d.tpl; p.step = 5;
   try { localStorage.setItem(KEY, JSON.stringify(p)); } catch (e) { alert('Not enough browser storage to open it.'); return; }
   location.href = './?v=pro#step-5';
 }

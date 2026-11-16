@@ -3,8 +3,9 @@
    - "#section" scrolls smoothly to that part of the preview (below the sticky header), and closes an open
      menu (phone drawer, dropdowns) so the part it scrolled to can be seen,
    - real web, email and phone links open in a new tab,
+   - links to another page of the site ("#@about us", made by render.js) call onPage(name) when given,
    - placeholder links ("#", or pages not built yet) stay put and call onPlaceholder(label). */
-export function tameLinks(iframe, onPlaceholder) {
+export function tameLinks(iframe, onPlaceholder, onPage) {
   const hook = () => {
     const doc = iframe.contentDocument; if (!doc || doc.__tamed) return; doc.__tamed = true;
     const win = doc.defaultView;
@@ -18,6 +19,7 @@ export function tameLinks(iframe, onPlaceholder) {
       const a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
       e.preventDefault();
       const h = (a.getAttribute('href') || '').trim();
+      if (/^#@/.test(h) && onPage) { closeMenus(); onPage(decodeURIComponent(h.slice(2))); return; }
       if (/^#.+/.test(h)) {
         const t = doc.getElementById(decodeURIComponent(h.slice(1)));
         if (t) {

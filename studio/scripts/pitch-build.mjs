@@ -3,7 +3,10 @@
    Usage: cd studio && node scripts/pitch-build.mjs /path/to/spec.json /path/to/outDir
    spec = { biz:{name,desc}, pal:{bg,ink,acc,soft} | palIndex, logo:"url"?, logoMark:true? (a picture-only logo shown beside the name), hero:"url", templates:["convoy-a",…],
             menu:[label | {label, children:[label]}], cta:"label", footer:{motto,text},
-            sections:[{ type, …fields, image?:"url", items?:[{ title, text, …fields, image?:"url" }] }] }
+            sections:[{ type, …fields, image?:"url", items?:[{ title, text, …fields, image?:"url" }] }],
+            pages:[{ name, url?, sections:[…same as above…] }] }   ← the business's OTHER pages (About, Services, Contact…),
+              read from their current site during the pitch run. Name each page like its menu entry, so the menu
+              opens it. Menu entries without a page get one made from Home at publish (lib/complete.js).
    Writes outDir/project.json (studio project without view state) and outDir/<tpl>-d.png / -p.png. */
 import { chromium } from '@playwright/test';
 import { createServer } from 'vite';
@@ -39,14 +42,16 @@ const project = await page.evaluate(async spec => {
     ['logo', 'hero', 'ill'].forEach(t => { ed.genSvg(t); const o = S.brand.opts[t]; if (o[0]) S.brand.pick[t] = (t == 'logo' ? (o.find(x => x.lay === 0) || o[0]) : o[0]).id; });
     if (spec.logo) { const o = { id: 'o-logo', kind: 'img', src: spec.logo, from: 'site', label: S.biz.name + ' logo' }; if (spec.logoMark) o.mark = 1; S.brand.opts.logo.unshift(o); S.brand.pick.logo = o.id; }
     if (spec.hero) { const h = img(spec.hero); const o = { id: 'o-hero', kind: 'img', src: h.src, from: 'site', label: h.label }; S.brand.opts.hero.unshift(o); S.brand.pick.hero = o.id; }
-    const sections = spec.sections.map(s => {
+    const mk = list => list.map(s => {
       const o = Object.assign(ed.defaultSection(s.type), s, { id: rid('s') });
       if (s.image) o.image = img(s.image); else delete o.image;
       if (s.items) o.items = s.items.map(i => Object.assign({ id: rid('i'), title: '', text: '', link: '#', linkText: '' }, i, i.image ? { image: img(i.image) } : {}));
       return o;
     });
-    const home = { id: 'p-home', name: 'Home', url: '', status: 'new', sections };
-    S.pages = [home]; S.ui.page = home.id; S.ui.tpage = home.id;
+    const home = { id: 'p-home', name: 'Home', url: '', status: 'new', sections: mk(spec.sections) };
+    const inner = (spec.pages || []).map(pg => ({ id: rid('p'), name: pg.name, url: pg.url || '', status: 'new',
+      sections: mk(pg.sections[0] && pg.sections[0].type == 'pagehead' ? pg.sections : [{ type: 'pagehead', title: pg.name, text: pg.intro || '' }].concat(pg.sections)) }));
+    S.pages = [home].concat(inner); S.ui.page = home.id; S.ui.tpage = home.id;
     const L = l => typeof l == 'string' ? { id: rid('m'), label: l, href: '#' } : { id: rid('g'), label: l.label, href: '', children: l.children.map(L) };
     S.menu.items = (spec.menu || []).map(L);
     S.menu.cta = { label: spec.cta || 'Contact us', href: '#' }; S.menu.vp.desktop.cta = true; S.menu.vp.tablet.cta = true;

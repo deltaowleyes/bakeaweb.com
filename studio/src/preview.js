@@ -3,7 +3,7 @@
    redesigns); talking points, notes and contact details stay in the private Pitches page.
    Replies go through reply_shared_pitch(), which marks the pitch "Interested". */
 import { createClient } from '@supabase/supabase-js';
-import { Site } from './lib/site.js';
+import { Site, pitchProject } from './lib/site.js';
 import { blank } from './store.js';
 import { tameLinks } from './lib/tame.js';
 import { Render } from './lib/render.js';
@@ -82,7 +82,7 @@ function draw() {
     $('#rm').className = 'msg ok'; $('#rm').textContent = 'Thank you! We got your message and will be in touch soon.'; e.target.querySelectorAll('input,textarea,button').forEach(x => x.disabled = true);
   };
   if ($('#bshot')) watchShot($('#bshot'));
-  tameLinks($('#f'), label => toast(label == 'form' ? 'Forms will work on your finished site.' : (label ? '“' + label + '”' : 'This link') + ' will open its own page on your finished site. This preview shows the home page.'));
+  tameLinks($('#f'), label => toast(label == 'form' ? 'Forms will work on your finished site.' : (label ? '“' + label + '”' : 'This link') + ' will open its own page on your finished site. This preview shows the home page.'), name => { pg = name; show(); });
   show(); new ResizeObserver(fit).observe($('#stage'));
 }
 function toast(text) {
@@ -91,9 +91,10 @@ function toast(text) {
 }
 function mark(sel, on) { app.querySelectorAll(sel).forEach(x => x.setAttribute('aria-pressed', x == on)); }
 
+let pg = 'home';   // the page of the site being previewed (prospects can click through every page)
 function show() {
   const d = designs[cur]; if (!d) return;
-  $('#f').srcdoc = Site.html(project(d.project || P.base_project), d.tpl);
+  $('#f').srcdoc = Site.previewPage(project(pitchProject(d, P.base_project)), d.tpl, pg);
   const g = +d.grade || 0; $('#cmp').innerHTML = compareHtml(g, Render.priceFor(g), Render.money, { forProspect: true }) || '<p>Ask us about this design.</p>';
   fit();
 }

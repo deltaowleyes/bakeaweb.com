@@ -6,6 +6,7 @@
 import siteCss from './site.css?raw';
 import { Render } from './render.js';
 import { Shot } from './shot.js';
+import { completeSite } from './complete.js';
 
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
@@ -92,4 +93,23 @@ export async function shotSite(P, tplId, opt = {}) {
   return { html: out, images };
 }
 
-export const Site = { html, files, shotSite, fontLink, slug };
+/** A pitch design's project: its own project (if it has one) with the pitch's real inner pages added from
+    base_project, so every design publishes the same full website. */
+export function pitchProject(design, base) {
+  const own = design && design.project, b = base || {};
+  let p = !own ? b : (own.pages || []).length > 1 || (b.pages || []).length < 2 ? own : Object.assign({}, own, { pages: [own.pages[0]].concat(b.pages.slice(1)) });
+  /* the whole website the prospect will get: a page for every menu entry, thin pages filled out (complete.js) */
+  try { if (p && p.menu && p.pages) p = completeSite(p, { enrich: true }); } catch (e) { /* show what we have */ }
+  return p;
+}
+
+/** A page of a site for a preview frame: the page named `name` (case-insensitive; 'home' or unknown = Home),
+    with its logo leading back to Home. Links to other pages stay "#@name" for tameLinks(…, onPage). */
+export function previewPage(P, tplId, name) {
+  const key = String(name || '').trim().toLowerCase(), i = Math.max(0, P.pages.findIndex(p => String(p.name || '').trim().toLowerCase() == key));
+  let out = html(P, tplId, { pageId: P.pages[i].id });
+  if (i > 0) out = out.replace(/class="lg" href="#top"/g, 'class="lg" href="#@home"');
+  return out;
+}
+
+export const Site = { html, previewPage, pitchProject, files, shotSite, fontLink, slug };
