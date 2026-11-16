@@ -7,6 +7,7 @@ import { Site, pitchProject } from './lib/site.js';
 import { blank } from './store.js';
 import { Render } from './lib/render.js';
 import { compareHtml } from './lib/compare.js';
+import { launchDeal, dealLine, timeLeft } from './lib/launch.js';
 import './lib/site.css';   // the generated site's look must apply in this page too, so the screenshot's link map and photo holes are measured with the real layout
 
 const sb = createClient('https://gpwxuunutljcauoknhrh.supabase.co', 'sb_publishable_B7a1VEv6RX13n2JhA50tbQ_oR_oKfw9');
@@ -52,7 +53,7 @@ function draw() {
     <div class="pages" aria-label="Pages of this website"><span class="pl" id="pgc">Pages</span><div class="tabs" id="pgs"></div></div>
     <div class="stage" id="stage"><div class="frame" id="frame"><div class="sv" id="sv"><div class="pic" id="pic"></div></div><p class="wait" id="wait">Drawing the page…</p></div></div>
     <p class="hint">Every page of your new website is here: pick one above, or click a link inside the preview. Scroll inside the preview to see the whole page.${designs.length > 1 ? ' ★ = the design we think suits you best.' : ''}</p>
-    <div class="card price"><h2>What this design costs, compared</h2><div id="cmp"></div>
+    <div class="card price"><h2>What this design costs, compared</h2><div id="deal"></div><div id="cmp"></div>
       <p class="hint">Publishing to a free BAKE address is included. Your own domain is +$50 for a new one or +$100 to connect one you have.</p></div>
     <div class="grid">
       <div class="card before"><h2>${none ? 'Today' : 'Your website today'}</h2>
@@ -100,7 +101,8 @@ function show() {
   $('#pgc').textContent = names.length + ' pages';
   $('#pgs').innerHTML = names.map((n, i) => `<button data-p="${i}" aria-pressed="${i == at}">${esc(i == 0 ? 'Home' : n)}</button>`).join('');
   $('#pgs').querySelectorAll('[data-p]').forEach(b => b.onclick = () => { pg = names[+b.dataset.p]; show(); });
-  const g = +d.grade || 0; $('#cmp').innerHTML = compareHtml(g, Render.priceFor(g), Render.money, { forProspect: true }) || '<p>Ask us about this design.</p>';
+  const g = +d.grade || 0; $('#cmp').innerHTML = compareHtml(g, Render.priceFor(g), Render.money, { forProspect: true, deal: launchDeal() }) || '<p>Ask us about this design.</p>';
+  dealBanner();
   fit();
 }
 function fit() {
@@ -160,3 +162,15 @@ function watchShot(img) {
 }
 
 start();
+
+/* Launch-week banner above the price: today's discount and the time left until midnight Eastern.
+   Rechecked every 30 seconds, so the price drops to the next day's discount at midnight without a reload. */
+let dealDay = null;
+function dealBanner() {
+  const el = $('#deal'); if (!el) return;
+  const d = launchDeal();
+  if ((d && d.day) !== dealDay) { const was = dealDay; dealDay = d && d.day; if (was !== null && designs[cur]) { const g = +designs[cur].grade || 0; $('#cmp').innerHTML = compareHtml(g, Render.priceFor(g), Render.money, { forProspect: true, deal: d }) || ''; } }
+  el.innerHTML = d ? `<div role="note" style="background:#fff4ec;border:2px solid #c2410c;border-radius:12px;padding:12px 14px;margin:4px 0 12px;font-size:15px;line-height:1.45">
+    <b style="color:#c2410c;font-size:17px">🎉 ${esc(dealLine(d))}</b><br><span>Time left at ${d.pct}% off: <b>${esc(timeLeft(d.msLeft))}</b>. The price below already includes today's discount.</span></div>` : '';
+}
+setInterval(dealBanner, 30000);

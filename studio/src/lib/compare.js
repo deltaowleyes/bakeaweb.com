@@ -54,11 +54,15 @@ export function compare(grade, price) {
 }
 
 /* The same comparison as plain HTML (Pitches page and prospect preview, which aren't React). */
-export function compareHtml(grade, price, money, { forProspect } = {}) {
+export function compareHtml(grade, price, money, { forProspect, deal } = {}) {
   const c = compare(grade, price); if (!c) return '';
   const esc = s => String(s).replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
-  const ours = price ? money(price) + ' one time' : 'Free';
-  return `<div class="cmp"><div class="cmp-row"><span class="cmp-k">${forProspect ? 'With BAKE' : 'BAKE'}</span><b>${esc(ours)}</b></div>
+  /* Launch-week discount (lib/launch.js): show the regular price struck through and today's price. */
+  const sale = price && deal ? Math.round(price * (100 - deal.pct) / 100) : null;
+  const ours = !price ? esc('Free')
+    : sale != null ? `<s style="opacity:.6;font-weight:400">${esc(money(price))}</s> ${esc(money(sale))} one time <span class="cmp-deal" style="display:inline-block;background:#c2410c;color:#fff;border-radius:999px;padding:1px 9px;font-size:.8em;margin-left:4px">${deal.pct}% off today</span>`
+    : esc(money(price) + ' one time');
+  return `<div class="cmp"><div class="cmp-row"><span class="cmp-k">${forProspect ? 'With BAKE' : 'BAKE'}</span><b>${ours}</b></div>
     <div class="cmp-row"><span class="cmp-k">Template elsewhere</span><span>${esc(c.tpl.label)} <small>(${esc(c.tpl.what)}; you set it up yourself)</small></span></div>
     <div class="cmp-row"><span class="cmp-k">Agency</span><span>${esc(c.agency.label)} <small>(${esc(c.agency.what)})</small></span></div>
     <details><summary>Where these numbers come from (checked ${CHECKED})</summary><ul>${c.sources.map(s => `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>: ${esc(s.says)}</li>`).join('')}</ul>

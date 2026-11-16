@@ -8,6 +8,7 @@ import { createClient } from '@supabase/supabase-js';
 import { Site, pitchProject } from './lib/site.js';
 import { Render } from './lib/render.js';
 import { compareHtml } from './lib/compare.js';
+import { launchDeal, salePrice } from './lib/launch.js';
 import { blank, KEY, addPoint } from './store.js';
 import { tameLinks } from './lib/tame.js';
 
@@ -122,7 +123,7 @@ function card(r) {
       ${(r.photos || []).length ? '<h3>Their photos (links to their site)</h3><div class="info">' + r.photos.map(p => '<div><a href="' + esc(p.src) + '" target="_blank" rel="noopener">' + esc(p.what || p.src) + '</a></div>').join('') + '</div>' : ''}
     </div><div><h3 style="margin-top:0">After (our redesigns)</h3><div class="afters">${(r.redesigns || []).map((d, k) => `<div class="after" data-p="${r.id}" data-i="${k}">
       <div class="frame"><iframe title="${esc(d.name)}" loading="lazy" sandbox="allow-same-origin"></iframe></div>
-      <div class="bar"><div><b>${esc(d.name)}</b> <span>${d.grade ? d.grade + '/99' : ''}</span>${priceChip(d)}</div><div class="acts"><button class="big">Full view</button><button class="btn2 studio">Open in studio</button></div></div>${compareHtml(+d.grade || 0, Render.priceFor(+d.grade || 0), Render.money)}</div>`).join('')}</div>
+      <div class="bar"><div><b>${esc(d.name)}</b> <span>${d.grade ? d.grade + '/99' : ''}</span>${priceChip(d)}</div><div class="acts"><button class="big">Full view</button><button class="btn2 studio">Open in studio</button></div></div>${compareHtml(+d.grade || 0, Render.priceFor(+d.grade || 0), Render.money, { deal: launchDeal() })}</div>`).join('')}</div>
       ${r.pitch ? '<h3>Talking points for the call</h3><p class="talk">' + esc(r.pitch) + '</p>' : ''}
       <div class="edit"><select class="st">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}"${r.status == k ? ' selected' : ''}>${v}</option>`).join('')}</select>
       <textarea class="nt" rows="2" placeholder="Notes (who you spoke to, what they said)">${esc(r.notes || '')}</textarea><div><button class="save">Save</button> <span class="saved"></span></div></div>
@@ -151,7 +152,8 @@ function watchShot(img) {
   if (img.complete) img.naturalWidth ? img.dispatchEvent(new Event('load')) : next();
 }
 /* Price from a redesign's grade (1–99), same ladder as the studio. */
-function priceChip(d) { const p = Render.priceFor(+d.grade || 0); return p == null ? '' : ' <span>· ' + (p ? Render.money(p) : 'Free') + '</span>'; }
+function priceChip(d) { const p = Render.priceFor(+d.grade || 0), deal = launchDeal(); if (p == null) return ''; if (!p) return ' <span>· Free</span>';
+  return deal ? ` <span>· <s>${Render.money(p)}</s> ${Render.money(salePrice(p, deal))} today (${deal.pct}% off until midnight ET)</span>` : ' <span>· ' + Render.money(p) + '</span>'; }
 
 let cur = null, curRow = null;
 function open(r, d) { cur = d; curRow = r; $('#dlgT').textContent = r.business_name + ' · ' + d.name; size(1280); showPage('home'); $('#dlg').showModal(); }
