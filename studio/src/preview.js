@@ -49,8 +49,9 @@ function draw() {
       Pick a design below and try it on a computer or a phone. Photos labelled “Sample photo” are placeholders that we swap for your own.</p>
     <div class="bar"><div class="tabs" role="tablist">${designs.map((d, i) => `<button data-i="${i}" aria-pressed="${i == cur}">${i == 0 && designs.length > 1 ? '★ ' : ''}${esc(d.name)}</button>`).join('')}</div>
       <div class="dev">${Object.keys(DEV).map(k => `<button data-d="${k}" aria-pressed="${k == dev}">${k[0].toUpperCase() + k.slice(1)}</button>`).join('')}</div></div>
+    <div class="pages" aria-label="Pages of this website"><span class="pl" id="pgc">Pages</span><div class="tabs" id="pgs"></div></div>
     <div class="stage" id="stage"><div class="frame" id="frame"><iframe id="f" title="Website preview" sandbox="allow-same-origin"></iframe></div></div>
-    <p class="hint">Scroll inside the preview to see the whole page.${designs.length > 1 ? ' ★ = the design we think suits you best.' : ''}</p>
+    <p class="hint">Every page of your new website is here: pick one above, or click the menu inside the preview. Scroll inside the preview to see the whole page.${designs.length > 1 ? ' ★ = the design we think suits you best.' : ''}</p>
     <div class="card price"><h2>What this design costs, compared</h2><div id="cmp"></div>
       <p class="hint">Publishing to a free BAKE address is included. Your own domain is +$50 for a new one or +$100 to connect one you have.</p></div>
     <div class="grid">
@@ -82,7 +83,7 @@ function draw() {
     $('#rm').className = 'msg ok'; $('#rm').textContent = 'Thank you! We got your message and will be in touch soon.'; e.target.querySelectorAll('input,textarea,button').forEach(x => x.disabled = true);
   };
   if ($('#bshot')) watchShot($('#bshot'));
-  tameLinks($('#f'), label => toast(label == 'form' ? 'Forms will work on your finished site.' : (label ? '“' + label + '”' : 'This link') + ' will open its own page on your finished site. This preview shows the home page.'), name => { pg = name; show(); });
+  tameLinks($('#f'), label => toast(label == 'form' ? 'Forms will work on your finished site.' : (label ? '“' + label + '”' : 'This link') + ' will work on your finished site.'), name => { pg = name; show(); });
   show(); new ResizeObserver(fit).observe($('#stage'));
 }
 function toast(text) {
@@ -94,7 +95,12 @@ function mark(sel, on) { app.querySelectorAll(sel).forEach(x => x.setAttribute('
 let pg = 'home';   // the page of the site being previewed (prospects can click through every page)
 function show() {
   const d = designs[cur]; if (!d) return;
-  $('#f').srcdoc = Site.previewPage(project(pitchProject(d, P.base_project)), d.tpl, pg);
+  const pr = project(pitchProject(d, P.base_project)), names = pr.pages.map(p => p.name || 'Page');
+  let at = names.findIndex(n => n.trim().toLowerCase() == String(pg).trim().toLowerCase()); if (at < 0) at = 0;
+  $('#f').srcdoc = Site.previewPage(pr, d.tpl, names[at]);
+  $('#pgc').textContent = names.length + ' pages';
+  $('#pgs').innerHTML = names.map((n, i) => `<button data-p="${i}" aria-pressed="${i == at}">${esc(i == 0 ? 'Home' : n)}</button>`).join('');
+  $('#pgs').querySelectorAll('[data-p]').forEach(b => b.onclick = () => { pg = names[+b.dataset.p]; show(); });
   const g = +d.grade || 0; $('#cmp').innerHTML = compareHtml(g, Render.priceFor(g), Render.money, { forProspect: true }) || '<p>Ask us about this design.</p>';
   fit();
 }

@@ -43,7 +43,8 @@ h3{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute
 .saved{font-size:13px;color:#1f7a4a;align-self:center}
 dialog{border:0;border-radius:16px;padding:0;width:min(1320px,96vw);height:92vh}dialog::backdrop{background:#0009}
 dialog .top{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line);gap:10px}
-dialog iframe{border:0;display:block;margin:0 auto;height:calc(92vh - 58px);background:#fff}
+dialog iframe{border:0;display:block;margin:0 auto;height:calc(92vh - 104px);background:#fff}
+#dlgP{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;padding:8px 14px;border-bottom:1px solid var(--line);font-size:13px}#dlgP button{white-space:nowrap;padding:4px 10px;font-size:13px}#dlgP button[aria-pressed=true]{background:var(--acc);color:#fff}
 .note{font-size:13px;color:var(--mute)}
 .sum{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:28px;font-size:14px}
 .sum th,.sum td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}.sum th{background:#eef3f1;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute)}
@@ -60,7 +61,7 @@ dialog iframe{border:0;display:block;margin:0 auto;height:calc(92vh - 58px);back
 <body>
 <header><div><b>BAKE Pitches</b> <small>private · admins only</small></div><div id="who"></div></header>
 <main id="app"><p class="empty">Loading…</p></main>
-<dialog id="dlg"><div class="top"><b id="dlgT"></b><div><button class="btn2" data-w="1280">Computer</button> <button class="btn2" data-w="820">Tablet</button> <button class="btn2" data-w="390">Phone</button> <button id="dlgX">Close</button></div></div><iframe id="dlgF" title="Redesign preview"></iframe></dialog>
+<dialog id="dlg"><div class="top"><b id="dlgT"></b><div><button class="btn2" data-w="1280">Computer</button> <button class="btn2" data-w="820">Tablet</button> <button class="btn2" data-w="390">Phone</button> <button id="dlgX">Close</button></div></div><div id="dlgP" aria-label="Pages of this website"></div><iframe id="dlgF" title="Redesign preview"></iframe></dialog>
 <script type="module" src="/src/pitches.js"></script>
 </body>
 </html>

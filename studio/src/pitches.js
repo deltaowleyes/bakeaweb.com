@@ -154,11 +154,19 @@ function watchShot(img) {
 function priceChip(d) { const p = Render.priceFor(+d.grade || 0); return p == null ? '' : ' <span>· ' + (p ? Render.money(p) : 'Free') + '</span>'; }
 
 let cur = null, curRow = null;
-function open(r, d) { cur = d; curRow = r; $('#dlgT').textContent = r.business_name + ' · ' + d.name; size(1280); $('#dlgF').srcdoc = pageHtml(r, d); $('#dlg').showModal(); }
+function open(r, d) { cur = d; curRow = r; $('#dlgT').textContent = r.business_name + ' · ' + d.name; size(1280); showPage('home'); $('#dlg').showModal(); }
+/* every page of the site the prospect will get, as buttons above the preview */
+function showPage(name) {
+  const pr = project(pitchProject(cur, curRow.base_project)), names = pr.pages.map(p => p.name || 'Page');
+  let at = names.findIndex(n => n.trim().toLowerCase() == String(name).trim().toLowerCase()); if (at < 0) at = 0;
+  $('#dlgF').srcdoc = Site.previewPage(pr, cur.tpl, names[at]);
+  $('#dlgP').innerHTML = '<b style="align-self:center;white-space:nowrap">' + names.length + ' pages</b>' + names.map((n, i) => '<button class="btn2" data-p="' + i + '" aria-pressed="' + (i == at) + '">' + esc(i == 0 ? 'Home' : n) + '</button>').join('');
+  $('#dlgP').querySelectorAll('[data-p]').forEach(b => b.onclick = () => showPage(names[+b.dataset.p]));
+}
 function size(w) { $('#dlgF').style.width = Math.min(w, innerWidth * .96 - 4) + 'px'; }
 document.querySelectorAll('#dlg [data-w]').forEach(b => b.onclick = () => size(+b.dataset.w));
 $('#dlgX').onclick = () => $('#dlg').close();
-tameLinks($('#dlgF'), null, name => { if (cur) $('#dlgF').srcdoc = pageHtml(curRow, cur, name); });
+tameLinks($('#dlgF'), null, name => { if (cur) showPage(name); });
 
 /* Load a redesign into the studio on this browser (a save point keeps the work that was there). */
 function toStudio(r, d) {
