@@ -38,6 +38,8 @@ function callFrom(province = '', city = '') {
 }
 
 /** Tips written by Chris, or a simple starter tip from what we know about the business. */
+/** Large firms (est_tier 'Large', custom builds of $10,000+) get a badge and the bigger-firm price line. */
+const big = c => c.est_tier === 'Large' || /10,000\+/.test(c.est_package || '');
 const real = v => v && !/^[-–—\s]*$/.test(v) ? v : '';
 function tipsFor(c) {
   if (c.tips) return c.tips;
@@ -160,6 +162,7 @@ function CallCard({ c, me, open, setOpen, reload }) {
         <div className="flex flex-col items-end gap-1">
           {c.outcome ? <span className="text-sm font-bold bg-emerald-100 text-emerald-900 rounded-full px-3 py-1">✓ {OUT[c.outcome]}</span>
             : <span className="text-sm font-bold bg-amber-100 text-amber-900 rounded-full px-3 py-1">To call</span>}
+          {big(c) && <span className="text-sm font-extrabold bg-violet-700 text-white rounded-full px-3 py-1" title={c.est_package || ''}>💼 $10K+ firm</span>}
           {c.locked_by_name && <span className="text-xs text-mute">🔒 {c.locked_by_me ? 'You are on this call' : c.locked_by_name + ' is on this call'}</span>}
         </div>
       </div>
@@ -167,6 +170,7 @@ function CallCard({ c, me, open, setOpen, reload }) {
         {c.phone && <a className="font-bold text-acc text-lg" href={'tel:' + c.phone.replace(/[^\d+]/g, '')}>📞 {c.phone}</a>}
         {c.website && <a className="text-acc underline break-all" href={/^https?:/.test(c.website) ? c.website : 'https://' + c.website} target="_blank" rel="noopener">{c.website.replace(/^https?:\/\//, '')}</a>}
       </div>
+      {big(c) && <div className="mt-3 bg-violet-50 border border-violet-300 rounded-xl p-3 text-sm"><b>Bigger firm: don't quote $180–$400.</b> If they ask about price, say: <i>"For a bigger site, Chris quotes it after you've seen the designs, and the launch-week discount applies."</i></div>}
       <div className="mt-3 bg-paper rounded-xl p-3 text-sm whitespace-pre-line"><b>Tips: </b>{tipsFor(c)}</div>
       {c.next_step && !open && <div className="mt-2 text-sm"><b>Next step:</b> {c.next_step}</div>}
       {msg && <p className="text-acc font-semibold mt-2 mb-0">{msg}</p>}
