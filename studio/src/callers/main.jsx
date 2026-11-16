@@ -11,6 +11,7 @@ import { StrictMode, useEffect, useState, useCallback } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createClient } from '@supabase/supabase-js';
 import './callers.css';
+import Script from './Script.jsx';
 
 const sb = createClient('https://gpwxuunutljcauoknhrh.supabase.co', 'sb_publishable_B7a1VEv6RX13n2JhA50tbQ_oR_oKfw9');
 
@@ -136,8 +137,8 @@ function CallForm({ c, onDone, onCancel }) {
   );
 }
 
-function CallCard({ c, open, setOpen, reload }) {
-  const [msg, setMsg] = useState('');
+function CallCard({ c, me, open, setOpen, reload }) {
+  const [msg, setMsg] = useState(''), [script, setScript] = useState(false);
   const lockedByOther = c.locked_by_name && !c.locked_by_me;
   const start = async () => {
     setMsg('');
@@ -169,6 +170,8 @@ function CallCard({ c, open, setOpen, reload }) {
       <div className="mt-3 bg-paper rounded-xl p-3 text-sm whitespace-pre-line"><b>Tips: </b>{tipsFor(c)}</div>
       {c.next_step && !open && <div className="mt-2 text-sm"><b>Next step:</b> {c.next_step}</div>}
       {msg && <p className="text-acc font-semibold mt-2 mb-0">{msg}</p>}
+      {open && <div className="mt-3 flex flex-wrap items-center gap-3"><button className="btn" onClick={() => setScript(true)}>📄 View script</button><span className="text-sm text-mute">Opening, offer, voicemail, prices and objections, with this business's name filled in.</span></div>}
+      {script && <Script c={c} me={me} onClose={() => setScript(false)} />}
       {open ? <CallForm c={c} onDone={done} onCancel={cancel} />
         : <div className="mt-3"><button className={c.outcome ? 'btn2' : 'btn'} disabled={lockedByOther} onClick={start}>{c.outcome ? 'Update this call' : 'Start call'}</button></div>}
     </article>
@@ -224,7 +227,7 @@ function App() {
         {err && <p className="text-warn">{err}</p>}
         {calls === null ? <p>Loading your calls…</p>
           : !calls.length ? <p className="bg-white border border-line rounded-2xl p-6 text-center">No calls assigned to you for this day.</p>
-          : <div className="grid gap-4">{list.map(c => <CallCard key={c.id} c={c} open={open === c.id} setOpen={setOpen} reload={reload} />)}</div>}
+          : <div className="grid gap-4">{list.map(c => <CallCard key={c.id} c={c} me={me} open={open === c.id} setOpen={setOpen} reload={reload} />)}</div>}
       </main>
     </>
   );
