@@ -85,7 +85,7 @@ export async function shotSite(P, tplId, opt = {}) {
     const blob = await (await fetch(r.url)).blob(), name = m.file.replace(/\.html$/, '') + '-' + k + '.webp';
     images.push({ path: name, blob });
     const pc = (v, t) => (v / t * 100).toFixed(3) + '%';
-    const links = (r.map.links || []).map(l => '<a href="' + esc(l.href) + '" style="left:' + pc(l.x, r.w) + ';top:' + pc(l.y, r.h) + ';width:' + pc(l.width, r.w) + ';height:' + pc(l.height, r.h) + '"' + (l.label ? ' aria-label="' + esc(l.label) + '"' : '') + '></a>').join('');
+    const links = (r.map.links || []).filter(l => l.href != '#bake-menu').map(l => '<a href="' + esc(l.href) + '" style="left:' + pc(l.x, r.w) + ';top:' + pc(l.y, r.h) + ';width:' + pc(l.width, r.w) + ';height:' + pc(l.height, r.h) + '"' + (l.label ? ' aria-label="' + esc(l.label) + '"' : '') + '></a>').join('');
     figs.push('<div class="pic pic-' + k + '" style="max-width:' + w + 'px"><img src="' + name + '" alt="' + esc((m.name || 'Page') + ' of ' + (P.biz.name || 'this site')) + '" width="' + w + '" height="' + r.h + '">' + links + '</div>');
   }
   const out = '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>' + esc(opt.title || P.biz.name || 'Portfolio') + '</title>\n' +

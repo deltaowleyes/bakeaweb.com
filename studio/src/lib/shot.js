@@ -51,6 +51,12 @@ var Shot = (function () {
       var r = rect(a); if (!r) return;
       links.push({ x: r.x, y: r.y, width: r.width, height: r.height, href: href, label: (a.textContent || '').trim().slice(0, 80) });
     });
+    /* drop-down menu buttons (<summary>) can't open in a picture: give them a click area that explains that */
+    Array.prototype.forEach.call(host.querySelectorAll('details:not([open])>summary'), function (sm) {
+      if (sm.checkVisibility && !sm.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true })) return;
+      var r = rect(sm); if (!r) return;
+      links.push({ x: r.x, y: r.y, width: r.width, height: r.height, href: '#bake-menu', label: (sm.textContent || '').replace(/▾/g, '').trim().slice(0, 80) });
+    });
     return { width: w, height: h, boxes: boxes, links: links };
   }
   /* html: page markup; w: viewport width; opt.maxH: crop height; opt.scale: pixel density.

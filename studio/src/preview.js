@@ -51,6 +51,7 @@ function draw() {
     <div class="bar"><div class="tabs" role="tablist">${designs.map((d, i) => `<button data-i="${i}" aria-pressed="${i == cur}">${i == 0 && designs.length > 1 ? '★ ' : ''}${esc(d.name)}</button>`).join('')}</div>
       <div class="dev">${Object.keys(DEV).map(k => `<button data-d="${k}" aria-pressed="${k == dev}">${k[0].toUpperCase() + k.slice(1)}</button>`).join('')}</div></div>
     <div class="pages" aria-label="Pages of this website"><span class="pl" id="pgc">Pages</span><div class="tabs" id="pgs"></div></div>
+    <p class="pvnote" role="note"><b>Preview note:</b> this is a picture of your new website. Drop-down menus (like the ones marked ▾) don't open in the preview, so use the page buttons above to reach those pages. They will open normally once your site is live. Any blue outline that appears when you click a link is only part of this preview and won't show on your live site.</p>
     <div class="stage" id="stage"><div class="frame" id="frame"><div class="sv" id="sv"><div class="pic" id="pic"></div></div><p class="wait" id="wait">Drawing the page…</p></div></div>
     <p class="hint">Every page of your new website is here: pick one above, or click a link inside the preview. Scroll inside the preview to see the whole page.${designs.length > 1 ? ' ★ = the design we think suits you best.' : ''}</p>
     <div class="card price"><h2>What this design costs, compared</h2><div id="deal"></div><div id="cmp"></div>
@@ -132,6 +133,7 @@ async function draw1(pr, tpl, name) {
     e.preventDefault();
     const l = r.links[+a.dataset.l], h = l.href;
     if (/^#@/.test(h)) { pg = decodeURIComponent(h.slice(2)); show(); sv.scrollTop = 0; return; }
+    if (h == '#bake-menu') { toast('“' + (l.label || 'This menu') + '” opens a drop-down list on your live site. For now, use the page buttons above the preview.'); return; }
     if (h == '#top') { sv.scrollTo({ top: 0, behavior: 'smooth' }); return; }
     if (/^#./.test(h)) { const s = r.secs.find(x => x.id == h.slice(1)); if (s) sv.scrollTo({ top: Math.max(0, s.y / r.h * pic.clientHeight - 70), behavior: 'smooth' }); return; }
     if (/^https?:/.test(h)) { window.open(h, '_blank', 'noopener'); return; }
