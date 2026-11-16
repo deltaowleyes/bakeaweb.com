@@ -332,7 +332,7 @@ var Render = (function () {
     return (flat.length ? '<div class="dg"><strong>Main</strong>' + flat.map(linkHtml).join('') + '</div>' : '') + groups.map(function (g) { return '<div class="dg"><strong>' + esc(g.label) + '</strong>' + g.children.map(linkHtml).join('') + '</div>'; }).join('');
   }
   function header(P, vp, open) {
-    var c = P.menu.vp[vp], items = P.menu.items, t = c.type, L = '<a class="lg" href="#">' + logoHtml(P, vp == 'phone' ? 34 : 44) + '</a>';
+    var c = P.menu.vp[vp], items = P.menu.items, t = c.type, L = '<a class="lg" href="#top">' + logoHtml(P, vp == 'phone' ? 34 : 44) + '</a>';
     var extras = (c.search ? '<span class="sr" aria-label="Search">⌕</span>' : '') + (c.cta && P.menu.cta.label ? btn(P.menu.cta.label, P.menu.cta.href, 'bt hc') : '');
     var drawer = '<details class="dr"' + (open ? ' open' : '') + '><summary>☰ Menu</summary><div class="dw">' + tree(items) + '</div></details>';
     var cls = 'hd hd-' + t + ' lp-' + (t == 'split' ? 'center' : c.logo) + (c.sticky ? ' sk' : '');
@@ -464,7 +464,115 @@ var Render = (function () {
   function footer(P, cr) {
     var items = P.menu.items, links = [];
     items.forEach(function (m) { if (m.children && m.children.length) links = links.concat(m.children); else links.push(m); });
-    return '<footer class="ft" data-sec="footer" data-type="footer" data-si="-1"><div class="w"><div class="fb">' + logoHtml(P, 36) + (P.footer.motto ? '<p class="mt"' + fk('motto') + '>' + esc(P.footer.motto) + '</p>' : '') + '</div><nav>' + links.slice(0, 12).map(linkHtml).join('') + '</nav><p class="cp"' + fk('text') + '>' + esc(P.footer.text || ('© ' + P.biz.name)) + '</p>' + (cr || '') + '</div></footer>';
+    return '<footer id="footer" class="ft" data-sec="footer" data-type="footer" data-si="-1"><div class="w"><div class="fb">' + logoHtml(P, 36) + (P.footer.motto ? '<p class="mt"' + fk('motto') + '>' + esc(P.footer.motto) + '</p>' : '') + '</div><nav>' + links.slice(0, 12).map(linkHtml).join('') + '</nav><p class="cp"' + fk('text') + '>' + esc(P.footer.text || ('© ' + P.biz.name)) + '</p>' + (cr || '') + '</div></footer>';
+  }
+
+  /* ---------- placeholder links → parts of the page ----------
+     A menu entry, button or card whose link is "#" or empty (no page of its own yet) is pointed at the part of
+     THIS page that best matches its words ("Rates" → the slip rates section, "Book a slip" → the booking section),
+     or at Contact when nothing fits. "Get directions" and contact addresses open Google Maps for the address on
+     the page. No other outside links are made up. Works on a copy: the saved project is never changed.
+     On a multi-page site a link named like one of its pages is left alone, so Site.files can point it at that page. */
+  var STOP = { a: 1, an: 1, the: 1, and: 1, or: 1, of: 1, our: 1, your: 1, my: 1, to: 1, for: 1, in: 1, on: 1, at: 1, by: 1, us: 1, we: 1, me: 1, it: 1, is: 1, more: 1, learn: 1, see: 1, all: 1, get: 1, view: 1, open: 1, here: 1, now: 1, page: 1, go: 1, read: 1, click: 1, with: 1, from: 1 };
+  var SYN = {
+    contact: 'contact find location locate direction map visit hours call phone email reach address where touch',
+    gallery: 'gallery photo picture image lookbook still portfolio',
+    booking: 'book booking reserve reservation appointment quote availability schedule',
+    menu: 'rate price pricing menu fee cost',
+    products: 'product shop store buy catalog catalogue',
+    videos: 'video film watch trailer',
+    podcast: 'podcast listen episode audio',
+    testimonial: 'review testimonial',
+    feature: 'about story history mission',
+    text: 'about story history mission',
+    tiles: 'service program offer',
+    list: 'service'
+  };
+  var SYNW = { tiles: 1, list: 1, feature: 2, text: 2 };   /* weak hints: many sections are card grids or lists */
+  function stem(w) { var m = /^(.{3,}?)(ing|es|s|e)$/.exec(w); return m ? m[1] : w; }
+  function words(t) {
+    return String(t || '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').split(' ')
+      .filter(function (w) { return w && !STOP[w]; }).map(stem);
+  }
+  function deadLink(h) { h = String(h == null ? '' : h).trim(); return !h || h == '#'; }
+  function mapsUrl(q) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q); }
+  function anchorPlan(P, secs) {
+    var keys = secs.map(function (s) {
+      var k = {}, add = function (t, w) { words(t).forEach(function (x) { k[x] = Math.max(k[x] || 0, w); }); };
+      add(s.title, 3); add(s.headline, 2); add(s.eyebrow, 2); add(SYN[s.type] || '', SYNW[s.type] || 3);
+      add(s.linkText, 1); add(s.moreText, 1);   /* what the section's own button says it is about ("Local attractions") */
+      (s.items || []).forEach(function (it) { add(it.title, 2); add(it.text, 1); });
+      return k;
+    });
+    var byType = function (t) { return secs.filter(function (s) { return s.type == t; })[0]; };
+    var contact = byType('contact'), fallback = contact || byType('booking') || byType('cta');
+    var addr = '';
+    if (contact) (contact.items || []).forEach(function (it) { if (!addr && /address|location|where|based|visit|find/i.test(it.title || '') && it.text) addr = it.text; });
+    var pageNames = {};
+    if ((P.pages || []).length > 1) P.pages.forEach(function (p) { pageNames[String(p.name || '').trim().toLowerCase()] = 1; });
+    /* best section for some words; "not" = the section the link sits in (a button never points at its own section) */
+    function best(text, not) {
+      var ws = words(text), top = null, score = 0;
+      secs.forEach(function (s, i) {
+        if (s === not || s.type == 'hero' || s.type == 'stats' || s.type == 'cta') return;   /* calls to action are only a last resort */
+        var sc = 0; ws.forEach(function (w) { sc += keys[i][w] || 0; });
+        if (sc > score) { score = sc; top = s; }
+      });
+      return top;
+    }
+    function to(text, not, extra) {
+      if (!secs.length) return '#';
+      if (/\b(directions?|map)\b/i.test(text || '')) return mapsUrl(addr || [P.biz && P.biz.name, P.biz && P.biz.desc].filter(Boolean).join(' '));
+      if (/\battractions?\b|\bnearby\b|things to do near/i.test(text || '') && addr) { var a = best(text, not); return a ? '#' + a.id : mapsUrl('attractions near ' + addr); }
+      var s = best(text, not) || (extra && best(extra, not)) || (fallback !== not ? fallback : null);
+      return s ? '#' + s.id : '#top';
+    }
+    return { to: to, best: best, addr: addr, pageNames: pageNames };
+  }
+  /* the section of a list that best matches some words (complete.js uses it to build inner pages) */
+  function matchSection(P, secs, text, not) { return secs.length ? anchorPlan(Object.assign({}, P, { pages: [] }), secs).best(text, not) : null; }
+  function anchorLinks(P, pg) {
+    var secs = pg.sections || [], plan = anchorPlan(P, secs);
+    var fixHash = function (h, label, not, extra) {
+      h = String(h == null ? '' : h).trim();
+      if (deadLink(h)) {
+        var pn = String(label || '').trim().toLowerCase();
+        if (plan.pageNames[pn]) return '#@' + encodeURIComponent(pn);   /* Site.files turns this into that page's file */
+        return plan.to(label, not, extra);
+      }
+      /* "#contact"-style links that point at a part that doesn't exist by that name */
+      if (/^#[^#]+$/.test(h) && h != '#top' && h != '#footer' && !secs.some(function (s) { return s.id == h.slice(1); })) return plan.to(h.slice(1).replace(/[-_]/g, ' '), not, label);
+      return h;
+    };
+    var menuItem = function (m, parent) {
+      var o = Object.assign({}, m);
+      if (o.children && o.children.length) { o.children = o.children.map(function (c) { return menuItem(c, m); }); if (!deadLink(o.href)) o.href = fixHash(o.href, o.label); }
+      else o.href = fixHash(o.href, o.label, null, parent && parent.label);
+      return o;
+    };
+    var menu = Object.assign({}, P.menu, { items: (P.menu.items || []).map(function (m) { return menuItem(m); }), cta: Object.assign({}, P.menu.cta) });
+    if (menu.cta.label) menu.cta.href = fixHash(menu.cta.href, menu.cta.label);
+    var out = secs.map(function (s) {
+      var o = Object.assign({}, s);
+      [['link', 'linkText'], ['link2', 'link2Text'], ['moreLink', 'moreText']].forEach(function (f) {
+        if (o[f[1]]) o[f[0]] = fixHash(o[f[0]], o[f[1]], s);
+      });
+      if (o.items) o.items = o.items.map(function (it) {
+        var x = Object.assign({}, it);
+        if (s.type == 'contact') {
+          if (deadLink(x.link)) x.link = /address|location|where|gps|coordinates|visit|find/i.test(x.title || '') && x.text ? mapsUrl(x.text) : '';
+          return x;
+        }
+        if (x.link !== undefined || x.linkText) {
+          var lab = (x.linkText && words(x.linkText).length ? x.linkText : x.title);
+          if (deadLink(x.link) && !x.linkText && /^(list|stats|gallery|menu|booking|testimonial)$/.test(s.type)) return x;   /* shown as text, not links */
+          x.link = fixHash(x.link, lab, s);
+        }
+        return x;
+      });
+      return o;
+    });
+    return { menu: menu, sections: out };
   }
 
   function page(P, tplId, opt) {
@@ -477,24 +585,26 @@ var Render = (function () {
     if (gf.b) { F = Object.assign({}, F, { b: fstack(gf.b, gf.bcat) }); useFont(gf.b, 400); useFont(gf.b, 700); }
     if (f.mono) { if (f.monoW) useFont(f.mono, f.monoW); else { useFont(f.mono, 500); useFont(f.mono, 600); } }   /* a family's label font (Freight) */
     var vars = '--bg:' + p.bg + ';--ink:' + p.ink + ';--acc:' + p.acc + ';--soft:' + p.soft + ';--oa:' + Art.onColor(p.acc) + ';--oi:' + Art.onColor(p.ink) + ';--line:' + Art.mix(p.bg, p.ink, dark ? .3 : .16) + ';--mute:' + Art.mix(p.ink, p.bg, .3) + ';--card:' + (dark ? Art.mix(p.bg, p.ink, .06) : '#ffffff') + ';--hf:' + F.h.replace(/"/g, "'") + ';--bf:' + F.b.replace(/"/g, "'") + ';--hw:' + F.w + ';--r:' + v.r + 'px';
-    var secs = pageOf(P, opt.pageId).sections.map(function (s, i) {
+    var pg0 = pageOf(P, opt.pageId), AL = anchorLinks(P, pg0);
+    P = Object.assign({}, P, { menu: AL.menu });
+    var secs = AL.sections.map(function (s, i) {
       FX = s.fx || null; var h = (SEC[s.type] || SEC.text)(P, s, f), lx = lxAttr(s); FX = null; var bg = s.bg && s.bg != 'auto' ? s.bg : (v.band != 'none' && i % 2 == 1 && s.type != 'hero' ? (f.dark && v.band == 'ink' ? 'soft' : v.band) : 'default');
       if (f.bands && s.type == 'cta') bg = 'acc';
       if (s.type == 'pagehead' && (!s.bg || s.bg == 'auto')) bg = f.k == 'bold' || f.k == 'portal' ? 'ink' : 'soft';
-      return h.replace('<section class="s ', '<section data-sec="' + s.id + '" data-type="' + s.type + '" data-si="' + i + '"' + lx.style + ' class="s bg-' + bg + ' al-' + (s.align || 'auto') + lx.cls + (opt.sel == s.id ? ' sel' : '') + ' ');
+      return h.replace('<section class="s ', '<section id="' + esc(s.id) + '" data-sec="' + s.id + '" data-type="' + s.type + '" data-si="' + i + '"' + lx.style + ' class="s bg-' + bg + ' al-' + (s.align || 'auto') + lx.cls + (opt.sel == s.id ? ' sel' : '') + ' ');
     }).join('');
     var mv = opt.openMenu;
     FX = P.footer.fx || null; var foot = footer(P, creditLine(credits(secs))); FX = null;
     PALX = null;
     var gfs = Object.keys(GF).map(function (k) { return k + ':' + Object.keys(GF[k]).join(','); }).join('|'); GF = null;
-    return '<div class="pv tf-' + f.k + ' tv-' + v.k + ' dn-' + v.dens + '" style="' + vars + '"' + (gfs ? ' data-gf="' + esc(gfs) + '"' : '') + '>' +
+    return '<div id="top" class="pv tf-' + f.k + ' tv-' + v.k + ' dn-' + v.dens + '" style="' + vars + '"' + (gfs ? ' data-gf="' + esc(gfs) + '"' : '') + '>' +
       '<div class="vh vh-d">' + header(P, 'desktop', mv == 'desktop') + '</div><div class="vh vh-t">' + header(P, 'tablet', mv == 'tablet') + '</div><div class="vh vh-p">' + header(P, 'phone', mv == 'phone') + '</div>' +
       '<main>' + secs + '</main>' + foot +
       (P.menu.vp.tablet.type == 'bottom' ? '<div class="vh vh-t">' + bottomBar(P, 'tablet', mv == 'tablet') + '</div>' : '') +
       (P.menu.vp.phone.type == 'bottom' ? '<div class="vh vh-p">' + bottomBar(P, 'phone', mv == 'phone') + '</div>' : '') + '</div>';
   }
 
-  return { DESIGNS: DESIGNS, designsFor: designsFor, fit: fit, siteText: siteText, VARIANT_HINTS: VARIANT_HINTS, RETIRED: RETIRED, page: page, credits: credits, GRADES: GRADES, PRICE_BY_GRADE: PRICE_BY_GRADE, money: money, MIN_GRADE: MIN_GRADE, priceFor: priceFor, priceLabel: priceLabel, OFFERED: OFFERED, pageOf: pageOf, allSections: allSections, imageRef: imageRef, imageRaw: imageRaw, decorate: decorate, SHADOWS: SHADOWS, FRAMES: FRAMES, BSTYLES: BSTYLES, TEMPLATES: TEMPLATES, FAMILIES: FAMILIES, tpl: tpl, compat: compat, SECTION_TYPES: SECTION_TYPES, MENU_TYPES: MENU_TYPES, asset: asset, picked: picked };
+  return { matchSection: matchSection, DESIGNS: DESIGNS, designsFor: designsFor, fit: fit, siteText: siteText, VARIANT_HINTS: VARIANT_HINTS, RETIRED: RETIRED, page: page, credits: credits, GRADES: GRADES, PRICE_BY_GRADE: PRICE_BY_GRADE, money: money, MIN_GRADE: MIN_GRADE, priceFor: priceFor, priceLabel: priceLabel, OFFERED: OFFERED, pageOf: pageOf, allSections: allSections, imageRef: imageRef, imageRaw: imageRaw, decorate: decorate, SHADOWS: SHADOWS, FRAMES: FRAMES, BSTYLES: BSTYLES, TEMPLATES: TEMPLATES, FAMILIES: FAMILIES, tpl: tpl, compat: compat, SECTION_TYPES: SECTION_TYPES, MENU_TYPES: MENU_TYPES, asset: asset, picked: picked };
 })();
 
 export { Render };

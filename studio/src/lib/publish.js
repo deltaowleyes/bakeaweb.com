@@ -5,6 +5,7 @@
      pagename.rezsite.com · pagename.bakedby.me · bakedbya.pro/pagename/ */
 import { createClient } from '@supabase/supabase-js';
 import { Site } from './site.js';
+import { completeSite } from './complete.js';
 import { blank } from '../store.js';
 
 export const sb = createClient('https://gpwxuunutljcauoknhrh.supabase.co', 'sb_publishable_B7a1VEv6RX13n2JhA50tbQ_oR_oKfw9');
@@ -58,9 +59,12 @@ function absolute(html) {
   return base == 'https://bakeaweb.com/' ? html : html.split(base).join('https://bakeaweb.com/');
 }
 
+/** The project as it will be published: a one-page pitch gets a real page for every menu entry (complete.js). */
+export function publishProject(project) { return completeSite(fullProject(project)); }
+
 /** The files of a site, ready to upload: [{ path, content }]. */
 export function siteFiles(project, tpl) {
-  return Site.files(fullProject(project), tpl).map(f => ({ path: f.path, content: absolute(f.content) }));
+  return Site.files(publishProject(project), tpl).map(f => ({ path: f.path, content: absolute(f.content) }));
 }
 
 /** Publish (or republish) a site. Returns the published_sites row. meta: { pitch_id, design, title } */

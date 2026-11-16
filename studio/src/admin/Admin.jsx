@@ -6,7 +6,7 @@
 import { useEffect, useState } from 'react';
 import { S } from '../store.js';
 import { Render } from '../lib/render.js';
-import { sb, HOSTS, HOST_KEYS, siteUrl, nameProblem, suggestName, publishSite, unpublishSite, checkLive, fullProject } from '../lib/publish.js';
+import { sb, HOSTS, HOST_KEYS, siteUrl, nameProblem, suggestName, publishSite, unpublishSite, checkLive, fullProject, publishProject } from '../lib/publish.js';
 
 const STATUS = { drafted: 'Drafted', offered: 'Offered', interested: 'Interested', accepted: 'Accepted', declined: 'Declined' };
 const day = d => d ? new Date(d).toLocaleDateString([], { dateStyle: 'medium' }) : '';
@@ -43,7 +43,7 @@ function PublishPanel({ title, designs, pitchId, sites, onDone, defaultDomain })
   async function go() {
     if (bad || !d) return;
     if (taken && (taken.pitch_id != pitchId || !pitchId) && !confirm(url + ' already shows “' + (taken.title || taken.pagename) + '”. Replace it with this site?')) return;
-    setBusy(true); setMsg({ t: 'Publishing ' + (fullProject(d.project).pages.length) + ' page(s)…' });
+    setBusy(true); setMsg({ t: 'Publishing ' + (publishProject(d.project).pages.length) + ' page(s)…' });
     try {
       const row = await publishSite({ domain, name, project: d.project, tpl: d.tpl, meta: { pitch_id: pitchId, design: d.name, title } });
       setMsg({ ok: true, t: 'Published', url });

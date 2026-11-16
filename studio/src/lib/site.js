@@ -41,6 +41,10 @@ function relink(html, map) {
     const f = byName[text.replace(/&amp;/g, '&').trim().toLowerCase()];
     return f ? '<a' + a + 'href="' + f + '"' + b + '>' + text + '</a>' : all;
   });
+  /* links named like one of the site's pages (render.js marks them "#@name") */
+  html = html.replace(/href="#@([^"]*)"/g, (all, n) => { const f = byName[decodeURIComponent(n)]; return f ? 'href="' + f + '"' : all; });
+  /* the logo goes to the home page (on a one-page site it just scrolls to the top) */
+  if (map.length > 1) html = html.replace(/class="lg" href="#top"/g, 'class="lg" href="index.html"');
   return html.replace(/href="([^"]*)"/g, (all, h) => {
     const raw = h.replace(/&amp;/g, '&');
     if (byUrl[norm(raw)]) return 'href="' + byUrl[norm(raw)] + '"';
