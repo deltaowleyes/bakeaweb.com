@@ -181,7 +181,7 @@ function CallCard({ c, me, open, setOpen, reload }) {
 function App() {
   const [session, setSession] = useState(undefined), [me, setMe] = useState(undefined);
   const [day, setDay] = useState(today()), [calls, setCalls] = useState(null), [totals, setTotals] = useState(null);
-  const [open, setOpen] = useState(null), [hideDone, setHideDone] = useState(false), [err, setErr] = useState('');
+  const [open, setOpen] = useState(null), [hideDone, setHideDone] = useState(false), [err, setErr] = useState(''), [script, setScript] = useState(false);
 
   useEffect(() => {
     sb.auth.getSession().then(({ data }) => setSession(data.session));
@@ -203,7 +203,7 @@ function App() {
   const header = (
     <header className="bg-ink text-white sticky top-0 z-10 px-4 sm:px-6 py-3 flex justify-between items-center gap-3">
       <b className="text-lg">BAKE Callers{me ? ' · ' + me.name : ''}</b>
-      <span className="flex items-center gap-3"><small className="opacity-70 hidden sm:inline">{session.user.email}</small><button className="rounded-lg px-3 py-1.5 font-semibold ring-1 ring-white/50" onClick={out}>Sign out</button></span>
+      <span className="flex items-center gap-2 sm:gap-3">{me && <button className="rounded-lg px-3 py-1.5 font-semibold bg-white text-ink whitespace-nowrap" onClick={() => setScript(true)}>📄 Script</button>}<small className="opacity-70 hidden sm:inline">{session.user.email}</small><button className="rounded-lg px-3 py-1.5 font-semibold ring-1 ring-white/50 whitespace-nowrap" onClick={out}>Sign out</button></span>
     </header>
   );
   if (me === undefined) return header;
@@ -214,6 +214,7 @@ function App() {
   return (
     <>
       {header}
+      {script && <Script c={{ general: true, name: '[business name]' }} me={me} onClose={() => setScript(false)} />}
       <main className="max-w-3xl mx-auto p-4 sm:p-6">
         <Totals t={totals} rate={+me.rate} />
         <div className="flex flex-wrap items-center gap-2 mb-4">
@@ -223,7 +224,7 @@ function App() {
           {day !== today() && <button className="btn2" onClick={() => setDay(today())}>Back to today</button>}
           <label className="ml-auto flex items-center gap-2 text-sm font-semibold"><input type="checkbox" checked={hideDone} onChange={e => setHideDone(e.target.checked)} /> Hide finished calls</label>
         </div>
-        {calls && <p className="text-mute mt-0">{calls.length} calls on your list · {left} still to call. Work from the top down; press <b>Start call</b> before you dial.</p>}
+        {calls && <p className="text-mute mt-0">{calls.length} calls on your list · {left} still to call. Work from the top down; press <b>Start call</b> before you dial. New? Read the <button className="text-acc font-semibold underline" onClick={() => setScript(true)}>call script</button> first.</p>}
         {err && <p className="text-warn">{err}</p>}
         {calls === null ? <p>Loading your calls…</p>
           : !calls.length ? <p className="bg-white border border-line rounded-2xl p-6 text-center">No calls assigned to you for this day.</p>

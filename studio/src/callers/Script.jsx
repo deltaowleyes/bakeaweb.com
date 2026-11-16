@@ -38,7 +38,7 @@ function turnaround() {
 }
 
 export function scriptFor(c, me) {
-  const site = c.website ? c.website.replace(/^https?:\/\//, '').replace(/\/$/, '') : 'your website';
+  const site = c.website ? c.website.replace(/^https?:\/\//, '').replace(/\/$/, '') : c.general ? '[their website]' : 'your website';
   return md.replaceAll('[your name]', me?.name || '[your name]').replaceAll('[business]', c.name || 'your business')
     .replaceAll('[website]', site).replaceAll('[turnaround]', turnaround());
 }
@@ -59,7 +59,7 @@ export default function Script({ c, me, onClose }) {
     <div className="fixed inset-0 z-50 bg-ink/50 flex justify-end" onClick={onClose} role="dialog" aria-modal="true" aria-label="Call script">
       <div className="bg-white w-full max-w-2xl h-full flex flex-col shadow-2xl" onClick={e => e.stopPropagation()}>
         <div className="shrink-0 bg-ink text-white px-4 py-3 flex items-center justify-between gap-3">
-          <div className="min-w-0"><div className="text-xs opacity-70">Call script for</div><b className="block truncate">{c.name}</b></div>
+          <div className="min-w-0"><div className="text-xs opacity-70">{c.general ? 'Read this before your first call' : 'Call script for'}</div><b className="block truncate">{c.general ? 'Call script' : c.name}</b></div>
           <button className="rounded-lg px-4 py-2 font-semibold bg-white text-ink" onClick={onClose}>Close script</button>
         </div>
         <div className="shrink-0 flex gap-2 overflow-x-auto px-4 py-2 border-b border-line bg-paper">
