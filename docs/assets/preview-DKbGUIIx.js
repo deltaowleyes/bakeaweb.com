@@ -8,7 +8,7 @@ import"./react-CAzQRxiY.js";import{t as e}from"./dist-D_8df79H.js";import{S as t
       <div class="dev">${Object.keys(f).map(e=>`<button data-d="${e}" aria-pressed="${e==g}">${e[0].toUpperCase()+e.slice(1)}</button>`).join(``)}</div></div>
     <div class="pages" aria-label="Pages of this website"><span class="pl" id="pgc">Pages</span><div class="tabs" id="pgs"></div></div>
     <div class="stage" id="stage"><div class="frame" id="frame"><div class="sv" id="sv"><div class="pic" id="pic"></div></div><p class="wait" id="wait">Drawing the page…</p></div></div>
-    <p class="hint">Every page of your new website is here: pick one above, or click the menu inside the preview. Scroll inside the preview to see the whole page.${m.length>1?` ★ = the design we think suits you best.`:``}</p>
+    <p class="hint">Every page of your new website is here: pick one above, or click a link inside the preview. Scroll inside the preview to see the whole page.${m.length>1?` ★ = the design we think suits you best.`:``}</p>
     <div class="card price"><h2>What this design costs, compared</h2><div id="cmp"></div>
       <p class="hint">Publishing to a free BAKE address is included. Your own domain is +$50 for a new one or +$100 to connect one you have.</p></div>
     <div class="grid">
