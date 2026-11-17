@@ -189,7 +189,13 @@ setInterval(dealBanner, 30000);
    arrives, an admin clicks "Payment received → publish" in BAKER Admin and the site goes live at name.rezsite.com. */
 const PAY_TO = 'leah@rezsite.com';
 let orders = [], buyState = null, nameCheck = 0;
-async function loadOrders() { const { data } = await sb.rpc('shared_pitch_orders', { t: token }); orders = Array.isArray(data) ? data : []; buyCard(); }
+async function loadOrders() {
+  const { data } = await sb.rpc('shared_pitch_orders', { t: token }), before = JSON.stringify(orders);
+  orders = Array.isArray(data) ? data : [];
+  if (JSON.stringify(orders) != before || !$('#buy').innerHTML) buyCard();   /* redraw only on change, so typing isn't interrupted */
+}
+/* While an order waits for its e-Transfer, check every 20 seconds, so the page shows "live" by itself. */
+setInterval(() => { if (orders.some(o => o.status == 'awaiting_payment' || o.status == 'paid') && !document.hidden) loadOrders(); }, 20000);
 function payBox(o) {
   const live = o.status == 'live', paid = o.status == 'paid';
   return `<div class="paybox" style="border:2px solid ${live ? '#15803d' : '#0f766e'};border-radius:14px;padding:14px 16px;margin-top:12px;background:${live ? '#f0fdf4' : '#f0fdfa'}">
@@ -200,7 +206,7 @@ function payBox(o) {
         <li>In your bank's app or website, choose <b>Interac e-Transfer</b> → <b>Send money</b>.</li>
         <li>Send <b>${Render.money(o.amount)}</b> to <b>${PAY_TO}</b> <button type="button" class="copy" data-copy="${PAY_TO}" style="font-size:13px;padding:2px 10px">Copy</button></li>
         <li>In the message, write <b>${esc(o.pay_code)}</b> <button type="button" class="copy" data-copy="${esc(o.pay_code)}" style="font-size:13px;padding:2px 10px">Copy</button> so we know it's yours.</li>
-        <li>That's it. As soon as it arrives, <b>${esc(o.design)}</b> goes live at <b>${esc(o.address.replace('https://', '').replace(/\/$/, ''))}</b>, usually within a few hours (9 am – 9 pm Eastern), and we'll let you know.</li>
+        <li>That's it. As soon as it arrives, <b>${esc(o.design)}</b> goes live at <b>${esc(o.address.replace('https://', '').replace(/\/$/, ''))}</b> automatically, usually within a few minutes. This page updates by itself.</li>
       </ol>
       <p class="hint" style="margin:8px 0 0">${o.discount_pct ? `Your launch-week price (${o.discount_pct}% off) is locked in with this code. ` : ''}No security question is needed: the money is deposited automatically.</p>`}
   </div>`;

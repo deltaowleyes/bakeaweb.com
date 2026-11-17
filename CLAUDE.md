@@ -8,7 +8,7 @@
 
 ## Publishing (the owner never publishes; Claude does)
 1. Push the current `main` to a backup branch first (for example `backup-YYYY-MM-DD-what`).
-2. `cd studio && npm install && npm run build` (rebuilds `docs/`: `index.html`, `assets/`, `.nojekyll`, `CNAME`, `ROADMAP.json`). Never put other files in `docs/`: everything there is public.
+2. `cd studio && npm install && npm run build` (rebuilds `docs/`: `index.html`, `assets/` (including `assets/site-builder.js`, which the bake-pay payment function loads; see `pay/README.md`), `.nojekyll`, `CNAME`, `ROADMAP.json`). Never put other files in `docs/`: everything there is public.
 3. Test: `cd studio && npm test`, and after the build `BAKE_TEST_BUILT=1 npm test` (the automatic testing robot, see `studio/tests/README.md`). Don't push if anything fails. GitHub also runs the tests on every push (`.github/workflows/test.yml`, results on the repo's Actions tab).
 4. Commit source + build together and push straight to `main`. If publishing fails, give the owner BAKE buttons to retry.
 

@@ -2,11 +2,12 @@
 # bakedbya.pro/pagename/) and sets up their DNS. Runs when host/ changes, or by hand (Actions → BAKE Host → Run workflow).
 # Needs two repository secrets: CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID (see host/README.md).
 # Optional: BAKE_COUNT_KEY switches on visitor stats (host/count.js, host/stats.sql).
+# Also deploys bake-pay, the Email Worker for leah@rezsite.com that publishes sites paid by e-Transfer (pay/README.md).
 name: BAKE Host
 on:
   push:
     branches: [main]
-    paths: ['host/**', '.github/workflows/host.yml']
+    paths: ['host/**', 'pay/worker/**', '.github/workflows/host.yml']
   workflow_dispatch:
 jobs:
   deploy:
@@ -40,3 +41,11 @@ jobs:
         run: |
           if [ -z "$BAKE_COUNT_KEY" ]; then echo "::warning::BAKE_COUNT_KEY is not set, so page views are not counted yet."; exit 0; fi
           printf '%s' "$BAKE_COUNT_KEY" | npx --yes wrangler@4 secret put BAKE_COUNT_KEY
+      - name: Deploy bake-pay (e-Transfer email Worker)
+        if: env.ok == '1'
+        working-directory: pay/worker
+        run: npx --yes wrangler@4 deploy
+      - name: Send leah@rezsite.com to bake-pay
+        if: env.ok == '1'
+        working-directory: pay/worker
+        run: node setup-route.mjs

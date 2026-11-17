@@ -1,0 +1,9 @@
+# bake-pay (Cloudflare Email Worker for leah@rezsite.com). Deployed by .github/workflows/host.yml; see pay/README.md.
+name = "bake-pay"
+main = "worker.js"
+compatibility_date = "2026-11-01"
+workers_dev = false
+
+[vars]
+FORWARD_TO = "ermatinger.leah@gmail.com"
+PAY_URL = "https://gpwxuunutljcauoknhrh.supabase.co/functions/v1/bake-pay"

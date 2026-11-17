@@ -78,7 +78,7 @@ EXPRESS and RezSite are no longer Studio versions (changed 2026-11-08). They bec
 | Premium templates, sections and extensions | Set by the Baker within the range of the item's **price class** (below) |
 | **Hosting** | **Free** on `pagename.rezsite.com`, `pagename.bakedby.me` **and on the client's own domain**, as long as the *Baked with BAKE* badge shows (decided 2026-11-16) |
 | Removing the *Baked with BAKE* badge | A monthly fee by traffic tier, from **$5 a month** (decided 2026-11-16; replaces $5 one time) |
-| **Paying for a pitch** | By **Interac e-Transfer** to leah@rezsite.com with a pay code from the prospect's preview link; the site goes live at `pagename.rezsite.com` when the payment arrives (BAKER Admin → e-Transfer orders → *Payment received → publish*; decided 2026-11-16) |
+| **Paying for a pitch** | By **Interac e-Transfer** to leah@rezsite.com with a pay code from the prospect's preview link; the site goes live at `pagename.rezsite.com` **automatically** when Interac's deposit email arrives (bake-pay, `pay/README.md`); anything it can't match waits in BAKER Admin → e-Transfer orders (decided 2026-11-16) |
 | **Code download** | **$25 one time per site**; after that the site's code can be downloaded **any number of times**, so the Studio can be used as an editor |
 | Code download of an **imported site** (§9) | **Free while it uses no premium items.** Once a premium template, section or add-on is added, the $25 applies like any other site (decided 2026-11-14) |
 | AI images | **10 free per login** once a card is on file; after that each new image is a cart item |

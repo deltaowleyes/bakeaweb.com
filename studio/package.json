@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/clean.mjs && vite build && node scripts/place.mjs",
+    "build": "node scripts/clean.mjs && vite build && node ../pay/bundle.mjs && node scripts/place.mjs",
     "preview": "vite preview",
     "test": "playwright test -c tests",
     "test:ui": "playwright test -c tests --ui",

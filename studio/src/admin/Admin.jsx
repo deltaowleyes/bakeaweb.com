@@ -109,8 +109,12 @@ function LiveBadge({ row }) {
 /* e-Transfer orders placed from prospect preview links (pitch_orders). When the e-Transfer with the pay code
    arrives in leah@rezsite.com, click "Payment received → publish": the design goes live at name.rezsite.com. */
 function Orders({ pitches, sites, onPublished }) {
-  const [rows, setRows] = useState(null), [busy, setBusy] = useState(null), [msg, setMsg] = useState('');
-  async function load() { const { data, error } = await sb.from('pitch_orders').select('*').order('created_at', { ascending: false }).limit(200); if (error) setMsg(error.message); setRows(data || []); }
+  const [rows, setRows] = useState(null), [busy, setBusy] = useState(null), [msg, setMsg] = useState(''), [pays, setPays] = useState([]);
+  async function load() {
+    const [o, p] = await Promise.all([sb.from('pitch_orders').select('*').order('created_at', { ascending: false }).limit(200),
+      sb.from('bake_payments').select('*').order('received_at', { ascending: false }).limit(50)]);
+    if (o.error) setMsg(o.error.message); setRows(o.data || []); setPays(p.data || []);
+  }
   useEffect(() => { load(); }, []);
   const money = n => '$' + Number(n || 0).toLocaleString('en-US');
   async function paid(o) {
@@ -121,9 +125,9 @@ function Orders({ pitches, sites, onPublished }) {
     if (!confirm((o.amount ? 'Did the e-Transfer of ' + money(o.amount) + ' with ' + o.pay_code + ' arrive?\n\n' : '') + 'This publishes ' + o.design + ' at ' + url + (taken ? '\n\nWARNING: that address already shows “' + (taken.title || taken.pagename) + '” and will be replaced.' : ''))) return;
     setBusy(o.id); setMsg('Publishing ' + url + '…');
     try {
-      if (o.status == 'awaiting_payment') await sb.from('pitch_orders').update({ status: 'paid', paid_at: new Date().toISOString() }).eq('id', o.id);
+      if (o.status == 'awaiting_payment') await sb.from('pitch_orders').update({ status: 'paid', paid_at: new Date().toISOString(), paid_by: 'admin' }).eq('id', o.id);
       const row = await publishSite({ domain: 'rezsite.com', name: o.pagename, project: pitchProject(d, p.base_project), tpl: d.tpl, meta: { pitch_id: p.id, design: d.name, title: p.business_name } });
-      await sb.from('pitch_orders').update({ status: 'live', live_at: new Date().toISOString(), published_site_id: row && row.id }).eq('id', o.id);
+      await sb.from('pitch_orders').update({ status: 'live', live_at: new Date().toISOString(), published_site_id: row && row.id, publish_error: null }).eq('id', o.id);
       await sb.from('pitch_orders').update({ status: 'cancelled' }).eq('pitch_id', o.pitch_id).eq('status', 'awaiting_payment').neq('id', o.id);
       await sb.from('redesign_pitches').update({ status: 'accepted' }).eq('id', p.id);
       onPublished(row); setMsg('Live: ' + url + (o.own_domain ? ' · still to do: ' + (o.domain_option == 'connect' ? 'connect ' : 'register ') + o.own_domain : '') + '. Let ' + (o.name || 'them') + ' know (' + o.contact + ').');
@@ -135,7 +139,7 @@ function Orders({ pitches, sites, onPublished }) {
   const open = (rows || []).filter(o => o.status != 'cancelled');
   return <section className="card">
     <h3 className="m-0">e-Transfer orders <span className="mu">({open.filter(o => o.status == 'awaiting_payment').length} waiting for payment)</span> <button className="small" onClick={load}>Refresh</button></h3>
-    <p className="mu small">Prospects get a pay code on their preview link and send the e-Transfer to leah@rezsite.com with the code in the message. When it arrives, click <b>Payment received → publish</b>.</p>
+    <p className="mu small">Prospects get a pay code on their preview link and send the e-Transfer to leah@rezsite.com with the code in the message. <b>bake-pay publishes the site automatically</b> when Interac's deposit email arrives with the right code and amount. Anything it can't do on its own shows below; then click <b>Payment received → publish</b> yourself.</p>
     {msg && <p className="okmsg" role="status">{msg}</p>}
     {rows == null ? <p className="mu">Loading…</p> : !open.length ? <p className="mu">No orders yet.</p> :
       <div className="overflow-x-auto"><table className="w-full border-collapse text-sm">
@@ -148,13 +152,25 @@ function Orders({ pitches, sites, onPublished }) {
           <td className="border-b border-line p-2 whitespace-nowrap"><b>{money(o.amount)}</b><div className="mu small">{o.discount_pct ? <><s>{money(o.regular_price)}</s> −{o.discount_pct}%</> : money(o.design_price)}{o.domain_fee ? ' + ' + money(o.domain_fee) : ''}</div></td>
           <td className="border-b border-line p-2">{o.name}<div className="small">{o.contact}</div></td>
           <td className="border-b border-line p-2 whitespace-nowrap">{new Date(o.created_at).toLocaleString('en-CA', { timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}</td>
-          <td className="border-b border-line p-2"><span className="st">{{ awaiting_payment: 'Waiting for e-Transfer', paid: 'Paid, not live yet', live: 'Live' }[o.status]}</span></td>
+          <td className="border-b border-line p-2"><span className="st">{{ awaiting_payment: 'Waiting for e-Transfer', paid: 'Paid, not live yet', live: 'Live' }[o.status]}</span>
+            {o.paid_by && <div className="mu small">{o.paid_by == 'auto' ? 'Paid automatically' : 'Marked paid by hand'}{o.paid_amount ? ' · ' + money(o.paid_amount) : ''}</div>}
+            {o.publish_error && <div className="errmsg small">{o.publish_error}</div>}</td>
           <td className="border-b border-line p-2 whitespace-nowrap">{o.status != 'live' && <><button className="pri" disabled={busy == o.id} onClick={() => paid(o)}>{busy == o.id ? 'Publishing…' : o.status == 'paid' ? 'Publish again' : 'Payment received → publish'}</button>{' '}<button disabled={busy == o.id} onClick={() => cancel(o)}>Cancel</button></>}
             {o.status == 'live' && <a href={siteUrl('rezsite.com', o.pagename)} target="_blank" rel="noopener">Open ↗</a>}</td>
         </tr>)}</tbody>
       </table></div>}
+    {(p => p.length > 0 && <details className="mt-3" open={p.some(x => Date.now() - new Date(x.received_at) < 864e5)}>
+      <summary className="cursor-pointer font-bold">Interac emails that need a look ({p.length})</summary>
+      <ul className="m-0 mt-2 list-none p-0 text-sm">{p.map(x => <li key={x.id} className="border-t border-line py-2">
+        <b>{x.sender_name || x.from_address || 'Unknown sender'}</b>{x.amount != null && <> · {money(x.amount)}</>}{x.pay_code && <> · <span className="font-mono">{x.pay_code}</span></>}
+        <span className="mu"> · {new Date(x.received_at).toLocaleString('en-CA', { timeZone: 'America/New_York', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}</span>
+        <div>{PAY_RESULT[x.result] || x.result}: <span className="mu">{x.detail}</span></div>
+        <button className="small" onClick={async () => { await sb.from('bake_payments').update({ result: 'handled' }).eq('id', x.id); load(); }}>Mark handled</button>
+      </li>)}</ul></details>)(pays.filter(x => !['published', 'already_live', 'handled'].includes(x.result) && !(x.result == 'no_code' && !x.amount)))}
   </section>;
 }
+const PAY_RESULT = { not_interac: '⚠️ Not signed by Interac (ignored)', no_code: 'No pay code in the message', no_order: 'Pay code not found', underpaid: 'Less than the order amount',
+  not_deposited: 'Needs depositing first', cancelled_order: 'Order was cancelled or replaced', cancelled_transfer: 'Transfer cancelled', paid_publish_failed: 'Paid, but publishing failed' };
 
 export default function Admin({ onClose }) {
   const [session, setSession] = useState(undefined), [admin, setAdmin] = useState(null);
