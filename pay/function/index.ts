@@ -71,7 +71,7 @@ async function selftest() {
   const resolver = async (n: string, t: string) => { if (n == 'selftest._domainkey.payments.interac.ca' && t == 'TXT') return [['v=DKIM1; k=rsa; p=' + pub]]; return doh(n, t); };
   const good = await dkimVerify(s.signatures + msg, { resolver }), bad = await dkimVerify(s.signatures + msg.replace('$300.00', '$900.00'), { resolver });
   const parsed = await PostalMime.parse(s.signatures + msg);
-  const real = await doh('google._domainkey.gmail.com', 'TXT').then(() => 'ok').catch(e => 'fail: ' + e.message);
+  const real = await doh('20230601._domainkey.gmail.com', 'TXT').then(() => 'ok').catch(e => 'fail: ' + e.message);
   let build = 'not loaded';
   try {   /* build (not publish) the newest pitch's first design, to prove the builder works here */
     const b = await getBuilder(), sb = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, { auth: { persistSession: false } });
