@@ -56,7 +56,7 @@ export function fullProject(p) {
 /* Sample photos and other studio files are linked with the studio's own address; published pages
    must always point at https://bakeaweb.com/, even when publishing from a test copy of the studio. */
 function absolute(html) {
-  const base = typeof document != 'undefined' ? new URL('./', document.baseURI).href : 'https://bakeaweb.com/';
+  const base = typeof document != 'undefined' ? new URL('/', document.baseURI).href : 'https://bakeaweb.com/';
   return base == 'https://bakeaweb.com/' ? html : html.split(base).join('https://bakeaweb.com/');
 }
 

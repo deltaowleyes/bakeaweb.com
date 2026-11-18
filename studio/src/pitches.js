@@ -175,7 +175,7 @@ function toStudio(r, d) {
   addPoint('Before opening a pitch');
   const p = project(pitchProject(d, r.base_project)); p.tpl.pick = d.tpl; p.step = 5;
   try { localStorage.setItem(KEY, JSON.stringify(p)); } catch (e) { alert('Not enough browser storage to open it.'); return; }
-  location.href = './?v=pro#step-5';
+  location.href = './studio/?v=pro#step-5';
 }
 
 start();

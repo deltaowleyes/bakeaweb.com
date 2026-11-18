@@ -22,9 +22,9 @@ export { expect };
 
 /** Open the studio with nothing saved, at a given version and step. */
 export async function openStudio(page, { v = 'pro', step = 1 } = {}) {
-  await page.goto(`./?v=${v}#step-${step}`);
+  await page.goto(`./studio/?v=${v}#step-${step}`);
   await page.evaluate(() => localStorage.clear());
-  await page.goto(`./?v=${v}#step-${step}`);
+  await page.goto(`./studio/?v=${v}#step-${step}`);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('BAKE Studio');
 }
 

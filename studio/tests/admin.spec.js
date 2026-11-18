@@ -2,9 +2,9 @@
 import { test, expect, openStudio } from './helpers.js';
 
 test('BAKER shows an Admin button that opens the admin sign-in; PRO does not', async ({ page }) => {
-  await page.goto('./?v=pro');
+  await page.goto('./studio/?v=pro');
   await expect(page.getByRole('button', { name: 'Admin', exact: true })).toHaveCount(0);
-  await page.goto('./?v=baker');
+  await page.goto('./studio/?v=baker');
   await page.getByRole('button', { name: 'Admin', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Sign in to Admin' })).toBeVisible();
   await page.getByRole('button', { name: '← Back to the studio' }).click();

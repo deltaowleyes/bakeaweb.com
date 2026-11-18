@@ -10,7 +10,7 @@ test('old saved projects still open (v2, and IndigiHub → PRO)', async ({ page 
     footer: { motto: '', text: '' }, menu: { items: [], cta: { label: 'Contact', href: '#' }, vp: { desktop: { type: 'bar', logo: 'left' }, tablet: { type: 'hamburger', logo: 'left' }, phone: { type: 'hamburger', logo: 'left' } } },
     tpl: { pick: null, view: null, fav: {} }, notes: [], req: { name: '', email: '' }, ai: { endpoint: '' }, ui: { vp: 'desktop' }
   })));
-  await page.goto('./');
+  await page.goto('./studio/');
   const S = await state(page);
   expect(S.v).toBe(3);
   expect(S.edition).toBe('pro');
@@ -21,7 +21,7 @@ for (const [old, want] of [['express', 'pro'], ['rezsite', 'pro'], ['pro', 'pro'
   test(`a saved ${old} project opens in ${want.toUpperCase()}`, async ({ page }) => {
     await openStudio(page);
     await page.evaluate(o => { const S = JSON.parse(JSON.stringify(window.BAKE.state())); S.edition = o; localStorage.setItem('bake-studio-v2', JSON.stringify(S)); }, old);
-    await page.goto('./');
+    await page.goto('./studio/');
     expect((await state(page)).edition).toBe(want);
   });
 }

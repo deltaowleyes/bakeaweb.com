@@ -14,9 +14,9 @@ await server.listen();
 const url = server.resolvedUrls.local[0];
 const browser = await chromium.launch();
 const page = await browser.newPage();
-await page.goto(url + '?v=pro#step-1');
+await page.goto(url + 'studio/?v=pro#step-1');
 await page.evaluate(() => localStorage.clear());
-await page.goto(url + '?v=pro#step-1');
+await page.goto(url + 'studio/?v=pro#step-1');
 await page.waitForFunction(() => window.BAKE);
 
 const ids = await page.evaluate(async ({ kind, pal, noPhotos }) => {

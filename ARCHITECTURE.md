@@ -1,6 +1,6 @@
 # BAKE Studio: architecture
 
-This describes BAKE Studio as it is now (November 2026; two Studios since 2026-11-08, project format **v3**). It is a static web app with no server, built with **React + Vite + Tailwind CSS** and published by GitHub Pages from `deltaowleyes/bakeaweb.com` (branch `main`, folder `/docs`; moved from `deltaowleyes/bake-studio` on 2026-11-07). The source lives in `studio/`; `npm run build` writes the built site into `docs/`, the **only** folder Pages serves, so plans, docs and source code are not on the website (since 2026-11-08). Live: **https://bakeaweb.com/**, set by `docs/CNAME` (the old https://deltaowleyes.ca/bake-studio/ address and the old `deltaowleyes/bake-studio` repo forward there).
+This describes BAKE Studio as it is now (November 2026; two Studios since 2026-11-08, project format **v3**). It is a static web app with no server, built with **React + Vite + Tailwind CSS** and published by GitHub Pages from `deltaowleyes/bakeaweb.com` (branch `main`, folder `/docs`; moved from `deltaowleyes/bake-studio` on 2026-11-07). The source lives in `studio/`; `npm run build` writes the built site into `docs/`, the **only** folder Pages serves, so plans, docs and source code are not on the website (since 2026-11-08). Live: **https://bakeaweb.com/** is BAKE's home page and the studio is at **https://bakeaweb.com/studio/** (since 2026-11-17), set by `docs/CNAME` (the old https://deltaowleyes.ca/bake-studio/ address and the old `deltaowleyes/bake-studio` repo forward there).
 
 ## 1. What it does
 
@@ -26,13 +26,14 @@ A five-step wizard that turns an existing website (or a blank start) into previe
 ```
 bakeaweb.com/   (the repository)
 ├── docs/                     BUILT studio, the only folder Pages publishes (made by `npm run build`; don't edit by hand)
-│   └── index.html, assets/, .nojekyll, CNAME (bakeaweb.com), ROADMAP.json (for the BAKE PRO panel)
+│   └── index.html (home page), studio/index.html (the studio), home/og.jpg, assets/, .nojekyll, CNAME (bakeaweb.com), ROADMAP.json (for the BAKE PRO panel)
 ├── ROADMAP.json, ROADMAP.md, VISION.md, plans/   plans and the roadmap (in the repo, not on the website)
 ├── README.md, ARCHITECTURE.md, CLAUDE.md
 ├── bake-notes/               (only while tasks are waiting to merge) notes from parallel BAKE tasks, folded into these docs at Merge and publish
 ├── .github/workflows/test.yml  runs the testing robot on GitHub on every push (results: the repo's Actions tab)
 └── studio/                   SOURCE (Vite project)
-    ├── index.html            page shell with <div id="root">
+    ├── index.html            BAKE's home page (plain HTML/CSS, the "Kitchen Table" design, 2026-11-17); fonts and images in home/, share picture in public/home/og.jpg. Its script forwards old studio links (?v=…, #step-…, #admin, sign-in tokens) to studio/. Links to studio/ carry vite-ignore so Vite leaves them alone.
+    ├── studio/index.html     the studio's page shell with <div id="root"> (served at bakeaweb.com/studio/; assets stay in /assets/, photos in /photos/)
     ├── package.json          scripts: dev, build (clean → vite build → place), test, test:ui, test:install
     ├── tests/                the automatic testing robot (Playwright, `npm test`); see tests/README.md
     ├── vite.config.js        React + Tailwind plugins; base './'

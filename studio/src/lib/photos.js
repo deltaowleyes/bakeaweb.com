@@ -10,5 +10,5 @@ export const STARTER_PHOTOS = { food: 'cafe', services: 'trades', shop: 'crafts'
 export function samplePhotos(kind) {
   const k = (list.kinds || {})[kind]; if (!k) return [];
   const base = typeof document != 'undefined' ? document.baseURI : 'https://bakeaweb.com/';
-  return k.photos.map(p => Object.assign({}, p, { src: new URL(p.file, base).href, label: 'Sample photo: ' + p.topic + ' (' + PHOTO_SOURCE.name + ', by ' + p.by + ')' }));
+  return k.photos.map(p => Object.assign({}, p, { src: new URL(p.file, new URL('/', base)).href, label: 'Sample photo: ' + p.topic + ' (' + PHOTO_SOURCE.name + ', by ' + p.by + ')' }));
 }
