@@ -1,7 +1,8 @@
 /* BAKE Pitches (pitches.html, was the Pitch Book): PRIVATE before/after redesigns for real businesses.
    The page code is public, but the data is not: it lives in the Supabase table redesign_pitches,
    which only RezSite admins (rezsite_admins) can read or change (row-level security).
-   Their photos are links to their own website, never copies.
+   Their photos are copied into our Storage bucket pitch-photos when the row is saved (database trigger +
+   Edge Function pitch-photo-copy, see ARCHITECTURE.md); each photo keeps its original address in `from`.
    Each pitch has a private prospect link (preview.html?p=<share_token>) to send to the business:
    see src/preview.js and the Supabase functions get_shared_pitch / reply_shared_pitch. */
 import { createClient } from '@supabase/supabase-js';

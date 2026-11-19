@@ -7,6 +7,8 @@
             pages:[{ name, url?, sections:[…same as above…] }] }   ← the business's OTHER pages (About, Services, Contact…),
               read from their current site during the pitch run. Name each page like its menu entry, so the menu
               opens it. Menu entries without a page get one made from Home at publish (lib/complete.js).
+   Photos may be the business's own web addresses: once Claude inserts the row, the database copies them into the
+   Storage bucket pitch-photos and repoints the pitch (trigger redesign_pitches_copy_photos), so previews never hotlink.
    Writes outDir/project.json (studio project without view state) and outDir/<tpl>-d.png / -p.png. */
 import { chromium } from '@playwright/test';
 import { createServer } from 'vite';
