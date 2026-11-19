@@ -29,6 +29,8 @@ const shotUrl = (url, h) => 'https://s.wordpress.com/mshots/v1/' + encodeURIComp
 let me = null, sites = [], ratings = [], view = 'rate', cur = null, listSort = 'order';
 /* Sites you've moved past (saved or skipped), newest last, so Back can return to fix a mistake. */
 let hist = [];
+/* Site id opened from a call (callers.html): after saving it, stay on it and say the window can be closed. */
+let fromCall = null;
 const go = next => { if (cur && (!next || next.id != cur.id)) hist.push(cur.id); cur = next; };
 const mine = id => ratings.find(r => r.site_id == id && r.rater == me.id);
 const theirs = id => ratings.filter(r => r.site_id == id && r.rater != me.id);
@@ -55,6 +57,14 @@ async function start() {
   view = h == 'list' ? 'list' : 'rate';
   let d = null; try { d = JSON.parse(localStorage.getItem(DRAFT)); } catch {}
   cur = (d && sites.find(x => x.id == d.site_id && !mine(x.id))) || nextUnrated();
+  // Opened from a call on callers.html (taste.html?biz=<business id>): add that business's site to the list if needed and open it.
+  const biz = +new URLSearchParams(location.search).get('biz');
+  if (biz) {
+    const { data: sid, error } = await sb.rpc('taste_site_for_business', { biz });
+    if (error) { app.innerHTML = '<p class="empty">Could not open this business for rating: ' + esc(error.message) + '</p>'; return; }
+    if (!sites.find(x => x.id == sid)) { const { data: row } = await sb.from('taste_sites').select('*').eq('id', sid).single(); if (row) sites.push(row); }
+    cur = sites.find(x => x.id == sid) || cur; fromCall = cur && cur.id == sid ? sid : null; view = 'rate';
+  }
   draw();
 }
 
@@ -109,7 +119,7 @@ function drawRate() {
   const val = r ? r.score : 60, tags = new Set(r ? r.tags : []);
   body.innerHTML = `<div class="rate">
     <div class="shot">
-      <div class="bar"><div><h2>${esc(s.name)}</h2><span class="note">${pitch ? 'Our pitch design (★ design, rate the design not the price box)' : esc(s.city || '')}</span></div>
+      <div class="bar"><div><h2>${esc(s.name)}</h2>${fromCall == s.id ? '<span class="note" style="display:block;color:#7c3aed;font-weight:700">📞 From your call: rate while you talk</span>' : ''}<span class="note">${pitch ? 'Our pitch design (★ design, rate the design not the price box)' : esc(s.city || '')}</span></div>
         <div class="row">${pitch ? '' : '<button class="btn2" id="whole">Whole page</button>'}<a href="${esc(s.website)}" target="_blank" rel="noopener">Open ${pitch ? 'the preview' : 'their site'} ↗</a></div></div>
       <div class="view" id="view">${pitch ? '<iframe title="Pitch preview" src="' + esc(s.website) + '"></iframe>' : '<div class="wait">Getting a picture of their site… (the first time can take up to a minute)</div>'}</div>
     </div>
@@ -146,6 +156,7 @@ function drawRate() {
     }
     setDraft(null);
     ratings = ratings.filter(x => !(x.site_id == s.id && x.rater == me.id)).concat(data);
+    if (fromCall == s.id) { draw(); $('#fm').innerHTML = '<b style="color:#047857">✓ Saved ' + esc(s.name) + ' (' + data.score + '). You can close this window and get back to the call.</b>'; return; }
     go(nextUnrated(s.id));
     draw();
     if (cur) toastPrev(s);

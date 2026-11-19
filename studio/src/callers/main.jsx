@@ -173,6 +173,7 @@ function CallCard({ c, me, open, setOpen, reload }) {
         {c.phone && <a className="font-bold text-acc text-lg" href={'tel:' + c.phone.replace(/[^\d+]/g, '')}>📞 {c.phone}</a>}
         {c.website && <a className="text-acc underline break-all" href={siteUrl(c.website)} target="_blank" rel="noopener">{c.website.replace(/^https?:\/\//, '')}</a>}
         {c.website && <a className="btn2 !py-1 !px-3 text-sm no-underline" href={siteUrl(c.website)} target="_blank" rel="noopener" onClick={e => openSite(c.website, e)}>🌐 Open website in new window ↗</a>}
+        {c.website && open && <a className="btn !py-1 !px-3 text-sm no-underline" href={'taste.html?biz=' + c.business_id} target="bake-taste" rel="noopener" title="Rate this business's website 1–99 on BAKE Taste while you're on the call (BAKE admins)">⭐ Rate their site's taste ↗</a>}
       </div>
       {big(c) && <div className="mt-3 bg-violet-50 border border-violet-300 rounded-xl p-3 text-sm"><b>Bigger firm: don't quote $50–$250.</b> If they ask about price, say: <i>"For a bigger site, Chris quotes it after you've seen the designs, and the half-price offer still applies."</i></div>}
       <div className="mt-3 bg-paper rounded-xl p-3 text-sm whitespace-pre-line"><b>Tips: </b>{tipsFor(c)}</div>
