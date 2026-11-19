@@ -25,7 +25,8 @@ async function copy(text, btn) {
   const o = btn.textContent; btn.textContent = 'Copied ✓'; setTimeout(() => btn.textContent = o, 1600);
 }
 const opened = r => r.share_views ? 'Opened ' + r.share_views + '× · last ' + when(r.share_last_view) : 'Not opened yet';
-let rows = [], filt = { status: '', q: '' };
+let rows = [], reqs = [], filt = { status: '', q: '' };
+const REQ = { new: 'New', working: 'Working on it', sent: 'Designs sent', closed: 'Closed' };
 
 /** A full studio project from what is stored (missing keys come from blank()). */
 function project(p) {
@@ -43,7 +44,8 @@ async function start() {
   const r = await sb.from('redesign_pitches').select('*').order('created_at', { ascending: false });
   if (r.error) { app.innerHTML = '<p class="empty">Could not load pitches: ' + esc(r.error.message) + '</p>'; return; }
   rows = r.data || [];
-  if (!rows.length) { app.innerHTML = '<p class="empty">No pitches yet, or this login is not a RezSite admin.</p>'; return; }
+  await loadRequests();
+  if (!rows.length && !reqs.length) { app.innerHTML = '<p class="empty">No pitches yet, or this login is not a RezSite admin.</p>'; return; }
   draw();
 }
 
@@ -71,7 +73,12 @@ function draw() {
   const list = rows.filter(r => (!filt.status || r.status == filt.status) && (!filt.q || (r.business_name + ' ' + (r.website || '')).toLowerCase().includes(filt.q)));
   app.innerHTML = `<div class="filters"><b>${rows.length} pitch${rows.length == 1 ? '' : 'es'}</b>
     <select id="fs"><option value="">All statuses</option>${Object.entries(STATUS).map(([k, v]) => `<option value="${k}"${filt.status == k ? ' selected' : ''}>${v}</option>`).join('')}</select>
-    <input id="fq" placeholder="Search name or site" value="${esc(filt.q)}"></div>` + summary(list) + list.map(card).join('');
+    <input id="fq" placeholder="Search name or site" value="${esc(filt.q)}"></div>` + requestsHtml() + summary(list) + list.map(card).join('');
+  app.querySelectorAll('select.rq').forEach(sel => sel.onchange = async () => {
+    const box = sel.closest('[data-r]'), x = reqs.find(r => r.id == box.dataset.r);
+    const { error } = await sb.from('pitch_requests').update({ status: sel.value }).eq('id', x.id);
+    box.querySelector('.rqs').textContent = error ? 'Not saved: ' + error.message : 'Saved'; if (!error) x.status = sel.value;
+  });
   app.querySelectorAll('[data-copy]').forEach(b => b.onclick = () => copy(b.dataset.copy, b));
   $('#fs').onchange = e => { filt.status = e.target.value; draw(); };
   $('#fq').oninput = e => { filt.q = e.target.value.toLowerCase(); clearTimeout(draw.t); draw.t = setTimeout(() => { draw(); const q = $('#fq'); q.focus(); q.setSelectionRange(q.value.length, q.value.length); }, 300); };
@@ -88,6 +95,38 @@ function draw() {
     const { error } = await sb.from('redesign_pitches').update(upd).eq('id', r.id);
     box.querySelector('.saved').textContent = error ? 'Not saved: ' + error.message : 'Saved'; if (!error) Object.assign(r, upd);
   });
+}
+
+/* Pitch requests: businesses that pressed "Yes, send me 3 free designs" on rezsite.com/update.html
+   (table pitch_requests, filled by owner_request_pitch, which also emails chris@rezsite.com).
+   Their private photos (bucket business-photos, table business_photos) open through short-lived signed links. */
+async function loadRequests() {
+  const q = await sb.from('pitch_requests').select('*').order('created_at', { ascending: false }).limit(200);
+  reqs = q.data || [];
+  if (!reqs.length) return;
+  const ids = [...new Set(reqs.map(x => x.business_id))];
+  const [ph, bz] = await Promise.all([
+    sb.from('business_photos').select('business_id, path, file_name').in('business_id', ids).order('created_at'),
+    sb.from('rezsite_businesses').select('id, phone, email, website, city, province, logo_url').in('id', ids)]);
+  const photos = ph.data || [], paths = photos.map(x => x.path);
+  const signed = paths.length ? (await sb.storage.from('business-photos').createSignedUrls(paths, 3600)).data || [] : [];
+  const url = Object.fromEntries(signed.map(x => [x.path, x.signedUrl]));
+  reqs.forEach(x => {
+    x.biz = (bz.data || []).find(b => b.id == x.business_id) || {};
+    x.photos = photos.filter(f => f.business_id == x.business_id).map(f => ({ name: f.file_name, url: url[f.path] }));
+  });
+}
+function requestsHtml() {
+  if (!reqs.length) return '';
+  const open = reqs.filter(x => x.status != 'closed' && x.status != 'sent').length;
+  return `<section class="pitch" id="requests"><div class="ph"><div><h2>🎨 Pitch requests <span class="tag${open ? ' hot' : ''}">${open} open</span></h2>
+    <div class="note">From businesses that pressed "Yes, send me 3 free designs" on their private update page. Promise: 3 designs in 1–2 business days.</div></div></div>
+    ${reqs.map(x => `<div class="reply" data-r="${x.id}"><b>${esc(x.business_name)}</b> · ${when(x.created_at)}${x.emailed ? '' : ' · <span style="color:#b3261e">email alert not sent</span>'}<br>
+      ${esc(x.contact_name || 'No name')} · ${esc(x.contact || '')}${x.biz.phone ? ' · listing phone ' + esc(x.biz.phone) : ''}${x.biz.website ? ' · <a href="' + esc(/^https?:/.test(x.biz.website) ? x.biz.website : 'https://' + x.biz.website) + '" target="_blank" rel="noopener">' + esc(x.biz.website) + '</a>' : ''}
+      ${x.message ? '<br>“' + esc(x.message) + '”' : ''}
+      ${x.biz.logo_url ? '<br>Logo: <a href="' + esc(x.biz.logo_url) + '" target="_blank" rel="noopener"><img src="' + esc(x.biz.logo_url) + '" alt="" style="height:28px;vertical-align:middle;background:#fff;border-radius:4px"></a>' : ''}
+      ${x.photos.length ? '<br>' + x.photos.length + ' private photo' + (x.photos.length == 1 ? '' : 's') + ': ' + x.photos.map((f, i) => '<a href="' + esc(f.url) + '" target="_blank" rel="noopener">' + esc(f.name || 'photo ' + (i + 1)) + '</a>').join(', ') : '<br><span class="note">No photos sent yet.</span>'}
+      <div style="margin-top:6px"><select class="rq">${Object.entries(REQ).map(([k, v]) => `<option value="${k}"${x.status == k ? ' selected' : ''}>${v}</option>`).join('')}</select> <span class="rqs note"></span></div></div>`).join('')}</section>`;
 }
 
 /* All pitches at a glance, each with the link to send to that business. */

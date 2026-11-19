@@ -40,11 +40,13 @@ const isUrl = v => typeof v === 'string' && /^https?:\/\//.test(v);
 export default function Listing({ sb, c, onVerified }) {
   const [b, setB] = useState(null), [f, setF] = useState({}), [err, setErr] = useState(''), [msg, setMsg] = useState('');
   const [busy, setBusy] = useState(false), [note, setNote] = useState(''), [more, setMore] = useState(false);
+  const [to, setTo] = useState(''), [sending, setSending] = useState(false), [sent, setSent] = useState(''), [sendErr, setSendErr] = useState('');
 
   const load = async () => {
     const { data, error } = await sb.rpc('caller_business', { p_id: c.business_id });
     if (error) return setErr(error.message);
     setB(data); setF(Object.fromEntries(FIELDS.map(([k]) => [k, data[k] ?? ''])));
+    setTo(t => t || c.contact_email || data.email || '');
   };
   useEffect(() => { load(); }, [c.business_id]);   // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -59,6 +61,13 @@ export default function Listing({ sb, c, onVerified }) {
     setMsg(verify ? 'Verified and saved. Give them the logo code below.' : 'Saved.');
     await load(); if (verify) onVerified?.(data);
   };
+  const sendCode = async () => {
+    setSending(true); setSendErr(''); setSent('');
+    const { data, error } = await sb.rpc('caller_send_code', { p_id: c.business_id, p_email: to.trim(), p_contact: f.contact_name || c.contact_person || null });
+    setSending(false);
+    if (error) return setSendErr(error.message);
+    setSent(`Sent to ${data.to}. Code ${data.code}.`); await load();
+  };
   const L = 'grid gap-1 text-sm font-semibold';
   const others = Object.entries(b).filter(([k, v]) => !SKIP.has(k) && v !== null && v !== '');
   const facts = INFO.filter(([k]) => b[k] !== null && b[k] !== undefined && b[k] !== '');
@@ -72,13 +81,24 @@ export default function Listing({ sb, c, onVerified }) {
           : <span className="text-sm font-bold bg-slate-200 text-slate-800 rounded-full px-3 py-1">Not verified yet</span>}
       </div>
 
-      {b.verified_at && b.logo_code && (
+      {b.logo_code && (
         <div className="mt-3 bg-amber-50 border-2 border-amber-300 rounded-xl p-3 text-sm">
-          <div className="flex flex-wrap items-center gap-3"><b>Free logo code:</b><span className="font-mono text-2xl font-extrabold tracking-[.2em] bg-white rounded-lg px-3 py-1 border border-amber-300">{b.logo_code}</span>
+          <div className="flex flex-wrap items-center gap-3"><b>Their private code:</b><span className="font-mono text-2xl font-extrabold tracking-[.2em] bg-white rounded-lg px-3 py-1 border border-amber-300">{b.logo_code}</span>
             {b.logo_url ? <span className="flex items-center gap-2">Logo added <img src={b.logo_url} alt="" className="h-8 max-w-24 object-contain bg-white rounded border" /></span> : <span className="text-mute">no logo yet</span>}</div>
           <p className="mb-0 mt-2"><i>"You're now verified on RezSite. Go to <b>rezsite.com/verified</b>, find your business, press <b>Add your logo</b> and type the code {b.logo_code.split('').join(' ')}. It's free."</i> You can also email them: <a className="text-acc underline" href={`https://rezsite.com/verified.html?id=${b.id}`} target="_blank" rel="noopener">their listing link</a>.</p>
         </div>
       )}
+
+      <div className="mt-3 bg-sky-50 border-2 border-sky-300 rounded-xl p-3 text-sm">
+        <b>✉️ Send code to business email</b>
+        <p className="mt-1 mb-2">Emails them a private code and a link where they can update their listing, add their logo, send photos privately and <b>ask for 3 free designs</b>. Ask first: <i>"Can I email you a private link to update your listing?"</i></p>
+        <div className="flex flex-wrap gap-2 items-center">
+          <input className="inp flex-1 min-w-[16rem]" type="email" placeholder="owner@business.ca" value={to} onChange={e => setTo(e.target.value)} aria-label="Business email" />
+          <button type="button" className="btn" disabled={sending || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(to.trim())} onClick={sendCode}>{sending ? 'Sending…' : 'Send code to business email'}</button>
+        </div>
+        {sent && <p className="text-emerald-700 font-semibold mb-0 mt-2">✓ {sent} Ask them to check their inbox (and spam, just in case).</p>}
+        {sendErr && <p className="text-warn mb-0 mt-2">{sendErr}</p>}
+      </div>
 
       <div className="grid sm:grid-cols-2 gap-3 mt-3">
         {FIELDS.map(([k, l]) => (
