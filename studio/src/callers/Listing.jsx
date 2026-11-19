@@ -50,13 +50,37 @@ export default function Listing({ sb, c, onVerified }) {
   const [busy, setBusy] = useState(false), [note, setNote] = useState(''), [more, setMore] = useState(false);
   const [to, setTo] = useState(''), [sending, setSending] = useState(false), [sent, setSent] = useState(''), [sendErr, setSendErr] = useState('');
 
-  const load = async () => {
+  // Every keystroke is also kept in this browser (draftKey) until it is saved, so nothing typed during a call
+  // can be lost: not by a page refresh, a login refresh, a crash or a reload of the listing (Nov 19 fix).
+  const draftKey = 'bake-listing-draft-' + c.business_id;
+  const readDraft = () => { try { return JSON.parse(localStorage.getItem(draftKey) || 'null'); } catch { return null; } };
+  const writeDraft = d => { try { d ? localStorage.setItem(draftKey, JSON.stringify(d)) : localStorage.removeItem(draftKey); } catch { /* storage off */ } };
+  const load = async (afterSave = false) => {
     const { data, error } = await sb.rpc('caller_business', { p_id: c.business_id });
     if (error) return setErr(error.message);
-    setB(data); setF(Object.fromEntries(FIELDS.map(([k]) => [k, data[k] ?? ''])));
+    const fresh = Object.fromEntries(FIELDS.map(([k]) => [k, data[k] ?? '']));
+    if (afterSave) { writeDraft(null); setF(fresh); }
+    else {
+      // keep anything the caller typed that isn't saved yet; only fill in fields they haven't touched
+      const draft = readDraft()?.f || {};
+      setF(cur => Object.fromEntries(FIELDS.map(([k]) => {
+        const mine = k in cur ? cur[k] : draft[k];
+        return [k, mine !== undefined && String(mine).trim() !== String(data[k] ?? '').trim() ? mine : fresh[k]];
+      })));
+      const dn = readDraft()?.note; if (dn) setNote(n => n || dn);
+    }
+    setB(data);
     setTo(t => t || c.contact_email || data.email || '');
   };
   useEffect(() => { load(); }, [c.business_id]);   // eslint-disable-line react-hooks/exhaustive-deps
+  const edit = (k, v) => setF(cur => { const n = { ...cur, [k]: v }; writeDraft({ f: n, note, at: Date.now() }); return n; });
+  const editNote = v => { setNote(v); writeDraft({ f, note: v, at: Date.now() }); };
+  const dirty = !!b && FIELDS.some(([k]) => String(f[k] ?? '').trim() !== String(b[k] ?? '').trim());
+  useEffect(() => {   // warn before closing / reloading the page with unsaved listing changes
+    if (!dirty) return;
+    const h = e => { e.preventDefault(); e.returnValue = ''; };
+    window.addEventListener('beforeunload', h); return () => window.removeEventListener('beforeunload', h);
+  }, [dirty]);
 
   if (err && !b) return <p className="text-warn">{err}</p>;
   if (!b) return <p className="text-mute text-sm mt-3">Loading the full listing…</p>;
@@ -66,8 +90,8 @@ export default function Listing({ sb, c, onVerified }) {
     const { data, error } = await sb.rpc('caller_update_business', { p_id: c.business_id, p: f, p_verify: verify, p_note: note });
     setBusy(false);
     if (error) return setErr(error.message);
-    setMsg(verify ? 'Verified and saved. Give them the logo code below.' : 'Saved.');
-    await load(); if (verify) onVerified?.(data);
+    setMsg((verify ? 'Verified and saved. Give them the logo code below.' : 'Saved.') + (changed.length ? ' Saved changes: ' + changed.join(', ') + '.' : ' (No listing fields were changed.)'));
+    await load(true); if (verify) onVerified?.(data);
   };
   const sendCode = async () => {
     setSending(true); setSendErr(''); setSent('');
@@ -112,13 +136,14 @@ export default function Listing({ sb, c, onVerified }) {
         {FIELDS.map(([k, l]) => (
           <label key={k} className={L + (LONG.has(k) ? ' sm:col-span-2' : '')}>
             <span>{l}{String(f[k] ?? '').trim() !== String(b[k] ?? '').trim() && <span className="text-amber-700"> · changed</span>}</span>
-            {LONG.has(k) ? <textarea className="inp" rows={k === 'description' ? 3 : 2} value={f[k]} onChange={e => setF({ ...f, [k]: e.target.value })} />
-              : <input className="inp" value={f[k]} onChange={e => setF({ ...f, [k]: e.target.value })} />}
+            {LONG.has(k) ? <textarea className="inp" rows={k === 'description' ? 3 : 2} value={f[k]} onChange={e => edit(k, e.target.value)} />
+              : <input className="inp" value={f[k]} onChange={e => edit(k, e.target.value)} />}
             {k === 'website' && siteUrl(f.website) && <a className="text-acc underline font-semibold text-sm" href={siteUrl(f.website)} target="_blank" rel="noopener" onClick={e => openSite(f.website, e)}>🌐 Open website in new window ↗</a>}
           </label>
         ))}
-        <label className={L + ' sm:col-span-2'}>Verification note (optional)<input className="inp" placeholder='e.g. "Confirmed with Mary (owner), new phone number"' value={note} onChange={e => setNote(e.target.value)} /></label>
+        <label className={L + ' sm:col-span-2'}>Verification note (optional)<input className="inp" placeholder='e.g. "Confirmed with Mary (owner), new phone number"' value={note} onChange={e => editNote(e.target.value)} /></label>
       </div>
+      {dirty && <p className="mt-3 mb-0 bg-amber-100 border-2 border-amber-400 rounded-lg px-3 py-2 text-sm font-semibold">⚠️ Not saved yet: {changed.join(', ')}. Your typing is kept on this computer until you press a Save button.</p>}
       {err && <p className="text-warn mb-0">{err}</p>}
       {msg && <p className="text-emerald-700 font-semibold mb-0">{msg}</p>}
       <div className="flex flex-wrap gap-2 mt-3">

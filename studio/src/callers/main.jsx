@@ -195,17 +195,22 @@ function App() {
 
   useEffect(() => {
     sb.auth.getSession().then(({ data }) => setSession(data.session));
-    const { data } = sb.auth.onAuthStateChange((_e, s) => setSession(s));
+    // Supabase fires this on every token refresh and every time the tab gets focus again (e.g. coming back
+    // from the business's website window). Only react when the signed-in PERSON changes; otherwise the whole
+    // call list reloaded, the open listing was rebuilt and everything typed during the call was lost (Nov 19).
+    const { data } = sb.auth.onAuthStateChange((_e, s) => setSession(old => (old?.user?.id === s?.user?.id && old !== undefined ? old : s)));
     return () => data.subscription.unsubscribe();
   }, []);
-  useEffect(() => { if (session) sb.rpc('caller_me').then(({ data, error }) => { setErr(error ? error.message : ''); setMe(data || null); }); }, [session]);
+  const uid = session?.user?.id;
+  useEffect(() => { if (uid) sb.rpc('caller_me').then(({ data, error }) => { setErr(error ? error.message : ''); setMe(old => (old && data && old.id === data.id ? old : data || null)); }); }, [uid]);
 
   const reload = useCallback(async () => {
     const [a, b] = await Promise.all([sb.rpc('caller_calls', { p_day: day }), sb.rpc('caller_totals')]);
     if (a.error) setErr(a.error.message); else { setErr(''); setCalls((a.data || []).sort((x, y) => x.sort_order - y.sort_order)); }
     if (!b.error) setTotals(b.data);
   }, [day]);
-  useEffect(() => { if (me) { setCalls(null); reload(); const t = setInterval(() => { if (!document.hidden) reload(); }, 60000); return () => clearInterval(t); } }, [me, reload]);
+  const meId = me?.id;
+  useEffect(() => { if (meId) { reload(); const t = setInterval(() => { if (!document.hidden) reload(); }, 60000); return () => clearInterval(t); } }, [meId, reload]);
 
   if (session === undefined) return null;
   if (!session) return <Login />;
