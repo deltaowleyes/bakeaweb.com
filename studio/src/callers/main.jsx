@@ -3,7 +3,8 @@
    assigned calls for the day, in sort_order, with tips, an outcome form and their totals.
    All data goes through Supabase functions (security definer, checked against rezsite_callers):
      caller_me()                      → {id, name, email, rate} or null if this login isn't a caller
-     caller_calls(p_day)              → that caller's call_assignments for the day (+ business details)
+     caller_calls(p_day)              → that caller's call_assignments for the day (+ business details, verified_at)
+     caller_business(p_id) / caller_update_business(p_id, p, p_verify, p_note) → full listing + edit/verify (Listing.jsx)
      caller_lock(p_id) / caller_unlock(p_id)   → lock a business while on the call (20-minute lock)
      caller_save(p_id, p jsonb, p_unlock)      → save the outcome (also mirrored onto rezsite_businesses)
      caller_totals()                  → assigned / called / interested / paid / commission */
@@ -12,6 +13,7 @@ import { createRoot } from 'react-dom/client';
 import { createClient } from '@supabase/supabase-js';
 import './callers.css';
 import Script from './Script.jsx';
+import Listing from './Listing.jsx';
 
 const sb = createClient('https://gpwxuunutljcauoknhrh.supabase.co', 'sb_publishable_B7a1VEv6RX13n2JhA50tbQ_oR_oKfw9');
 
@@ -162,6 +164,7 @@ function CallCard({ c, me, open, setOpen, reload }) {
         <div className="flex flex-col items-end gap-1">
           {c.outcome ? <span className="text-sm font-bold bg-emerald-100 text-emerald-900 rounded-full px-3 py-1">✓ {OUT[c.outcome]}</span>
             : <span className="text-sm font-bold bg-amber-100 text-amber-900 rounded-full px-3 py-1">To call</span>}
+          {c.verified_at && <span className="text-sm font-bold bg-emerald-600 text-white rounded-full px-3 py-1" title={'Verified by ' + (c.verified_by || '')}>✓ Listing verified</span>}
           {big(c) && <span className="text-sm font-extrabold bg-violet-700 text-white rounded-full px-3 py-1" title={c.est_package || ''}>💼 $10K+ firm</span>}
           {c.locked_by_name && <span className="text-xs text-mute">🔒 {c.locked_by_me ? 'You are on this call' : c.locked_by_name + ' is on this call'}</span>}
         </div>
@@ -176,6 +179,7 @@ function CallCard({ c, me, open, setOpen, reload }) {
       {msg && <p className="text-acc font-semibold mt-2 mb-0">{msg}</p>}
       {open && <div className="mt-3 flex flex-wrap items-center gap-3"><button className="btn" onClick={() => setScript(true)}>📄 View script</button><span className="text-sm text-mute">Opening, offer, voicemail, prices and objections, with this business's name filled in.</span></div>}
       {script && <Script c={c} me={me} onClose={() => setScript(false)} />}
+      {open && <Listing sb={sb} c={c} onVerified={reload} />}
       {open ? <CallForm c={c} onDone={done} onCancel={cancel} />
         : <div className="mt-3"><button className={c.outcome ? 'btn2' : 'btn'} disabled={lockedByOther} onClick={start}>{c.outcome ? 'Update this call' : 'Start call'}</button></div>}
     </article>

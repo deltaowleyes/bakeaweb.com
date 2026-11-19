@@ -1,0 +1,119 @@
+/* Listing panel on callers.html: opens with Start call. Shows EVERYTHING we have on the business
+   (caller_business), lets the caller fix any listing field while on the phone and either
+   "Save changes" or "Save + mark verified" (caller_update_business). Verifying gives the business a
+   free-logo code to use on rezsite.com/verified.html. Every save is logged in rezsite_business_edits. */
+import { useEffect, useState } from 'react';
+
+const FIELDS = [
+  ['name', 'Business name'], ['contact_name', 'Owner / contact person'], ['phone', 'Phone'], ['email', 'Email'],
+  ['website', 'Website'], ['social_links', 'Facebook / Instagram / other links'], ['address', 'Street address'],
+  ['city', 'City / town'], ['province', 'Province'], ['postal_code', 'Postal code'], ['community', 'Community / Nation'],
+  ['category', 'Business type'], ['hours', 'Hours'], ['description', 'What they do (shown on the listing)']
+];
+const LONG = new Set(['description', 'social_links', 'hours']);
+// Read-only facts, in a sensible order, with plain-language labels.
+const INFO = [
+  ['id', 'Listing #'], ['directory_category', 'Directory category'], ['t2', 'T2 design rating (1–99)'], ['t2_notes', 'T2 note'],
+  ['score99', 'Old v1 rating'], ['score99_notes', 'v1 notes'], ['est_tier', 'Size'], ['est_revenue', 'Est. revenue'],
+  ['est_package', 'Likely package'], ['est_budget_low', 'Est. web budget from'], ['est_budget_high', 'Est. web budget to'],
+  ['est_value_low', 'Est. business value from'], ['est_value_high', 'Est. business value to'], ['est_confidence', 'Estimate confidence'], ['est_basis', 'Estimate basis'],
+  ['built_with', 'Site built with'], ['copyright_year', 'Site copyright year'], ['https', 'Site has https'], ['mobile_ok', 'Works on phones'],
+  ['site_loads', 'Site loads'], ['parked_or_sale', 'Domain parked / for sale'], ['possibly_closed', 'Possibly closed'],
+  ['review_status', 'Review status'], ['review_notes', 'Review notes'], ['auto_grade', 'Auto grade'], ['auto_notes', 'Auto notes'],
+  ['site_search_status', 'Website search'], ['site_search_notes', 'Website search notes'], ['site_found_source', 'Website found at'],
+  ['source_url', 'Where we found the listing'], ['source_id', 'Source id'], ['call_status', 'Last call result'], ['called_at', 'Last called'],
+  ['call_notes', 'Call log'], ['admin_notes', 'Chris\'s notes'], ['verification_status', 'Verification status'], ['owner_confirmed', 'Owner confirmed'],
+  ['verified_at', 'Verified on'], ['verified_by', 'Verified by'], ['verify_notes', 'Verification note'],
+  ['logo_url', 'Logo'], ['logo_uploaded_at', 'Logo uploaded'], ['claimed_by', 'Claimed by'], ['claimed_at', 'Claimed on'],
+  ['imported_at', 'Added to directory'], ['updated_at', 'Last changed'], ['updated_by', 'Changed by'], ['discovered_by', 'Found by']
+];
+const SKIP = new Set([...FIELDS.map(f => f[0]), ...INFO.map(i => i[0]), 'logo_code', 'past_calls', 'edits', 'score', 'auto_score', 'auto_status', 'score99_at', 'score99_version', 'est_at', 'site_search_at', 'reviewed_at']);
+const when = v => new Date(v).toLocaleString('en-CA', { timeZone: 'America/Toronto', dateStyle: 'medium', timeStyle: 'short' });
+const show = (k, v) => {
+  if (v === true) return 'Yes'; if (v === false) return 'No';
+  if (/_at$/.test(k) && v) return when(v);
+  if (/^est_(revenue|budget|value)/.test(k)) return '$' + (+v).toLocaleString('en-CA');
+  return String(v);
+};
+const isUrl = v => typeof v === 'string' && /^https?:\/\//.test(v);
+
+export default function Listing({ sb, c, onVerified }) {
+  const [b, setB] = useState(null), [f, setF] = useState({}), [err, setErr] = useState(''), [msg, setMsg] = useState('');
+  const [busy, setBusy] = useState(false), [note, setNote] = useState(''), [more, setMore] = useState(false);
+
+  const load = async () => {
+    const { data, error } = await sb.rpc('caller_business', { p_id: c.business_id });
+    if (error) return setErr(error.message);
+    setB(data); setF(Object.fromEntries(FIELDS.map(([k]) => [k, data[k] ?? ''])));
+  };
+  useEffect(() => { load(); }, [c.business_id]);   // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (err && !b) return <p className="text-warn">{err}</p>;
+  if (!b) return <p className="text-mute text-sm mt-3">Loading the full listing…</p>;
+  const changed = FIELDS.filter(([k]) => String(f[k] ?? '').trim() !== String(b[k] ?? '').trim()).map(([, l]) => l);
+  const save = async verify => {
+    setBusy(true); setErr(''); setMsg('');
+    const { data, error } = await sb.rpc('caller_update_business', { p_id: c.business_id, p: f, p_verify: verify, p_note: note });
+    setBusy(false);
+    if (error) return setErr(error.message);
+    setMsg(verify ? 'Verified and saved. Give them the logo code below.' : 'Saved.');
+    await load(); if (verify) onVerified?.(data);
+  };
+  const L = 'grid gap-1 text-sm font-semibold';
+  const others = Object.entries(b).filter(([k, v]) => !SKIP.has(k) && v !== null && v !== '');
+  const facts = INFO.filter(([k]) => b[k] !== null && b[k] !== undefined && b[k] !== '');
+
+  return (
+    <section className="mt-4 border-t border-line pt-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h3 className="text-lg font-bold m-0">📋 Their listing <span className="text-sm text-mute font-normal">read it back to them and fix anything that's wrong</span></h3>
+        {b.verified_at
+          ? <span className="text-sm font-bold bg-emerald-600 text-white rounded-full px-3 py-1">✓ Verified {when(b.verified_at)} by {b.verified_by}</span>
+          : <span className="text-sm font-bold bg-slate-200 text-slate-800 rounded-full px-3 py-1">Not verified yet</span>}
+      </div>
+
+      {b.verified_at && b.logo_code && (
+        <div className="mt-3 bg-amber-50 border-2 border-amber-300 rounded-xl p-3 text-sm">
+          <div className="flex flex-wrap items-center gap-3"><b>Free logo code:</b><span className="font-mono text-2xl font-extrabold tracking-[.2em] bg-white rounded-lg px-3 py-1 border border-amber-300">{b.logo_code}</span>
+            {b.logo_url ? <span className="flex items-center gap-2">Logo added <img src={b.logo_url} alt="" className="h-8 max-w-24 object-contain bg-white rounded border" /></span> : <span className="text-mute">no logo yet</span>}</div>
+          <p className="mb-0 mt-2"><i>"You're now verified on RezSite. Go to <b>rezsite.com/verified</b>, find your business, press <b>Add your logo</b> and type the code {b.logo_code.split('').join(' ')}. It's free."</i> You can also email them: <a className="text-acc underline" href={`https://rezsite.com/verified.html?id=${b.id}`} target="_blank" rel="noopener">their listing link</a>.</p>
+        </div>
+      )}
+
+      <div className="grid sm:grid-cols-2 gap-3 mt-3">
+        {FIELDS.map(([k, l]) => (
+          <label key={k} className={L + (LONG.has(k) ? ' sm:col-span-2' : '')}>
+            <span>{l}{String(f[k] ?? '').trim() !== String(b[k] ?? '').trim() && <span className="text-amber-700"> · changed</span>}</span>
+            {LONG.has(k) ? <textarea className="inp" rows={k === 'description' ? 3 : 2} value={f[k]} onChange={e => setF({ ...f, [k]: e.target.value })} />
+              : <input className="inp" value={f[k]} onChange={e => setF({ ...f, [k]: e.target.value })} />}
+          </label>
+        ))}
+        <label className={L + ' sm:col-span-2'}>Verification note (optional)<input className="inp" placeholder='e.g. "Confirmed with Mary (owner), new phone number"' value={note} onChange={e => setNote(e.target.value)} /></label>
+      </div>
+      {err && <p className="text-warn mb-0">{err}</p>}
+      {msg && <p className="text-emerald-700 font-semibold mb-0">{msg}</p>}
+      <div className="flex flex-wrap gap-2 mt-3">
+        <button type="button" className="btn" disabled={busy} onClick={() => save(true)}>{busy ? 'Saving…' : b.verified_at ? '✓ Save + verify again' : '✓ Save + mark verified'}</button>
+        <button type="button" className="btn2" disabled={busy || !changed.length} onClick={() => save(false)}>Save changes only</button>
+        <span className="text-sm text-mute self-center">{changed.length ? 'Changed: ' + changed.join(', ') : 'No changes yet.'}</span>
+      </div>
+      <p className="text-xs text-mute mt-2 mb-0">Only press <b>mark verified</b> after the owner (or someone who works there) has confirmed the details. Every save is kept in a change log ({b.edits} so far).</p>
+
+      {b.past_calls?.length > 0 && (
+        <div className="mt-4"><b className="text-sm">Earlier calls</b>
+          <ul className="text-sm mt-1 mb-0 pl-5">{b.past_calls.map((p, i) => <li key={i}>{p.day} · {p.caller} · {p.outcome}{p.contact ? ' · ' + p.contact : ''}{p.email ? ' (' + p.email + ')' : ''}{p.notes ? ' — ' + p.notes : ''}{p.next_step ? ' · next: ' + p.next_step : ''}</li>)}</ul>
+        </div>
+      )}
+
+      <button type="button" className="mt-4 text-acc font-semibold underline text-sm" onClick={() => setMore(!more)}>{more ? '▾ Hide' : '▸ Show'} everything else we know ({facts.length + others.length} facts)</button>
+      {more && (
+        <dl className="mt-2 grid sm:grid-cols-[14rem_1fr] gap-x-4 gap-y-1 text-sm bg-paper rounded-xl p-3">
+          {[...facts, ...others.map(([k]) => [k, k.replace(/_/g, ' ')])].map(([k, l]) => (
+            <div key={k} className="contents"><dt className="font-semibold text-mute">{l}</dt>
+              <dd className="m-0 whitespace-pre-line break-words">{isUrl(b[k]) ? <a className="text-acc underline break-all" href={b[k]} target="_blank" rel="noopener">{b[k]}</a> : show(k, b[k])}</dd></div>
+          ))}
+        </dl>
+      )}
+    </section>
+  );
+}
