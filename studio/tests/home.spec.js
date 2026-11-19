@@ -35,3 +35,21 @@ test('phone: home page has no sideways scrolling', async ({ page }) => {
   await page.goto('./');
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
 });
+
+/* The /studio/ welcome page (Atelier design, 2026-11-18): first-time visitors see it; the app opens from its buttons,
+   and anyone with saved work or a ?v= / #step- address goes straight to the app. */
+test('a first-time visitor at /studio/ sees the welcome page, and its button opens the studio', async ({ page }) => {
+  await page.goto('./studio/');
+  await expect(page.locator('#welcome h1')).toContainText('A website as good as');
+  await expect(page.locator('#root')).toBeHidden();
+  await page.locator('#welcome .hl .btn').click();
+  await expect(page).toHaveURL(/studio\/\?v=pro#step-1$/);
+  await expect(page.locator('#welcome')).toBeHidden();
+  await expect(page.locator('#root')).not.toBeEmpty();
+});
+
+test('studio addresses with ?v= go straight to the app, not the welcome page', async ({ page }) => {
+  await page.goto('./studio/?v=pro#step-1');
+  await expect(page.locator('#welcome')).toBeHidden();
+  await expect(page.locator('#root')).not.toBeEmpty();
+});

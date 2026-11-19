@@ -8,7 +8,8 @@ import { getEditMaps } from './components/Preview.jsx';
 import { Site } from './lib/site.js';
 import { setPremiumCheck } from './editions.js';
 
-createRoot(document.getElementById('root')).render(<StrictMode><App /></StrictMode>);
+// The /studio/ welcome page (studio/index.html) sets html.welcome for first-time visitors; the app only starts in edit mode.
+if (!document.documentElement.classList.contains('welcome')) createRoot(document.getElementById('root')).render(<StrictMode><App /></StrictMode>);
 window.BAKE = {   // test hook (ARCHITECTURE.md §7)
   state: () => S,
   maps: getEditMaps,   // box maps of the step 3 preview screenshots
