@@ -22,3 +22,11 @@ test('BAKE Taste scale: every number has a meaning and the reason tags are good/
   expect(r.g).toBeGreaterThan(5);
   expect(r.b).toBeGreaterThan(5);
 });
+
+test('BAKE Taste has a Back button so a saved or skipped site can be fixed', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
+  await page.goto('taste.html');
+  const src = await page.evaluate(() => fetch('/src/taste.js').then(r => r.text()));
+  expect(src).toMatch(/id=\\?"back\\?"/);
+  expect(src).toContain('hist.pop()');
+});

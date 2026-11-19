@@ -27,6 +27,9 @@ export const TAGS = {
 const shotUrl = (url, h) => 'https://s.wordpress.com/mshots/v1/' + encodeURIComponent(url) + '?w=1280&h=' + h + '&vpw=1280&vph=' + h;
 
 let me = null, sites = [], ratings = [], view = 'rate', cur = null, listSort = 'order';
+/* Sites you've moved past (saved or skipped), newest last, so Back can return to fix a mistake. */
+let hist = [];
+const go = next => { if (cur && (!next || next.id != cur.id)) hist.push(cur.id); cur = next; };
 const mine = id => ratings.find(r => r.site_id == id && r.rater == me.id);
 const theirs = id => ratings.filter(r => r.site_id == id && r.rater != me.id);
 
@@ -95,7 +98,7 @@ function draw() {
 /* ---------- Rate one site ---------- */
 function drawRate() {
   const body = $('#body');
-  if (!cur) { body.innerHTML = '<p class="empty">You have rated every site. Thank you! See <b>All ratings</b> to compare, or tell Claude the ratings are ready.</p>'; return; }
+  if (!cur) { body.innerHTML = '<p class="empty">You have rated every site. Thank you! See <b>All ratings</b> to compare, or tell Claude the ratings are ready.</p>' + (hist.length ? '<p><button class="btn2" id="back">← Back</button></p>' : ''); if ($('#back')) $('#back').onclick = () => { cur = sites.find(x => x.id == hist.pop()) || null; draw(); }; return; }
   const s = cur, r = mine(s.id), pitch = s.kind == 'pitch';
   const val = r ? r.score : 60, tags = new Set(r ? r.tags : []);
   body.innerHTML = `<div class="rate">
@@ -111,7 +114,7 @@ function drawRate() {
       <div><p class="lbl">What's not</p><div class="chips">${TAGS.b.map(t => '<button type="button" class="b' + (tags.has(t) ? ' on' : '') + '" data-t="' + esc(t) + '">' + esc(t) + '</button>').join('')}</div></div>
       <div><p class="lbl">Why this number? (in your own words)</p><textarea id="why" rows="4" placeholder="What makes it better or worse than the last few you rated?">${esc(r ? r.reason : '')}</textarea></div>
       <p class="msg" id="fm"></p>
-      <div class="row"><button type="submit">${r ? 'Update and next' : 'Save and next'}</button><button type="button" class="btn2" id="skip">Skip for now</button></div>
+      <div class="row">${hist.length ? '<button type="button" class="btn2" id="back">← Back</button>' : ''}<button type="submit">${r ? 'Update and next' : 'Save and next'}</button><button type="button" class="btn2" id="skip">Skip for now</button></div>
       ${r ? reveal(s) : '<p class="note">Claude\'s grade and the other person\'s rating show after you save, so they don\'t sway you.</p>'}
     </form></div>`;
   if (!pitch) loadShot(s, 900);
@@ -119,7 +122,8 @@ function drawRate() {
   sc.oninput = () => { $('#num').textContent = sc.value; $('#anc').textContent = anchorFor(+sc.value); };
   body.querySelectorAll('.chips button').forEach(b => b.onclick = () => { b.classList.toggle('on'); tags.has(b.dataset.t) ? tags.delete(b.dataset.t) : tags.add(b.dataset.t); });
   if ($('#whole')) $('#whole').onclick = () => { loadShot(s, 3200); $('#whole').remove(); };
-  $('#skip').onclick = () => { cur = nextUnrated(s.id) || cur; draw(); };
+  $('#skip').onclick = () => { go(nextUnrated(s.id) || cur); draw(); };
+  if ($('#back')) $('#back').onclick = () => { const id = hist.pop(); cur = sites.find(x => x.id == id) || cur; draw(); };
   $('#f').onsubmit = async e => {
     e.preventDefault();
     const why = $('#why').value.trim();
@@ -128,7 +132,7 @@ function drawRate() {
     const { data, error } = await sb.from('taste_ratings').upsert(row, { onConflict: 'site_id,rater' }).select().single();
     if (error) { $('#fm').textContent = 'Not saved: ' + error.message; return; }
     ratings = ratings.filter(x => !(x.site_id == s.id && x.rater == me.id)).concat(data);
-    cur = nextUnrated(s.id);
+    go(nextUnrated(s.id));
     draw();
     if (cur) toastPrev(s);
   };
@@ -187,7 +191,7 @@ function drawList() {
       '<td><button class="btn2" data-go="' + s.id + '" style="padding:4px 10px;font-size:13px">' + (mine(s.id) ? 'Change' : 'Rate') + '</button></td></tr>').join('')}
     </tbody></table></div>`;
   $('#body').querySelectorAll('[data-s]').forEach(b => b.onclick = () => { listSort = b.dataset.s; drawList(); });
-  $('#body').querySelectorAll('[data-go]').forEach(b => b.onclick = () => { cur = sites.find(s => s.id == b.dataset.go); view = 'rate'; draw(); });
+  $('#body').querySelectorAll('[data-go]').forEach(b => b.onclick = () => { go(sites.find(s => s.id == b.dataset.go)); view = 'rate'; draw(); });
 }
 
 if (!globalThis.BAKE_TASTE_NO_START) start();
