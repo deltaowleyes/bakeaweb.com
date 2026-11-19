@@ -1,6 +1,6 @@
 # BAKE PRO roadmap
 
-Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do list. The list itself lives in `ROADMAP.json` (edit that file and the BAKE PRO buttons update too); this page is made from it by `node studio/scripts/roadmap.mjs`. Business plan: `VISION.md`. Updated 2026-11-16. 82 tasks.
+Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do list. The list itself lives in `ROADMAP.json` (edit that file and the BAKE PRO buttons update too); this page is made from it by `node studio/scripts/roadmap.mjs`. Business plan: `VISION.md`. Updated 2026-11-19. 88 tasks.
 
 **Already done:** Visitor stats for every site: page views counted by the BAKE Host Worker, shown in BAKER Admin with the badge tier (2026-11-16); Drag-and-drop sections (Step 3); Inspector sidebar (Step 3); Google Fonts; Image editor with crop and border/frame controls; Versions: EXPRESS, RezSite and BAKER preview the live page with View code; PRO previews screenshots; Page files and clickable screenshot pages (lib/site.js); Studio moved to bakeaweb.com; IndigiHub version renamed to RezSite (rezsite.com); Only the finished studio is published (GitHub Pages serves docs/); Automatic testing robot (Playwright tests, npm test, GitHub Actions); Undo, redo and history (Ctrl+Z, save points); Two Studios: BAKE Studio PRO and BAKE Studio BAKER (destination chosen at Publish); Pitch run: specialty drink cafés, coffee houses and drive-thrus (Whip, Pourover, Letterboard) for the Sweet Tree Cafe pitch: 171 templates; Ten new designer template families (Tide, Ember, Folio, Block party, Bento, Handmade, Glow, Swiss grid, Sunny retro, Lens): 54 templates; Photo robot (free Pixabay sample photos with credits) and three photo-led flagship templates with motion: Hearth (cafés), Volt (trades), Loom (makers): 63 templates; New sections: menu with prices and categories, booking and service area, products with prices; wordmark logos for the flagships; Three more flagships: Bloom (salons), Pulse (fitness), Commons (community organizations and band offices): 72 templates; Indigenous business series run 1: consulting firms (Council, Meridian, Bridge) and a Numbered steps card style: 81 templates; Indigenous business series run 2: movers and logistics (Convoy, Homeward, Freight): 90 templates; private Pitch Book (pitches.html) with before/after redesigns in Supabase; Indigenous business series run 3: lodges and outdoor tourism (Timber, Shoreline, Basecamp): 99 templates; Grades out of 99 with grade-based prices (70-74 free to 90+ $500); templates under 70 no longer offered; sample photo credits in page footers; Indigenous business series run 4: film and media production (Reel, Marquee, Frame): 108 templates; Indigenous business series run 5: marinas and waterfront (Harbour, Waterline, Dockside): 117 templates; Indigenous business series run 6: apparel, embroidery and printing (Press, Stitch, Merch): 126 templates; Indigenous business series run 7: sports bars, roadside motels and riverside restaurants (Taproom, Roadside, Patio): 135 templates; Indigenous business series run 8: civil, concrete and shoreline contractors (Bedrock, Breakwater, Rebar): 144 templates.
 
@@ -11,17 +11,27 @@ Every idea for BAKE Studio, in one list. These are possible avenues, not a to-do
 
 Tasks in the same wave change different files, so they can all run at the same time. Each works on its own branch (`bake/<id>`) and never builds or publishes; one **Merge and publish** step does that at the end (CLAUDE.md, *Parallel BAKE*).
 
-**Wave 1** (43 tasks): Talk about the vision (always open) · Site health check · Design tokens and a spacing linter · Layout linter for the finished page · Brand-matched photos · Turn designs into real websites · The cart and its total at the top right · Import a site as it is · HTML editor with locked code blocks · Magic AI buttons · Grade screenshots, not code · Pagename accounts · Free publish to bakedby.me and rezsite.com · Cart checkout · RezSite free pages · Trust and safety for free hosting · Escrow payments · Check imported sites before publish · Edit text right on the preview · Drag and drop for pages, cards and menu links · Command palette · Colours from your logo · Compare templates side by side · Studio works great on phones · Indigenous languages and syllabics · Automatic quality gates · Copy that fits the layout · Pagename email addresses · Terms and policies · New domain through Porkbun · Connect an existing domain · Domain renewals for PRO · Import any website · Real AI images · AI image limits: card first, 10 free · AI writing help on every field · Shareable preview link · Pin comments on the preview · Requests reach your inbox · Magic AI allowance and packs · Automate the manual steps · Protect the templates · Ready for a million sites
+**Wave 1** (42 tasks): Talk about the vision (always open) · Site health check · Card that sits on the seam between two sections · Layout linter for the finished page · Brand-matched photos · Grader reads the page code for motion and features · Turn designs into real websites · The cart and its total at the top right · Import a site as it is · HTML editor with locked code blocks · Magic AI buttons · Pagename accounts · Free publish to bakedby.me and rezsite.com · Cart checkout · RezSite free pages · Trust and safety for free hosting · Escrow payments · Check imported sites before publish · Edit text right on the preview · Drag and drop for pages, cards and menu links · Command palette · Colours from your logo · Compare templates side by side · Studio works great on phones · Automatic quality gates · Copy that fits the layout · Pagename email addresses · Terms and policies · New domain through Porkbun · Connect an existing domain · Domain renewals for PRO · Import any website · Real AI images · AI image limits: card first, 10 free · AI writing help on every field · Shareable preview link · Pin comments on the preview · Requests reach your inbox · Magic AI allowance and packs · Automate the manual steps · Protect the templates · Ready for a million sites
 
-**Wave 2** (5 tasks): bakeaweb.com home page · Describe your business, get a site · Mix and match templates · Presentation mode · OKLCH colour system
+**Wave 2** (5 tasks): Sticky and parallax background photos · Grade screenshots, not code · Describe your business, get a site · Presentation mode · OKLCH colour system
 
-**Wave 3** (3 tasks): Dark mode and seasonal looks · Faster previews · Guided tour and demo projects
+**Wave 3** (4 tasks): Header scrolls away, menu stays · bakeaweb.com home page · Faster previews · Guided tour and demo projects
 
-**Wave 4** (1 task): More section types
+**Wave 4** (3 tasks): Design tokens and a spacing linter · Indigenous languages and syllabics · Requests that write the brief
 
-**Wave 5** (1 task): English and French
+**Wave 5** (1 task): Mix and match templates
 
-**Wave 6** (2 tasks): Motion pack · Requests that write the brief
+**Wave 6** (1 task): Dark mode and seasonal looks
+
+**Wave 7** (1 task): More section types
+
+**Wave 8** (1 task): English and French
+
+**Wave 9** (1 task): Video opener (hero background video)
+
+**Wave 10** (1 task): Video cards that play on hover
+
+**Wave 11** (1 task): Motion pack
 
 ## Anytime: Studio improvements that need no accounts or services; do them whenever you like
 
@@ -50,6 +60,11 @@ Tasks in the same wave change different files, so they can all run at the same t
 | ★ | **Import a site as it is** (plan first)<br>Bring in an existing site unchanged (its own HTML, CSS, images and scripts) and host it free. Its own code is always viewable, editable and free to download until a premium item is added. | Studio | Medium | ✎ plan | — |
 | ★ | **HTML editor with locked code blocks** (plan first)<br>BAKE Studio as an HTML editor: code beside the live preview. Unpaid premium templates, sections and add-ons show as locked blocks until checkout; free items stay visible. | Studio | Big | ✎ plan | — |
 | ★ | **Magic AI buttons** (plan first)<br>Buttons marked with a sparkle improve a page in one click: Make it pop, Rewrite, Fix for phones, Modernize, Speed it up, Easy for everyone, Get found on Google, Translate, Add a section. | AI | Big | ✎ plan | An AI server function (Supabase plus an API key) for the AI ones; some work without one |
+|  | **Video opener (hero background video)**<br>A silent, looping background video (drone shot, job site, kitchen) behind the opening headline. Chris valued it at about 20 points. Phones and visitors who ask for less motion get a still photo instead. | Design | Medium | ▶ now | — |
+|  | **Video cards that play on hover**<br>Service or product cards can hold a short, silent looping clip that starts playing when you point at the card (and when it scrolls into view on phones), showing a still photo otherwise. It makes a page feel alive without autoplaying everything. | Design | Quick | ▶ now | — |
+| ★ | **Card that sits on the seam between two sections**<br>A rounded, accent-coloured card (contact form, quote, free-estimate offer or testimonial) that overlaps the line between two sections, half in each, often pushed to one side. Leah gave bonus points every time she saw it. | Design | Medium | ▶ now | — |
+| ★ | **Sticky and parallax background photos**<br>A section's background photo can stay put (sticky) or move slower than the page (parallax, e.g. 50% speed), which gives depth and made Chris rate Akawe 98. Makers pick it per section with a simple Scroll / Sticky / Slow (25%, 50%, 75%) choice. | Design | Medium | ▶ now | — |
+| ★ | **Header scrolls away, menu stays**<br>Chris and Leah both called this out on 9 sites. When you scroll down, the top part of the header (logo, phone, top bar) slides away and only the menu bar stays pinned, slimming down a little. It keeps navigation handy without a big block eating the screen, which is exactly what they marked down on Sage Solutions and KC Interior Design. | Design | Medium | ▶ now | — |
 
 ## Design quality: Engineering the 92/99 ceiling away: grade the real pixels, enforce the maths, catch small mistakes, and make stock photos look like one shoot. All plain HTML/CSS, Playwright and GitHub Actions; nothing changes in the studio's React.
 
@@ -66,6 +81,7 @@ Tasks in the same wave change different files, so they can all run at the same t
 |  | **Copy that fits the layout**<br>Each section gets a character budget (hero headline 20–45 characters, card text 80–140…). Text that doesn't fit is rewritten, not squeezed in, so every option looks designed around its words. | Design | Quick | ▶ now | — |
 |  | **Motion pack**<br>Restrained CSS-only motion for every template: sections reveal as you scroll, smooth page-to-page transitions, button and card hover effects; all switched off for people who ask for less motion. | Design | Quick | ▶ now | — |
 |  | **Visual regression baselines**<br>Approved screenshots of every template are saved; any change that moves pixels has to be approved first. Once a template reaches 96, a later CSS tweak can't quietly drop it back to 91. | Quality | Quick | ⏳ after design-tokens-and-a-spacing-linter, typography-polish-pack | — |
+| ★ | **Grader reads the page code for motion and features**<br>Screenshots can't see scroll effects, so the taste grader misses sites Chris and Leah love (Kenkenem, Monkman, GoodMinds, Asham, Nuez). A feature detector loads each page in a real browser, scrolls it, and records what it does: menu-only sticky, shrinking header, sticky/parallax backgrounds, scroll animations, hover videos, video hero, seam cards. It also flags broken bits (unrendered shortcodes like [layerslider], doubled titles like 'Home Home', site down, bot-check pages) so grades and call lists get them right. | Quality | Medium | ▶ now | — |
 
 ## Phase 1: Accounts, free hosting, the cart and the first publish
 
