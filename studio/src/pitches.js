@@ -9,7 +9,7 @@ import { createClient } from '@supabase/supabase-js';
 import { Site, pitchProject } from './lib/site.js';
 import { Render } from './lib/render.js';
 import { compareHtml } from './lib/compare.js';
-import { launchDeal, salePrice } from './lib/launch.js';
+import { pitchDeal, pitchPriceFor, salePrice, timeLeft } from './lib/sale.js';
 import { blank, KEY, addPoint } from './store.js';
 import { tameLinks } from './lib/tame.js';
 
@@ -44,7 +44,7 @@ async function start() {
   const r = await sb.from('redesign_pitches').select('*').order('created_at', { ascending: false });
   if (r.error) { app.innerHTML = '<p class="empty">Could not load pitches: ' + esc(r.error.message) + '</p>'; return; }
   rows = r.data || [];
-  await loadRequests();
+  await Promise.all([loadRequests(), loadEmails()]);
   if (!rows.length && !reqs.length) { app.innerHTML = '<p class="empty">No pitches yet, or this login is not a RezSite admin.</p>'; return; }
   draw();
 }
@@ -89,6 +89,18 @@ function draw() {
     el.querySelector('.studio').onclick = () => toStudio(r, d);
   });
   app.querySelectorAll('img.bshot').forEach(watchShot);
+  app.querySelectorAll('.msend').forEach(b => b.onclick = async () => {
+    const box = b.closest('.mail'), r = rows.find(x => x.id == box.dataset.m), to = box.querySelector('.mto').value.trim(), note = box.querySelector('.mnote');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(to)) { note.textContent = 'Type the email address first.'; box.querySelector('.mto').focus(); return; }
+    if (r.emailed_at && !confirm('This pitch was already emailed on ' + when(r.emailed_at) + '. Send it again to ' + to + '? (The sale keeps its first start time.)')) return;
+    b.disabled = true; note.textContent = 'Sending…';
+    const { data, error } = await sb.rpc('admin_email_pitch', { p_id: r.id, p_to: to, p_name: box.querySelector('.mname').value.trim() });
+    b.disabled = false;
+    if (error) { note.textContent = 'Not sent: ' + error.message; return; }
+    Object.assign(r, { emailed_at: data.emailed_at, emailed_to: to, email_count: data.email_count, status: data.status || r.status });
+    note.innerHTML = '✅ Sent to ' + esc(to) + '. ' + saleNote(r);
+    b.textContent = 'Email again';
+  });
   app.querySelectorAll('.save').forEach(b => b.onclick = async () => {
     const box = b.closest('.pitch'), r = rows.find(x => x.id == box.dataset.p);
     const upd = { status: box.querySelector('.st').value, notes: box.querySelector('.nt').value };
@@ -136,15 +148,41 @@ function summary(list) {
     return `<tr><td><a href="#pitch-${r.id}">${esc(r.business_name)}</a><div class="note">${new Date(r.created_at).toLocaleDateString()}</div></td>
       <td class="hide">${r.rating_before ?? '?'} → ${r.rating_after ?? '?'}</td>
       <td><span class="tag${r.status == 'interested' || r.status == 'accepted' ? ' hot' : ''}">${STATUS[r.status] || esc(r.status)}</span></td>
-      <td class="hide">${opened(r)}${rep ? '<br><b>' + rep + ' repl' + (rep == 1 ? 'y' : 'ies') + '</b>' : ''}</td>
+      <td class="hide">${r.emailed_at ? '✉️ Emailed ' + when(r.emailed_at) + '<br>' : ''}${opened(r)}${rep ? '<br><b>' + rep + ' repl' + (rep == 1 ? 'y' : 'ies') + '</b>' : ''}</td>
       <td style="white-space:nowrap"><button data-copy="${esc(u)}">Copy link</button> <a class="btn btn2" href="${esc(u)}&me=1" target="_blank" rel="noopener" style="padding:6px 10px;font-size:13px">Open</a></td></tr>`;
   }).join('')}</tbody></table>`;
+}
+
+/* Email a pitch (Supabase admin_email_pitch → Brevo, from chris@rezsite.com; log in pitch_emails).
+   The FIRST email sets redesign_pitches.emailed_at, which starts the sale (lib/sale.js): 50% off for 24 hours,
+   then 10% less every 24 hours. Sending again does not restart the sale. */
+let bizEmail = {};
+async function loadEmails() {
+  const ids = [...new Set(rows.map(r => r.business_id).filter(Boolean))];
+  if (!ids.length) return;
+  const { data } = await sb.from('rezsite_businesses').select('id, email').in('id', ids);
+  bizEmail = Object.fromEntries((data || []).filter(b => b.email).map(b => [b.id, b.email]));
+}
+function saleNote(r) {
+  if (!r.emailed_at) return 'Not emailed yet. The sale (50% off for 24 hours, then 10% less each day) starts when you email it.';
+  const d = pitchDeal(r.emailed_at);
+  return `Emailed ${when(r.emailed_at)}${r.emailed_to ? ' to ' + esc(r.emailed_to) : ''}${r.email_count > 1 ? ' (' + r.email_count + ' emails)' : ''} · `
+    + (d ? `<b style="color:#c2410c">Sale now ${d.pct}% off</b>, ${d.next ? 'drops to ' + d.next + '%' : 'ends'} in ${timeLeft(d.msLeft)}` : 'Sale over: regular prices');
+}
+function mailBox(r) {
+  const to = r.emailed_to || (r.info || {}).email || bizEmail[r.business_id] || '';
+  return `<div class="share mail" data-m="${r.id}"><b>Email this pitch:</b>
+    <input type="email" class="mto" value="${esc(to)}" placeholder="their@email.com" style="max-width:260px">
+    <input class="mname" placeholder="Their first name (optional)" style="max-width:200px">
+    <button class="msend">${r.emailed_at ? 'Email again' : 'Email pitch + start sale'}</button>
+    <div class="note mnote" style="margin-top:4px">${saleNote(r)}</div></div>`;
 }
 
 function shareBox(r) {
   const u = shareUrl(r), reps = r.prospect_replies || [];
   return `<div class="share"><b>Link to send:</b> <input readonly value="${esc(u)}" onclick="this.select()"> <button data-copy="${esc(u)}">Copy link</button>
     <a class="btn btn2" href="${esc(u)}&me=1" target="_blank" rel="noopener">Open as they see it</a> <span class="note">${opened(r)}</span></div>
+    ${mailBox(r)}
     ${reps.slice().reverse().map(x => `<div class="reply"><b>${x.choice == 'interested' ? '🔥 Interested' : '❓ Question'}</b>${x.pick ? ' in <b>' + esc(x.pick) + '</b>' : ''} · ${when(x.at)}<br>
       ${esc(x.name || 'No name')} · ${esc(x.contact)}${x.message ? '<br>“' + esc(x.message) + '”' : ''}</div>`).join('')}`;
 }
@@ -163,7 +201,7 @@ function card(r) {
       ${(r.photos || []).length ? '<h3>Their photos (links to their site)</h3><div class="info">' + r.photos.map(p => '<div><a href="' + esc(p.src) + '" target="_blank" rel="noopener">' + esc(p.what || p.src) + '</a></div>').join('') + '</div>' : ''}
     </div><div><h3 style="margin-top:0">After (our redesigns)</h3><div class="afters">${(r.redesigns || []).map((d, k) => `<div class="after" data-p="${r.id}" data-i="${k}">
       <div class="frame"><iframe title="${esc(d.name)}" loading="lazy" sandbox="allow-same-origin"></iframe></div>
-      <div class="bar"><div><b>${esc(d.name)}</b> <span>${d.grade ? d.grade + '/99' : ''}</span>${priceChip(d)}</div><div class="acts"><button class="big">Full view</button><button class="btn2 studio">Open in studio</button></div></div>${compareHtml(+d.grade || 0, Render.priceFor(+d.grade || 0), Render.money, { deal: launchDeal() })}</div>`).join('')}</div>
+      <div class="bar"><div><b>${esc(d.name)}</b> <span>${d.grade ? d.grade + '/99' : ''}</span>${priceChip(d, r)}</div><div class="acts"><button class="big">Full view</button><button class="btn2 studio">Open in studio</button></div></div>${compareHtml(+d.grade || 0, pitchPriceFor(+d.grade || 0), Render.money, { deal: pitchDeal(r.emailed_at) })}</div>`).join('')}</div>
       ${r.pitch ? '<h3>Talking points for the call</h3><p class="talk">' + esc(r.pitch) + '</p>' : ''}
       <div class="edit"><select class="st">${Object.entries(STATUS).map(([k, v]) => `<option value="${k}"${r.status == k ? ' selected' : ''}>${v}</option>`).join('')}</select>
       <textarea class="nt" rows="2" placeholder="Notes (who you spoke to, what they said)">${esc(r.notes || '')}</textarea><div><button class="save">Save</button> <span class="saved"></span></div></div>
@@ -191,9 +229,9 @@ function watchShot(img) {
   });
   if (img.complete) img.naturalWidth ? img.dispatchEvent(new Event('load')) : next();
 }
-/* Price from a redesign's grade (1–99), same ladder as the studio. */
-function priceChip(d) { const p = Render.priceFor(+d.grade || 0), deal = launchDeal(); if (p == null) return ''; if (!p) return ' <span>· Free</span>';
-  return deal ? ` <span>· <s>${Render.money(p)}</s> ${Render.money(salePrice(p, deal))} today (${deal.pct}% off until midnight ET)</span>` : ' <span>· ' + Render.money(p) + '</span>'; }
+/* Pitch price from a redesign's grade (lib/sale.js), with the sale that starts when the pitch is emailed. */
+function priceChip(d, r) { const p = pitchPriceFor(+d.grade || 0), deal = pitchDeal(r.emailed_at);
+  return deal ? ` <span>· <s>${Render.money(p)}</s> ${Render.money(salePrice(p, deal))} (${deal.pct}% off for ${timeLeft(deal.msLeft)})</span>` : ' <span>· ' + Render.money(p) + '</span>'; }
 
 let cur = null, curRow = null;
 function open(r, d) { cur = d; curRow = r; $('#dlgT').textContent = r.business_name + ' · ' + d.name; size(1280); showPage('home'); $('#dlg').showModal(); }

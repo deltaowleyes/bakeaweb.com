@@ -7,7 +7,7 @@ import { Site, pitchProject } from './lib/site.js';
 import { blank } from './store.js';
 import { Render } from './lib/render.js';
 import { compareHtml } from './lib/compare.js';
-import { launchDeal, dealLine, timeLeft, salePrice } from './lib/launch.js';
+import { pitchDeal, pitchPriceFor, dealLine, timeLeft, salePrice } from './lib/sale.js';
 import { suggestName, nameProblem } from './lib/publish.js';
 import './lib/site.css';   // the generated site's look must apply in this page too, so the screenshot's link map and photo holes are measured with the real layout
 
@@ -108,7 +108,7 @@ function show() {
   $('#pgc').textContent = names.length + ' pages';
   $('#pgs').innerHTML = names.map((n, i) => `<button data-p="${i}" aria-pressed="${i == at}">${esc(i == 0 ? 'Home' : n)}</button>`).join('');
   $('#pgs').querySelectorAll('[data-p]').forEach(b => b.onclick = () => { pg = names[+b.dataset.p]; show(); });
-  const g = +d.grade || 0; $('#cmp').innerHTML = compareHtml(g, Render.priceFor(g), Render.money, { forProspect: true, deal: launchDeal() }) || '<p>Ask us about this design.</p>';
+  const g = +d.grade || 0; $('#cmp').innerHTML = compareHtml(g, pitchPriceFor(g), Render.money, { forProspect: true, deal: deal() }) || '<p>Ask us about this design.</p>';
   dealBanner(); buyCard();
   fit();
 }
@@ -171,21 +171,23 @@ function watchShot(img) {
 
 start();
 
-/* Launch-week banner above the price: today's discount and the time left until midnight Eastern.
-   Rechecked every 30 seconds, so the price drops to the next day's discount at midnight without a reload. */
-let dealDay = null;
+/* Pitch sale banner above the price (lib/sale.js): it starts when we email the pitch (P.emailed_at from
+   get_shared_pitch): 50% off for 24 hours, then 10% less every 24 hours. Rechecked every 30 seconds, so the
+   price steps down by itself without a reload. */
+const deal = () => pitchDeal(P && P.emailed_at);
+let dealPct = null;
 function dealBanner() {
   const el = $('#deal'); if (!el) return;
-  const d = launchDeal();
-  if ((d && d.day) !== dealDay) { const was = dealDay; dealDay = d && d.day; if (was !== null && designs[cur]) { const g = +designs[cur].grade || 0; $('#cmp').innerHTML = compareHtml(g, Render.priceFor(g), Render.money, { forProspect: true, deal: d }) || ''; } }
+  const d = deal(), pct = d ? d.pct : 0;
+  if (pct !== dealPct) { const was = dealPct; dealPct = pct; if (was !== null && designs[cur]) { const g = +designs[cur].grade || 0; $('#cmp').innerHTML = compareHtml(g, pitchPriceFor(g), Render.money, { forProspect: true, deal: d }) || ''; buyCard(); } }
   el.innerHTML = d ? `<div role="note" style="background:#fff4ec;border:2px solid #c2410c;border-radius:12px;padding:12px 14px;margin:4px 0 12px;font-size:15px;line-height:1.45">
-    <b style="color:#c2410c;font-size:17px">🎉 ${esc(dealLine(d))}</b><br><span>Time left at ${d.pct}% off: <b>${esc(timeLeft(d.msLeft))}</b>. The price below already includes today's discount.</span></div>` : '';
+    <b style="color:#c2410c;font-size:17px">🎉 ${esc(dealLine(d))}</b><br><span>Time left at ${d.pct}% off: <b>${esc(timeLeft(d.msLeft))}</b>. The price below already includes the discount. Prices are in Canadian dollars.</span></div>` : '';
 }
 setInterval(dealBanner, 30000);
 
 /* ---------- Buy with Interac e-Transfer → live on rezsite.com ----------
    The prospect picks a page name and address, and gets a pay code. order_shared_pitch() (Supabase) works out the
-   price and today's launch discount on the server and records the order in pitch_orders; when the e-Transfer
+   price and the pitch sale discount on the server and records the order in pitch_orders; when the e-Transfer
    arrives, an admin clicks "Payment received → publish" in BAKER Admin and the site goes live at name.rezsite.com. */
 const PAY_TO = 'leah@rezsite.com';
 let orders = [], buyState = null, nameCheck = 0;
@@ -208,16 +210,16 @@ function payBox(o) {
         <li>In the message, write <b>${esc(o.pay_code)}</b> <button type="button" class="copy" data-copy="${esc(o.pay_code)}" style="font-size:13px;padding:2px 10px">Copy</button> so we know it's yours.</li>
         <li>That's it. As soon as it arrives, <b>${esc(o.design)}</b> goes live at <b>${esc(o.address.replace('https://', '').replace(/\/$/, ''))}</b> automatically, usually within a few minutes. This page updates by itself.</li>
       </ol>
-      <p class="hint" style="margin:8px 0 0">${o.discount_pct ? `Your launch-week price (${o.discount_pct}% off) is locked in with this code. ` : ''}No security question is needed: the money is deposited automatically.</p>`}
+      <p class="hint" style="margin:8px 0 0">${o.discount_pct ? `Your sale price (${o.discount_pct}% off) is locked in with this code. ` : ''}No security question is needed: the money is deposited automatically.</p>`}
   </div>`;
 }
 function buyCard() {
   const el = $('#buy'), d = designs[cur]; if (!el || !d) return;
-  const g = +d.grade || 0, reg = Render.priceFor(g), deal = launchDeal();
+  const g = +d.grade || 0, reg = pitchPriceFor(g), sale = deal();
   const firstOpen = orders.find(o => o.status == 'awaiting_payment');   /* newest unpaid order replaces older ones */
   const mine = orders.filter(o => o.status == 'paid' || o.status == 'live' || o == firstOpen);
   if (reg == null) { el.innerHTML = '<h2>Want this design?</h2><p>Send us a message below and we\'ll quote it.</p>'; return; }
-  const today = salePrice(reg, deal) || 0;
+  const today = salePrice(reg, sale) || 0;
   if (!buyState) buyState = { name: suggestName(P.business_name), opt: 'free', dom: '', who: '', contact: '', open: false };
   const fee = { free: 0, connect: 100, new: 50 }[buyState.opt], total = today + fee;
   el.innerHTML = `<h2 style="margin:0 0 6px">Buy ${esc(d.name)}: pay by Interac e-Transfer</h2>
@@ -236,9 +238,9 @@ function buyCard() {
       <label><b>3. Your name</b><input id="bw" value="${esc(buyState.who)}" autocomplete="name" maxlength="120"></label>
       <label><b>4. Phone or email</b> <span class="hint">(so we can tell you when it's live)</span><input id="bc" value="${esc(buyState.contact)}" maxlength="160" required></label>
       <div style="background:var(--bg,#f6f7f7);border-radius:12px;padding:10px 14px;line-height:1.6">
-        ${esc(d.name)}: ${today != reg ? `<s>${Render.money(reg)}</s> ` : ''}<b>${today ? Render.money(today) : 'Free'}</b>${deal && reg ? ` <span class="hint">(${deal.pct}% launch-week discount, today only)</span>` : ''}
+        ${esc(d.name)}: ${today != reg ? `<s>${Render.money(reg)}</s> ` : ''}<b>${today ? Render.money(today) : 'Free'}</b>${sale && reg ? ` <span class="hint">(${sale.pct}% off for the next ${timeLeft(sale.msLeft)})</span>` : ''}
         ${fee ? `<br>${buyState.opt == 'connect' ? 'Connect your domain' : 'Register a new domain'}: <b>${Render.money(fee)}</b>${buyState.opt == 'new' ? ' <span class="hint">(+ the yearly domain fee, about $15, which we confirm with you)</span>' : ''}` : ''}
-        <br><span style="font-size:18px">Total: <b>${Render.money(total)}</b></span></div>
+        <br><span style="font-size:18px">Total: <b>${Render.money(total)}</b> <span class="hint">CAD</span></span></div>
       <button type="submit" class="primary" style="justify-self:start;font-size:17px;padding:12px 22px">${total ? 'Get my pay code' : 'Publish my free site'}</button>
       <p class="msg" id="bm" aria-live="polite"></p>
     </form>`}`;

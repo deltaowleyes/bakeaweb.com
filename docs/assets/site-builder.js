@@ -1884,31 +1884,16 @@ var Render = (function() {
 		imprint: 85
 	};
 	var PRICE_BY_GRADE = {
-		75: 50,
-		76: 60,
-		77: 70,
-		78: 80,
-		79: 90,
-		80: 100,
-		81: 120,
-		82: 140,
-		83: 160,
-		84: 180,
-		85: 200,
-		86: 250,
-		87: 300,
-		88: 350,
-		89: 400,
-		90: 500,
-		91: 600,
-		92: 700,
-		93: 800,
-		94: 900,
-		95: 1e3,
-		96: 1500,
-		97: 2500,
-		98: 4e3,
-		99: 7500
+		90: 25,
+		91: 35,
+		92: 50,
+		93: 65,
+		94: 80,
+		95: 100,
+		96: 120,
+		97: 145,
+		98: 170,
+		99: 200
 	};
 	var MIN_GRADE = 65;
 	function priceFor(g) {
@@ -3690,5 +3675,5 @@ function fullProject(p) {
 function buildPitchSite(design, baseProject) {
 	return Site.files(completeSite(fullProject(pitchProject(design, baseProject))), design.tpl);
 }
-var BUILT_AT = "2026-11-19T19:11:58.583Z";
+var BUILT_AT = "2026-11-19T19:30:45.376Z";
 export { BUILT_AT, buildPitchSite };

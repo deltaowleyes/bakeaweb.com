@@ -145,7 +145,7 @@ test('grades and prices: only 65+ templates are offered, priced by their rating 
   });
   expect(r.all).toBeGreaterThan(r.off.length);
   for (const [g] of r.off) expect(g).toBeGreaterThanOrEqual(65);
-  expect(r.p).toEqual([null, 0, 0, 0, 0, 50, 90, 100, 180, 200, 250, 350, 500, 1000, 1500, 7500]);
+  expect(r.p).toEqual([null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 100, 120, 200]);
   expect(r.lab).toBe('$7,500');
 });
 

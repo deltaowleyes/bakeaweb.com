@@ -173,7 +173,7 @@ function CallCard({ c, me, open, setOpen, reload }) {
         {c.phone && <a className="font-bold text-acc text-lg" href={'tel:' + c.phone.replace(/[^\d+]/g, '')}>📞 {c.phone}</a>}
         {c.website && <a className="text-acc underline break-all" href={/^https?:/.test(c.website) ? c.website : 'https://' + c.website} target="_blank" rel="noopener">{c.website.replace(/^https?:\/\//, '')}</a>}
       </div>
-      {big(c) && <div className="mt-3 bg-violet-50 border border-violet-300 rounded-xl p-3 text-sm"><b>Bigger firm: don't quote $180–$400.</b> If they ask about price, say: <i>"For a bigger site, Chris quotes it after you've seen the designs, and the launch-week discount applies."</i></div>}
+      {big(c) && <div className="mt-3 bg-violet-50 border border-violet-300 rounded-xl p-3 text-sm"><b>Bigger firm: don't quote $50–$250.</b> If they ask about price, say: <i>"For a bigger site, Chris quotes it after you've seen the designs, and the half-price offer still applies."</i></div>}
       <div className="mt-3 bg-paper rounded-xl p-3 text-sm whitespace-pre-line"><b>Tips: </b>{tipsFor(c)}</div>
       {c.next_step && !open && <div className="mt-2 text-sm"><b>Next step:</b> {c.next_step}</div>}
       {msg && <p className="text-acc font-semibold mt-2 mb-0">{msg}</p>}

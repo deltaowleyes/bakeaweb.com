@@ -106,7 +106,7 @@ var Render = (function () {
   ];
   /* Grades on a 1–99 scale (Claude's grading from screenshots, 2026-11-14; the owner and Leah grade the finalists).
      A family's grade applies to its three variants unless a variant is listed (e.g. 'homeward-b').
-     Prices follow the grade point by point (decided 2026-11-15, VISION.md §5): 74 and lower free, 75 $50 … 99 $7,500 (PRICE_BY_GRADE).
+     Prices follow the grade point by point (decided 2026-11-19): under 90 free, 90 $25 … 99 $200 CAD (PRICE_BY_GRADE).
      Templates under 65 are not offered (cutoff lowered from 70 on 2026-11-15) in step 5 (they stay here so older saved projects still open). */
   var GRADES = { news: 45, app: 50, mag: 52, min: 50, bold: 48, portal: 50, story: 55, board: 42,
     tide: 72, ember: 73, folio: 74, block: 70, bento: 72, craft: 66, glow: 67, swiss: 71, retro: 70, lens: 64,
@@ -122,8 +122,8 @@ var Render = (function () {
     whip: 85, pourover: 84, letterboard: 86,
     tender: 85, quill: 86, lattice: 85,
     colophon: 86, swatch: 85, imprint: 85 };
-  var PRICE_BY_GRADE = { 75: 50, 76: 60, 77: 70, 78: 80, 79: 90, 80: 100, 81: 120, 82: 140, 83: 160, 84: 180, 85: 200, 86: 250, 87: 300, 88: 350, 89: 400,
-    90: 500, 91: 600, 92: 700, 93: 800, 94: 900, 95: 1000, 96: 1500, 97: 2500, 98: 4000, 99: 7500 };
+  /* Template prices in CAD (decided 2026-11-19): under 90 free, then 90 $25 … 99 $200. Pitch prices are in lib/sale.js. */
+  var PRICE_BY_GRADE = { 90: 25, 91: 35, 92: 50, 93: 65, 94: 80, 95: 100, 96: 120, 97: 145, 98: 170, 99: 200 };
   var MIN_GRADE = 65;
   function priceFor(g) { g = Math.floor(+g || 0); if (g < MIN_GRADE) return null; if (g > 99) g = 99; return PRICE_BY_GRADE[g] || 0; }
   function money(n) { return '$' + Number(n).toLocaleString('en-US'); }

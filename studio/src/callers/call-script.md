@@ -1,4 +1,4 @@
-# BAKE call script: launch week (Nov 16–20, 2026)
+# BAKE call script (prices updated Nov 19, 2026)
 
 **Who we are on the phone:** RezSite. The call starts as a quick check of their RezSite directory listing, then offers **3 free website designs**. BAKE is RezSite's web design studio.
 
@@ -30,7 +30,7 @@ Then stay on the line while they open it: "What do you think of the first one?"
 3. **Their current site:** "We'll use the photos, videos and information from your current site, so there's nothing you need to send us. Is there anything you'd like changed or added, like new photos or another page?" *(Write anything they'd like in Notes.)*
 
 Close:
-> "Perfect. You'll have three designs **[turnaround]**. And just so you know, this is our **launch week**: if you pick one **today it's half price**, tomorrow 40% off, then 10% less each day until Friday. Thanks, **[their name]**!"
+> "Perfect. You'll have three designs **[turnaround]**. And just so you know: when we email them to you, any design you pick in the **first 24 hours is half price**, then 40% off the next day, and 10% less each day after that. Thanks, **[their name]**!"
 
 Then message **Chris right away** with the business name.
 
@@ -40,7 +40,7 @@ Then message **Chris right away** with the business name.
 ---
 
 ## Price and what's included (only when they ask)
-> "The designs are free. If you like one, it's a **one-time price, usually $180 to $400** depending on the design, with **no monthly fees**. This is our launch week, so it's **50% off today**, 40% tomorrow, then 10% less each day until Friday."
+> "The designs are free. If you like one, it's a **one-time price, usually $50 to $250 (Canadian)** depending on the design, with **no monthly fees**. And when we email the designs, it's **50% off for the first 24 hours**, then 40% off the next day, then 10% less each day."
 
 | They ask about | You say |
 |---|---|
@@ -48,7 +48,7 @@ Then message **Chris right away** with the business name.
 | **Address** | "You get a **free address** like *yourbusiness.rezsite.com* or *yourbusiness.bakedby.me*." |
 | **Their own domain** | "We can connect the domain you already have for **$100 one-time**." |
 | **A new domain** | "We can register a new one for you for **$50**, plus the yearly domain fee, usually **about $15 a year**." |
-| **Bigger firms** | "For a bigger site, Chris quotes it after you've seen the designs, and the launch-week discount applies." |
+| **Bigger firms** | "For a bigger site, Chris quotes it after you've seen the designs, and the half-price offer still applies." |
 | **Paying** | "By Interac e-Transfer. Your designs link has a **Buy** section: pick a name, you get a pay code, send the e-Transfer with that code, and your site goes live on rezsite.com as soon as it arrives." |
 
 ---
@@ -72,5 +72,5 @@ Then message **Chris right away** with the business name.
 ## Never say
 - Don't say a business is Indigenous-owned unless they tell you.
 - Don't promise prices or features beyond this page.
-- Don't call the launch-week price "our regular price is…". Say "launch-week pricing".
+- Don't promise the sale before the designs are emailed: it starts when Chris emails them.
 - Don't email anyone who didn't give you their email on the call (or publish it on their own site).
