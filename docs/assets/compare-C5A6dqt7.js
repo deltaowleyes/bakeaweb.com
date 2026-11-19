@@ -3881,6 +3881,7 @@ import{t as e}from"./react-DvXU6kJ2.js";var t=e(),n=(function(){function e(e){re
 .pv .hph svg{display:inline-block;color:var(--acc)}
 .pv .hd-split .hph{margin-left:8px}
 .pv .hph.hph-i span{display:none}
+.pv .hd>.ha{flex:0 0 auto}.pv .hd .hc{white-space:nowrap}.pv .hd>.mn{min-width:0;flex-wrap:wrap;row-gap:6px}
 .pv .hph.hph-i{width:40px;height:40px;justify-content:center;border-radius:50%;box-shadow:inset 0 0 0 2px var(--line)}
 .pv .hb{display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:18px 0 0;padding:8px 16px 8px 10px;border-radius:999px;font-size:14px;line-height:1.3;
   background:color-mix(in srgb,currentColor 8%,transparent);border:1px solid color-mix(in srgb,currentColor 22%,transparent);max-width:100%}
