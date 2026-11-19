@@ -3864,3 +3864,62 @@
   .pv.tf-imprint .pr-i{padding:8px 8px 14px;border-radius:18px}.pv.tf-imprint .pr-btn{font-size:13px;padding:8px 10px}.pv.tf-imprint .pr-im:after{width:64%;font-size:9px}
   .pv.tf-imprint .s-cta .w{padding:90px 24px 48px;clip-path:polygon(44px 0,calc(100% - 44px) 0,100% 44px,100% 100%,0 100%,0 44px)}
 }
+
+/* ======================================================================
+   First screen + live page (2026-11-19): what the best builder templates (Framer BLDR, Webflow Plumbox) have.
+   1. Call button in the hero and the phone number in the header (render.js phoneOf: only the business's real number).
+   2. Proof / rating badge under the hero buttons (render.js badgeHtml: biz.badge, stars only with a real score).
+   3. Sticky menu: on the live page the header stays at the top and slims down as you scroll ("Keep header
+      visible when scrolling", on by default). Screenshots are drawn without .live, so they never change.
+   4. Scroll animation on the live page: the hero eases in on load; headings, cards, menu rows, numbers and
+      photos fade up as they scroll into view (CSS scroll-driven animations; off for "reduce motion").
+   ====================================================================== */
+.pv .bt-call{display:inline-flex;align-items:center;gap:8px;background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.pv .bt-call svg{display:inline-block;flex:0 0 auto}
+.pv .hph{display:inline-flex;align-items:center;gap:7px;font-weight:700;text-decoration:none;white-space:nowrap;font-size:15px}
+.pv .hph svg{display:inline-block;color:var(--acc)}
+.pv .hd-split .hph{margin-left:8px}
+.pv .hb{display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:18px 0 0;padding:8px 16px 8px 10px;border-radius:999px;font-size:14px;line-height:1.3;
+  background:color-mix(in srgb,currentColor 8%,transparent);border:1px solid color-mix(in srgb,currentColor 22%,transparent);max-width:100%}
+.pv .hb b{font-weight:800}
+.pv .hb>span:last-child:not(.hb-i):not(.hb-st){opacity:.8}
+.pv .hb-i{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--acc);color:var(--oa);font-size:13px}
+.pv .hb-st{color:#f5b301;letter-spacing:1px;font-size:16px}.pv .hb-st i{font-style:normal;opacity:.3}
+.pv .al-center .hb,.pv .hl-center .hb{margin-left:auto;margin-right:auto}
+@container (max-width:599.98px){
+  .pv .hph span{display:none}
+  .pv .hph{width:40px;height:40px;justify-content:center;border-radius:50%;box-shadow:inset 0 0 0 2px var(--line)}
+  .pv .bts .bt-call{width:100%;justify-content:center}
+  .pv .hb{font-size:13px}
+}
+
+/* 3. sticky menu (live page only) */
+@container (min-width:1024px){.cq.live .pv .vh-d:has(>.hd.sk){display:contents}}
+@container (min-width:600px) and (max-width:1023.98px){.cq.live .pv .vh-t:has(>.hd.sk){display:contents}}
+@container (max-width:599.98px){.cq.live .pv .vh-p:has(>.hd.sk){display:contents}}
+.cq.live .pv .hd.sk{position:sticky;top:0;z-index:30}
+@supports (animation-timeline:scroll()){
+  .cq.live .pv .hd.sk{animation:bk-slim linear both;animation-timeline:scroll(root);animation-range:0 180px}
+  .cq.live .pv .hd.sk :is(.lg img,.wm,.wm-pic){animation:bk-slim-logo linear both;animation-timeline:scroll(root);animation-range:0 180px;transform-origin:left center}
+}
+@keyframes bk-slim{to{padding-top:8px;padding-bottom:8px;box-shadow:0 10px 30px -14px rgba(0,0,0,.45)}}
+@keyframes bk-slim-logo{to{transform:scale(.82)}}
+
+/* 4. scroll animation (live page only, the industry families) */
+@media (prefers-reduced-motion:no-preference){
+  .cq.live .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s-hero .ht>*{animation:bk-hero .9s cubic-bezier(.2,.7,.2,1) both}
+  .cq.live .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s-hero .ht>:nth-child(2){animation-delay:.12s}
+  .cq.live .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s-hero .ht>:nth-child(3){animation-delay:.24s}
+  .cq.live .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s-hero .ht>:nth-child(n+4){animation-delay:.36s}
+  .cq.live .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) .s-hero .hm{animation:bk-hero-img 1.2s cubic-bezier(.2,.7,.2,1) both}
+  @supports (animation-timeline:view()){
+    .cq.live .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) main>.s:not(.s-hero) .w>*{animation:bk-in linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
+    .cq.live .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) main>.s:not(.s-hero) .w>:is(.tl,.pr-g,.mu-g,.gl,.stt,.ls,.vg,.qs,.ct,.pods,.vl-lead,.vrow){animation:none}
+    .cq.live .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) main>.s:not(.s-hero) :is(.tl>.ti,.pr-g>.pr-i,.mu-c,.gl>figure,.stt>div,.ls>.lr,.vg>.vi,.qs>blockquote,.ct>div,.pods>.pod,.vl-lead>*,.vrow>.vi){animation:bk-in linear both;animation-timeline:view();animation-range:entry 0% entry 45%}
+    .cq.live .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) main>.s:not(.s-hero) :is(.tl>.ti,.pr-g>.pr-i,.gl>figure,.stt>div,.vg>.vi):nth-child(3n+2){animation-range:entry 8% entry 53%}
+    .cq.live .pv:is(.tf-hearth,.tf-volt,.tf-loom,.tf-bloom,.tf-pulse,.tf-commons,.tf-council,.tf-meridian,.tf-bridge,.tf-convoy,.tf-homeward,.tf-freight,.tf-timber,.tf-shoreline,.tf-basecamp,.tf-reel,.tf-marquee,.tf-frame,.tf-harbour,.tf-waterline,.tf-dockside,.tf-press,.tf-stitch,.tf-merch,.tf-taproom,.tf-roadside,.tf-patio,.tf-bedrock,.tf-breakwater,.tf-rebar,.tf-trapline,.tf-tannery,.tf-birchbark,.tf-gauge,.tf-flowline,.tf-ledger,.tf-whip,.tf-pourover,.tf-letterboard,.tf-tender,.tf-quill,.tf-lattice,.tf-colophon,.tf-swatch,.tf-imprint) main>.s:not(.s-hero) :is(.tl>.ti,.pr-g>.pr-i,.gl>figure,.stt>div,.vg>.vi):nth-child(3n){animation-range:entry 16% entry 61%}
+  }
+}
+@keyframes bk-hero{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes bk-hero-img{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:none}}
+@keyframes bk-in{from{opacity:0;transform:translateY(42px)}to{opacity:1;transform:none}}

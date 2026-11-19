@@ -347,9 +347,32 @@ var Render = (function () {
     var flat = items.filter(function (m) { return !(m.children && m.children.length); }), groups = items.filter(function (m) { return m.children && m.children.length; });
     return (flat.length ? '<div class="dg"><strong>Main</strong>' + flat.map(linkHtml).join('') + '</div>' : '') + groups.map(function (g) { return '<div class="dg"><strong>' + esc(g.label) + '</strong>' + g.children.map(linkHtml).join('') + '</div>'; }).join('');
   }
+  /* ---------- first-screen contact + proof (2026-11-19: what BLDR / Plumbox have) ----------
+     phoneOf: the business's own phone (biz.phone, else the first tel: link on the site). Never made up.
+     badgeHtml: biz.badge = { text, sub?, score?, count?, source? }. A star rating shows only when a real score
+     and count are given (e.g. their Google rating); otherwise it is a proof badge with a real fact
+     (an award, a certification, years in business). */
+  function phoneOf(P) {
+    var b = P.biz || {}, t = String(b.phone || '').trim(), link = '';
+    if (!t) (P.pages || []).some(function (pg) { return (pg.sections || []).some(function (s) { return (s.items || []).some(function (it) { if (/^tel:/i.test(it.link || '')) { link = it.link; t = String(it.text || '').split(/\s*[·|]\s*/)[0].trim(); return true; } return false; }); }); });
+    var d = (link.replace(/^tel:/i, '') || t).replace(/[^0-9+]/g, '');
+    if (d.replace(/\D/g, '').length < 7) return null;
+    if (!t) t = d;
+    return { text: t, href: 'tel:' + (d.charAt(0) == '+' ? d : (d.length == 10 ? '+1' + d : d)), digits: d.replace(/\D/g, '').slice(-10) };
+  }
+  function hasNumber(txt, ph) { return !!(ph && txt && String(txt).replace(/\D/g, '').indexOf(ph.digits) >= 0); }
+  var PHONE_SVG = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>';
+  function badgeHtml(P) {
+    var b = (P.biz || {}).badge; if (!b || !(b.text || b.score)) return '';
+    var sc = parseFloat(b.score), stars = '';
+    if (isFinite(sc) && sc > 0 && b.count) { var full = Math.round(Math.min(5, sc)); stars = '<span class="hb-st" aria-hidden="true">' + '★★★★★'.slice(0, full) + '<i>' + '★★★★★'.slice(full) + '</i></span><b>' + esc(sc.toFixed(1)) + '</b>'; }
+    var main = stars ? stars + '<span>' + esc(b.count + ' ' + (b.source ? b.source + ' ' : '') + 'reviews') + '</span>' : '<span class="hb-i" aria-hidden="true">✦</span><b>' + esc(b.text) + '</b>' + (b.sub ? '<span>' + esc(b.sub) + '</span>' : '');
+    return '<p class="hb"' + (stars ? ' aria-label="Rated ' + esc(sc.toFixed(1)) + ' out of 5 from ' + esc(b.count) + ' reviews"' : '') + '>' + main + '</p>';
+  }
   function header(P, vp, open) {
     var c = P.menu.vp[vp], items = P.menu.items, t = c.type, L = '<a class="lg" href="#top">' + logoHtml(P, vp == 'phone' ? 34 : 44) + '</a>';
-    var extras = (c.search ? '<span class="sr" aria-label="Search">⌕</span>' : '') + (c.cta && P.menu.cta.label ? btn(P.menu.cta.label, P.menu.cta.href, 'bt hc') : '');
+    var ph = phoneOf(P), phb = ph && !hasNumber(P.menu.cta.label, ph) && !/^tel:/i.test(P.menu.cta.href || '') ? '<a class="hph" href="' + esc(ph.href) + '" aria-label="Call ' + esc(ph.text) + '">' + PHONE_SVG + '<span>' + esc(ph.text) + '</span></a>' : '';
+    var extras = (c.search ? '<span class="sr" aria-label="Search">⌕</span>' : '') + phb + (c.cta && P.menu.cta.label ? btn(P.menu.cta.label, P.menu.cta.href, 'bt hc') : '');
     var drawer = '<details class="dr"' + (open ? ' open' : '') + '><summary>☰ Menu</summary><div class="dw">' + tree(items) + '</div></details>';
     var cls = 'hd hd-' + t + ' lp-' + (t == 'split' ? 'center' : c.logo) + (c.sticky ? ' sk' : '');
     var inner;
@@ -372,12 +395,17 @@ var Render = (function () {
 
   /* ---------- sections ---------- */
   function head(s) { return (s.title ? '<div class="sh"><h2' + fk('title') + '>' + esc(s.title) + '</h2>' + (s.moreText ? btn(s.moreText, s.moreLink, 'mo', 'moreText') : '') + '</div>' : '') + (s.text && s.type != 'feature' && s.type != 'text' && s.type != 'cta' ? '<p class="in"' + fk('text') + '>' + esc(s.text) + '</p>' : ''); }
+  function heroCall(P, s) {
+    var ph = phoneOf(P); if (!ph || s.call === false) return '';
+    if (hasNumber(s.linkText, ph) || hasNumber(s.link2Text, ph) || /^tel:/i.test(s.link || '') || /^tel:/i.test(s.link2 || '')) return '';
+    return '<a class="bt bt-call" href="' + esc(ph.href) + '">' + PHONE_SVG + '<span>Call ' + esc(ph.text) + '</span></a>';
+  }
   var SEC = {
     hero: function (P, s, f) {
       var lay = s.layout && s.layout != 'auto' ? s.layout : f.hero; if (lay == 'none') lay = 'center';
       var img = s.image === null ? '' : (s.image ? sectionImage(P, s) : asset(P, picked(P, 'hero'), 'hero'));
       return '<section class="s s-hero hl-' + lay + '"><div class="hx"><div class="ht">' + (s.eyebrow ? '<p class="ey"' + fk('eyebrow') + '>' + esc(s.eyebrow) + '</p>' : '') + '<h1' + fk('title') + '>' + esc(s.title || P.biz.name) + '</h1>' + paras(s.text) +
-        '<div class="bts">' + btn(s.linkText, s.link, 'bt', 'linkText') + btn(s.link2Text, s.link2, 'bt bt2', 'link2Text') + '</div></div>' + (img ? '<div class="hm">' + tagImg(img) + '</div>' : '') + '</div></section>';
+        '<div class="bts">' + btn(s.linkText, s.link, 'bt', 'linkText') + btn(s.link2Text, s.link2, 'bt bt2', 'link2Text') + heroCall(P, s) + '</div>' + badgeHtml(P) + '</div>' + (img ? '<div class="hm">' + tagImg(img) + '</div>' : '') + '</div></section>';
     },
     tiles: function (P, s, f) {
       var st = s.style && s.style != 'auto' ? s.style : f.tiles, cols = s.cols || 3;

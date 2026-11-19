@@ -65,7 +65,7 @@ export function html(P, tplId, opt = {}) {
     '<title>' + esc(title) + '</title>\n' + (P.biz.desc ? '<meta name="description" content="' + esc(P.biz.desc) + '">\n' : '') +
     '<meta name="generator" content="BAKE Studio (bakeaweb.com)">\n' +
     (fl ? '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link rel="stylesheet" href="' + esc(fl) + '">\n' : '') +
-    '<style>\nbody{margin:0}\n' + siteCss + '\n</style>\n</head>\n<body>\n<div class="cq">' + body + '</div>\n</body>\n</html>\n';
+    '<style>\nbody{margin:0}\n' + siteCss + '\n</style>\n</head>\n<body>\n<div class="cq live">' + body + '</div>\n</body>\n</html>\n';
 }
 
 /** Every page as a file: [{ path: 'index.html', content }, …] */

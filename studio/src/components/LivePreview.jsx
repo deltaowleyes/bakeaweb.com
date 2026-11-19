@@ -12,7 +12,7 @@ import { VPW, VPN } from '../edit.js';
 import { partName } from './Preview.jsx';
 
 const SHELL = '<!DOCTYPE html><html><head><meta charset="utf-8"><link id="gf" rel="stylesheet"><style>body{margin:0}' + siteCss +
-  '</style><style id="ed"></style></head><body><div class="cq" id="cq"></div></body></html>';
+  '</style><style id="ed"></style></head><body><div class="cq live" id="cq"></div></body></html>';
 const EDIT_CSS = '[data-sec],[data-ii],[data-fk]{cursor:pointer}[data-sec]:hover{outline:2px dashed rgba(37,99,235,.55);outline-offset:-2px}' +
   '[data-ii]:hover,[data-fk]:hover{outline:2px solid rgba(37,99,235,.8);outline-offset:1px}';
 
