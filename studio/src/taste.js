@@ -32,6 +32,11 @@ let hist = [];
 const go = next => { if (cur && (!next || next.id != cur.id)) hist.push(cur.id); cur = next; };
 const mine = id => ratings.find(r => r.site_id == id && r.rater == me.id);
 const theirs = id => ratings.filter(r => r.site_id == id && r.rater != me.id);
+/* If a save fails because the sign-in ran out, the rating is kept here until it is saved. */
+const DRAFT = 'bake-taste-draft';
+const getDraft = id => { try { const d = JSON.parse(localStorage.getItem(DRAFT)); return d && d.site_id == id ? d : null; } catch { return null; } };
+const setDraft = d => { try { d ? localStorage.setItem(DRAFT, JSON.stringify(d)) : localStorage.removeItem(DRAFT); } catch {} };
+export const signedOut = e => e && (e.code == '42501' || e.code == 'PGRST301' || /row-level security|JWT|refresh token/i.test(e.message || ''));
 
 async function start() {
   const { data } = await sb.auth.getSession();
@@ -48,7 +53,8 @@ async function start() {
   if (!sites.length) { app.innerHTML = '<p class="empty">Nothing to rate yet, or this login is not a RezSite admin.</p>'; return; }
   const h = location.hash.slice(1);
   view = h == 'list' ? 'list' : 'rate';
-  cur = nextUnrated();
+  let d = null; try { d = JSON.parse(localStorage.getItem(DRAFT)); } catch {}
+  cur = (d && sites.find(x => x.id == d.site_id && !mine(x.id))) || nextUnrated();
   draw();
 }
 
@@ -99,7 +105,7 @@ function draw() {
 function drawRate() {
   const body = $('#body');
   if (!cur) { body.innerHTML = '<p class="empty">You have rated every site. Thank you! See <b>All ratings</b> to compare, or tell Claude the ratings are ready.</p>' + (hist.length ? '<p><button class="btn2" id="back">← Back</button></p>' : ''); if ($('#back')) $('#back').onclick = () => { cur = sites.find(x => x.id == hist.pop()) || null; draw(); }; return; }
-  const s = cur, r = mine(s.id), pitch = s.kind == 'pitch';
+  const s = cur, pitch = s.kind == 'pitch', r = mine(s.id) || getDraft(s.id);
   const val = r ? r.score : 60, tags = new Set(r ? r.tags : []);
   body.innerHTML = `<div class="rate">
     <div class="shot">
@@ -114,8 +120,8 @@ function drawRate() {
       <div><p class="lbl">What's not</p><div class="chips">${TAGS.b.map(t => '<button type="button" class="b' + (tags.has(t) ? ' on' : '') + '" data-t="' + esc(t) + '">' + esc(t) + '</button>').join('')}</div></div>
       <div><p class="lbl">Why this number? (in your own words)</p><textarea id="why" rows="4" placeholder="What makes it better or worse than the last few you rated?">${esc(r ? r.reason : '')}</textarea></div>
       <p class="msg" id="fm"></p>
-      <div class="row">${hist.length ? '<button type="button" class="btn2" id="back">← Back</button>' : ''}<button type="submit">${r ? 'Update and next' : 'Save and next'}</button><button type="button" class="btn2" id="skip">Skip for now</button></div>
-      ${r ? reveal(s) : '<p class="note">Claude\'s grade and the other person\'s rating show after you save, so they don\'t sway you.</p>'}
+      <div class="row">${hist.length ? '<button type="button" class="btn2" id="back">← Back</button>' : ''}<button type="submit">${mine(s.id) ? 'Update and next' : 'Save and next'}</button><button type="button" class="btn2" id="skip">Skip for now</button></div>
+      ${mine(s.id) ? reveal(s) : '<p class="note">Claude\'s grade and the other person\'s rating show after you save, so they don\'t sway you.</p>'}
     </form></div>`;
   if (!pitch) loadShot(s, 900);
   const sc = $('#sc');
@@ -130,7 +136,15 @@ function drawRate() {
     if (why.length < 5 && !tags.size) { $('#fm').textContent = 'Add a reason or pick at least one tag, so Claude knows why.'; return; }
     const row = { site_id: s.id, score: +sc.value, tags: [...tags], reason: why, rated_at: new Date().toISOString() };
     const { data, error } = await sb.from('taste_ratings').upsert(row, { onConflict: 'site_id,rater' }).select().single();
-    if (error) { $('#fm').textContent = 'Not saved: ' + error.message; return; }
+    if (error) {
+      if (signedOut(error)) {
+        setDraft(row);
+        $('#fm').innerHTML = 'Your sign-in ran out, so this was not saved yet. Your rating is kept. <button type="button" id="relog">Sign in again</button>';
+        $('#relog').onclick = async () => { await sb.auth.signOut({ scope: 'local' }); location.reload(); };
+      } else $('#fm').textContent = 'Not saved: ' + error.message;
+      return;
+    }
+    setDraft(null);
     ratings = ratings.filter(x => !(x.site_id == s.id && x.rater == me.id)).concat(data);
     go(nextUnrated(s.id));
     draw();

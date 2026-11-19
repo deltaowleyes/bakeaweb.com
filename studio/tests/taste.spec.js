@@ -30,3 +30,18 @@ test('BAKE Taste has a Back button so a saved or skipped site can be fixed', asy
   expect(src).toMatch(/id=\\?"back\\?"/);
   expect(src).toContain('hist.pop()');
 });
+
+test('BAKE Taste keeps a rating when the sign-in has run out, instead of losing it', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'needs the source modules (runs in the normal test run)');
+  await page.goto('taste.html');
+  const r = await page.evaluate(async () => {
+    globalThis.BAKE_TASTE_NO_START = true;
+    const m = await import('/src/taste.js');
+    return [
+      m.signedOut({ code: '42501', message: 'new row violates row-level security policy for table "taste_ratings"' }),
+      m.signedOut({ code: 'PGRST301', message: 'JWT expired' }),
+      m.signedOut({ code: '23505', message: 'duplicate key' })
+    ];
+  });
+  expect(r).toEqual([true, true, false]);
+});
