@@ -1,4 +1,4 @@
-import{t as e}from"./react-CAzQRxiY.js";import{n as t,t as n}from"./jsx-runtime-BqGDR8Sr.js";import{t as r}from"./dist-D_8df79H.js";var i=e(),a=t(),o=`# BAKE call script: launch week (Nov 16–20, 2026)
+import"./modulepreload-polyfill-P2Xu9kJm.js";import{t as e}from"./react-DvXU6kJ2.js";import{n as t,t as n}from"./jsx-runtime-Cu9vUFkz.js";import{t as r}from"./dist-D_8df79H.js";var i=e(),a=t(),o=`# BAKE call script: launch week (Nov 16–20, 2026)
 
 **Who we are on the phone:** RezSite. The call starts as a quick check of their RezSite directory listing, then offers **3 free website designs**. BAKE is RezSite's web design studio.
 

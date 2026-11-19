@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>BAKE Taste</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232f5d62%22/%3E%3Ctext x=%2216%22 y=%2222%22 font-size=%2216%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22 font-weight=%22700%22%3EB%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f5f1;--ink:#1d2a2c;--mute:#5d6b6d;--line:#d9ddd8;--acc:#2f5d62;--card:#fff;--warn:#a8481f;--good:#1f7a4a;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+*{box-sizing:border-box}body{margin:0}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px;background:var(--ink);color:#fff;position:sticky;top:0;z-index:5;flex-wrap:wrap}
+header b{font-size:18px}header small{opacity:.75}
+main{max-width:1400px;margin:0 auto;padding:20px 24px 60px}
+button,.btn{font:inherit;font-weight:600;border:0;border-radius:8px;padding:9px 16px;background:var(--acc);color:#fff;cursor:pointer;text-decoration:none;display:inline-block}
+.btn2{background:transparent;color:var(--acc);box-shadow:inset 0 0 0 1.5px var(--acc)}
+header .btn2{color:#fff;box-shadow:inset 0 0 0 1.5px #fff8}
+input,select,textarea{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;width:100%}
+.login{max-width:420px;margin:60px auto;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;display:grid;gap:12px}
+.msg{color:var(--warn);min-height:1.5em;margin:0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.tabs button[aria-pressed=true]{background:var(--acc);color:#fff}.tabs button[aria-pressed=false]{background:transparent;color:var(--acc);box-shadow:inset 0 0 0 1.5px var(--acc)}
+.prog{margin-left:auto;font-size:14px;color:var(--mute)}
+.rate{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(320px,1fr);gap:22px;align-items:start}
+.shot{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.shot .bar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.shot .bar h2{margin:0;font-size:20px}.shot .bar a{color:var(--acc);font-weight:600}
+.view{height:72vh;overflow:auto;background:#eee}
+.view img{width:100%;display:block}
+.view iframe{width:100%;height:100%;border:0;display:block;background:#fff}
+.wait{padding:60px 20px;text-align:center;color:var(--mute)}
+.form{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:14px;position:sticky;top:76px}
+.big{font-size:44px;font-weight:800;line-height:1;color:var(--acc)}
+.anchor{font-size:14px;color:var(--mute);min-height:1.4em}
+input[type=range]{padding:0;border:0;accent-color:var(--acc)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{font-size:13px;font-weight:600;padding:5px 10px;border-radius:999px;background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.chips button.on.g{background:#e3f2e9;color:var(--good);box-shadow:inset 0 0 0 1.5px var(--good)}
+.chips button.on.b{background:#fbe9e1;color:var(--warn);box-shadow:inset 0 0 0 1.5px var(--warn)}
+.lbl{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--mute);font-weight:700;margin:0 0 6px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.reveal{background:#eef3f1;border-radius:10px;padding:12px 14px;font-size:14px}
+.reveal b{font-size:15px}
+.note{font-size:13px;color:var(--mute);margin:0}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);font-size:14px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#eef3f1;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);position:sticky;top:64px}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td a{color:var(--acc);font-weight:600}.tagl{font-size:12px;color:var(--mute)}
+.diff{font-weight:700}.diff.hi{color:var(--warn)}
+.empty{text-align:center;color:var(--mute);padding:60px 0}
+@media (max-width:900px){.rate{grid-template-columns:1fr}.form{position:static}.view{height:60vh}}
+</style>
+<!-- Cloudflare Web Analytics (visitor counts, no cookies) --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2efc251e2e8a4a488034774beba6aa99"}'></script>
+</head>
+<body>
+<header><div><b>BAKE Taste</b> <small>your own design ratings · admins only</small></div><div id="who"></div></header>
+<main id="app"><p class="empty">Loading…</p></main>
+<script type="module" src="/src/taste.js"></script>
+</body>
+</html>
