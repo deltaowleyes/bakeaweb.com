@@ -360,6 +360,8 @@ var Render = (function () {
     if (!t) t = d;
     return { text: t, href: 'tel:' + (d.charAt(0) == '+' ? d : (d.length == 10 ? '+1' + d : d)), digits: d.replace(/\D/g, '').slice(-10) };
   }
+  /* a long menu leaves no room for the number in the desktop header: show the phone as an icon there */
+  function menuChars(P) { return (P.menu.items || []).reduce(function (n, m) { return n + String(m.label || '').length; }, 0) + String(P.menu.cta && P.menu.cta.label || '').length; }
   function hasNumber(txt, ph) { return !!(ph && txt && String(txt).replace(/\D/g, '').indexOf(ph.digits) >= 0); }
   var PHONE_SVG = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>';
   function badgeHtml(P) {
@@ -371,7 +373,7 @@ var Render = (function () {
   }
   function header(P, vp, open) {
     var c = P.menu.vp[vp], items = P.menu.items, t = c.type, L = '<a class="lg" href="#top">' + logoHtml(P, vp == 'phone' ? 34 : 44) + '</a>';
-    var ph = phoneOf(P), phb = ph && !hasNumber(P.menu.cta.label, ph) && !/^tel:/i.test(P.menu.cta.href || '') ? '<a class="hph" href="' + esc(ph.href) + '" aria-label="Call ' + esc(ph.text) + '">' + PHONE_SVG + '<span>' + esc(ph.text) + '</span></a>' : '';
+    var ph = phoneOf(P), phb = ph && !hasNumber(P.menu.cta.label, ph) && !/^tel:/i.test(P.menu.cta.href || '') ? '<a class="hph' + (vp == 'desktop' && menuChars(P) > 64 ? ' hph-i' : '') + '" href="' + esc(ph.href) + '" aria-label="Call ' + esc(ph.text) + '">' + PHONE_SVG + '<span>' + esc(ph.text) + '</span></a>' : '';
     var extras = (c.search ? '<span class="sr" aria-label="Search">⌕</span>' : '') + phb + (c.cta && P.menu.cta.label ? btn(P.menu.cta.label, P.menu.cta.href, 'bt hc') : '');
     var drawer = '<details class="dr"' + (open ? ' open' : '') + '><summary>☰ Menu</summary><div class="dw">' + tree(items) + '</div></details>';
     var cls = 'hd hd-' + t + ' lp-' + (t == 'split' ? 'center' : c.logo) + (c.sticky ? ' sk' : '');
