@@ -9,8 +9,13 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
 const BUCKET = "pitch-photos";
 const OURS = /(bakeaweb\.com|rezsite\.com|bakedby\.me|bakedbya\.pro|supabase\.co)/i;
-const IMG = /https?:\/\/[^"\\\s]+?\.(?:jpe?g|png|webp|gif)(?:\?[^"\\\s]*)?/gi;
-const MAX = 15 * 1024 * 1024;
+// a whole web address (up to a quote, backslash or space) that ends in a photo type, e.g. Wix's
+// …~mv2.jpg/v1/fill/w_960,h_720/name.jpg, so the address is never cut short at the first ".jpg"
+const URL_RE = /https?:\/\/[^"'\\\s)<>]+/gi;
+const IS_IMG = /\.(?:jpe?g|png|webp|gif)(?:\?[^"\\\s]*)?$/i;
+const MAX = 5 * 1024 * 1024; // the pitch-photos bucket limit
+// smaller versions some photo hosts will serve when the original is too big
+const SMALLER = (u: string) => /squarespace-cdn\.com/.test(u) ? [u.split("?")[0] + "?format=2500w", u.split("?")[0] + "?format=1500w"] : [];
 
 function stripJpeg(b: Uint8Array): Uint8Array {
   // drop APP1 (EXIF/XMP, holds GPS) and APP13 segments; keep everything else
@@ -47,16 +52,22 @@ Deno.serve(async (req) => {
 
   const folder = row.photo_folder || crypto.randomUUID().replace(/-/g, "");
   const text = JSON.stringify([row.photos, row.base_project, row.redesigns]);
-  const urls = [...new Set((text.match(IMG) || []).filter((u) => !OURS.test(u)))];
+  const urls = [...new Set((text.match(URL_RE) || []).filter((u) => IS_IMG.test(u) && !OURS.test(u)))]
+    .sort((a, b) => b.length - a.length); // longest first, so no address is swapped inside a longer one
   const map: Record<string, string> = {}, failed: Record<string, string> = {};
 
   for (const u of urls) {
     try {
-      const r = await fetch(u, { headers: { "user-agent": "Mozilla/5.0 (BAKE pitch photo copy)", "accept": "image/*" }, redirect: "follow" });
-      const type = (r.headers.get("content-type") || "").split(";")[0].trim();
-      if (!r.ok || !/^image\/(jpeg|png|webp|gif)$/.test(type)) { failed[u] = `HTTP ${r.status} ${type}`; continue; }
-      let b = new Uint8Array(await r.arrayBuffer());
-      if (b.length > MAX) { failed[u] = "too big"; continue; }
+      let type = "", b = new Uint8Array(0), why = "";
+      for (const src of [u, ...SMALLER(u)]) {
+        const r = await fetch(src, { headers: { "user-agent": "Mozilla/5.0 (BAKE pitch photo copy)", "accept": "image/*" }, redirect: "follow" });
+        type = (r.headers.get("content-type") || "").split(";")[0].trim();
+        if (!r.ok || !/^image\/(jpeg|png|webp|gif)$/.test(type)) { why = `HTTP ${r.status} ${type}`; break; }
+        b = new Uint8Array(await r.arrayBuffer());
+        if (b.length <= MAX) { why = ""; break; }
+        why = "too big";
+      }
+      if (why) { failed[u] = why; continue; }
       if (type === "image/jpeg") b = stripJpeg(b);
       const ext = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "image/gif": "gif" }[type];
       const path = `${folder}/${await sha(u)}.${ext}`;
@@ -69,7 +80,9 @@ Deno.serve(async (req) => {
   const swap = (v: unknown) => {
     if (v == null) return v;
     let s = JSON.stringify(v);
-    for (const [a, b] of Object.entries(map)) s = s.split(JSON.stringify(a).slice(1, -1)).join(b);
+    // replace an address only where it ends (quote, backslash, space, bracket), never inside a longer address
+    const esc = (x: string) => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    for (const [a, b] of Object.entries(map)) s = s.replace(new RegExp(esc(JSON.stringify(a).slice(1, -1)) + "(?=[\"'\\\\\\s)<>]|$)", "g"), () => b);
     return JSON.parse(s);
   };
   // photos keep the original address as "from" (where it came from) and point "src" at the copy
