@@ -13,7 +13,7 @@ import { createRoot } from 'react-dom/client';
 import { createClient } from '@supabase/supabase-js';
 import './callers.css';
 import Script from './Script.jsx';
-import Listing from './Listing.jsx';
+import Listing, { siteUrl, openSite } from './Listing.jsx';
 
 const sb = createClient('https://gpwxuunutljcauoknhrh.supabase.co', 'sb_publishable_B7a1VEv6RX13n2JhA50tbQ_oR_oKfw9');
 
@@ -171,7 +171,8 @@ function CallCard({ c, me, open, setOpen, reload }) {
       </div>
       <div className="flex flex-wrap gap-x-5 gap-y-1 mt-2 text-base">
         {c.phone && <a className="font-bold text-acc text-lg" href={'tel:' + c.phone.replace(/[^\d+]/g, '')}>📞 {c.phone}</a>}
-        {c.website && <a className="text-acc underline break-all" href={/^https?:/.test(c.website) ? c.website : 'https://' + c.website} target="_blank" rel="noopener">{c.website.replace(/^https?:\/\//, '')}</a>}
+        {c.website && <a className="text-acc underline break-all" href={siteUrl(c.website)} target="_blank" rel="noopener">{c.website.replace(/^https?:\/\//, '')}</a>}
+        {c.website && <a className="btn2 !py-1 !px-3 text-sm no-underline" href={siteUrl(c.website)} target="_blank" rel="noopener" onClick={e => openSite(c.website, e)}>🌐 Open website in new window ↗</a>}
       </div>
       {big(c) && <div className="mt-3 bg-violet-50 border border-violet-300 rounded-xl p-3 text-sm"><b>Bigger firm: don't quote $50–$250.</b> If they ask about price, say: <i>"For a bigger site, Chris quotes it after you've seen the designs, and the half-price offer still applies."</i></div>}
       <div className="mt-3 bg-paper rounded-xl p-3 text-sm whitespace-pre-line"><b>Tips: </b>{tipsFor(c)}</div>

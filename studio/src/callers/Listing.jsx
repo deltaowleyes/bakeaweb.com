@@ -11,6 +11,14 @@ const FIELDS = [
   ['category', 'Business type'], ['hours', 'Hours'], ['description', 'What they do (shown on the listing)']
 ];
 const LONG = new Set(['description', 'social_links', 'hours']);
+// Opens a business website in its own browser window (not a tab) so the caller can look at it while on the phone.
+export const siteUrl = u => { u = String(u || '').trim().split(/[\s,]+/)[0]; return u ? (/^https?:/i.test(u) ? u : 'https://' + u) : ''; };
+export const openSite = (u, e) => {
+  const url = siteUrl(u); if (!url) return;
+  const w = Math.min(1280, screen.availWidth - 40), h = Math.min(900, screen.availHeight - 60);
+  const win = window.open(url, 'bake-site', `popup=yes,noopener=no,width=${w},height=${h},left=${screen.availWidth - w},top=20`);
+  if (win) { e?.preventDefault(); win.opener = null; win.focus(); } // if a popup blocker stops it, the normal link opens a new tab instead
+};
 // Read-only facts, in a sensible order, with plain-language labels.
 const INFO = [
   ['id', 'Listing #'], ['directory_category', 'Directory category'], ['t2', 'T2 design rating (1–99)'], ['t2_notes', 'T2 note'],
@@ -106,6 +114,7 @@ export default function Listing({ sb, c, onVerified }) {
             <span>{l}{String(f[k] ?? '').trim() !== String(b[k] ?? '').trim() && <span className="text-amber-700"> · changed</span>}</span>
             {LONG.has(k) ? <textarea className="inp" rows={k === 'description' ? 3 : 2} value={f[k]} onChange={e => setF({ ...f, [k]: e.target.value })} />
               : <input className="inp" value={f[k]} onChange={e => setF({ ...f, [k]: e.target.value })} />}
+            {k === 'website' && siteUrl(f.website) && <a className="text-acc underline font-semibold text-sm" href={siteUrl(f.website)} target="_blank" rel="noopener" onClick={e => openSite(f.website, e)}>🌐 Open website in new window ↗</a>}
           </label>
         ))}
         <label className={L + ' sm:col-span-2'}>Verification note (optional)<input className="inp" placeholder='e.g. "Confirmed with Mary (owner), new phone number"' value={note} onChange={e => setNote(e.target.value)} /></label>
