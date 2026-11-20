@@ -7,5 +7,5 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   base: './',
   plugins: [react(), tailwindcss()],
-  build: { outDir: 'dist', emptyOutDir: true, rollupOptions: { input: { main: 'index.html', studio: 'studio/index.html', pitches: 'pitches.html', preview: 'preview.html', callers: 'callers.html', taste: 'taste.html' } } }   // pitches.html = private Pitches page (admin login); preview.html = the link sent to a prospect; callers.html = the callers' page (Leah, Brandee); taste.html = Chris and Leah's own design ratings
+  build: { outDir: 'dist', emptyOutDir: true, rollupOptions: { input: { main: 'index.html', studio: 'studio/index.html', pitches: 'pitches.html', preview: 'preview.html', callers: 'callers.html', taste: 'taste.html', markets: 'markets.html' } } }   // pitches.html = private Pitches page (admin login); preview.html = the link sent to a prospect; callers.html = the callers' page (Leah, Brandee); taste.html = Chris and Leah's own design ratings; markets.html = future markets + domain search (admins only)
 });
