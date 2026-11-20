@@ -49,6 +49,7 @@ export default function Listing({ sb, c, onVerified }) {
   const [b, setB] = useState(null), [f, setF] = useState({}), [err, setErr] = useState(''), [msg, setMsg] = useState('');
   const [busy, setBusy] = useState(false), [note, setNote] = useState(''), [more, setMore] = useState(false);
   const [to, setTo] = useState(''), [sending, setSending] = useState(false), [sent, setSent] = useState(''), [sendErr, setSendErr] = useState('');
+  const [saleTo, setSaleTo] = useState(''), [saleBusy, setSaleBusy] = useState(false), [saleSent, setSaleSent] = useState(''), [saleErr, setSaleErr] = useState(''), [saleShow, setSaleShow] = useState(false);
   const [vmTo, setVmTo] = useState(''), [vmBusy, setVmBusy] = useState(false), [vmSent, setVmSent] = useState(''), [vmErr, setVmErr] = useState(''), [vmShow, setVmShow] = useState(false);
 
   // Every keystroke is also kept in this browser (draftKey) until it is saved, so nothing typed during a call
@@ -73,6 +74,7 @@ export default function Listing({ sb, c, onVerified }) {
     setB(data);
     setTo(t => t || c.contact_email || data.email || '');
     setVmTo(t => t || c.contact_email || data.email || '');
+    setSaleTo(t => t || c.contact_email || data.email || '');
   };
   useEffect(() => { load(); }, [c.business_id]);   // eslint-disable-line react-hooks/exhaustive-deps
   const edit = (k, v) => setF(cur => { const n = { ...cur, [k]: v }; writeDraft({ f: n, note, at: Date.now() }); return n; });
@@ -108,6 +110,13 @@ export default function Listing({ sb, c, onVerified }) {
     setVmBusy(false);
     if (error) return setVmErr(error.message);
     setVmSent(`Voicemail follow-up sent to ${data.to}.`);
+  };
+  const sendSale = async () => {
+    setSaleBusy(true); setSaleErr(''); setSaleSent('');
+    const { data, error } = await sb.rpc('caller_send_sale_rundown', { p_id: c.business_id, p_email: saleTo.trim(), p_contact: f.contact_name || c.contact_person || null });
+    setSaleBusy(false);
+    if (error) return setSaleErr(error.message);
+    setSaleSent(`Sale rundown sent to ${data.to}.`);
   };
   const okEmail = v => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim());
   const L = 'grid gap-1 text-sm font-semibold';
@@ -166,6 +175,51 @@ If you'd rather not hear from us, reply "unsubscribe" and we won't email you aga
         )}
         {vmSent && <p className="text-emerald-700 font-semibold mb-0 mt-2">✓ {vmSent} Remember to pick "Voicemail left" as the outcome and save the call.</p>}
         {vmErr && <p className="text-warn mb-0 mt-2">{vmErr}</p>}
+      </div>
+
+      <div className="mt-3 bg-amber-50 border-2 border-amber-300 rounded-xl p-3 text-sm" data-testid="sale-email">
+        <b>🏷️ Interested? Send them the sale rundown</b>
+        <p className="mt-1 mb-2">Emails a short summary of the current offer (3 free designs, prices, the half-price sale, hosting, domains, paying) from leah@rezsite.com, so they can look it over in their own time. Ask first: <i>"Can I email you a quick rundown of the offer?"</i></p>
+        <div className="flex flex-wrap gap-2 items-center">
+          <input className="inp flex-1 min-w-[16rem]" type="email" placeholder="owner@business.ca" value={saleTo} onChange={e => setSaleTo(e.target.value)} aria-label="Sale rundown email" />
+          <button type="button" className="btn" disabled={saleBusy || !!saleSent || !okEmail(saleTo)} onClick={sendSale}>{saleBusy ? 'Sending…' : saleSent ? '✓ Sent' : 'Send sale rundown'}</button>
+        </div>
+        <button type="button" className="mt-2 text-acc font-semibold underline text-sm" onClick={() => setSaleShow(!saleShow)}>{saleShow ? '▾ Hide' : '▸ Preview'} the email</button>
+        {saleShow && (
+          <div className="mt-2 bg-white border border-line rounded-lg p-3 whitespace-pre-line">
+            <b>Subject: Our current offer for {b.name}: 3 free website designs</b>{'\n\n'}
+            {`Hi ${(f.contact_name || c.contact_person || '').trim().split(' ')[0] || b.name + ' team'},
+
+Thanks for your time today. Here's a quick rundown of our current offer, so you can look it over whenever suits you.
+
+WHAT YOU GET
+- Three free website designs made for ${b.name}, built from your current site, photos and information. No cost and no obligation to look.
+
+IF YOU LIKE ONE
+- A one-time price, usually $50 to $250 (Canadian) depending on the design. No monthly fees.
+- Sale: once we email your designs, any design you pick in the first 24 hours is half price, then 40% off the next day, and 10% less each day after that.
+
+HOSTING AND YOUR ADDRESS
+- Free hosting, with a small "Baked with BAKE" badge at the bottom of your pages (or remove the badge from $5 a month).
+- A free address like yourbusiness.rezsite.com or yourbusiness.bakedby.me.
+- Connect a domain you already own for $100 one-time, or we can register a new one for $50 plus the yearly domain fee (usually about $15 a year).
+
+PAYING
+- By Interac e-Transfer. Your designs link has a Buy section: pick a name, get a pay code, send the e-Transfer with that code, and your site goes live as soon as it arrives.
+
+Questions, or ready for your designs? Just reply to this email or call me at 226-542-5991.
+
+Thank you,
+Leah Courteaux
+BAKE / BakeAWeb
+leah@rezsite.com 226-542-5991
+bakeaweb.com
+
+If you'd rather not hear from us, reply "unsubscribe" and we won't email you again.`}
+          </div>
+        )}
+        {saleSent && <p className="text-emerald-700 font-semibold mb-0 mt-2">✓ {saleSent} Ask them to check their inbox (and spam, just in case).</p>}
+        {saleErr && <p className="text-warn mb-0 mt-2">{saleErr}</p>}
       </div>
 
       <div className="mt-3 bg-sky-50 border-2 border-sky-300 rounded-xl p-3 text-sm">

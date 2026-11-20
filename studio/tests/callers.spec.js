@@ -83,3 +83,25 @@ test('voicemail follow-up email: fills in the business name and sends to the typ
   await expect(box.getByText(/Voicemail follow-up sent to info@testfood.ca/)).toBeVisible();
   expect(sent).toEqual([{ p_id: BIZ.id, p_email: 'info@testfood.ca' }]);
 });
+
+test('sale rundown email: previews the offer and sends to the typed address', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'uses the dev server');
+  const sent = [];
+  await fake(page, []);
+  await page.route(`https://${REF}.supabase.co/rest/v1/rpc/caller_send_sale_rundown*`, route => {
+    sent.push(JSON.parse(route.request().postData()));
+    return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, to: 'owner@testfood.ca' }) });
+  });
+  await page.goto('callers.html');
+  await page.getByRole('button', { name: /Start call/ }).click();
+  const box = page.getByTestId('sale-email');
+  await box.getByRole('button', { name: /Preview/ }).click();
+  await expect(box.getByText(/Our current offer for Test Food Co: 3 free website designs/)).toBeVisible();
+  await expect(box.getByText(/first 24 hours is half price/)).toBeVisible();
+  const send = box.getByRole('button', { name: 'Send sale rundown' });
+  await expect(send).toBeDisabled();
+  await box.getByLabel('Sale rundown email').fill('owner@testfood.ca');
+  await send.click();
+  await expect(box.getByText(/Sale rundown sent to owner@testfood.ca/)).toBeVisible();
+  expect(sent).toEqual([{ p_id: BIZ.id, p_email: 'owner@testfood.ca', p_contact: null }]);
+});
