@@ -14,9 +14,22 @@ test('BAKE Markets batch prompt has everything a new chat needs', async ({ page 
   const r = await page.evaluate(async () => {
     globalThis.BAKE_MARKETS_NO_START = true;
     const m = await import('/src/markets.js');
-    return { p: m.batchPrompt(3, [{ id: 21, name: 'Lawyers', examples: 'law firms', tlds: '.lawyer' }]), s: m.STATUSES,
-      out: [m.signedOut({ code: 'PGRST301', message: 'JWT expired' }), m.signedOut({ code: '23505', message: 'duplicate key' })] };
+    return { p: m.batchPrompt(3, [{ id: 21, name: 'Lawyers', examples: 'law firms', tlds: '.lawyer' },
+        { id: 22, name: 'Dentists', examples: 'clinics', tlds: '.dental', biz_canada: 16000, biz_na: 196000, biz_world: 1200000, avg_site_usd: 5000 }]), s: m.STATUSES,
+      out: [m.signedOut({ code: 'PGRST301', message: 'JWT expired' }), m.signedOut({ code: '23505', message: 'duplicate key' })],
+      money: [m.money(45e9), m.money(1083675000000), m.money(66564000), m.money(2500), m.money(null)], count: [m.count(1800000), m.count(16000), m.count(13000000)],
+      up: [m.upliftOf(45e9, 100), m.upliftOf(45e9, 60), m.upliftOf(45e9, null)] };
   });
+  expect(r.p).toContain('biz_canada');
+  expect(r.p).toContain('avg_site_usd');
+  expect(r.p).toContain('quality_score');
+  expect(r.p).toContain('max_uplift_usd');
+  expect(r.p).toContain('Not sized yet');
+  expect(r.p).toContain('Sized: 16K Canada / 196K North America / 1.2M world, $5,000 average site');
+  expect(r.p).toContain('best one to choose next');
+  expect(r.money).toEqual(['$45.0B', '$1.08T', '$66.6M', '$2,500', '']);
+  expect(r.count).toEqual(['1.8M', '16K', '13M']);
+  expect(r.up).toEqual([67500000, 24300000, null]);   // matches public.domain_max_uplift()
   expect(r.p).toContain('batch 3');
   expect(r.p).toContain('gpwxuunutljcauoknhrh');
   expect(r.p).toContain('id 21: Lawyers');
