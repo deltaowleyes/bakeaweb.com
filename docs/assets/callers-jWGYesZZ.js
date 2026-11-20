@@ -84,7 +84,7 @@ I just left you a voicemail and wanted to follow up here in case email is easier
 
 I'm Leah Courteaux with BAKE (BakeAWeb). We're verifying business listings on RezSite.com, and I'd like to confirm that ${r.name}'s details are correct.
 
-While I'm reaching out, I'd also like to offer you three free previews of a refreshed website, built from your current site and images. There's no cost and no commitment to look at them. If you like one, prices start at $25.
+While I'm reaching out, I'd also like to offer you three free previews of a refreshed website, built from your current site and images. There's no cost and no commitment to look at them. If you like one, it's a one-time price, usually $50 to $250 (Canadian), with no monthly fees.
 
 If you're interested, just reply to this email or call me at 226-542-5991.
 
