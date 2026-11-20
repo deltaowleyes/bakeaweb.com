@@ -34,7 +34,8 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;heigh
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 .logo img{height:46px;width:auto}
 nav{display:flex;gap:30px;font-weight:500;font-size:16px}
-nav a{text-decoration:none;color:var(--muted)}
+nav a{text-decoration:none;color:var(--muted);white-space:nowrap}
+@media (max-width:1180px){nav{gap:18px;font-size:15px}.logo img{height:38px}}
 nav a:hover{color:var(--ink)}
 .btn{display:inline-flex;align-items:center;gap:10px;background:var(--crust);color:#fff;text-decoration:none;font-weight:700;font-size:17px;padding:15px 26px;border-radius:12px;box-shadow:0 2px 0 #3D0866;transition:background .2s}
 .btn:hover{background:#4E0A80}
