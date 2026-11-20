@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>BAKE Valuation Tracker</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%231d2a2c%22/%3E%3Ctext x=%2216%22 y=%2222%22 font-size=%2216%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22 font-weight=%22700%22%3E$%3C/text%3E%3C/svg%3E">
+<style>:root{--bg:#f6f5f1;--card:#fff;--ink:#1d2a2c;--mute:#5d6b6d;--faint:#8a9597;--line:#e1e4df;--grid:#eceee9;--u:#c0451a;--r:#0b7fa3;--b:#b8860b;--up:#1f7a4a;--flat:#6b7678;--down:#a8481f;color:var(--ink);background:var(--bg);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}@media (prefers-color-scheme:dark){:root{--bg:#121819;--card:#1a2224;--ink:#e8eceb;--mute:#a7b2b3;--faint:#7c888a;--line:#2b3537;--grid:#232c2e;--u:#e0703f;--r:#3fa9cf;--b:#d6a536;--up:#4fbf83;--flat:#9aa5a7}}*{box-sizing:border-box}body{margin:0}header{color:#fff;background:#1d2a2c;padding:28px 24px 24px}header .in,main{max-width:1100px;margin:0 auto}header h1{letter-spacing:-.01em;margin:0 0 4px;font-size:28px}header p{opacity:.8;margin:0;font-size:15px}.priv{letter-spacing:.04em;text-transform:uppercase;background:#ffffff1a;border-radius:999px;margin-top:12px;padding:4px 12px;font-size:12px;font-weight:600;display:inline-block}main{padding:24px 24px 64px}h2{margin:36px 0 6px;font-size:20px}.lede{color:var(--mute);max-width:760px;margin:0 0 16px}.tiles{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;display:grid}.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;position:relative}.tile .k{letter-spacing:.06em;text-transform:uppercase;color:var(--mute);align-items:center;gap:8px;font-size:12px;font-weight:700;display:flex}.sw{border-radius:3px;flex:none;width:12px;height:12px;display:inline-block}.tile .v{font-variant-numeric:tabular-nums;margin:6px 0 2px;font-size:30px;font-weight:700;line-height:1.15}.tile .d{color:var(--mute);font-size:14px}.tile .d b{color:var(--up)}.tile .what{color:var(--mute);border-top:1px solid var(--line);margin:10px 0 0;padding-top:10px;font-size:13px}.charts{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;display:grid}.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 14px 8px;position:relative}.chart h3{align-items:center;gap:8px;margin:0 0 2px;font-size:15px;display:flex}.chart small{color:var(--mute);font-size:12px}.chart svg{width:100%;height:auto;display:block;overflow:visible}.tip{pointer-events:none;background:var(--ink);color:var(--bg);white-space:nowrap;opacity:0;z-index:3;border-radius:8px;padding:6px 9px;font-size:12px;line-height:1.4;transition:opacity .1s;position:absolute}.tl{gap:12px;display:grid}.day{background:var(--card);border:1px solid var(--line);border-radius:14px;grid-template-columns:110px 1fr;gap:16px;padding:16px 18px;display:grid}.day.live{border-color:var(--r);box-shadow:0 0 0 1px var(--r) inset}.when b{font-size:22px;line-height:1.1;display:block}.when span{color:var(--mute);font-size:13px;display:block}.tag{background:var(--grid);color:var(--mute);border-radius:999px;margin-top:8px;padding:2px 8px;font-size:11px;font-weight:700;display:inline-block}.tag.rec{color:#1f6a40;background:#e3f2e9}.tag.now{color:#0a5f7c;background:#dff0f7}@media (prefers-color-scheme:dark){.tag.rec{color:#8fd9ae;background:#1d3a2a}.tag.now{color:#8fd0ea;background:#123441}}.day h4{margin:0 0 8px;font-size:16px}.lv{grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;display:grid}.lv div{border-left:3px solid;padding:2px 0 2px 10px}.lv .n{letter-spacing:.05em;text-transform:uppercase;color:var(--mute);font-size:11px;font-weight:700}.lv .x{font-variant-numeric:tabular-nums;font-size:15px;font-weight:700}.lv .c{font-variant-numeric:tabular-nums;font-size:13px;font-weight:600}.c.up{color:var(--up)}.c.flat{color:var(--flat)}.why{color:var(--ink);margin:0;font-size:14.5px}.why em{color:var(--mute)}details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:28px;padding:12px 18px}summary{cursor:pointer;font-weight:600}table{border-collapse:collapse;font-variant-numeric:tabular-nums;width:100%;margin:10px 0 4px;font-size:13.5px}th,td{border-bottom:1px solid var(--line);text-align:right;white-space:nowrap;padding:6px 8px}th:first-child,td:first-child{text-align:left}th{text-transform:uppercase;letter-spacing:.05em;color:var(--mute);font-size:11px}.notes{color:var(--mute);max-width:820px;font-size:14px}.notes li{margin-bottom:6px}.scroll{overflow-x:auto}@media (width<=640px){.day{grid-template-columns:1fr;gap:8px}.lv{grid-template-columns:1fr}.when b{margin-right:8px;display:inline}.when span{display:inline}}</style>
+  <script type="module" crossorigin src="./assets/value-C6swVuhx.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-P2Xu9kJm.js">
+</head>
+<body>
+<header><div class="in">
+  <h1>BAKE valuation tracker</h1>
+  <p>BakeAWeb + RezSite + TasteAWeb, day by day since our first day building with Claude (Nov 7, 2026).</p>
+  <span class="priv">Private link · not linked from any page · not indexed</span>
+</div></header>
+
+<main>
+  <h2>Where we stand</h2>
+  <p class="lede" id="asof"></p>
+  <div class="tiles" id="tiles"></div>
+
+  <h2>14-day trend</h2>
+  <p class="lede">Each level gets its own chart and scale, because the three numbers are far apart. Shaded bands show the low–high range; the line is the middle. Hover or tap a point for that day.</p>
+  <div class="charts" id="charts"></div>
+
+  <h2>Daily timeline</h2>
+  <p class="lede">Change is shown against the day before. For ranges, the change shows the low end / high end. <span class="tag rec">Recorded</span> = a figure Claude gave that day. <span class="tag">Back-filled</span> = Claude rebuilt it on Nov 20 from what existed that day (no figure was given then).</p>
+  <div class="tl" id="tl"></div>
+
+  <details>
+    <summary>Table view (all numbers)</summary>
+    <div class="scroll"><table id="tbl"></table></div>
+  </details>
+
+  <h2>How to read the three levels</h2>
+  <ul class="notes">
+    <li><b style="color:var(--u)">Unaligned investor</b> — what an outside investor with no stake in us, no loyalty and no interest in our story would pay today. It starts at Rob's figure of about $50K and only moves for things that investor can check: working product, a call list that converts, real buyers, real money. Ideas, plans and AI grades move it very little. This line is Claude's model anchored to Rob's starting number; Rob did not give the daily figures.</li>
+    <li><b style="color:var(--r)">Realistic</b> — Claude's blended estimate (cost to rebuild + early-stage scorecard + forward revenue), cross-checked against Gemini, Copilot, Perplexity and ChatGPT on Nov 14. It's what a friendly early investor might accept in a negotiation, not a price anyone has offered.</li>
+    <li><b style="color:var(--b)">Berkus ceiling</b> — the Berkus pre-revenue method: up to $500K each for idea, prototype, team, relationships and sales. It's a pitching method and the most generous of the three. Use it as the upper limit, never as the headline.</li>
+    <li>All figures are USD. The Nov 13 figure was given in CAD (C$75K–300K) and is converted at 1.40. These are informal estimates, not professional valuations or financial advice. None of them is revenue: as of Nov 20 we have $0 in sales, so the first paid e-Transfer is the single biggest move available to every line.</li>
+  </ul>
+</main>
+
+</body>
+</html>

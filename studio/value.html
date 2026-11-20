@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>BAKE Valuation Tracker</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%231d2a2c%22/%3E%3Ctext x=%2216%22 y=%2222%22 font-size=%2216%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22sans-serif%22 font-weight=%22700%22%3E$%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#f6f5f1;--card:#fff;--ink:#1d2a2c;--mute:#5d6b6d;--faint:#8a9597;--line:#e1e4df;--grid:#eceee9;
+  --u:#c0451a;--r:#0b7fa3;--b:#b8860b;--up:#1f7a4a;--flat:#6b7678;--down:#a8481f;
+  font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+@media (prefers-color-scheme:dark){:root{--bg:#121819;--card:#1a2224;--ink:#e8eceb;--mute:#a7b2b3;--faint:#7c888a;--line:#2b3537;--grid:#232c2e;
+  --u:#e0703f;--r:#3fa9cf;--b:#d6a536;--up:#4fbf83;--flat:#9aa5a7}}
+*{box-sizing:border-box}body{margin:0}
+header{background:#1d2a2c;color:#fff;padding:28px 24px 24px}
+header .in,main{max-width:1100px;margin:0 auto}
+header h1{margin:0 0 4px;font-size:28px;letter-spacing:-.01em}
+header p{margin:0;opacity:.8;font-size:15px}
+.priv{display:inline-block;margin-top:12px;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;background:#ffffff1a;border-radius:999px;padding:4px 12px}
+main{padding:24px 24px 64px}
+h2{font-size:20px;margin:36px 0 6px}
+.lede{color:var(--mute);margin:0 0 16px;max-width:760px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;position:relative}
+.tile .k{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);display:flex;align-items:center;gap:8px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block;flex:none}
+.tile .v{font-size:30px;font-weight:700;line-height:1.15;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.tile .d{font-size:14px;color:var(--mute)}
+.tile .d b{color:var(--up)}
+.tile .what{font-size:13px;color:var(--mute);margin:10px 0 0;border-top:1px solid var(--line);padding-top:10px}
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 14px 8px;position:relative}
+.chart h3{margin:0 0 2px;font-size:15px;display:flex;align-items:center;gap:8px}
+.chart small{color:var(--mute);font-size:12px}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;line-height:1.4;padding:6px 9px;border-radius:8px;white-space:nowrap;opacity:0;transition:opacity .1s;z-index:3}
+.tl{display:grid;gap:12px}
+.day{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:110px 1fr;gap:16px}
+.day.live{border-color:var(--r);box-shadow:0 0 0 1px var(--r) inset}
+.when b{display:block;font-size:22px;line-height:1.1}
+.when span{display:block;font-size:13px;color:var(--mute)}
+.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;padding:2px 8px;margin-top:8px;background:var(--grid);color:var(--mute)}
+.tag.rec{background:#e3f2e9;color:#1f6a40}
+.tag.now{background:#dff0f7;color:#0a5f7c}
+@media (prefers-color-scheme:dark){.tag.rec{background:#1d3a2a;color:#8fd9ae}.tag.now{background:#123441;color:#8fd0ea}}
+.day h4{margin:0 0 8px;font-size:16px}
+.lv{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.lv div{border-left:3px solid;padding:2px 0 2px 10px}
+.lv .n{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mute)}
+.lv .x{font-weight:700;font-variant-numeric:tabular-nums;font-size:15px}
+.lv .c{font-size:13px;font-variant-numeric:tabular-nums;font-weight:600}
+.c.up{color:var(--up)}.c.flat{color:var(--flat)}
+.why{margin:0;font-size:14.5px;color:var(--ink)}
+.why em{color:var(--mute)}
+details{margin-top:28px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 18px}
+summary{cursor:pointer;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0 4px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mute)}
+.notes{font-size:14px;color:var(--mute);max-width:820px}
+.notes li{margin-bottom:6px}
+.scroll{overflow-x:auto}
+@media (max-width:640px){.day{grid-template-columns:1fr;gap:8px}.lv{grid-template-columns:1fr}.when b{display:inline;margin-right:8px}.when span{display:inline}}
+</style>
+</head>
+<body>
+<header><div class="in">
+  <h1>BAKE valuation tracker</h1>
+  <p>BakeAWeb + RezSite + TasteAWeb, day by day since our first day building with Claude (Nov 7, 2026).</p>
+  <span class="priv">Private link · not linked from any page · not indexed</span>
+</div></header>
+
+<main>
+  <h2>Where we stand</h2>
+  <p class="lede" id="asof"></p>
+  <div class="tiles" id="tiles"></div>
+
+  <h2>14-day trend</h2>
+  <p class="lede">Each level gets its own chart and scale, because the three numbers are far apart. Shaded bands show the low–high range; the line is the middle. Hover or tap a point for that day.</p>
+  <div class="charts" id="charts"></div>
+
+  <h2>Daily timeline</h2>
+  <p class="lede">Change is shown against the day before. For ranges, the change shows the low end / high end. <span class="tag rec">Recorded</span> = a figure Claude gave that day. <span class="tag">Back-filled</span> = Claude rebuilt it on Nov 20 from what existed that day (no figure was given then).</p>
+  <div class="tl" id="tl"></div>
+
+  <details>
+    <summary>Table view (all numbers)</summary>
+    <div class="scroll"><table id="tbl"></table></div>
+  </details>
+
+  <h2>How to read the three levels</h2>
+  <ul class="notes">
+    <li><b style="color:var(--u)">Unaligned investor</b> — what an outside investor with no stake in us, no loyalty and no interest in our story would pay today. It starts at Rob's figure of about $50K and only moves for things that investor can check: working product, a call list that converts, real buyers, real money. Ideas, plans and AI grades move it very little. This line is Claude's model anchored to Rob's starting number; Rob did not give the daily figures.</li>
+    <li><b style="color:var(--r)">Realistic</b> — Claude's blended estimate (cost to rebuild + early-stage scorecard + forward revenue), cross-checked against Gemini, Copilot, Perplexity and ChatGPT on Nov 14. It's what a friendly early investor might accept in a negotiation, not a price anyone has offered.</li>
+    <li><b style="color:var(--b)">Berkus ceiling</b> — the Berkus pre-revenue method: up to $500K each for idea, prototype, team, relationships and sales. It's a pitching method and the most generous of the three. Use it as the upper limit, never as the headline.</li>
+    <li>All figures are USD. The Nov 13 figure was given in CAD (C$75K–300K) and is converted at 1.40. These are informal estimates, not professional valuations or financial advice. None of them is revenue: as of Nov 20 we have $0 in sales, so the first paid e-Transfer is the single biggest move available to every line.</li>
+  </ul>
+</main>
+
+<script type="module">
+// ---------- DATA (USD) ----------
+// u = unaligned investor (point), r = realistic [low, high], b = Berkus ceiling [low, high]
+// src: 'rec' recorded that day, 'bf' back-filled Nov 20, 'now' today in progress
+const days = [
+ { d:'2026-11-07', t:'Day one with Claude', src:'bf', u:50000, r:[35000,140000], b:[450000,850000],
+   why:'Starting line. Claude reviewed the old ChatGPT-built Delta Owl Eyes site, set up new repos, and built the first BAKE Studio: a five-step wizard (import, brand, sections, menus, templates) with a working Brand step. Assets on hand: the 5,000-business directory, four registered domains and the BAKE EXPRESS experiments. No customers, no revenue. The unaligned investor line starts at Rob\'s figure of about $50K.' },
+ { d:'2026-11-08', t:'Studio moves to bakeaweb.com; rezsite.com registered', src:'bf', u:52000, r:[40000,155000], b:[525000,950000],
+   why:'The studio moved to its own home on bakeaweb.com, rezsite.com was registered, and the plan was simplified to two studios (PRO and BAKER) with pagename accounts and Supabase logins. A working prototype on its own domain is something any investor can click, so the prototype factor rises (+$2K unaligned). The bigger jumps in the other two lines come from the prototype score in the Berkus scorecard.' },
+ { d:'2026-11-09', t:'Family and funding asks', src:'bf', u:52000, r:[40000,155000], b:[525000,950000],
+   why:'Texts to Uncle Bob, Uncle Ron and Dad asking for $420 to incorporate, plus an offer of 10% for help with a $50K line of credit, and the first $64,000 council budget. Asking for money doesn\'t change what the business is worth, so every line holds. (The 10%-for-$50K offer implied $500K, well above what an outside investor would pay.)' },
+ { d:'2026-11-10', t:'Council presentation', src:'rec', u:52000, r:[45000,170000], b:[600000,1100000],
+   why:'Council deck and script built; the ask grew to $76,500 with a 60% RezSite offer. Claude gave its first Berkus figure, $600K–1.1M, after counting Chris\'s background, and that number went into the deck without its lower estimates beside it, which Claude later said was a mistake. Realistic rises slightly for a clearer company structure. An unaligned investor ignores a pitching method and a funding ask: +$0.' },
+ { d:'2026-11-11', t:'No Claude work recorded', src:'bf', u:52000, r:[45000,170000], b:[600000,1100000],
+   why:'No Claude chats are recorded for this day, so nothing changes. Work done outside Claude (or in a Project whose chats can\'t be searched from here) isn\'t counted.' },
+ { d:'2026-11-12', t:'Calling campaign set up', src:'bf', u:54000, r:[50000,190000], b:[600000,1100000],
+   why:'The directory became a sales tool: 4,610 businesses with phone numbers, deduplicated and sorted (no-website businesses first), split between Chris and Leah, with a call script, follow-up texts and full prep for Mobile Resource Group. A ready list of prospects is a real sales asset (+$2K unaligned). The Berkus ceiling holds: it only moves for sales once someone pays.' },
+ { d:'2026-11-13', t:'First three-method valuation; TRC sale priced', src:'rec', u:54000, r:[54000,214000], b:[600000,1100000],
+   why:'Claude\'s first blended valuation: C$75K–300K (US$54K–214K) from cost to rebuild, Berkus and forward revenue. ChatGPT said about $125K. The TRC tracker sale was priced separately (ask C$12,500, floor C$7,500) and isn\'t included here. Realistic moves up to the recorded figure; nothing new an outside investor can verify: +$0.' },
+ { d:'2026-11-14', t:'Neutral tests; templates and flagships', src:'rec', u:56000, r:[150000,400000], b:[650000,1100000],
+   why:'A neutral brief tested on Gemini, Copilot and Perplexity gave $125K–400K, and Claude\'s nightly review set realistic at $150K–400K. Most of that jump is a change of method (the old figure blended in a low cost-to-rebuild number), not one day\'s work; about $25K of it is real progress: 99 templates, flagships graded 80–86, a photo robot and the first pitches. Unaligned +$2K for the larger product.' },
+ { d:'2026-11-15', t:'Publishing works end to end', src:'rec', u:58500, r:[160000,425000], b:[675000,1100000],
+   why:'Sites now publish for real: BAKE Host on Cloudflare, multi-page sites, an admin Publish button, and a test site that went live. 171 templates, the first 90+ grade (Reel 92), a price ladder checked against Framer, Webflow and agencies, and 10 pitches with private prospect links. Something that actually ships websites is the biggest product step so far (+$2.5K unaligned). Grade B+.' },
+ { d:'2026-11-16', t:'First call day: first market signal', src:'rec', u:63500, r:[165000,435000], b:[675000,1100000],
+   why:'The first outside evidence: Leah logged 27 calls with 4 marked interested (one, Chiblow, later turned out to be Chris\'s own test reply) and 3 call-backs, and the first 4 real prospect previews were sent. The e-Transfer → live-site pipeline was built and passed a fake-payment test. Real people saying yes is what an unaligned investor values most before revenue: +$5K, the biggest day for that line. Still $0 in sales.' },
+ { d:'2026-11-17', t:'New homepage, no calls logged', src:'rec', u:63500, r:[165000,440000], b:[675000,1100000],
+   why:'A new public bakeaweb.com homepage ("free preview first") and fixed reply and order alerts. But 0 of 24 planned calls were logged and no prospect opened a preview. Polish without customer movement: realistic +$5K at the top only, unaligned +$0. Grade C.' },
+ { d:'2026-11-18', t:'Directory re-rated; business plan reviewed', src:'rec', u:64500, r:[165000,445000], b:[675000,1100000],
+   why:'1,864 directory sites re-rated 1–99, which found 438 weak live sites to call next. First human taste ratings, a business plan reviewed by four AIs, and a reframed Walpole Island proposal. Gemini\'s review put BAKE at only US$5K–15K today, a reminder of where a strict outside view sits. No calls logged for the third day. Unaligned +$1K for a better call list. Grade C+.' },
+ { d:'2026-11-19', t:'Calls resume; TasteAWeb added', src:'rec', u:65500, r:[175000,495000], b:[725000,1250000],
+   why:'7 calls logged (1 call-back, 0 interested), the first pitch-code email (RB Wilson), new pitch pricing, and taste-anchored grading. TasteAWeb was added as a pre-product feature of BAKE (paid human website reviews), lifting realistic to $175K–495K and the ceiling to $725K–1.25M. An unaligned investor gives a concept with an unregistered domain and two raters very little: +$1K.' },
+ { d:'2026-11-20', t:'Today: loan, grant and last launch-pricing day', src:'now', u:65500, r:[175000,495000], b:[725000,1250000],
+   why:'In progress. The Tecumseh CDC micro-loan package ($4,678 for desk, chairs and laptop) and the $3,000 IEDF grant budget are done; today is the last 10%-off launch day. Applying for a loan doesn\'t raise value; spending it well might. The 6am plan expected +$0–5K likely and +$15–25K if a first e-Transfer lands. This entry gets its numbers after tonight\'s review.' }
+];
+
+// ---------- HELPERS ----------
+const $ = s => document.querySelector(s);
+const k = n => n >= 1e6 ? '$' + (n/1e6).toFixed(n % 1e6 ? 2 : 1).replace(/\.?0+$/,'') + 'M' : '$' + Math.round(n/1000) + 'K';
+const full = n => '$' + n.toLocaleString('en-US');
+const rng = a => k(a[0]) + '–' + k(a[1]);
+const mid = a => (a[0] + a[1]) / 2;
+const dt = s => new Date(s + 'T12:00:00');
+const fmtDay = s => dt(s).toLocaleDateString('en-CA', { month:'short', day:'numeric' });
+const wk = s => dt(s).toLocaleDateString('en-CA', { weekday:'short' });
+const delta = (n) => n === 0 ? '±$0' : (n > 0 ? '+' : '−') + k(Math.abs(n)).replace('$','$');
+const cls = n => n > 0 ? 'up' : 'flat';
+const esc = s => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const L = { u:{ name:'Unaligned investor', col:'var(--u)' }, r:{ name:'Realistic', col:'var(--r)' }, b:{ name:'Berkus ceiling', col:'var(--b)' } };
+
+// ---------- TILES ----------
+const first = days[0], last = days[days.length - 1];
+$('#asof').textContent = `Day ${days.length} (${fmtDay(last.d)}, ${wk(last.d)}). Change shown since day one, ${fmtDay(first.d)}.`;
+const tiles = [
+  ['u', full(last.u), `<b>+${k(last.u - first.u)}</b> since day one (+${Math.round((last.u/first.u - 1)*100)}%)`, 'An outside investor with no stake in us. Anchored to Rob\'s ~$50K.'],
+  ['r', rng(last.r), `<b>+${k(last.r[0]-first.r[0])} / +${k(last.r[1]-first.r[1])}</b> since day one (low / high)`, 'Claude\'s blended estimate, cross-checked with four other AIs.'],
+  ['b', rng(last.b), `<b>+${k(last.b[0]-first.b[0])} / +${k(last.b[1]-first.b[1])}</b> since day one (low / high)`, 'Berkus pitch method. The upper limit, never the headline.'],
+];
+$('#tiles').innerHTML = tiles.map(([key, v, d, w]) =>
+  `<div class="tile"><div class="k"><span class="sw" style="background:${L[key].col}"></span>${L[key].name}</div><div class="v">${v}</div><div class="d">${d}</div><p class="what">${w}</p></div>`).join('');
+
+// ---------- CHARTS (small multiples, one scale each) ----------
+function chart(key) {
+  const W = 340, H = 190, pl = 46, pr = 12, pt = 12, pb = 26;
+  const isR = key !== 'u';
+  const lo = days.map(x => isR ? x[key][0] : x[key]);
+  const hi = days.map(x => isR ? x[key][1] : x[key]);
+  const md = days.map(x => isR ? mid(x[key]) : x[key]);
+  let min = Math.min(...lo), max = Math.max(...hi);
+  const pad = (max - min) * 0.12 || max * 0.1; min = Math.max(0, min - pad); max = max + pad;
+  // nice ticks
+  const span = max - min, step0 = span / 4, mag = 10 ** Math.floor(Math.log10(step0));
+  const step = [1,2,2.5,5,10].map(m => m*mag).find(s => s >= step0);
+  min = Math.floor(min/step)*step; max = Math.ceil(max/step)*step;
+  const x = i => pl + i * (W - pl - pr) / (days.length - 1);
+  const y = v => pt + (1 - (v - min) / (max - min)) * (H - pt - pb);
+  let g = '';
+  for (let v = min; v <= max + 1; v += step) g += `<line x1="${pl}" x2="${W-pr}" y1="${y(v)}" y2="${y(v)}" stroke="var(--grid)" stroke-width="1"/><text x="${pl-6}" y="${y(v)+4}" text-anchor="end" font-size="10" fill="var(--faint)">${k(v)}</text>`;
+  [0, 3, 7, 13].forEach(i => g += `<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="10" fill="var(--faint)">${fmtDay(days[i].d)}</text>`);
+  const col = L[key].col;
+  let band = '';
+  if (isR) band = `<path d="M${hi.map((v,i)=>`${x(i)},${y(v)}`).join('L')}L${lo.map((v,i)=>`${x(i)},${y(v)}`).reverse().join('L')}Z" fill="${col}" fill-opacity=".14"/>`;
+  // back-filled portion dashed
+  const bfEnd = days.reduce((a, d, i) => d.src === 'bf' ? i : a, 0);
+  const seg = (a, b) => md.slice(a, b + 1).map((v, j) => `${j ? 'L' : 'M'}${x(a+j)},${y(v)}`).join('');
+  const line = `<path d="${seg(0, bfEnd)}" fill="none" stroke="${col}" stroke-width="2" stroke-dasharray="4 3"/><path d="${seg(bfEnd, days.length-1)}" fill="none" stroke="${col}" stroke-width="2"/>`;
+  const dots = md.map((v,i) => `<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="${days[i].src==='bf' ? 'var(--card)' : col}" stroke="${col}" stroke-width="2"/>`).join('');
+  const hits = md.map((v,i) => `<rect x="${x(i)-11}" y="${pt}" width="22" height="${H-pt-pb}" fill="transparent" data-i="${i}" tabindex="0" aria-label="${fmtDay(days[i].d)}"/>`).join('');
+  const el = document.createElement('div'); el.className = 'chart';
+  el.innerHTML = `<h3><span class="sw" style="background:${col}"></span>${L[key].name}</h3><small>${isR ? 'Middle of range (line), low–high (band)' : 'Point estimate'} · dashed = back-filled</small>
+    <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${L[key].name} by day, Nov 7 to Nov 20">${g}${band}${line}${dots}<line class="xh" y1="${pt}" y2="${H-pb}" stroke="var(--faint)" stroke-width="1" opacity="0"/>${hits}</svg><div class="tip"></div>`;
+  $('#charts').appendChild(el);
+  const tip = el.querySelector('.tip'), xh = el.querySelector('.xh'), svg = el.querySelector('svg');
+  const show = (i) => {
+    const d = days[i], v = d[key];
+    tip.innerHTML = `<b>${fmtDay(d.d)}</b> · ${isR ? rng(v) : full(v)}`;
+    xh.setAttribute('x1', x(i)); xh.setAttribute('x2', x(i)); xh.setAttribute('opacity', 1);
+    const r = svg.getBoundingClientRect(), s = r.width / W;
+    tip.style.left = Math.min(Math.max(x(i)*s + svg.offsetLeft - 50, 4), el.clientWidth - 150) + 'px';
+    tip.style.top = (y(md[i])*s + svg.offsetTop - 38) + 'px'; tip.style.opacity = 1;
+  };
+  const hide = () => { tip.style.opacity = 0; xh.setAttribute('opacity', 0); };
+  el.querySelectorAll('rect[data-i]').forEach(rc => {
+    const i = +rc.dataset.i;
+    rc.addEventListener('mouseenter', () => show(i)); rc.addEventListener('focus', () => show(i));
+    rc.addEventListener('touchstart', () => show(i), { passive:true });
+    rc.addEventListener('mouseleave', hide); rc.addEventListener('blur', hide);
+  });
+}
+['u','r','b'].forEach(chart);
+
+// ---------- TIMELINE (newest first) ----------
+const rows = days.map((d, i) => {
+  const p = days[i-1];
+  const du = p ? d.u - p.u : 0;
+  const dr = p ? [d.r[0]-p.r[0], d.r[1]-p.r[1]] : [0,0];
+  const db = p ? [d.b[0]-p.b[0], d.b[1]-p.b[1]] : [0,0];
+  return { ...d, i, du, dr, db };
+});
+const pair = a => `<span class="c ${cls(a[0]+a[1])}">${delta(a[0])} / ${delta(a[1])}</span>`;
+$('#tl').innerHTML = rows.slice().reverse().map(d => {
+  const tag = d.src === 'rec' ? '<span class="tag rec">Recorded</span>' : d.src === 'now' ? '<span class="tag now">Today · in progress</span>' : '<span class="tag">Back-filled</span>';
+  const startNote = d.i === 0 ? '<span class="c flat">starting point</span>' : null;
+  return `<article class="day${d.src==='now' ? ' live' : ''}">
+    <div class="when"><b>${fmtDay(d.d)}</b><span>${wk(d.d)} · Day ${d.i+1}</span>${tag}</div>
+    <div><h4>${esc(d.t)}</h4>
+      <div class="lv">
+        <div style="border-color:var(--u)"><div class="n">Unaligned investor</div><div class="x">${full(d.u)}</div>${startNote || `<span class="c ${cls(d.du)}">${delta(d.du)}</span>`}</div>
+        <div style="border-color:var(--r)"><div class="n">Realistic</div><div class="x">${rng(d.r)}</div>${startNote || pair(d.dr)}</div>
+        <div style="border-color:var(--b)"><div class="n">Berkus ceiling</div><div class="x">${rng(d.b)}</div>${startNote || pair(d.db)}</div>
+      </div>
+      <p class="why">${esc(d.why)}</p>
+    </div></article>`;
+}).join('');
+
+// ---------- TABLE ----------
+$('#tbl').innerHTML = `<thead><tr><th>Day</th><th>Source</th><th>Unaligned</th><th>Δ</th><th>Realistic</th><th>Δ low / high</th><th>Berkus</th><th>Δ low / high</th></tr></thead><tbody>` +
+  rows.map(d => `<tr><td>${fmtDay(d.d)} (${d.i+1})</td><td>${d.src==='rec'?'Recorded':d.src==='now'?'Today':'Back-filled'}</td><td>${full(d.u)}</td><td>${d.i?delta(d.du):'—'}</td><td>${rng(d.r)}</td><td>${d.i?delta(d.dr[0])+' / '+delta(d.dr[1]):'—'}</td><td>${rng(d.b)}</td><td>${d.i?delta(d.db[0])+' / '+delta(d.db[1]):'—'}</td></tr>`).join('') + '</tbody>';
+</script>
+</body>
+</html>
