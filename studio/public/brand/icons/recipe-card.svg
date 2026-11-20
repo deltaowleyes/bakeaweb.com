@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Recipe card – project planning"><title>Recipe card – project planning</title>
+<g stroke="#6A0DAD" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"><rect x="10" y="8" width="44" height="52" rx="5" fill="#FFFFFF"/>
+<rect x="24" y="4" width="16" height="8" rx="2" fill="#FFC107"/>
+<path d="M18 38 l3 3 l5 -6" stroke="#FFC107"/><path d="M18 50 l3 3 l5 -6" stroke="#FFC107"/>
+<path d="M32 39 H46"/><path d="M32 51 H46"/>
+<path d="M26 26 q-6 0 -4 -6 q0 -6 8 -4 q4 -6 10 0 q8 0 4 8 Z" fill="#FFFFFF" stroke-width="3"/></g>
+</svg>

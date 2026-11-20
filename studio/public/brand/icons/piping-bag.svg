@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Piping bag – customization"><title>Piping bag – customization</title>
+<g stroke="#6A0DAD" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"><path d="M40 12 L52 24 L18 52 L12 52 L12 46 Z" fill="#FFF9F0"/>
+<path d="M40 12 Q46 4 52 8 Q58 12 52 24" fill="#FFC107"/>
+<path d="M12 52 L6 58" /></g>
+<g stroke="#FFC107" stroke-width="3" stroke-linecap="round"><path d="M28 54 L30 60"/><path d="M34 50 L40 54"/></g>
+</svg>

@@ -32,7 +32,7 @@ bakeaweb.com/   (the repository)
 ├── bake-notes/               (only while tasks are waiting to merge) notes from parallel BAKE tasks, folded into these docs at Merge and publish
 ├── .github/workflows/test.yml  runs the testing robot on GitHub on every push (results: the repo's Actions tab)
 └── studio/                   SOURCE (Vite project)
-    ├── index.html            BAKE's home page (plain HTML/CSS, the "Kitchen Table" design, 2026-11-17); fonts and images in home/, share picture in public/home/og.jpg. Its script forwards old studio links (?v=…, #step-…, #admin, sign-in tokens) to studio/. Links to studio/ carry vite-ignore so Vite leaves them alone.
+    ├── index.html            BAKE's home page (plain HTML/CSS, the "Kitchen Table" design, 2026-11-17); fonts and images in home/, share picture in public/home/og.jpg. Rebranded to **BAKEaWeb** (2026-11-19, Asset Library 5.0): purple #6A0DAD, gold #FFC107, cream #FFF9F0, Baloo 2 headings; logos, favicon set, ribbon and 9 baking icons are in public/brand/ (served at /brand/). Its script forwards old studio links (?v=…, #step-…, #admin, sign-in tokens) to studio/. Links to studio/ carry vite-ignore so Vite leaves them alone.
     ├── studio/index.html     the studio's page shell with <div id="root"> (served at bakeaweb.com/studio/; assets stay in /assets/, photos in /photos/)
     ├── package.json          scripts: dev, build (clean → vite build → place), test, test:ui, test:install
     ├── tests/                the automatic testing robot (Playwright, `npm test`); see tests/README.md

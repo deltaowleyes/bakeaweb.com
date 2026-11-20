@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Timer – launch / schedule"><title>Timer – launch / schedule</title>
+<g stroke="#6A0DAD" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"><rect x="28" y="4" width="8" height="5" rx="1.5" fill="#6A0DAD"/>
+<circle cx="32" cy="36" r="23" fill="#FFFFFF"/>
+<path d="M32 36 L32 18 A18 18 0 0 1 48 30 Z" fill="#FFC107"/>
+<path d="M32 36 L32 18"/><path d="M32 36 L42 44"/></g>
+</svg>
