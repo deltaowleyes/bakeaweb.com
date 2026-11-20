@@ -48,15 +48,16 @@ async function start() {
   me = data.session.user;
   $('#who').innerHTML = '<small>' + esc(me.email) + '</small> <button class="btn2" id="out">Sign out</button>';
   $('#out').onclick = async () => { await sb.auth.signOut(); location.reload(); };
-  const [s, r] = await Promise.all([
+  const [s, r, p] = await Promise.all([
     sb.from('taste_sites').select('*').order('sort'),
-    sb.from('taste_ratings').select('*')
+    sb.from('taste_ratings').select('*'),
+    sb.from('taste_pairs').select('id,rater,rater_email,site_a,site_b,winner')
   ]);
   if (s.error || r.error) { app.innerHTML = '<p class="empty">Could not load: ' + esc((s.error || r.error).message) + '</p>'; return; }
-  sites = s.data || []; ratings = r.data || [];
+  sites = s.data || []; ratings = r.data || []; pairs = p.data || [];
   if (!sites.length) { app.innerHTML = '<p class="empty">Nothing to rate yet, or this login is not a RezSite admin.</p>'; return; }
   const h = location.hash.slice(1);
-  view = h == 'list' ? 'list' : 'rate';
+  view = h == 'list' ? 'list' : h == 'pair' ? 'pair' : 'rate';
   let d = null; try { d = JSON.parse(localStorage.getItem(DRAFT)); } catch {}
   cur = (d && sites.find(x => x.id == d.site_id && !mine(x.id))) || nextUnrated();
   // Opened from a call on callers.html (taste.html?biz=<business id>): add that business's site to the list if needed and open it.
@@ -104,14 +105,131 @@ function progress() {
 }
 
 function draw() {
-  location.hash = view == 'list' ? 'list' : '';
+  location.hash = view == 'list' ? 'list' : view == 'pair' ? 'pair' : '';
+  clearInterval(tick); clearInterval(ptick);
   app.innerHTML = `<div class="tabs">
-      <button data-v="rate" aria-pressed="${view == 'rate'}">Rate</button>
+      <button data-v="rate" aria-pressed="${view == 'rate'}">Rate (10 categories)</button>
+      <button data-v="pair" aria-pressed="${view == 'pair'}">This or That</button>
       <button data-v="list" aria-pressed="${view == 'list'}">All ratings</button>
-      <span class="prog">${esc(progress())}</span></div><div id="body"></div>`;
+      <span class="prog" id="prog">${esc(view == 'pair' ? pairProgress() : progress())}</span></div><div id="body"></div>`;
   app.querySelectorAll('.tabs [data-v]').forEach(b => b.onclick = () => { view = b.dataset.v; if (view == 'rate' && !cur) cur = nextUnrated(); draw(); });
-  view == 'list' ? drawList() : drawRate();
+  view == 'list' ? drawList() : view == 'pair' ? drawPair() : drawRate();
 }
+
+/* ---------- This or That: two sites side by side, click the better one (about 10 seconds each) ----------
+   Saved to taste_pairs (rater, site_a, site_b, winner = the better site's id or null for a tie, note, seconds).
+   Supabase function taste_pair_next picks the pair that teaches the most: a site with few comparisons so far,
+   against a site close in level that you haven't compared it with. The tournament maths (taste_tourney_compute)
+   counts each pick as 2 head-to-heads. The pair on screen (and your note) is kept in the browser until saved, so a
+   reload, a tab switch or a run-out sign-in never loses it. */
+const PDRAFT = 'bake-taste-pair-draft';
+export const PAIR_MIN = 2;   // seconds after both pictures show before a pick counts (stops accidental double-clicks)
+export const pairWinner = (choice, a, b) => choice == 'a' ? a : choice == 'b' ? b : null;
+let pairs = [], pair = null, pairQueue = null, lastPair = null, ptick = null, picking = false;
+const getPDraft = () => { try { const d = JSON.parse(localStorage.getItem(PDRAFT)); return d && d.a && d.b ? d : null; } catch { return null; } };
+const setPDraft = d => { try { d ? localStorage.setItem(PDRAFT, JSON.stringify(d)) : localStorage.removeItem(PDRAFT); } catch {} };
+const siteById = id => sites.find(s => s.id == id);
+
+function pairProgress() {
+  const people = {}; pairs.forEach(p => { people[p.rater_email] = (people[p.rater_email] || 0) + 1; });
+  const you = pairs.filter(p => p.rater == me.id).length;
+  const others = Object.entries(people).filter(([e]) => e != me.email).map(([e, n]) => first(e) + ': ' + n);
+  return 'Your picks: ' + you + (others.length ? ' · ' + others.join(' · ') : '') + ' · all: ' + pairs.length;
+}
+
+async function fetchPair(avoid) {
+  const { data, error } = await sb.rpc('taste_pair_next', { p_avoid: avoid || [] });
+  if (error) throw error;
+  const p = (data || [])[0];
+  if (!p || !p.site_b || !siteById(p.site_a) || !siteById(p.site_b)) return null;
+  const [a, b] = Math.random() < .5 ? [p.site_a, p.site_b] : [p.site_b, p.site_a];   // random sides
+  return { a, b, started: 0, note: '' };
+}
+const prefetch = p => p && [p.a, p.b].forEach(id => { const s = siteById(id); if (s && s.kind == 'biz') new Image().src = shotUrl(s.website, 900); });
+const queueNext = () => { if (!pair || pairQueue) return; const want = pair; fetchPair([pair.a, pair.b]).then(p => { if (pair === want && !pairQueue) { pairQueue = p; prefetch(p); } }).catch(() => {}); };
+
+async function drawPair() {
+  const body = $('#body');
+  clearInterval(ptick);
+  if (!pair) pair = getPDraft();
+  if (!pair) {
+    body.innerHTML = '<p class="empty">Finding a good pair…</p>';
+    try { pair = pairQueue || await fetchPair(); pairQueue = null; }
+    catch (e) { if (view == 'pair') body.innerHTML = signedOut(e) ? '<p class="empty">Your sign-in ran out. <button id="relog">Sign in again</button></p>' : '<p class="empty">Could not get a pair: ' + esc(e.message) + '</p>'; if ($('#relog')) $('#relog').onclick = relog; return; }
+    if (!pair) { if (view == 'pair') body.innerHTML = '<p class="empty">You have compared every useful pair for now. Thank you!</p>'; return; }
+    setPDraft(pair);
+  }
+  if (view != 'pair' || !document.body.contains(body)) return;
+  const A = siteById(pair.a), B = siteById(pair.b);
+  if (!A || !B) { setPDraft(null); pair = null; return drawPair(); }
+  const side = (k, s, key) => `<div class="side shot" data-side="${k}">
+      <div class="bar"><div><h2>${esc(s.name)}</h2><span class="note">${s.kind == 'pitch' ? 'Our pitch design' : esc(s.city || '')}</span></div>
+        <div class="row">${s.kind == 'pitch' ? '' : '<button class="btn2" data-whole="' + k + '">Whole page</button>'}<a href="${esc(s.website)}" target="_blank" rel="noopener">Open ↗</a></div></div>
+      <div class="view pv" id="pv-${k}">${s.kind == 'pitch' ? '<iframe title="Pitch preview" src="' + esc(s.website) + '"></iframe>' : '<div class="wait">Getting a picture of their site…</div>'}</div>
+      <button class="pick" data-c="${k}">${key} This one is better</button></div>`;
+  body.innerHTML = `<div class="pairtop"><span class="pclk" id="pclk">…</span><span class="note">Which site is better overall? Go with your gut (about 10 seconds). Keys: <b>←</b> left · <b>→</b> right · <b>↓</b> tie · <b>S</b> skip</span></div>
+    <div class="pair">${side('a', A, '←')}${side('b', B, '→')}</div>
+    <div class="pairbot"><button class="btn2" data-c="tie">↓ About the same</button>
+      <input id="pnote" maxlength="200" placeholder="Optional: one line on why (e.g. 'own photos beat stock')" value="${esc(pair.note || '')}">
+      <button class="btn2" id="pskip">Skip (S)</button>${lastPair ? '<button class="btn2" id="pundo">Undo last pick</button>' : ''}</div>
+    <p class="msg" id="pm"></p>`;
+  const cp = pair;
+  let shown = 0;
+  const ready = () => { if (++shown >= 2 && pair === cp && !cp.started) { cp.started = Date.now(); setPDraft(cp); } };
+  [['a', A], ['b', B]].forEach(([k, s]) => {
+    if (s.kind == 'pitch') { const f = $('#pv-' + k + ' iframe'); f.onload = ready; setTimeout(ready, 4000); }
+    else shotInto($('#pv-' + k), s, 900, () => pair === cp, ready);
+  });
+  body.querySelectorAll('[data-whole]').forEach(b => b.onclick = () => { const s = b.dataset.whole == 'a' ? A : B; shotInto($('#pv-' + b.dataset.whole), s, 3200, () => pair === cp, () => {}); b.remove(); });
+  body.querySelectorAll('[data-c]').forEach(b => b.onclick = () => pickPair(b.dataset.c));
+  $('#pnote').oninput = e => { cp.note = e.target.value; setPDraft(cp); };
+  $('#pskip').onclick = skipPair;
+  if ($('#pundo')) $('#pundo').onclick = undoPair;
+  const step = () => { if (!document.body.contains(body) || pair !== cp) { clearInterval(ptick); return; } $('#pclk').textContent = cp.started ? Math.floor((Date.now() - cp.started) / 1000) + 's' : 'loading…'; };
+  step(); ptick = setInterval(step, 500);
+  queueNext();
+}
+
+const pmsg = h => { const m = $('#pm'); if (m) m.innerHTML = h; };
+async function relog() { await sb.auth.signOut({ scope: 'local' }); location.reload(); }
+
+async function pickPair(c) {
+  if (!pair || picking) return;
+  const cp = pair, e = cp.started ? (Date.now() - cp.started) / 1000 : 0;
+  if (!cp.started) { pmsg('Wait for both pictures to show (or open both sites).'); return; }
+  if (e < PAIR_MIN) { pmsg('Take one more look first.'); return; }
+  picking = true;
+  const row = { site_a: cp.a, site_b: cp.b, winner: pairWinner(c, cp.a, cp.b), note: (cp.note || '').trim() || null, seconds: Math.round(e) };
+  const { data, error } = await sb.from('taste_pairs').insert(row).select('id,rater,rater_email,site_a,site_b,winner').single();
+  picking = false;
+  if (error) {
+    setPDraft(cp);
+    if (signedOut(error)) { pmsg('Your sign-in ran out, so this pick was not saved yet. The pair is kept. <button type="button" id="relog">Sign in again</button>'); $('#relog').onclick = relog; }
+    else pmsg('Not saved: ' + esc(error.message));
+    return;
+  }
+  pairs.push(data);
+  lastPair = { id: data.id, pair: { a: cp.a, b: cp.b, note: cp.note || '', started: 0 } };
+  nextPair();
+}
+function nextPair() { pair = pairQueue; pairQueue = null; if (pair) { pair.started = 0; setPDraft(pair); } else setPDraft(null); const pr = $('#prog'); if (pr) pr.textContent = pairProgress(); drawPair(); }
+function skipPair() { if (!pair) return; nextPair(); }
+async function undoPair() {
+  if (!lastPair) return;
+  const { error } = await sb.from('taste_pairs').delete().eq('id', lastPair.id);
+  if (error) { pmsg('Could not undo: ' + esc(error.message)); return; }
+  pairs = pairs.filter(p => p.id != lastPair.id);
+  pairQueue = pair; pair = lastPair.pair; lastPair = null; setPDraft(pair);
+  const pr = $('#prog'); if (pr) pr.textContent = pairProgress();
+  drawPair();
+}
+/* Keyboard: ← left, → right, ↓ tie, S skip (not while typing the note). */
+if (typeof document != 'undefined') document.addEventListener('keydown', e => {
+  if (view != 'pair' || !pair || e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.target.matches && e.target.matches('input,textarea')) return;
+  const c = { ArrowLeft: 'a', ArrowRight: 'b', ArrowDown: 'tie' }[e.key];
+  if (c) { e.preventDefault(); pickPair(c); } else if (e.key == 's' || e.key == 'S') skipPair();
+});
 
 /* ---------- Tasteaweb: 10 categories in 3 timed buckets over 5 minutes ----------
    Each category is rated 1–99 (slider or quick buttons) with optional "good / bad" notes, so the ratings teach
@@ -274,15 +392,17 @@ function toastPrev(s) {
 }
 
 /* mShots first answers with a small "Generating preview" picture; try again a few times, then offer the live site. */
-function loadShot(s, h) {
-  const box = $('#view'); if (!box) return;
+function loadShot(s, h) { shotInto($('#view'), s, h, () => cur && cur.id == s.id, () => {}); }
+/* Put a picture of site s into box; still() says the box is still showing that site; done() runs once it shows (or fails). */
+function shotInto(box, s, h, still, done) {
+  if (!box) return;
   let tries = 0;
   const img = new Image(); img.alt = 'Picture of ' + s.name + "'s website";
-  const fail = () => { if (cur && cur.id == s.id) box.innerHTML = '<div class="wait">No picture available right now. Use <b>Open their site ↗</b> above, then rate.</div>'; };
+  const fail = () => { if (still() && document.body.contains(box)) { box.innerHTML = '<div class="wait">No picture available right now. Use <b>Open ↗</b> above.</div>'; done(); } };
   img.onload = () => {
-    if (!cur || cur.id != s.id) return;
+    if (!still() || !document.body.contains(box)) return;
     if (img.naturalWidth <= 400) { if (++tries <= 8) setTimeout(() => { img.src = shotUrl(s.website, h) + '&t=' + Date.now(); }, 5000); else fail(); return; }
-    box.innerHTML = ''; box.append(img);
+    box.innerHTML = ''; box.append(img); done();
   };
   img.onerror = fail;
   img.src = shotUrl(s.website, h);

@@ -63,12 +63,18 @@ input[type=range].unset{opacity:.4}
 .qk button span{opacity:.6}.qk button.on{background:var(--acc);color:#fff}
 .cn{display:grid;grid-template-columns:1fr 1fr;gap:6px}.cn input{font-size:13px;padding:6px 9px}
 button:disabled{opacity:.55;cursor:not-allowed}
-@media (max-width:900px){.rate{grid-template-columns:1fr}.form{position:static}.view{height:60vh}}
+.pairtop,.pairbot{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.pairtop{margin:0 0 12px}.pairbot{margin:12px 0 0}
+.pclk{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--acc);min-width:3em}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.pair .view{height:calc(100vh - 340px);min-height:280px}
+.pick{width:100%;border-radius:0;padding:14px;font-size:17px}
+.pairbot input{flex:1;min-width:220px;width:auto}
+@media (max-width:900px){.rate{grid-template-columns:1fr}.form{position:static}.view{height:60vh}.pair{grid-template-columns:1fr}.pair .view{height:45vh}}
 </style>
 <!-- Cloudflare Web Analytics (visitor counts, no cookies) --><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "2efc251e2e8a4a488034774beba6aa99"}'></script>
 </head>
 <body>
-<header><div><b>Tasteaweb</b> <small>10 categories · 5 minutes · by BAKE · admins only</small></div><div id="who"></div></header>
+<header><div><b>Tasteaweb</b> <small>10 categories · This or That · by BAKE · admins only</small></div><div id="who"></div></header>
 <main id="app"><p class="empty">Loading…</p></main>
 <script type="module" src="/src/taste.js"></script>
 </body>
