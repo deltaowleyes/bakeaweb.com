@@ -61,3 +61,25 @@ test('listing edits survive coming back from the website window, a page reload, 
   expect(saves[0].p.contact_name).toBe('Lesley');
   expect(saves[0].p_verify).toBe(true);
 });
+
+test('voicemail follow-up email: fills in the business name and sends to the typed address', async ({ page }) => {
+  test.skip(!!process.env.BAKE_TEST_BUILT, 'uses the dev server');
+  const sent = [];
+  await fake(page, []);
+  await page.route(`https://${REF}.supabase.co/rest/v1/rpc/caller_send_voicemail*`, route => {
+    sent.push(JSON.parse(route.request().postData()));
+    return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, to: 'info@testfood.ca' }) });
+  });
+  await page.goto('callers.html');
+  await page.getByRole('button', { name: /Start call/ }).click();
+  const box = page.getByTestId('voicemail-email');
+  await box.getByRole('button', { name: /Preview/ }).click();
+  await expect(box.getByText(/Following up on my voicemail – Test Food Co's listing and website/)).toBeVisible();
+  await expect(box.getByText(/Hi Test Food Co team/)).toBeVisible();
+  const send = box.getByRole('button', { name: 'Send voicemail follow-up' });
+  await expect(send).toBeDisabled();
+  await box.getByLabel('Voicemail follow-up email').fill('info@testfood.ca');
+  await send.click();
+  await expect(box.getByText(/Voicemail follow-up sent to info@testfood.ca/)).toBeVisible();
+  expect(sent).toEqual([{ p_id: BIZ.id, p_email: 'info@testfood.ca' }]);
+});

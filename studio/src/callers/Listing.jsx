@@ -49,6 +49,7 @@ export default function Listing({ sb, c, onVerified }) {
   const [b, setB] = useState(null), [f, setF] = useState({}), [err, setErr] = useState(''), [msg, setMsg] = useState('');
   const [busy, setBusy] = useState(false), [note, setNote] = useState(''), [more, setMore] = useState(false);
   const [to, setTo] = useState(''), [sending, setSending] = useState(false), [sent, setSent] = useState(''), [sendErr, setSendErr] = useState('');
+  const [vmTo, setVmTo] = useState(''), [vmBusy, setVmBusy] = useState(false), [vmSent, setVmSent] = useState(''), [vmErr, setVmErr] = useState(''), [vmShow, setVmShow] = useState(false);
 
   // Every keystroke is also kept in this browser (draftKey) until it is saved, so nothing typed during a call
   // can be lost: not by a page refresh, a login refresh, a crash or a reload of the listing (Nov 19 fix).
@@ -71,6 +72,7 @@ export default function Listing({ sb, c, onVerified }) {
     }
     setB(data);
     setTo(t => t || c.contact_email || data.email || '');
+    setVmTo(t => t || c.contact_email || data.email || '');
   };
   useEffect(() => { load(); }, [c.business_id]);   // eslint-disable-line react-hooks/exhaustive-deps
   const edit = (k, v) => setF(cur => { const n = { ...cur, [k]: v }; writeDraft({ f: n, note, at: Date.now() }); return n; });
@@ -100,6 +102,14 @@ export default function Listing({ sb, c, onVerified }) {
     if (error) return setSendErr(error.message);
     setSent(`Sent to ${data.to}. Code ${data.code}.`); await load();
   };
+  const sendVoicemail = async () => {
+    setVmBusy(true); setVmErr(''); setVmSent('');
+    const { data, error } = await sb.rpc('caller_send_voicemail', { p_id: c.business_id, p_email: vmTo.trim() });
+    setVmBusy(false);
+    if (error) return setVmErr(error.message);
+    setVmSent(`Voicemail follow-up sent to ${data.to}.`);
+  };
+  const okEmail = v => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim());
   const L = 'grid gap-1 text-sm font-semibold';
   const others = Object.entries(b).filter(([k, v]) => !SKIP.has(k) && v !== null && v !== '');
   const facts = INFO.filter(([k]) => b[k] !== null && b[k] !== undefined && b[k] !== '');
@@ -120,6 +130,43 @@ export default function Listing({ sb, c, onVerified }) {
           <p className="mb-0 mt-2"><i>"You're now verified on RezSite. Go to <b>rezsite.com/verified</b>, find your business, press <b>Add your logo</b> and type the code {b.logo_code.split('').join(' ')}. It's free."</i> You can also email them: <a className="text-acc underline" href={`https://rezsite.com/verified.html?id=${b.id}`} target="_blank" rel="noopener">their listing link</a>.</p>
         </div>
       )}
+
+      <div className="mt-3 bg-violet-50 border-2 border-violet-300 rounded-xl p-3 text-sm" data-testid="voicemail-email">
+        <b>📨 Left a voicemail? Send the follow-up email</b>
+        <p className="mt-1 mb-2">Sends Leah's follow-up email (from leah@rezsite.com) with <b>{b.name}</b> filled in. Only use an email the business posted itself (their website or Facebook page) or gave you on the phone, not one from a directory site.</p>
+        <div className="flex flex-wrap gap-2 items-center">
+          <input className="inp flex-1 min-w-[16rem]" type="email" placeholder="info@business.ca" value={vmTo} onChange={e => setVmTo(e.target.value)} aria-label="Voicemail follow-up email" />
+          <button type="button" className="btn" disabled={vmBusy || !!vmSent || !okEmail(vmTo)} onClick={sendVoicemail}>{vmBusy ? 'Sending…' : vmSent ? '✓ Sent' : 'Send voicemail follow-up'}</button>
+        </div>
+        <button type="button" className="mt-2 text-acc font-semibold underline text-sm" onClick={() => setVmShow(!vmShow)}>{vmShow ? '▾ Hide' : '▸ Preview'} the email</button>
+        {vmShow && (
+          <div className="mt-2 bg-white border border-line rounded-lg p-3 whitespace-pre-line">
+            <b>Subject: Following up on my voicemail – {b.name}'s listing and website</b>{'\n\n'}
+            {`Hi ${b.name} team,
+
+I just left you a voicemail and wanted to follow up here in case email is easier.
+
+I'm Leah Courteaux with BAKE (BakeAWeb). We're verifying business listings on RezSite.com, and I'd like to confirm that ${b.name}'s details are correct.
+
+While I'm reaching out, I'd also like to offer you three free previews of a refreshed website, built from your current site and images. There's no cost and no commitment to look at them. If you like one, prices start at $25.
+
+If you're interested, just reply to this email or call me at 226-542-5991.
+
+Thank you,
+Leah Courteaux
+BAKE / BakeAWeb
+leah@rezsite.com 226-542-5991
+bakeaweb.com
+29598 Bishop Road
+Wallaceburg, ON.
+N8A 4L1
+
+If you'd rather not hear from us, reply "unsubscribe" and we won't email you again.`}
+          </div>
+        )}
+        {vmSent && <p className="text-emerald-700 font-semibold mb-0 mt-2">✓ {vmSent} Remember to pick "Voicemail left" as the outcome and save the call.</p>}
+        {vmErr && <p className="text-warn mb-0 mt-2">{vmErr}</p>}
+      </div>
 
       <div className="mt-3 bg-sky-50 border-2 border-sky-300 rounded-xl p-3 text-sm">
         <b>✉️ Send code to business email</b>

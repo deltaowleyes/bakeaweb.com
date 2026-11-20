@@ -3675,5 +3675,5 @@ function fullProject(p) {
 function buildPitchSite(design, baseProject) {
 	return Site.files(completeSite(fullProject(pitchProject(design, baseProject))), design.tpl);
 }
-var BUILT_AT = "2026-11-20T13:30:11.613Z";
+var BUILT_AT = "2026-11-20T18:15:21.276Z";
 export { BUILT_AT, buildPitchSite };
