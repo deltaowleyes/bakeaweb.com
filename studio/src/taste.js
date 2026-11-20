@@ -1,4 +1,6 @@
-/* BAKE Taste (taste.html): Chris and Leah rate real websites 1–99 with reasons, so Claude can learn what they
+/* Tasteaweb (taste.html, moving to tasteaweb.com later; was BAKE Taste): Chris and Leah rate real websites on 10
+   categories (1–99 each, 3 timed buckets over a strict 5 minutes) with good/bad notes. Older ratings were one 1–99 number
+   (method 'v1-overall'); new ones are method 'tw10' with score = average of the 10. Originally: rate real websites 1–99 with reasons, so Claude can learn what they
    look for and grade designs (and make pitches) to their taste. Each person rates on their own, blind: Claude's
    grade and the other person's rating only show after you save yours.
    Data: Supabase tables taste_sites (the list: top business sites + our pitches) and taste_ratings (one row per
@@ -111,12 +113,65 @@ function draw() {
   view == 'list' ? drawList() : drawRate();
 }
 
-/* ---------- Rate one site ---------- */
+/* ---------- Tasteaweb: 10 categories in 3 timed buckets over 5 minutes ----------
+   Each category is rated 1–99 (slider or quick buttons) with optional "good / bad" notes, so the ratings teach
+   the AI grader what to look for and give the developer ideas for BAKE Studio features. Overall = average. */
+export const CATS = [
+  { k: 'polish', b: 1, s: 'Polish', n: 'Visual Polish & Craft', q: 'Does this look custom-built by a pro, or like a cheap/broken template?' },
+  { k: 'modern', b: 1, s: 'Modern', n: 'Aesthetic Modernity', q: 'Does the design feel current and fresh, or dated?' },
+  { k: 'hierarchy', b: 1, s: 'Focus', n: 'Visual Hierarchy & Focus', q: 'Does your eye immediately know where to look first, or is everything competing for attention?' },
+  { k: 'brand', b: 1, s: 'Brand', n: 'Brand Vibe / Memorability', q: 'Does the site have a distinct personality that stands out?' },
+  { k: 'clarity', b: 2, s: 'Clarity', n: 'Instant Value Clarity', q: 'Within seconds, can you tell exactly what this site does and who it is for?' },
+  { k: 'scan', b: 2, s: 'Scan', n: 'Scannability & Layout Breathability', q: 'Is the text easy to skim with good spacing, or an overwhelming wall of clutter?' },
+  { k: 'nav', b: 2, s: 'Nav', n: 'Navigation Intuition', q: 'Without clicking deep, is it obvious how to find key information or take the next step?' },
+  { k: 'trust', b: 3, s: 'Trust', n: 'Credibility & Legitimacy', q: 'Does this site feel safe, trustworthy and real enough to give your email or credit card to?' },
+  { k: 'copy', b: 3, s: 'Copy', n: 'Copy & Tone Persuasion', q: 'Does the writing feel natural, human and compelling, or robotic and full of buzzwords?' },
+  { k: 'cta', b: 3, s: 'Action', n: 'Action Pull (CTA Desire)', q: 'Based purely on what you see, how likely would you be to click the main button or try this?' }
+];
+export const BUCKETS = [
+  { b: 1, t: 'Gut Reaction & Aesthetics', w: 'first 15 seconds', at: 0 },
+  { b: 2, t: 'Clarity & Cognitive Load', w: 'next 90 seconds', at: 15 },
+  { b: 3, t: 'Trust & Conversion Intent', w: 'final 75 seconds', at: 105 }
+];
+export const NOTES_AT = 180, SAVE_AT = 300;
+export const QUICK = [[10, 'Bad'], [30, 'Weak'], [50, 'OK'], [70, 'Good'], [85, 'Great'], [95, 'Best']];
+export const overall = cats => { const v = CATS.map(c => +(cats || {})[c.k]).filter(x => x > 0); return v.length ? Math.round(v.reduce((a, b) => a + b, 0) / v.length) : null; };
+export const fmt = t => { t = Math.max(0, Math.floor(t)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
+export const phaseAt = e => e < 15 ? 'Bucket 1 · gut reaction' : e < 105 ? 'Bucket 2 · clarity' : e < NOTES_AT ? 'Bucket 3 · trust' : e < SAVE_AT ? 'Notes time: what makes it good or bad?' : 'Ready to save';
+export const missingCats = cats => CATS.filter(c => !(+(cats || {})[c.k] > 0)).map(c => c.n);
+
+/* The rating in progress. Kept in the browser (localStorage) on every change until saved, so a reload, a tab switch
+   or a run-out sign-in never loses it, and the 5-minute clock keeps its start time. */
+let work = null, tick = null;
+function workFor(s) {
+  if (work && work.site_id == s.id) return work;
+  const r = mine(s.id), d = getDraft(s.id);
+  if (d && d.cats) work = d;
+  else if (r) work = { site_id: s.id, started: 0, cats: { ...(r.cats || {}) }, cat_notes: JSON.parse(JSON.stringify(r.cat_notes || {})), good: r.good || '', bad: r.bad || '', reason: r.reason || '', tags: [...(r.tags || [])], old: r.method == 'tw10' ? null : r.score };
+  else work = { site_id: s.id, started: Date.now(), cats: {}, cat_notes: {}, good: '', bad: '', reason: '', tags: [] };
+  return work;
+}
+const keep = () => setDraft(work);
+const elapsed = () => work && work.started ? (Date.now() - work.started) / 1000 : 1e9;
+const leave = () => { setDraft(null); work = null; };
+
+function catHtml(c) {
+  const v = +work.cats[c.k] || 0, nt = work.cat_notes[c.k] || {};
+  return `<div class="cat" data-k="${c.k}"><div class="ch"><b>${CATS.indexOf(c) + 1}. ${esc(c.n)}</b><span class="cv" id="v-${c.k}">${v || '–'}</span></div>
+    <p class="note">${esc(c.q)}</p>
+    <input type="range" min="1" max="99" step="1" value="${v || 50}" class="${v ? '' : 'unset'}" data-k="${c.k}" aria-label="${esc(c.n)} from 1 to 99">
+    <div class="qk">${QUICK.map(([n, t]) => `<button type="button" data-k="${c.k}" data-n="${n}" class="${v == n ? 'on' : ''}">${t} <span>${n}</span></button>`).join('')}</div>
+    <div class="cn"><input data-k="${c.k}" data-f="good" placeholder="What makes it good?" value="${esc(nt.good || '')}"><input data-k="${c.k}" data-f="bad" placeholder="What makes it bad?" value="${esc(nt.bad || '')}"></div></div>`;
+}
+
 function drawRate() {
   const body = $('#body');
-  if (!cur) { body.innerHTML = '<p class="empty">You have rated every site. Thank you! See <b>All ratings</b> to compare, or tell Claude the ratings are ready.</p>' + (hist.length ? '<p><button class="btn2" id="back">← Back</button></p>' : ''); if ($('#back')) $('#back').onclick = () => { cur = sites.find(x => x.id == hist.pop()) || null; draw(); }; return; }
-  const s = cur, pitch = s.kind == 'pitch', r = mine(s.id) || getDraft(s.id);
-  const val = r ? r.score : 60, tags = new Set(r ? r.tags : []);
+  clearInterval(tick);
+  if (!cur) { body.innerHTML = '<p class="empty">You have rated every site. Thank you! See <b>All ratings</b> to compare, or tell Claude the ratings are ready.</p>' + (hist.length ? '<p><button class="btn2" id="back">← Back</button></p>' : ''); if ($('#back')) $('#back').onclick = () => { work = null; cur = sites.find(x => x.id == hist.pop()) || null; draw(); }; return; }
+  const s = cur, pitch = s.kind == 'pitch';
+  workFor(s);
+  const tags = new Set(work.tags);
+  const avg = overall(work.cats);
   body.innerHTML = `<div class="rate">
     <div class="shot">
       <div class="bar"><div><h2>${esc(s.name)}</h2>${fromCall == s.id ? '<span class="note" style="display:block;color:#7c3aed;font-weight:700">📞 From your call: rate while you talk</span>' : ''}<span class="note">${pitch ? 'Our pitch design (★ design, rate the design not the price box)' : esc(s.city || '')}</span></div>
@@ -124,37 +179,76 @@ function drawRate() {
       <div class="view" id="view">${pitch ? '<iframe title="Pitch preview" src="' + esc(s.website) + '"></iframe>' : '<div class="wait">Getting a picture of their site… (the first time can take up to a minute)</div>'}</div>
     </div>
     <form class="form" id="f">
-      <div><p class="lbl">Your rating</p><div class="row" style="align-items:baseline;gap:14px"><span class="big" id="num">${val}</span><span class="anchor" id="anc">${esc(anchorFor(val))}</span></div>
-        <input type="range" id="sc" min="1" max="99" step="1" value="${val}" aria-label="Rating from 1 to 99"></div>
-      <div><p class="lbl">What's good</p><div class="chips">${TAGS.g.map(t => '<button type="button" class="g' + (tags.has(t) ? ' on' : '') + '" data-t="' + esc(t) + '">' + esc(t) + '</button>').join('')}</div></div>
-      <div><p class="lbl">What's not</p><div class="chips">${TAGS.b.map(t => '<button type="button" class="b' + (tags.has(t) ? ' on' : '') + '" data-t="' + esc(t) + '">' + esc(t) + '</button>').join('')}</div></div>
-      <div><p class="lbl">Why this number? (in your own words)</p><textarea id="why" rows="4" placeholder="What makes it better or worse than the last few you rated?">${esc(r ? r.reason : '')}</textarea></div>
+      <div class="clock"><div class="row" style="justify-content:space-between;align-items:baseline"><span class="clk" id="clk">${work.started ? '0:00' : 'Editing'}</span><span class="phase" id="phase">${work.started ? '' : 'No timer when changing a saved rating'}</span></div><div class="pbar"><i id="pb"></i></div></div>
+      ${work.old != null ? '<p class="note">Your old single rating was <b>' + work.old + '</b>. Score all 10 categories to update it.</p>' : ''}
+      ${BUCKETS.map(B => `<fieldset class="bk" data-b="${B.b}"><legend>Bucket ${B.b}: ${esc(B.t)} <small>${B.w}</small></legend><p class="lock" id="lk${B.b}">Unlocks at ${fmt(B.at)}</p>${CATS.filter(c => c.b == B.b).map(catHtml).join('')}</fieldset>`).join('')}
+      <fieldset class="bk" data-b="4"><legend>Overall <small>notes time ${fmt(NOTES_AT)}–${fmt(SAVE_AT)}</small></legend>
+        <div class="row" style="align-items:baseline;gap:14px"><span class="big" id="num">${avg ?? '–'}</span><span class="anchor" id="anc">${avg ? esc(anchorFor(avg)) : 'Average of the 10 categories'}</span></div>
+        <div><p class="lbl">What makes this site good? (things the AI should copy)</p><textarea id="good" rows="3">${esc(work.good)}</textarea></div>
+        <div><p class="lbl">What makes it bad? (things the AI should avoid)</p><textarea id="bad" rows="3">${esc(work.bad)}</textarea></div>
+        <div><p class="lbl">Quick tags</p><div class="chips">${TAGS.g.map(t => '<button type="button" class="g' + (tags.has(t) ? ' on' : '') + '" data-t="' + esc(t) + '">' + esc(t) + '</button>').join('')}${TAGS.b.map(t => '<button type="button" class="b' + (tags.has(t) ? ' on' : '') + '" data-t="' + esc(t) + '">' + esc(t) + '</button>').join('')}</div></div>
+        <div><p class="lbl">Ideas: a grading rule or a BAKE Studio feature this site suggests</p><textarea id="why" rows="3" placeholder="e.g. 'Menu stays put while the header scrolls away: BAKE should offer that'">${esc(work.reason)}</textarea></div>
+      </fieldset>
       <p class="msg" id="fm"></p>
-      <div class="row">${hist.length ? '<button type="button" class="btn2" id="back">← Back</button>' : ''}<button type="submit">${mine(s.id) ? 'Update and next' : 'Save and next'}</button><button type="button" class="btn2" id="skip">Skip for now</button></div>
+      <div class="row">${hist.length ? '<button type="button" class="btn2" id="back">← Back</button>' : ''}<button type="submit" id="sv">${mine(s.id) ? 'Update and next' : 'Save and next'}</button><button type="button" class="btn2" id="skip">Skip for now</button></div>
       ${mine(s.id) ? reveal(s) : '<p class="note">Claude\'s grade and the other person\'s rating show after you save, so they don\'t sway you.</p>'}
     </form></div>`;
   if (!pitch) loadShot(s, 900);
-  const sc = $('#sc');
-  sc.oninput = () => { $('#num').textContent = sc.value; $('#anc').textContent = anchorFor(+sc.value); };
-  body.querySelectorAll('.chips button').forEach(b => b.onclick = () => { b.classList.toggle('on'); tags.has(b.dataset.t) ? tags.delete(b.dataset.t) : tags.add(b.dataset.t); });
+  const f = $('#f');
+  const setCat = (k, v) => {
+    work.cats[k] = v; keep();
+    const r = f.querySelector('input[type=range][data-k="' + k + '"]'); r.value = v; r.classList.remove('unset');
+    $('#v-' + k).textContent = v;
+    f.querySelectorAll('.qk button[data-k="' + k + '"]').forEach(b => b.classList.toggle('on', +b.dataset.n == v));
+    const a = overall(work.cats); $('#num').textContent = a ?? '–'; $('#anc').textContent = a ? anchorFor(a) : '';
+  };
+  f.querySelectorAll('input[type=range][data-k]').forEach(r => r.oninput = () => setCat(r.dataset.k, +r.value));
+  f.querySelectorAll('.qk button').forEach(b => b.onclick = () => setCat(b.dataset.k, +b.dataset.n));
+  f.querySelectorAll('.cn input').forEach(i => i.oninput = () => { const n = work.cat_notes[i.dataset.k] = work.cat_notes[i.dataset.k] || {}; n[i.dataset.f] = i.value; keep(); });
+  [['good', 'good'], ['bad', 'bad'], ['why', 'reason']].forEach(([id, key]) => $('#' + id).oninput = e => { work[key] = e.target.value; keep(); });
+  f.querySelectorAll('.chips button').forEach(b => b.onclick = () => { b.classList.toggle('on'); tags.has(b.dataset.t) ? tags.delete(b.dataset.t) : tags.add(b.dataset.t); work.tags = [...tags]; keep(); });
   if ($('#whole')) $('#whole').onclick = () => { loadShot(s, 3200); $('#whole').remove(); };
-  $('#skip').onclick = () => { go(nextUnrated(s.id) || cur); draw(); };
-  if ($('#back')) $('#back').onclick = () => { const id = hist.pop(); cur = sites.find(x => x.id == id) || cur; draw(); };
-  $('#f').onsubmit = async e => {
+  $('#skip').onclick = () => { leave(); go(nextUnrated(s.id) || cur); draw(); };
+  if ($('#back')) $('#back').onclick = () => { leave(); const id = hist.pop(); cur = sites.find(x => x.id == id) || cur; draw(); };
+
+  // The clock: buckets unlock in order; Save unlocks at 5:00 (strict).
+  const step = () => {
+    if (!document.body.contains(f)) { clearInterval(tick); return; }
+    const e = elapsed(), timed = !!work.started;
+    if (timed) { $('#clk').textContent = fmt(Math.min(e, SAVE_AT)) + ' / ' + fmt(SAVE_AT); $('#phase').textContent = phaseAt(e); $('#pb').style.width = Math.min(100, e / SAVE_AT * 100) + '%'; }
+    else $('#pb').style.width = '100%';
+    BUCKETS.forEach(B => {
+      const fs = f.querySelector('.bk[data-b="' + B.b + '"]'), open = e >= B.at;
+      // When a bucket unlocks during the timed 5 minutes, bring it into view (not while you're typing a note).
+      if (timed && open && fs.disabled && B.b > 1 && !f.contains(document.activeElement && document.activeElement.matches('input:not([type=range]),textarea') ? document.activeElement : null)) f.scrollTo({ top: fs.offsetTop - 90, behavior: 'smooth' });
+      fs.disabled = !open; fs.classList.toggle('now', timed && open && e < (BUCKETS[B.b] ? BUCKETS[B.b].at : NOTES_AT));
+      $('#lk' + B.b).hidden = open; if (!open) $('#lk' + B.b).textContent = '🔒 Unlocks in ' + fmt(B.at - e);
+    });
+    f.querySelector('.bk[data-b="4"]').classList.toggle('now', timed && e >= NOTES_AT && e < SAVE_AT);
+    const sv = $('#sv'); sv.disabled = e < SAVE_AT;
+    sv.textContent = e < SAVE_AT ? 'Save unlocks in ' + fmt(SAVE_AT - e) : (mine(s.id) ? 'Update and next' : 'Save and next');
+  };
+  step(); tick = setInterval(step, 500);
+
+  f.onsubmit = async e => {
     e.preventDefault();
-    const why = $('#why').value.trim();
-    if (why.length < 5 && !tags.size) { $('#fm').textContent = 'Add a reason or pick at least one tag, so Claude knows why.'; return; }
-    const row = { site_id: s.id, score: +sc.value, tags: [...tags], reason: why, rated_at: new Date().toISOString() };
+    if (elapsed() < SAVE_AT) { $('#fm').textContent = 'Keep looking: Save unlocks at 5:00.'; return; }
+    const miss = missingCats(work.cats);
+    if (miss.length) { $('#fm').textContent = 'Score every category first. Missing: ' + miss.join(', '); return; }
+    const anyNote = (work.good + work.bad + work.reason).trim().length >= 5 || Object.values(work.cat_notes).some(n => ((n.good || '') + (n.bad || '')).trim().length >= 3);
+    if (!anyNote && !work.tags.length) { $('#fm').textContent = 'Add at least one note (what makes it good or bad), so the AI learns why.'; return; }
+    const cn = {}; Object.entries(work.cat_notes).forEach(([k, n]) => { const g = (n.good || '').trim(), b = (n.bad || '').trim(); if (g || b) cn[k] = { good: g, bad: b }; });
+    const row = { site_id: s.id, score: overall(work.cats), cats: work.cats, cat_notes: cn, good: work.good.trim(), bad: work.bad.trim(), tags: work.tags, reason: work.reason.trim(), seconds: work.started ? Math.round(elapsed()) : null, method: 'tw10', rated_at: new Date().toISOString() };
     const { data, error } = await sb.from('taste_ratings').upsert(row, { onConflict: 'site_id,rater' }).select().single();
     if (error) {
       if (signedOut(error)) {
-        setDraft(row);
+        keep();
         $('#fm').innerHTML = 'Your sign-in ran out, so this was not saved yet. Your rating is kept. <button type="button" id="relog">Sign in again</button>';
         $('#relog').onclick = async () => { await sb.auth.signOut({ scope: 'local' }); location.reload(); };
       } else $('#fm').textContent = 'Not saved: ' + error.message;
       return;
     }
-    setDraft(null);
+    leave();
     ratings = ratings.filter(x => !(x.site_id == s.id && x.rater == me.id)).concat(data);
     if (fromCall == s.id) { draw(); $('#fm').innerHTML = '<b style="color:#047857">✓ Saved ' + esc(s.name) + ' (' + data.score + '). You can close this window and get back to the call.</b>'; return; }
     go(nextUnrated(s.id));
@@ -168,7 +262,7 @@ function drawRate() {
 function reveal(s) {
   const o = theirs(s.id);
   return '<div class="reveal"><b>Claude: ' + (s.claude_score ?? '–') + '</b> <span class="note">(' + (s.kind == 'pitch' ? 'our pitch grade' : 'old code-based grade') + ')</span>' +
-    o.map(r => '<div style="margin-top:6px"><b>' + esc(first(r.rater_email)) + ': ' + r.score + '</b> ' + (r.tags.length ? '<span class="tagl">' + esc(r.tags.join(', ')) + '</span>' : '') + (r.reason ? '<div>' + esc(r.reason) + '</div>' : '') + '</div>').join('') + '</div>';
+    o.map(r => '<div style="margin-top:6px"><b>' + esc(first(r.rater_email)) + ': ' + r.score + '</b> ' + (r.cats && Object.keys(r.cats).length ? '<div class="tagl">' + CATS.filter(c => r.cats[c.k]).map(c => c.s + ' ' + r.cats[c.k]).join(' · ') + '</div>' : '') + (r.good ? '<div>👍 ' + esc(r.good) + '</div>' : '') + (r.bad ? '<div>👎 ' + esc(r.bad) + '</div>' : '') + (r.tags.length ? '<span class="tagl">' + esc(r.tags.join(', ')) + '</span>' : '') + (r.reason ? '<div>' + esc(r.reason) + '</div>' : '') + '</div>').join('') + '</div>';
 }
 
 /* After saving, a small box shows how the last one compared. */
@@ -216,7 +310,7 @@ function drawList() {
       '<td><button class="btn2" data-go="' + s.id + '" style="padding:4px 10px;font-size:13px">' + (mine(s.id) ? 'Change' : 'Rate') + '</button></td></tr>').join('')}
     </tbody></table></div>`;
   $('#body').querySelectorAll('[data-s]').forEach(b => b.onclick = () => { listSort = b.dataset.s; drawList(); });
-  $('#body').querySelectorAll('[data-go]').forEach(b => b.onclick = () => { go(sites.find(s => s.id == b.dataset.go)); view = 'rate'; draw(); });
+  $('#body').querySelectorAll('[data-go]').forEach(b => b.onclick = () => { work = null; go(sites.find(s => s.id == b.dataset.go)); view = 'rate'; draw(); });
 }
 
 if (!globalThis.BAKE_TASTE_NO_START) start();

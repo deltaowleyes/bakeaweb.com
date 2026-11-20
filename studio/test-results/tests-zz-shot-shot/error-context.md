@@ -6,8 +6,8 @@
 
 # Test info
 
-- Name: tests/markets.spec.js >> BAKE Markets batch prompt has everything a new chat needs
-- Location: tests/markets.spec.js:11:1
+- Name: tests/zz-shot.spec.js >> shot
+- Location: tests/zz-shot.spec.js:2:1
 
 # Error details
 
