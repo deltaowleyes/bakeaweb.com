@@ -20,7 +20,8 @@ const sb = createClient('https://gpwxuunutljcauoknhrh.supabase.co', 'sb_publisha
 const OUTCOMES = [
   ['no_answer', 'No answer'], ['left_message', 'Voicemail left'], ['call_back', 'Call back later'],
   ['interested', 'Interested (yes to free designs)'], ['not_interested', 'Not interested'],
-  ['wrong_number', 'Wrong number'], ['closed', 'Business closed'], ['do_not_call', 'Do not call again']
+  ['wrong_number', 'Wrong number'], ['closed', 'Business closed'], ['do_not_call', 'Do not call again'],
+  ['deleted', '🗑 Delete (bad website / no voicemail, not worth calling back)']
 ];
 const OUT = Object.fromEntries(OUTCOMES);
 const INTEREST = [['hot', 'Hot'], ['warm', 'Warm'], ['cold', 'Cold'], ['none', 'None']];
@@ -98,7 +99,7 @@ function CallForm({ c, onDone, onCancel }) {
   });
   const [err, setErr] = useState(''), [busy, setBusy] = useState(false);
   const set = k => e => setF({ ...f, [k]: e.target.type === 'checkbox' ? e.target.checked : e.target.value });
-  const yes = f.outcome === 'interested';
+  const yes = f.outcome === 'interested', del = f.outcome === 'deleted';
   const save = async e => {
     e.preventDefault();
     if (!f.outcome) return setErr('Pick an outcome first.');
@@ -116,6 +117,7 @@ function CallForm({ c, onDone, onCancel }) {
         <label className={L}>Outcome *<select className="inp" value={f.outcome} onChange={set('outcome')}><option value="">Choose…</option>{OUTCOMES.map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select></label>
         <label className={L}>Interest<select className="inp" value={f.interest} onChange={set('interest')}><option value="">Choose…</option>{INTEREST.map(([k, v]) => <option key={k} value={k}>{v}</option>)}</select></label>
       </div>
+      {del && <p className="m-0 text-sm bg-rose-50 border border-rose-200 rounded-xl p-3">This business comes off your call list for good and won't be given to anyone again. Its RezSite listing stays. Add a quick note below on why (e.g. "site broken, voicemail not set up").</p>}
       <label className={L}>Next step<input className="inp" placeholder='e.g. "Call back Tue 2pm, ask for Kyle"' value={f.next_step} onChange={set('next_step')} /></label>
       {yes && (
         <div className="grid gap-3 bg-emerald-50 border border-emerald-200 rounded-xl p-3">
@@ -162,7 +164,8 @@ function CallCard({ c, me, open, setOpen, reload }) {
           <div className="text-mute text-sm">{[c.city, c.province].filter(Boolean).join(', ')}{real(c.category) ? ' · ' + c.category : ''}</div>
         </div>
         <div className="flex flex-col items-end gap-1">
-          {c.outcome ? <span className="text-sm font-bold bg-emerald-100 text-emerald-900 rounded-full px-3 py-1">✓ {OUT[c.outcome]}</span>
+          {c.outcome === 'deleted' ? <span className="text-sm font-bold bg-rose-100 text-rose-900 rounded-full px-3 py-1">🗑 Deleted</span>
+            : c.outcome ? <span className="text-sm font-bold bg-emerald-100 text-emerald-900 rounded-full px-3 py-1">✓ {OUT[c.outcome]}</span>
             : <span className="text-sm font-bold bg-amber-100 text-amber-900 rounded-full px-3 py-1">To call</span>}
           {c.verified_at && <span className="text-sm font-bold bg-emerald-600 text-white rounded-full px-3 py-1" title={'Verified by ' + (c.verified_by || '')}>✓ Listing verified</span>}
           {big(c) && <span className="text-sm font-extrabold bg-violet-700 text-white rounded-full px-3 py-1" title={c.est_package || ''}>💼 $10K+ firm</span>}
@@ -224,7 +227,8 @@ function App() {
   if (me === undefined) return header;
   if (!me) return <>{header}<p className="max-w-xl mx-auto mt-12 text-center">This login isn't set up as a caller yet. Ask Chris to add <b>{session.user.email}</b> to the callers list.{err && <><br /><small className="text-warn">{err}</small></>}</p></>;
 
-  const list = (calls || []).filter(c => !hideDone || !c.outcome || c.id === open);
+  // Deleted calls drop off the list right away (they're never carried over or re-queued either).
+  const list = (calls || []).filter(c => c.id === open || (c.outcome !== 'deleted' && (!hideDone || !c.outcome)));
   const left = (calls || []).filter(c => !c.outcome).length;
   return (
     <>
